@@ -80,6 +80,10 @@ nav {
 }   
 
 .navbutton:hover {
+    background-color: var(--highlight-color);
+}
+
+.navbutton:active {
     background-color: var(--secundary-color);
 }
 
