@@ -80,7 +80,7 @@ nav {
 }   
 
 .navbutton:hover {
-    background-color: var(--highlight-color);
+    background-color: #2A3D59;
 }
 
 .navbutton:active {
@@ -91,10 +91,14 @@ nav {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 20vh 0vh 0vh 0vh;
+    padding: 20% 0% 0% 0%;
 }
 
 .nav-link a {
     color: #A8A8A8;
     text-decoration: none;
+}
+
+.nav-link a:hover {
+    color: var(--highlight-color);
 }
