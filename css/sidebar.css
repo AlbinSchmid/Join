@@ -14,6 +14,32 @@ a {
     cursor: pointer;
 }
 
+.fz-16px {
+    font-size: 16px !important;
+}
+
+.dflex-c-c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column {
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 61px;
+    font-weight: 700;
+    margin: auto;
+}
+
+.text-line {
+    width: 150px;
+    border-bottom: 3px solid var(--highlight-color);
+    margin-top: 16px;
+}    
+
 header {
     height: 96px;
     display: flex;
@@ -45,9 +71,6 @@ header p {
 }
 
 .header-right-user {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border: solid 3px var(--secundary-color);
     height: 50px;
     width: 50px;
