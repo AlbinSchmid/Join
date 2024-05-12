@@ -1,0 +1,96 @@
+.btn-small {
+    width: 91px;
+    height: 49px;
+    padding: 15px 16px 15px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2A3647;
+    font-family: inter;
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.btn-small:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-small:focus {
+    background-color: #091931;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.login-head {
+    height: 116px;
+    display: flex;
+    gap: 35px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-right: 60px;
+    opacity: 0;
+    animation-name: screen-animation;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+}
+
+.login-head-top-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+}
+
+.login-head-top-right a {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--black);
+}
+
+
+/* ------------ LOGO ANIMATION ------------ */
+
+
+
+.logo-start {
+    width: 274px;
+    height: 334px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-name: logo-animation;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+}
+
+@keyframes logo-animation {
+    from {
+        width: 274px;
+        height: 334px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    to {
+        width: 100px;
+        height: 122px;
+        top: 80px;
+        left: 77px;
+        transform: none;
+    }
+}
+
+@keyframes screen-animation {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

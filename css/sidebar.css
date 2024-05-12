@@ -6,6 +6,14 @@ body {
     margin: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
+.cp {
+    cursor: pointer;
+}
+
 header {
     height: 96px;
     display: flex;
@@ -14,7 +22,6 @@ header {
     padding: 0px 40px 0px 348px;
     background-color: var(--white);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
 }
 
 header p {
@@ -83,11 +90,9 @@ nav {
     align-items: center;
     padding: 8px 56px;
     gap: 16px;
-    cursor: pointer;
 }
 
 .nav-btn a {
-    text-decoration: none;
     color: var(--lightgrey);
 }
 
@@ -118,7 +123,6 @@ nav {
     width: 112px;
     height: 35px;
     color: #A8A8A8;
-    text-decoration: none;
 }
 
 .nav-bottom-link a:hover {

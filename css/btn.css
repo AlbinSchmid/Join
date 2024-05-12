@@ -1,0 +1,170 @@
+
+/*---------- BUTTONS FOR COPY ----------*/
+
+.btn-small {
+    width: 91px;
+    height: 49px;
+    padding: 15px 16px 15px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2A3647;
+    font-family: inter;
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.btn-small:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-small:focus {
+    background-color: #091931;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+.btn-outline {
+    width: 99px;
+    height: 48px;
+    padding: 15px 24px 15px 24px;
+    gap: 10px;
+    border: 1px solid #2A3647;
+    border-radius: 8px;
+    opacity: 0px;
+    background-color: #FFFFFF;
+    color: #2A3647;
+    ;
+    font-size: 16px;
+}
+
+.btn-outline:hover {
+    border: 2px solid #29ABE2;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #29ABE2;
+}
+
+.btn-outline:focus {
+    border: 1px solid #091931;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #091931;
+}
+
+
+.btn-primary-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 183px;
+    height: 56px;
+    padding: 16px;
+    gap: 4px;
+    border: none;
+    border-radius: 10px;
+    opacity: 0px;
+    background-color: #2a3647;
+    color: #FFFFFF;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.btn-primary-check:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-primary-check:focus {
+    background-color: #091931;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+.btn-add-contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 255px;
+    height: 56px;
+    padding: 12px 16px;
+    gap: 16px;
+    border: none;
+    border-radius: 10px;
+    opacity: 0px;
+    background-color: #2a3647;
+    color: #FFFFFF;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.btn-add-contact:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-add-contact:focus {
+    background-color: #091931;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+.btn-secondary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 126px;
+    height: 56px;
+    padding: 16px;
+    gap: 4px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    opacity: 0px;
+    background-color: #FFFFFF;
+    color: #2A3647;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.btn-secondary:hover {
+    border: 2px solid #29ABE2;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #29ABE2;
+}
+
+
+.btn-secondary:focus {
+    border: 1px solid #091931;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #091931;
+}
+
+
+.btn-add-task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 56px;
+    padding: 12px 16px;
+    gap: 4px;
+    border: none;
+    border-radius: 10px;
+    opacity: 0px;
+    background-color: #2a3647;
+    color: #FFFFFF;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.btn-add-task:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-add-task:focus {
+    background-color: #091931;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
