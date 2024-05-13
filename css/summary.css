@@ -66,20 +66,13 @@ body {
     background-color: white;
     border-radius: 30px;
     padding: 38px 60px;
-    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.10);
-    transition: 50ms all;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+    transition: 70ms all;
 }
 
 .card img {
     width: 69px;
     height: 69px;
-}
-
-.card:hover {
-    background-color: #2A3647;
-    transform: scale(1.1);
-    cursor: pointer;
-    color: white;
 }
 
 .info-cardpart {
@@ -103,7 +96,8 @@ body {
     background-color: white;
     border-radius: 30px;
     padding: 38px 60px;
-    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.10);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+    transition: 70ms all;
 }
 
 .left-card-part-big {
@@ -149,7 +143,8 @@ body {
     background-color: white;
     border-radius: 30px;
     padding: 20px 15px;
-    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.10);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
+    transition: 70ms all;
 }
 
 .card-bottom h4 {
@@ -175,4 +170,40 @@ body {
 .summary-right-section h2 {
     font-size: 47px;
     font-weight: 500;
+}
+
+.hover-right:hover {
+    background-color: #2A3647;
+    cursor: pointer;
+    color: white;
+    transform: scale(1.08, 1.1);
+    transform-origin: left;
+}
+
+.hover-left:hover {
+    background-color: #2A3647;
+    cursor: pointer;
+    color: white;
+    transform: scale(1.08, 1.1);
+    transform-origin: right;
+}
+
+.hover-bottom:hover {
+    background-color: #2A3647;
+    cursor: pointer;
+    color: white;
+    transform: scale(1.02, 1.1);
+    transform-origin: left top;
+}
+
+.card-big:hover .left-card-part-big img {
+    width: 60px;
+    height: 56px;
+}
+
+.card-bottom:hover {
+    background-color: #2A3647;
+    cursor: pointer;
+    color: white;
+    transform: scale(1.1);
 }
