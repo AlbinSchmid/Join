@@ -15,7 +15,7 @@ body {
     width: 630px;
     height: 73px;
     gap: 30px;
-    margin: 110px 0 0 328px;
+    margin: 110px 0 0 120px;
 }
 
 .headline-section h1 {
@@ -41,7 +41,7 @@ body {
 }
 
 .summary-left-section {
-    margin: 65px 0 0 328px;
+    margin: 65px 0 0 120px;
     width: 560px;
     display: flex;
     flex-direction: column;

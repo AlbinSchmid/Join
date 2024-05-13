@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign up</title>
-
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="../../css/color.css">
+    <link rel="stylesheet" href="../../css/fonts.css">
     <link rel="stylesheet" href="/css/login-signup.css">
-    <script src="/java-script/login-signup.js"></script>
+    <link rel="shortcut icon" href="../img/join-logo.png" type="image/x-icon">
+    <title>JOIN</title>
 </head>
+
 <body>
-    
+    <img class="logo-end" src="./assets/img/join_logo_blue_big.png" alt="join-logo">
+
+    <section class="container-login-signup dflex-c-c ">
+        <div class="signup-mask dflex-c-c column">
+            <div class="dflex-c-c column">
+                <a href="./log-in.html" class="arrow-back">
+                    <img src="./assets/img/icons/login_signup/arrow-left-line.png" alt="arrow-left">
+                </a>
+                <h1>Sign up</h1>
+                <div class="text-line"></div>
+            </div>
+
+            <form class="input-container dflex-c-c column">
+                <input class="inputfield" type="text" placeholder="Name" required>
+                <input class="inputfield" type="email" placeholder="Email" required>
+                <input class="inputfield" type="password" placeholder="Password" required>
+                <input class="inputfield" type="password" placeholder="Password" required>
+            </form>
+
+            <form class="checkbox-signup">
+                <input type="checkbox" name="remember-me" class="cp" required>
+                <span>I accept the <a href="./privacy-policy.html">Privacy policy</a></span>
+            </form>
+
+            <div class="footer-link dflex-c-c">
+                <a href="#">
+                    <button class="btn-small cp">Sign up</button>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="login-footer dflex-c-c">
+        <a href="./privacy-policy.html">Privacy Policy</a>
+        <a href="./legal-notice.html">Legal Notice</a>
+    </section>
 </body>
+
 </html>

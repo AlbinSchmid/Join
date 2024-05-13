@@ -14,7 +14,7 @@
     gap: 35px;
 }
 
-.login-head-top-right a {
+.login-head-top-right span {
     font-size: 20px;
     font-weight: 400;
     color: var(--black);
@@ -26,14 +26,32 @@
     bottom: 0;
     left: 0;
     right: 0;
-
 }
 
-.login-signup-mask {
+.login-mask {
     padding: 48px 115px;
     gap: 32px;
     border-radius: 30px;
     background-color: var(--white);
+}
+
+.signup-mask {
+    position: relative;
+    padding: 48px 88px;
+    gap: 32px;
+    border-radius: 30px;
+    background-color: var(--white);
+}
+
+.arrow-back {
+    position: absolute;
+    left: 8%;
+}
+
+.arrow-back img:hover {
+    background-color: var(--bg-color);
+    border-radius: 50%;
+    width: 34px;
 }
 
 .inputfield {
@@ -42,7 +60,8 @@
     border: 1px solid #D1D1D1;
     border-radius: 10px;
 }
-.checkbox {
+
+.checkbox-login {
     width: 100%;
     display: flex;
     align-items: center;
@@ -50,6 +69,26 @@
     gap: 8px;
 }
 
+.checkbox-signup {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-signup a {
+    color: var(--highlight-color);
+}
+
+.checkbox-signup a:hover {
+    text-decoration: underline;
+}
+
+input[type="text"] {
+    background: url(/assets/img/icons/login_signup/person.png) no-repeat;
+    background-position: 95%;
+}
 
 input[type="email"] {
     background: url(/assets/img/icons/login_signup/mail.png) no-repeat;
@@ -83,13 +122,18 @@ input[type="password"]:focus {
     right: 0;
     left: 0;
     gap: 16px;
-
 }
 
 .login-footer a {
     padding: 8px;
     color: #A8A8A8;
 }
+
+.login-footer a:hover {
+    color: var(--highlight-color);
+    font-weight: 700;
+}
+
 
 /* ------------ BUTTON ------------ */
 
@@ -150,7 +194,13 @@ input[type="password"]:focus {
 
 /* ------------ LOGO ANIMATION ------------ */
 
-
+.logo-end {
+    width: 100px;
+    height: 122px;
+    top: 80px;
+    left: 77px;
+    position: absolute;
+}
 
 .logo-start {
     width: 274px;
@@ -160,6 +210,7 @@ input[type="password"]:focus {
     left: 50%;
     transform: translate(-50%, -50%);
     animation-name: logo-animation;
+    animation-iteration-count: 1;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
     animation-duration: 500ms;
@@ -173,6 +224,7 @@ input[type="password"]:focus {
     animation-timing-function: ease-in-out;
     animation-duration: 500ms;
     animation-delay: 700ms;
+    animation-iteration-count: 1;
 }
 
 @keyframes logo-animation {
@@ -193,7 +245,7 @@ input[type="password"]:focus {
     }
 }
 
-@keyframes screen-animation  {
+@keyframes screen-animation {
     from {
         opacity: 0;
     }
