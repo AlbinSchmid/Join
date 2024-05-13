@@ -11,3 +11,20 @@ async function includeHTML() {
         }
     }
 }
+
+
+function changePencilImg(element) {
+    document.getElementById('pencil-img').setAttribute('src', './assets/img/icons/summary/pencil-white.png');
+}
+
+function resetPencilImg(element) {
+    document.getElementById('pencil-img').setAttribute('src', './assets/img/icons/summary/pencil-darkblue.png');
+}
+
+function changeCheckImg(element) {
+    document.getElementById('check-img').setAttribute('src', './assets/img/icons/summary/check-white.png');
+}
+
+function resetCheckImg(element) {
+    document.getElementById('check-img').setAttribute('src', './assets/img/icons/summary/check-darkblue.png');
+}
