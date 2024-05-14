@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,106 @@
     <link rel="stylesheet" href="/css/contact.css">
     <script src="/java-script/contact.js"></script>
 </head>
-<body>
-    
+
+<body onload="includeHTML()">
+    <div w3-include-html="/assets/templates/side-bar-template.html"></div>
+
+    <main>
+        <div w3-include-html="/assets/templates/header-template.html"></div>
+
+        <section class="container-contacts">
+            <div class="bg-btn-add-new-contact  dflex-c-c">
+                <div class="btn-add-new-contact dflex-c-c">
+                    <span>Add new contact</span>
+                    <img src="./assets/img/icons/contact/person_add.png" alt="">
+                </div>
+            </div>
+            <div class="contact-list">
+                <div class="container-letters">A</div>
+
+                <div class="container-contact">
+                    <div class="first-letters dflex-c-c">AM</div>
+                    <div class="name-mail">
+                        <span>Anton Meyer</span>
+                        <a href="mailto:antom@gmail.com">antom@gmail.com</a>
+                    </div>
+                </div>
+                <div class="container-contact">
+                    <div class="first-letters dflex-c-c">AS</div>
+                    <div class="name-mail">
+                        <span>Anaja Schulz</span>
+                        <a href="mailto:antom@gmail.com">schulz@hotmail.com</a>
+                    </div>
+                </div>
+
+                <div class="container-letters">B</div>
+
+                <div class="container-contact">
+                    <div class="first-letters dflex-c-c">BZ</div>
+                    <div class="name-mail">
+                        <span>Bernd Ziegler</span>
+                        <a href="mailto:antom@gmail.com">benedikt@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="container-letters">D</div>
+
+                <div class="container-contact">
+                    <div class="first-letters dflex-c-c">DE</div>
+                    <div class="name-mail">
+                        <span>David Eisenberg</span>
+                        <a href="mailto:antom@gmail.com">davidberg@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="container-letters">E</div>
+
+                <div class="container-contact">
+                    <div class="first-letters dflex-c-c">EF</div>
+                    <div class="name-mail">
+                        <span>Eva Fischer</span>
+                        <a href="mailto:antom@gmail.com">eva@gmail.com</a>
+                    </div>
+                </div>
+                <div class="container-contact">
+                    <div class="first-letters dflex-c-c">EM</div>
+                    <div class="name-mail">
+                        <span>Emmanuel Mauer</span>
+                        <a href="mailto:antom@gmail.com">emmanuelma@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="container-letters">M</div>
+
+                <div class="container-contact">
+                    <div class="first-letters dflex-c-c">MB</div>
+                    <div class="name-mail">
+                        <span>Marcel Bauer</span>
+                        <a href="mailto:antom@gmail.com">bauer@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="container-letters">M</div>
+
+                <div class="container-contact">
+                    <div class="first-letters dflex-c-c">T</div>
+                    <div class="name-mail">
+                        <span>Tatjana Wolf</span>
+                        <a href="mailto:antom@gmail.com">wolf@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container-right">
+            <div class="headline dflex-c-c">
+                <h1>Contacts</h1>
+                <div class="line"></div>
+                <span>Better with a team</span>
+            </div>
+        </section>
+    </main>
+
 </body>
+
 </html>
