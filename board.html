@@ -19,9 +19,9 @@
                                 <div><h1>Board</h1></div>
                                 <div class="operations-container">
                                     <form class="search-area" action="">
-                                        <input class="search-field" placeholder="Find Task" type="text">
+                                        <input class="search-field" placeholder="Find Task" type="text"> <!-- vertical line und hover/eingabe desgin fehlt noch -->
                                         <img class="search-btn">
-                                    </form>
+                                    </form> 
                                     <div onclick="addTask()" class="add-task-btn">
                                         <p>Add task</p>
                                         <img src="assets/img/icons/add.svg" alt="">
@@ -53,9 +53,12 @@
                                 <!-- addTask Funktion muss unique IDs für jeden Container erstellen für drag-and-drop -->
                                     <div id="to-do" class="to-do-task-container"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
                                         <div class="to-do-title-container"><p class="to-do-title">User Story</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
-                                        <div class="to-do-task"><p class="">Contact Form & Imprint</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
-                                        <div class="to-do-task-description">Create a contact form and imprint page...</div>
-                                        <div>Subtasks</div> <!-- Substatus Bar muss hinzugefügt werden, Variable für den count der Subtasks -->
+                                        <div><p class="to-do-task">Contact Form & Imprint</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
+                                        <div class="to-do-task-description"><p>Create a contact form and imprint page...</p></div>
+                                        <div class="progress-container">
+                                            <div class="progress-bar" id="progress-bar">0/2</div>
+                                        </div> <!-- Substatus Bar muss hinzugefügt werden, Variable für den count der Subtasks -->
+                                        <!-- variable let currentSubtask = 0 -->
                                         <div>
                                             <div>Assigned to</div> <!-- auswählen bei addTask() -->
                                             <div>Priority</div> <!-- auswählen bei addTask() -->

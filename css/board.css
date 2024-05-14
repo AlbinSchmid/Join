@@ -174,3 +174,17 @@ h1 {
     font-weight: 400;
     color: #A8A8A8;
 }
+
+.progress-container {
+    width: 128px;
+    background-color: #0038FF;
+    border-radius: 16px;
+  }
+  .progress-bar {
+    width: 0%;
+    height: 8px;
+    background-color: #0038FF;
+    text-align: center;
+    line-height: 30px;
+
+  }
