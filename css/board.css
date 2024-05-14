@@ -153,6 +153,10 @@ h1 {
     margin-top: 16px;
 }
 
+.to-do-task-container:hover {
+    cursor: pointer;
+}
+
 .to-do-title-container {
     display: flex;
 }
@@ -164,10 +168,13 @@ h1 {
     font-weight: 400;
     padding: 4px 16px 4px 16px;
     border-radius: 8px;
+    margin: 0;
+    margin-bottom: 24px;
 }
 
 .to-do-task {
     font-weight: 700;
+    margin: 0;
 }
 
 .to-do-task-description {
@@ -176,15 +183,48 @@ h1 {
 }
 
 .progress-container {
-    width: 128px;
-    background-color: #0038FF;
-    border-radius: 16px;
-  }
-  .progress-bar {
-    width: 0%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.progress-wrapper {
+    width: 128px; /* Die volle Breite innerhalb des Containers */
+    background-color:#F4F4F4;
+    border-radius: 8px;
+
+}
+
+.progress-bar {
+    width: 50%; /* Startbreite von 0% */
     height: 8px;
     background-color: #0038FF;
-    text-align: center;
-    line-height: 30px;
+    border-radius: 16px;
+}
 
-  }
+.progress-count {
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 8px; /* Abstand zwischen Progressbar und Fortschrittszahl */
+}
+
+.attributor-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.attributor-icon {
+    background-color: #FFBB2B;
+    height: 32px;
+    width: 32px;
+    border: 1px solid #FFFFFF;
+    border-radius: 45px;
+    color: #FFFFFF;
+    font-size: 12px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
