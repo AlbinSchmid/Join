@@ -47,10 +47,22 @@
                             
                             </section>
                             <section class="board-task-container">
-                                <div class="no-task-container">
-                                    <p>No tasks To do</p>
+                                <div class="to-do-container">
+                                    <div class="no-task-container"><p>No tasks To do</p></div>
+                                
+                                <!-- addTask Funktion muss unique IDs für jeden Container erstellen für drag-and-drop -->
+                                    <div id="to-do" class="to-do-task-container"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
+                                        <div class="to-do-title-container"><p class="to-do-title">User Story</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
+                                        <div class="to-do-task"><p class="">Contact Form & Imprint</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
+                                        <div class="to-do-task-description">Create a contact form and imprint page...</div>
+                                        <div>Subtasks</div> <!-- Substatus Bar muss hinzugefügt werden, Variable für den count der Subtasks -->
+                                        <div>
+                                            <div>Assigned to</div> <!-- auswählen bei addTask() -->
+                                            <div>Priority</div> <!-- auswählen bei addTask() -->
+                                        </div>
+                                    </div>
                                 </div>
-                            </section>
+                            </section> 
                         </div>
                         
                     </section>

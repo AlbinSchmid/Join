@@ -124,18 +124,53 @@ h1 {
 
 .board-task-container {
     display: flex;
+    margin-left: 64px;
+}
+
+.to-do-container {
+    width: 244px;
 }
 
 .no-task-container {
     background-color: #E7E7E7;
     border-radius: 10px;
     border: 1px solid;
-    margin-left: 64px;
-    width: 244px;
     text-align: center;
     height: 48px;
     font-size: 16px;
     font-weight: 400;
     border-style: dashed;
+    color: #A8A8A8;
+}
+
+.to-do-task-container {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    background-color: #FFFFFF;
+    border-radius: 24px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+.to-do-title-container {
+    display: flex;
+}
+
+.to-do-title {
+    background-color: #0038FF;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 4px 16px 4px 16px;
+    border-radius: 8px;
+}
+
+.to-do-task {
+    font-weight: 700;
+}
+
+.to-do-task-description {
+    font-weight: 400;
     color: #A8A8A8;
 }
