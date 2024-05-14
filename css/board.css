@@ -12,8 +12,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 64px;
-    padding-top: 96px;
+    margin-left: 106px;
+    padding-top: 106px;
 }
 
 h1 {
@@ -104,7 +104,6 @@ h1 {
 
 .board-status-container {
     display: flex;
-    justify-content: center;
 }
 
 .status-overiew-container {
@@ -116,7 +115,7 @@ h1 {
     font-size: 20px;
     font-weight: 700;
     gap: 64px;
-    margin-left: 64px;
+    margin-left: 106px;
     width: 244px;
     text-wrap: nowrap;
 }
@@ -145,7 +144,7 @@ h1 {
 
 .board-task-container {
     display: flex;
-    margin-left: 64px;
+    margin-left: 106px;
 }
 
 .to-do-container {
