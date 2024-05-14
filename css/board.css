@@ -58,7 +58,7 @@ h1 {
     width: 32px;
     display: flex;
     align-items: center;
-    justify-content: ;
+    justify-content: space-between;
     margin-right: 16px;
 }
 
