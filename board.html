@@ -14,20 +14,27 @@
             
                 <section class="board-container">
                     <div w3-include-html="./assets/templates/side-bar-template.html"></div>
+                    <!-- 1.HTML return Funktion -->
                         <div>
-                            <div class="board-header">
+                            <section class="board-header">
                                 <div><h1>Board</h1></div>
                                 <div class="operations-container">
                                     <form class="search-area" action="">
                                         <input class="search-field" placeholder="Find Task" type="text"> <!-- vertical line und hover/eingabe desgin fehlt noch -->
-                                        <img class="search-btn">
+                                        <div class="al-center">
+                                            <div class="vl"></div>
+                                            <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg" alt="search"></div>
+                                        </div>
+                                            
                                     </form> 
                                     <div onclick="addTask()" class="add-task-btn">
                                         <p>Add task</p>
                                         <img src="assets/img/icons/add.svg" alt="">
                                     </div>
                                 </div>
-                            </div>
+                            </section>
+
+                            <!-- 2.HTML return Funktion -->
                             <section class="board-status-container">
                                 <div class="status-overiew-container">
                                     <div>To do</div>
@@ -45,6 +52,7 @@
                                     <div>done</div>
                                 </div>
                             
+                            <!-- 3.HTML return Funktion -->
                             </section>
                             <section class="board-task-container">
                                 <div class="to-do-container"> <!-- draggable Video checken, category festlegen für draggable und dropable -->
@@ -60,9 +68,6 @@
                                             </div>
                                             <div class="progress-count" id="progress-count">1/2 Subtasks</div>
                                         </div>
-                                        
-                                         <!-- Substatus Bar muss hinzugefügt werden, Variable für den count der Subtasks -->
-                                        <!-- variable let currentSubtask = 0 -->
                                         <div class="attributor-container">
                                             <div><p class="attributor-icon">FE</p></div> <!-- auswählen bei addTask() -->
                                             <div><img src="assets/img/icons/prio_baja_high.svg" alt=""></div> <!-- auswählen bei addTask() -->
@@ -77,6 +82,6 @@
 
         
     
-    
+
 </body>
 </html>
