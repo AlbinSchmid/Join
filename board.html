@@ -9,39 +9,53 @@
     <script src="/java-script/board.js"></script>
 </head>
     <body onload="includeHTML()">
-        <div w3-include-html="./assets/templates/side-bar-template.html"></div>
-            <section class="board-header">
-                <h1>Board</h1>
-                <div class="operations-container">
-                    <form class="search-area" action="">
-                        <input class="search-field" placeholder="Find Task" type="text">
-                        <img class="search-btn">
-                    </form>
-                    <div class="add-task-btn">
-                        <p>Add task</p>
-                        <img src="assets/img/icons/add.svg" alt="">
-                    </div>
-                </div>
-            </section>
-            <section class="board-status-container">
-                <div class="status-overiew-container">
-                    <div>To do</div>
-                    <p class="status-bar-img">+</p>
-                </div>
-                <div class="status-overiew-container">
-                    <div>In progress</div>
-                    <p class="status-bar-img">+</p>
-                </div>
-                <div class="status-overiew-container">
-                    <div>Await feedback</div>
-                    <p class="status-bar-img">+</p>
-                </div>
-                <div class="status-overiew-container">
-                    <div>done</div>
-                    <p class="status-bar-img">+</p>
-                </div>
-
-            </section>
+        <section class="main-content"> 
+            <div w3-include-html="./assets/templates/header-template.html"></div>
+            
+                <section class="board-container">
+                    <div w3-include-html="./assets/templates/side-bar-template.html"></div>
+                        <div>
+                            <div class="board-header">
+                                <div><h1>Board</h1></div>
+                                <div class="operations-container">
+                                    <form class="search-area" action="">
+                                        <input class="search-field" placeholder="Find Task" type="text">
+                                        <img class="search-btn">
+                                    </form>
+                                    <div onclick="addTask()" class="add-task-btn">
+                                        <p>Add task</p>
+                                        <img src="assets/img/icons/add.svg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <section class="board-status-container">
+                                <div class="status-overiew-container">
+                                    <div>To do</div>
+                                    <p onclick="addTask()" class="status-bar-img">+</p>
+                                </div>
+                                <div class="status-overiew-container">
+                                    <div>In progress</div>
+                                    <p onclick="addTask()" class="status-bar-img">+</p>
+                                </div>
+                                <div class="status-overiew-container">
+                                    <div>Await feedback</div>
+                                    <p onclick="addTask()" class="status-bar-img">+</p>
+                                </div>
+                                <div class="status-overiew-container">
+                                    <div>done</div>
+                                </div>
+                            
+                            </section>
+                            <section class="board-task-container">
+                                <div class="no-task-container">
+                                    <p>No tasks To do</p>
+                                </div>
+                            </section>
+                        </div>
+                        
+                    </section>
+                    
+        </section>           
 
         
     

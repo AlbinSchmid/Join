@@ -1,8 +1,24 @@
+.main-content {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.board-container {
+    display: flex;
+}
+
 .board-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin-left: 64px;
     padding-top: 96px;
-    padding-right: 96px;
+}
+
+h1 {
+    margin: 0;
+    padding-left: 0;
 }
 
 .board-header-container {
@@ -68,7 +84,6 @@
 .board-status-container {
     display: flex;
     justify-content: center;
-    padding-left: 120px;
 }
 
 .status-overiew-container {
@@ -80,7 +95,9 @@
     font-size: 20px;
     font-weight: 700;
     gap: 64px;
-    margin-left: 60px;
+    margin-left: 64px;
+    width: 244px;
+    text-wrap: nowrap;
 }
 
 .status-bar-img {
@@ -103,4 +120,22 @@
     color: #29ABE2;
     transition: ease-out 300ms;
     gap: 10px;
+}
+
+.board-task-container {
+    display: flex;
+}
+
+.no-task-container {
+    background-color: #E7E7E7;
+    border-radius: 10px;
+    border: 1px solid;
+    margin-left: 64px;
+    width: 244px;
+    text-align: center;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 400;
+    border-style: dashed;
+    color: #A8A8A8;
 }
