@@ -9,19 +9,41 @@
     <script src="/java-script/board.js"></script>
 </head>
     <body onload="includeHTML()">
-        <section class="board-container">
         <div w3-include-html="./assets/templates/side-bar-template.html"></div>
-        <section class="board-headline">
-            <h1>Board</h1>
-            <form class="search-area" action="">
-                <input type="text">
-                <input class="" type="submit">
-            </form>
-    
-        </section>
-           
+            <section class="board-header">
+                <h1>Board</h1>
+                <div class="operations-container">
+                    <form class="search-area" action="">
+                        <input class="search-field" placeholder="Find Task" type="text">
+                        <img class="search-btn">
+                    </form>
+                    <div class="add-task-btn">
+                        <p>Add task</p>
+                        <img src="assets/img/icons/add.svg" alt="">
+                    </div>
+                </div>
+            </section>
+            <section class="board-status-container">
+                <div class="status-overiew-container">
+                    <div>To do</div>
+                    <p class="status-bar-img">+</p>
+                </div>
+                <div class="status-overiew-container">
+                    <div>In progress</div>
+                    <p class="status-bar-img">+</p>
+                </div>
+                <div class="status-overiew-container">
+                    <div>Await feedback</div>
+                    <p class="status-bar-img">+</p>
+                </div>
+                <div class="status-overiew-container">
+                    <div>done</div>
+                    <p class="status-bar-img">+</p>
+                </div>
+
+            </section>
+
         
-        </section>
     
     
 </body>
