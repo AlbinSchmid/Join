@@ -46,6 +46,8 @@ h1 {
     display: flex;
     width: 232px;
     height: 100vh;
+    position: sticky;
+    top: 0;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
