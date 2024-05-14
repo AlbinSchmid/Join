@@ -9,11 +9,19 @@
     <script src="/java-script/board.js"></script>
 </head>
     <body onload="includeHTML()"> <!-- init() => includeHTML(),renderBoardContent() -->
-        <section class="main-content"> 
+
+
+
+    <div w3-include-html="/assets/templates/side-bar-template.html"></div>
+
+    <main>
+        <div w3-include-html="/assets/templates/header-template.html"></div>
+
+        <!-- <section class="main-content"> 
             <div w3-include-html="./assets/templates/header-template.html"></div>
             
                 <section class="board-container">
-                    <div w3-include-html="./assets/templates/side-bar-template.html"></div>
+                    <div w3-include-html="./assets/templates/side-bar-template.html"></div> -->
                     <!-- 1.HTML return Funktion -->
                         <div>
                             <section class="board-header">
@@ -140,7 +148,7 @@
                             </section> 
                         </div>
                     </section>
-                    
+          
         </section>           
 
         
