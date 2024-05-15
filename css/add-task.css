@@ -15,20 +15,21 @@ h2 {
     margin-left: 106px;
     margin-right: 106px;
     padding-top: 64px;
+    display: flex;
 }
 
 .inputfield-title {
-    width: 440px;
+    width: 396px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
-    padding: 12px 21px 12px 21px;
+    padding: 19px 21px 12px 21px;
     margin-top: 8px;
 }
 
 
 .textareafied-description {
-    width: 440px;
-    height: 120px;
+    width: 396px;
+    height: 142px;
     text-wrap: wrap;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
@@ -45,19 +46,44 @@ h2 {
   }
   
   .dropdown-toggle {
-    width: 100%;
-    padding: 10px;
+    width: 440px;
+    padding: 10px 16px 12px 16px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     background-color: #fff;
     cursor: pointer;
     outline: none;
+    margin-top: 8px;
+    text-align: start;
+    font-family: inter;
+    font-weight: 400;
+    font-size: 20px;
+    position: relative;
+  }
+  
+  /* Pfeil */
+  .dropdown-toggle::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 4px); /* Vertikal zentrieren */
+    right: 12px; /* Abstand vom rechten Rand */
+    border: solid #333;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: translateY(-50%) rotate(45deg); /* Rotation für Pfeil nach unten */
+    transition: transform 0.3s ease; /* Animationsübergang für den Pfeil */
+  }
+  
+  /* Pfeil nach oben drehen, wenn das Dropdown-Menü geöffnet ist */
+  .dropdown-menu ~ .dropdown-toggle.active::after {
+    transform: translateY(-50%) rotate(-135deg); /* Rotation für Pfeil nach oben */
   }
   
   .dropdown-menu {
     display: none;
     position: absolute;
-    width: 100%;
+    width: 484px;
     background-color: #fff;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
@@ -71,8 +97,18 @@ h2 {
     text-decoration: none;
     color: #333;
   }
-  
-  .dropdown-menu a:hover {
-    background-color: #f1f1f1;
-  }
+ 
+.date-selector {
+    margin-top: 8px;
+    width: 406px;
+    padding: 14px 16px 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+
+}
+
+.mg-l-r {
+    margin-left: 24px;
+    margin-right: 24px;
+}
   

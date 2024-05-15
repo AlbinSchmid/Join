@@ -15,16 +15,17 @@
         <div w3-include-html="/assets/templates/header-template.html"></div>
         <h1>Add Task</h1>
         <section class="add-task-container">
+        <div>
             <div>
                 <img src="assets/img/icons/required_icon.svg" alt="">
                 <form>
-                    <input id="task-title" class="inputfield-title" placeholder="Enter a title" type="text">
+                    <input required id="task-title" class="inputfield-title" placeholder="Enter a title" type="text">
                 </form>
             </div>
             <div>
                 <h2>Description</h2>
                 <form>
-                    <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10">
+                    <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
                 </form>
             </div>
             <div>
@@ -38,6 +39,16 @@
                     </div>
                   </div>
             </div>
+        </div>
+            <img src="assets/img/icons/Vector 4.png" alt="">
+        <div>
+            <div>
+                <img class="mg-l-r" src="assets/img/icons/due_date_icon.svg" alt="">
+                <form>
+                    <input id="task-date" type="time" class="date-selector" placeholder="dd/mm/yyyy">
+                </form>
+            </div>
+        </div>
         </section>
 </body>
 </html>
