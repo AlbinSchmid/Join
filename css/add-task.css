@@ -1,0 +1,34 @@
+h1 {
+    padding-top: 106px;
+    padding-left: 106px;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
+.add-task-container {
+    margin-left: 106px;
+    margin-right: 106px;
+    padding-top: 64px;
+}
+
+.inputfield-title {
+    width: 440px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    padding: 12px 21px 12px 21px;
+    margin-top: 8px;
+}
+
+
+.textareafied-description {
+    width: 440px;
+    text-wrap: wrap;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    padding: 12px 21px 12px 21px;
+    margin-top: 8px;
+}

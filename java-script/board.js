@@ -32,6 +32,10 @@ function getToDoHTML() {
         </div>`;
 }
 
+function addTask() {
+    
+}
+
 function updateProgressBar() {
     let percent = (currentTask / totalSubtasks) * 100; // Verwendung von totalSubtasks
     percent = Math.round(percent);

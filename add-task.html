@@ -8,7 +8,25 @@
     <link rel="stylesheet" href="/css/add-task.css">
     <script src="/java-script/add-task.js"></script>
 </head>
-<body>
-   
+<body onload="init()">
+    <div w3-include-html="/assets/templates/side-bar-template.html"></div>
+
+    <main>
+        <div w3-include-html="/assets/templates/header-template.html"></div>
+        <h1>Add Task</h1>
+        <section class="add-task-container">
+            <div>
+                <img src="assets/img/icons/required_icon.svg" alt="">
+                <form>
+                    <input id="task-title" class="inputfield-title" placeholder="Enter a title" type="text">
+                </form>
+            </div>
+            <div>
+                <h2>Description</h2>
+                <form>
+                    <div class="textarea-container"><input id="task-description" class="textareafied-description" type="textarea" placeholder="Enter a Description" rows="10"></div>
+                </form>
+            </div>
+        </section>
 </body>
 </html>
