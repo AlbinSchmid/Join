@@ -35,4 +35,44 @@ h2 {
     padding: 12px 21px 12px 21px;
     margin-top: 8px;
     resize: none;
+    font-family: inter;
 }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 440px;
+  }
+  
+  .dropdown-toggle {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  .dropdown-menu a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #f1f1f1;
+  }
+  
