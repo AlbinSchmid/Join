@@ -15,7 +15,7 @@ function renderBoard() {
 
 function getToDoHTML() {
     return /*html*/`
-         <div id="to-do${1}" class="to-do-task-container" onclick="openTask()"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
+        <div id="to-do${1}" class="to-do-task-container" onclick="openTask()"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
             <div class="to-do-title-container"><p class="to-do-title">User Story</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task">Contact Form & Imprint</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task-description">Create a contact form and imprint page...</p></div>
@@ -25,12 +25,11 @@ function getToDoHTML() {
                     </div>
                     <div class="progress-count" id="progress-count">1/2 Subtasks</div>
                 </div>
-                <div class="attributor-container">
-                    <div><p class="attributor-icon">FE</p></div> <!-- auswählen bei addTask() -->
-                    <div><img src="assets/img/icons/prio_baja_high.svg" alt=""></div> <!-- auswählen bei addTask() -->
-                </div>
+            <div class="attributor-container">
+                <div><p class="attributor-icon">FE</p></div> <!-- auswählen bei addTask() -->
+                <div><img src="assets/img/icons/prio_baja_high.svg" alt=""></div> <!-- auswählen bei addTask() -->
             </div>
-    `
+        </div>`;
 }
 
 function updateProgressBar() {

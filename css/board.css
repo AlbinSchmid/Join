@@ -105,6 +105,8 @@ h1 {
 
 .board-status-container {
     display: flex;
+    margin-left: 106px;
+    margin-right: 106px;
 }
 
 .status-overiew-container {
@@ -115,8 +117,7 @@ h1 {
     padding-top: 64px;
     font-size: 20px;
     font-weight: 700;
-    gap: 64px;
-    margin-left: 106px;
+    padding-right: 24px;
     width: 244px;
     text-wrap: nowrap;
 }
@@ -146,6 +147,7 @@ h1 {
 .board-task-container {
     display: flex;
     margin-left: 106px;
+    margin-right: 106px;
 }
 
 .to-do-container {
