@@ -20,21 +20,21 @@
             <div class="bg-btn-add-new-contact  dflex-c-c">
                 <div class="btn-add-new-contact dflex-c-c">
                     <span>Add new contact</span>
-                    <img src="./assets/img/icons/contact/person_add.png" alt="">
+                    <img src="./assets/img/icons/contact/person_add.png" alt="add-new-contact">
                 </div>
             </div>
             <div class="contact-list">
                 <div class="container-letters">A</div>
 
                 <div class="container-contact">
-                    <div class="first-letters dflex-c-c">AM</div>
+                    <div class="first-letters-small dflex-c-c">AM</div>
                     <div class="name-mail">
-                        <span>Anton Meyer</span>
+                        <span>Anton Mayer</span>
                         <a href="mailto:antom@gmail.com">antom@gmail.com</a>
                     </div>
                 </div>
                 <div class="container-contact">
-                    <div class="first-letters dflex-c-c">AS</div>
+                    <div class="first-letters-small dflex-c-c">AS</div>
                     <div class="name-mail">
                         <span>Anaja Schulz</span>
                         <a href="mailto:antom@gmail.com">schulz@hotmail.com</a>
@@ -44,7 +44,7 @@
                 <div class="container-letters">B</div>
 
                 <div class="container-contact">
-                    <div class="first-letters dflex-c-c">BZ</div>
+                    <div class="first-letters-small dflex-c-c">BZ</div>
                     <div class="name-mail">
                         <span>Bernd Ziegler</span>
                         <a href="mailto:antom@gmail.com">benedikt@gmail.com</a>
@@ -54,7 +54,7 @@
                 <div class="container-letters">D</div>
 
                 <div class="container-contact">
-                    <div class="first-letters dflex-c-c">DE</div>
+                    <div class="first-letters-small dflex-c-c">DE</div>
                     <div class="name-mail">
                         <span>David Eisenberg</span>
                         <a href="mailto:antom@gmail.com">davidberg@gmail.com</a>
@@ -64,14 +64,14 @@
                 <div class="container-letters">E</div>
 
                 <div class="container-contact">
-                    <div class="first-letters dflex-c-c">EF</div>
+                    <div class="first-letters-small dflex-c-c">EF</div>
                     <div class="name-mail">
                         <span>Eva Fischer</span>
                         <a href="mailto:antom@gmail.com">eva@gmail.com</a>
                     </div>
                 </div>
                 <div class="container-contact">
-                    <div class="first-letters dflex-c-c">EM</div>
+                    <div class="first-letters-small dflex-c-c">EM</div>
                     <div class="name-mail">
                         <span>Emmanuel Mauer</span>
                         <a href="mailto:antom@gmail.com">emmanuelma@gmail.com</a>
@@ -81,7 +81,7 @@
                 <div class="container-letters">M</div>
 
                 <div class="container-contact">
-                    <div class="first-letters dflex-c-c">MB</div>
+                    <div class="first-letters-small dflex-c-c">MB</div>
                     <div class="name-mail">
                         <span>Marcel Bauer</span>
                         <a href="mailto:antom@gmail.com">bauer@gmail.com</a>
@@ -91,7 +91,7 @@
                 <div class="container-letters">M</div>
 
                 <div class="container-contact">
-                    <div class="first-letters dflex-c-c">T</div>
+                    <div class="first-letters-small dflex-c-c">T</div>
                     <div class="name-mail">
                         <span>Tatjana Wolf</span>
                         <a href="mailto:antom@gmail.com">wolf@gmail.com</a>
@@ -106,8 +106,79 @@
                 <div class="line"></div>
                 <span>Better with a team</span>
             </div>
+
+            <div class="contact-data">
+                <div class="container-user-top">
+                    <div class="first-letters-big dflex-c-c">AM</div>
+                    <div class="container-name-buttons">
+                        <span>Anton Mayer</span>
+                        <div class="edit-delete">
+                            <div class="edit-delete-btn dflex-c-c cp">
+                                <img src="./assets/img/icons/contact/edit.svg" alt="edit">
+                                <span>Edit</span>
+                            </div>
+                            <div class="edit-delete-btn dflex-c-c cp">
+                                <img src="./assets/img/icons/contact/delete.svg" alt="delete">
+                                <span>Delete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-info-headline">Contact information</div>
+
+                <div class="contact-mail-number">
+                    <div class="mail-number">
+                        <div class="contact-mail-number-headline">E-Mail</div>
+                        <a href="mailto:antom@gmail.com">antom@gmail.com</a>
+                    </div>
+                    <div class="mail-number">
+                        <div class="contact-mail-number-headline">Phone</div>
+                        <a href="tel:+49 1111 111 11 1">+49 1111 111 11 1</a>
+                    </div>
+                </div>
+
+            </div>
         </section>
     </main>
+
+    <section class="overlay-bg dflex-c-c">
+        <div class="container-overlay">
+
+            <div class="overlay-left-bg">
+                <div class="overlay-left">
+                    <img src="./assets/img/logo_join_white.png" alt="logo_join_white">
+
+                    <h1>Add contact</h1>
+                    <span>Tasks are better with a team!</span>
+                    <div class="line-turn"></div>
+                </div>
+            </div>
+            <div class="dflex-c-c">
+                <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png" alt="person_picture">
+            </div>
+            <img class="close-img cp" src="./assets/img/icons/contact/Close.png" alt="close">
+                <div class="container-contact-right">
+                    <form class="input-container dflex-c-c column">
+                        <input class="inputfield" type="text" placeholder="Name" required>
+                        <input class="inputfield" type="email" placeholder="Email" required>
+                        <input class="inputfield" type="tel" placeholder="Phone" required>
+                    </form>
+
+                    <div class="btn-cancel-create dflex-c-c cp">
+                        <div class="btn-outline-create-contact dflex-c-c">
+                            <span>Cancel</span>
+                            <img src="./assets/img/icons/contact/Close.png" alt="cancel">
+                        </div>
+                        <div class="btn-create-contact dflex-c-c cp">
+                            <span>Create contact</span>
+                            <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </div>
+    </section>
 
 </body>
 
