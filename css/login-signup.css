@@ -100,6 +100,10 @@ input[type="password"] {
     background-position: 95%;
 }
 
+input[type="text"]:focus {
+    background-image: none;
+}
+
 input[type="email"]:focus {
     background-image: none;
 }
