@@ -64,18 +64,20 @@
                             </div>
                         </label>
                     </div>
+                <!-- options müssen ausgelesen werden -->  
                 <h2>Category*</h2>
                 <form>
                     <select class="selectfield-task-category" name="task category" id="task-category">
-                        <option value="" disabled selected>Select task category</option>
+                        <option value="" >Select task category</option>
                         <option value="Technical Task">Technical Task</option>
                         <option value="User Story">User Story</option>
                     </select>
                 </form>
+                <!-- value muss ausgelesen werden für das Array, nachdem select, soll wieder die ersten Option angzeigt werden -->
                 <h2>Subtasks</h2>
-                <form action="">
-                    <select class="selectfield-tast-subtasks" name="Subtasks" id="task-subtasks">
-                        <option value="" disabled selected>Add new subtask</option>
+                <form>
+                    <select class="selectfield-task-subtasks" name="Subtasks" id="task-subtasks">
+                        <option value="">Add new subtask</option>
                         <option value="Contact Form">Contact Form</option>
                         <option value="Write Legal Imprint">Write Legal Imprint</option>
                     </select>

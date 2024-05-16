@@ -35,8 +35,8 @@ h2 {
 
 
 .textareafied-description {
-    width: 396px;
-    height: 142px;
+   width: 406px;
+    height: 102px;
     text-wrap: wrap;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
@@ -249,12 +249,12 @@ h2 {
     border: 1px solid #D1D1D1;
 }
 
-.selectfield-tast-category:focus option[value=""] {
-    height: 0;
+.selectfield-task-category:focus option[value=""] {
+    display: none;
     visibility: hidden;
 }
 
-.selectfield-tast-subtasks {
+.selectfield-task-subtasks {
     margin-top: 8px;
     width: 440px;
     padding-left: 16px;
@@ -267,8 +267,8 @@ h2 {
     border: 1px solid #D1D1D1;
 }
 
-.selectfield-tast-subtasks:focus option[value=""] {
-    height: 0;
+.selectfield-task-subtasks:focus option[value=""] {
+    display: none;
     visibility: hidden;
 }
 
