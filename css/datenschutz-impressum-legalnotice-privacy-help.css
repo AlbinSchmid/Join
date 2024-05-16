@@ -20,6 +20,8 @@
 }
 
 button {
+    position: fixed;
+    right: 106px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,5 +46,27 @@ h1 {
 }
 
 h2 {
-    margin-top: 30px;
+    font-size: 27px;
+    font-weight: 700;
+    margin: 30px 0 8px 0 ;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+ul {
+    padding-left: 28px;
+    margin-bottom: 20px;
+}
+
+span {
+    color: #29ABE2;
 }
