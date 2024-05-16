@@ -131,24 +131,58 @@ h2 {
 }
 
 /* Verstecke die Standard-Checkbox */
-.task-checkbox {
+.custom-checkbox {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url('assets/img/icons/urgent_high_icon.svg');
-    
-    
-    border: none;
-    outline: none;
-    cursor: pointer;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
 }
 
-
+/* Stilisiere das Label, um wie ein Button auszusehen */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+}
 
 .checkbox-label {
-    display: inline-block;
-    width: 20px; /* Breite des Bildes */
-    height: 20px; /* Höhe des Bildes */
+    background-color: #FFFFFF; /* Hintergrundfarbe des Buttons */
+    color: #000000; /* Textfarbe des Buttons */
+    padding: 10px 20px; /* Anpassen der Padding-Größe nach Bedarf */
+    border-radius: 10px; /* Abgerundete Ecken des Buttons */
+    transition: background-color 0.3s ease; /* Animiere den Farbwechsel */
 }
 
-  
+/* Ändere den Stil des Labels, wenn die Checkbox aktiviert ist */
+.custom-checkbox:checked + .checkbox-container .checkbox-label {
+    background-color: #FF3D00; /* Ändere die Hintergrundfarbe, wenn aktiviert */
+    color: #FFFFFF;
+}
+
+.checkbox-container:hover .checkbox-label {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Stilisierung für das Bild */
+.checkbox-image {
+    margin-left: 10px; /* Abstand zwischen Text und Bild */
+    width: 24px; /* Breite des Bildes anpassen */
+    height: auto;
+}
+
+/* Ändere das Bild, wenn die Checkbox aktiviert ist */
+.custom-checkbox:checked + .checkbox-container .checkbox-image {
+    content: url('assets/img/icons/prio_low.png'); /* Pfad zum neuen Bild */
+}
+
+
+.checkbox-container:hover .checkbox-label {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
