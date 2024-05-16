@@ -180,13 +180,13 @@ h2 {
 /* Stilisierung für das Bild */
 .checkbox-image {
     margin-left: 10px; /* Abstand zwischen Text und Bild */
-    width: 24px; /* Breite des Bildes anpassen */
-    height: auto;
+    width: 20px; /* Breite des Bildes anpassen */
+    height: 14px;
 }
 
-/* Ändere das Bild, wenn die Checkbox aktiviert ist */
+
 .custom-checkbox:checked + .checkbox-container .checkbox-image {
-    content: url('/assets/img/icons/white_prio_arrows.svg'); /* Pfad zum neuen Bild */
+    content: url('/assets/img/icons/white_prio_arrows.svg'); 
 }
 
 
