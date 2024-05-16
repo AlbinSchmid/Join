@@ -128,6 +128,7 @@ h2 {
 .mg-l-r {
     margin-left: 24px;
     margin-right: 24px;
+    padding-top: 20px;
 }
 
 .dp-flex-jc-sb {
@@ -246,6 +247,29 @@ h2 {
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
+}
+
+.selectfield-tast-category:focus option[value=""] {
+    height: 0;
+    visibility: hidden;
+}
+
+.selectfield-tast-subtasks {
+    margin-top: 8px;
+    width: 440px;
+    padding-left: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 16px;
+    font-family: inter;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+}
+
+.selectfield-tast-subtasks:focus option[value=""] {
+    height: 0;
+    visibility: hidden;
 }
 
 
