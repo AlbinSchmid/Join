@@ -151,11 +151,20 @@ h2 {
 }
 
 .checkbox-label {
-    background-color: #FFFFFF; /* Hintergrundfarbe des Buttons */
-    color: #000000; /* Textfarbe des Buttons */
-    padding: 10px 20px; /* Anpassen der Padding-Größe nach Bedarf */
-    border-radius: 10px; /* Abgerundete Ecken des Buttons */
-    transition: background-color 0.3s ease; /* Animiere den Farbwechsel */
+    background-color: #FFFFFF;
+    color: #000000;
+    padding-left: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 16px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    margin-top: 8px;
+    height: 40px;
+    width: 136px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Ändere den Stil des Labels, wenn die Checkbox aktiviert ist */
@@ -177,7 +186,7 @@ h2 {
 
 /* Ändere das Bild, wenn die Checkbox aktiviert ist */
 .custom-checkbox:checked + .checkbox-container .checkbox-image {
-    content: url('assets/img/icons/prio_low.png'); /* Pfad zum neuen Bild */
+    content: url('/assets/img/icons/white_prio_arrows.svg'); /* Pfad zum neuen Bild */
 }
 
 
