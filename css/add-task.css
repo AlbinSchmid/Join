@@ -28,7 +28,7 @@ h2 {
     padding-right: 16px;
     margin-top: 8px;
     font-family: inter;
-    color: #D1D1D1;
+    
     font-size: 20px;
     height: 30px;
 }
@@ -40,11 +40,13 @@ h2 {
     text-wrap: wrap;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
-    padding: 12px 21px 12px 21px;
+    padding-left: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 16px;
     margin-top: 8px;
     resize: none;
     font-family: inter;
-    color: #D1D1D1;
     font-size: 20px;
 }
 
@@ -92,7 +94,7 @@ h2 {
   .dropdown-menu {
     display: none;
     position: absolute;
-    width: 484px;
+    width: 440px;
     background-color: #fff;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
@@ -120,13 +122,33 @@ h2 {
     height: 30px;
     font-size: 20px;
     font-family: inter;
-    color: #D1D1D1;
+    
 }
-
-
 
 .mg-l-r {
     margin-left: 24px;
     margin-right: 24px;
 }
+
+/* Verstecke die Standard-Checkbox */
+.task-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('assets/img/icons/urgent_high_icon.svg');
+    
+    
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+
+
+.checkbox-label {
+    display: inline-block;
+    width: 20px; /* Breite des Bildes */
+    height: 20px; /* Höhe des Bildes */
+}
+
   
