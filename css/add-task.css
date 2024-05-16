@@ -130,8 +130,14 @@ h2 {
     margin-right: 24px;
 }
 
-/* Verstecke die Standard-Checkbox */
-.custom-checkbox {
+.dp-flex-jc-sb {
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-checkbox-high,
+.custom-checkbox-medium,
+.custom-checkbox-low {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -142,56 +148,95 @@ h2 {
     pointer-events: none;
 }
 
-/* Stilisiere das Label, um wie ein Button auszusehen */
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.checkbox-label {
-    background-color: #FFFFFF;
-    color: #000000;
-    padding-left: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-right: 16px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
+.checkbox-label-high {
+    background-color: #FFFFFF; /* Hintergrundfarbe des Buttons */
+    color: #000000; /* Textfarbe des Buttons */
+    padding: 8px 16px; /* Anpassen der Padding-Größe nach Bedarf */
+    border-radius: 10px; /* Abgerundete Ecken des Buttons */
+    transition: background-color 0.3s ease; /* Animiere den Farbwechsel */
     margin-top: 8px;
     height: 40px;
-    width: 136px;
+    width: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Stilisiere das Label für mittlere Priorität */
+.checkbox-label-medium {
+    background-color: #FFFFFF; /* Hintergrundfarbe des Buttons */
+    color: #000000; /* Textfarbe des Buttons */
+    padding: 8px 16px; /* Anpassen der Padding-Größe nach Bedarf */
+    border-radius: 10px; /* Abgerundete Ecken des Buttons */
+    transition: background-color 0.3s ease; /* Animiere den Farbwechsel */
+    margin-top: 8px;
+    height: 40px;
+    width: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Stilisiere das Label für niedrige Priorität */
+.checkbox-label-low {
+    background-color: #FFFFFF; /* Hintergrundfarbe des Buttons */
+    color: #000000; /* Textfarbe des Buttons */
+    padding: 8px 16px; /* Anpassen der Padding-Größe nach Bedarf */
+    border-radius: 10px; /* Abgerundete Ecken des Buttons */
+    transition: background-color 0.3s ease; /* Animiere den Farbwechsel */
+    margin-top: 8px;
+    height: 40px;
+    width: 104px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 /* Ändere den Stil des Labels, wenn die Checkbox aktiviert ist */
-.custom-checkbox:checked + .checkbox-container .checkbox-label {
+.custom-checkbox-high:checked + .checkbox-container .checkbox-label-high {
     background-color: #FF3D00; /* Ändere die Hintergrundfarbe, wenn aktiviert */
-    color: #FFFFFF;
+    color: #FFFFFF; /* Ändere die Textfarbe, wenn aktiviert */
 }
 
-.checkbox-container:hover .checkbox-label {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.custom-checkbox-medium:checked + .checkbox-container .checkbox-label-medium {
+    background-color: #FFA800; /* Ändere die Hintergrundfarbe, wenn aktiviert */
+    color: #FFFFFF; /* Ändere die Textfarbe, wenn aktiviert */
 }
+
+.custom-checkbox-low:checked + .checkbox-container .checkbox-label-low {
+    background-color: #7AE229; /* Ändere die Hintergrundfarbe, wenn aktiviert */
+    color: #FFFFFF; /* Ändere die Textfarbe, wenn aktiviert */
+}
+
+.checkbox-label-low:hover,
+.checkbox-label-medium:hover,
+.checkbox-label-high:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+
 
 /* Stilisierung für das Bild */
-.checkbox-image {
+.checkbox-image-high,
+.checkbox-image-medium,
+.checkbox-image-low {
     margin-left: 10px; /* Abstand zwischen Text und Bild */
     width: 20px; /* Breite des Bildes anpassen */
     height: 14px;
 }
 
-
-.custom-checkbox:checked + .checkbox-container .checkbox-image {
-    content: url('/assets/img/icons/white_prio_arrows.svg'); 
+/* Ändere das Bild, wenn die Checkbox aktiviert ist */
+.custom-checkbox-high:checked + .checkbox-container .checkbox-image-high {
+    content: url('/assets/img/icons/white_prio_arrows.svg'); /* Pfad zum neuen Bild */
 }
 
+.custom-checkbox-medium:checked + .checkbox-container .checkbox-image-medium {
+    content: url('/assets/img/icons/white_prio_medium.png'); /* Pfad zum neuen Bild */
+}
 
-.checkbox-container:hover .checkbox-label {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.custom-checkbox-low:checked + .checkbox-container .checkbox-image-low {
+    content: url('/assets/img/icons/white_prio_low.png'); /* Pfad zum neuen Bild */
 }
 
 
