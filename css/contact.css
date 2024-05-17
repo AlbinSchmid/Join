@@ -185,6 +185,15 @@
 
 /* ---------- OVERLAY ---------- */
 
+
+.overlay-add-contact {
+    display: none;
+}
+
+.overlay-edit-contact {
+    display: block;
+}
+
 .overlay-bg {
     position: fixed;
     top: 0;
@@ -217,13 +226,13 @@
     justify-content: center;
     gap: 16px;
     padding: 0px 48px;
-    margin-top: -51px;
     color: var(--white);
 }
 
 .overlay-left img {
     width: 56px;
-    margin: 0;
+    position: absolute;
+    top: 154px;
 }
 
 .overlay-left span {
