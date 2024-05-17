@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacts</title>
-
     <link rel="stylesheet" href="/css/contact.css">
+    <script src="/java-script/header.js"></script>
     <script src="/java-script/contact.js"></script>
+    <title>Contacts</title>
 </head>
 
 <body onload="includeHTML()">
@@ -114,11 +114,13 @@
                         <span>Anton Mayer</span>
                         <div class="edit-delete">
                             <div class="edit-delete-btn dflex-c-c cp">
-                                <img src="./assets/img/icons/contact/edit.svg" alt="edit">
+                                <img src="./assets/img/icons/contact/edit_black.png" alt="edit">
+                                <img src="./assets/img/icons/contact/edit_blue.png" alt="edit">
                                 <span>Edit</span>
                             </div>
                             <div class="edit-delete-btn dflex-c-c cp">
-                                <img src="./assets/img/icons/contact/delete.svg" alt="delete">
+                                <img src="./assets/img/icons/contact/delete_black.png" alt="delete">
+                                <img src="./assets/img/icons/contact/delete_blue.png" alt="delete">
                                 <span>Delete</span>
                             </div>
                         </div>
@@ -156,7 +158,7 @@
                 <div class="dflex-c-c">
                     <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png"alt="person_picture">
                 </div>
-                <img class="close-img cp" src="./assets/img/icons/contact/Close.png" alt="close">
+                <img class="close-img cp" src="./assets/img/icons/contact/cancel_black.png" alt="close">
                 <div class="container-contact-right">
                     <form class="input-container dflex-c-c column">
                         <input class="inputfield" type="text" placeholder="Name" required>
@@ -166,7 +168,8 @@
                     <div class="btn-cancel-create dflex-c-c cp">
                         <div class="btn-outline-create-contact dflex-c-c">
                             <span>Cancel</span>
-                            <img src="./assets/img/icons/contact/Close.png" alt="cancel">
+                            <img src="./assets/img/icons/contact/cancel_black.png" alt="cancel">
+                            <img src="./assets/img/icons/contact/cancel_blue.png" alt="cancel">
                         </div>
                         <div class="btn-create-contact dflex-c-c cp">
                             <span>Create contact</span>
@@ -189,9 +192,10 @@
                     </div>
                 </div>
                 <div class="dflex-c-c">
-                    <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png"alt="person_picture">
+                    <div class="container-user-top">
+                        <div class=" first-letters-edit dflex-c-c">AM</div>
                 </div>
-                <img class="close-img cp" src="./assets/img/icons/contact/Close.png" alt="close">
+                <img class="close-img cp" src="./assets/img/icons/contact/cancel_black.png" alt="close">
                 <div class="container-contact-right">
                     <form class="input-container dflex-c-c column">
                         <input class="inputfield" type="text" placeholder="Name" required>
@@ -200,17 +204,17 @@
                     </form>
                     <div class="btn-cancel-create dflex-c-c cp">
                         <div class="btn-outline-create-contact dflex-c-c">
-                            <span>Cancel</span>
-                            <img src="./assets/img/icons/contact/Close.png" alt="cancel">
+                            <span>Delete</span>
                         </div>
                         <div class="btn-create-contact dflex-c-c cp">
-                            <span>Create contact</span>
+                            <span>Save</span>
                             <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="btn-contact-created dflex-c-c">Contact succesfully created</div>
     </section>
 
 

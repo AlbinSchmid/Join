@@ -147,18 +147,31 @@
 
 .edit-delete {
     display: flex;
-    gap: 20px;
+    gap: 30px;
     font-size: 16px;
     font-weight: 400;
 }
 
 .edit-delete-btn {
+    width: 64px;
     gap: 8px;
+}
+
+.edit-delete-btn img:nth-child(2) {
+    display: none;
 }
 
 .edit-delete-btn:hover {
     font-weight: 700;
     color: var(--highlight-color);
+}
+
+.edit-delete-btn:hover img:nth-child(1) {
+    display: none;
+}
+
+.edit-delete-btn:hover img:nth-child(2) {
+    display: block;
 }
 
 .contact-info-headline {
@@ -191,7 +204,7 @@
 }
 
 .overlay-edit-contact {
-    display: block;
+    display: none;
 }
 
 .overlay-bg {
@@ -344,7 +357,7 @@ input[type="tel"]:focus {
 }
 
 .btn-outline-create-contact {
-    width: fit-content;
+    width: 126px;
     height: 56px;
     padding: 16px;
     gap: 4px;
@@ -355,8 +368,48 @@ input[type="tel"]:focus {
     color: var(--primary-color);
 }
 
+.btn-outline-create-contact img:nth-child(3) {
+    display: none;
+}
+
 .btn-outline-create-contact:hover {
     border: 2px solid var(--highlight-color);
     color: var(--highlight-color);
     box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.btn-outline-create-contact:hover img:nth-child(2) {
+    display: none;
+}
+
+.btn-outline-create-contact:hover img:nth-child(3) {
+    display: block;
+}
+
+.first-letters-edit {
+    width: 120px;
+    height: 120px;
+    margin: 83px;
+    background-color: #ff7a00;
+    border-radius: 70px;
+    color: var(--white);
+    border: 3px solid #ffffff;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.btn-contact-created {
+    width: 326px;
+    height: 74px;
+    position: absolute;
+    bottom: 60px;
+    left: 750px;
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    font-size: 20px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.btn-contact-created:hover {
+    background-color: var(--highlight-color);
 }
