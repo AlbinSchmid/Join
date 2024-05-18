@@ -1,5 +1,108 @@
 function init() {
     includeHTML();
+    renderAddTaskContent();
+}
+
+/**
+ * This function renders the main add-task-content into the section with id = 'add-task-content'
+ * container variable
+ * 
+ */
+
+function renderAddTaskContent() {
+    let container = document.getElementById('add-task-content');
+    container.innerHTML = getAddTaskHTML();
+}
+
+/**
+ * This function returns the addTask HTML Code
+ */
+
+function getAddTaskHTML() {
+  return getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
+}
+
+function getAddTaskHTMLLeftSide() {
+    return /*html*/`
+      <div>
+          <h2>Title*</h2>
+              <form>
+                  <input required id="task-title" class="inputfield-title" placeholder="Enter a title" type="text">
+              </form>
+          <h2>Description</h2>
+                <form>
+                    <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
+                </form>
+                    <!-- contacts müssen geladen werden und entsprechend als option + value gerendert werden -->
+          <h2>Assinged to</h2>
+                <form>
+                    <select class="selectfield-task-assingment" name="task category" id="task-category">
+                        <option value="" >Select contacts to assign</option>
+                        <option value="Max Mustermann">Max Mustermann</option>
+                        <option value="Beate Test">Beate Test</option>
+                    </select>
+                    <!-- Contact icons müssen in div gerendert werden -->
+                    <div>
+
+                    </div>
+                </form>
+            </div>
+      <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">`;           
+}
+
+function getAddTaskHTMLRightSide() {
+    return /*html*/`
+      <div>
+          <h2>Due Date*</h2>
+              <form>
+                  <input id="task-date" type="date" name="task-date" class="date-selector">
+              </form>
+          <h2>Prio</h2>
+              <div class="dp-flex-jc-sb">
+                  <input type="checkbox" id="task-high-priority" class="custom-checkbox-high">
+                  <label for="task-high-priority" class="checkbox-container">
+                      <div class="checkbox-label-high">
+                            Urgent
+                          <img class="checkbox-image-high" src="assets/img/icons/prio_high.png" alt="priority high">
+                      </div>
+                  </label>
+                  <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium">
+                  <label for="task-medium-priority" class="checkbox-container">
+                      <div class="checkbox-label-medium">
+                          Medium
+                          <img class="checkbox-image-medium" src="assets/img/icons/prio_medium.png" alt="priority medium">
+                      </div>
+                  </label>
+                  <input type="checkbox" id="task-low-priority" class="custom-checkbox-low">
+                  <label for="task-low-priority" class="checkbox-container">
+                      <div class="checkbox-label-low">
+                          Low
+                          <img class="checkbox-image-low" src="assets/img/icons/prio_low.png" alt="priority low">
+                      </div>
+                  </label>
+              </div>
+                <!-- options müssen ausgelesen werden -->  
+          <h2>Category*</h2>
+              <form>
+                  <select class="selectfield-task-category" name="task category" id="task-category">
+                      <option value="" >Select task category</option>
+                      <option value="Technical Task">Technical Task</option>
+                      <option value="User Story">User Story</option>
+                  </select>
+              </form>
+                <!-- value muss ausgelesen werden für das Array, nachdem select, soll wieder die ersten Option angzeigt werden -->
+          <h2>Subtasks</h2>
+              <form>
+                  <select class="selectfield-task-subtasks" name="Subtasks" id="task-subtasks">
+                      <option value="">Add new subtask</option>
+                      <option value="Contact Form">Contact Form</option>
+                      <option value="Write Legal Imprint">Write Legal Imprint</option>
+                  </select>
+                  <div> <!-- Subtasks müssen in div-container gerendert werden -->
+
+                  </div>
+              </form>
+          </div>`;
 }
 
 async function includeHTML() {
