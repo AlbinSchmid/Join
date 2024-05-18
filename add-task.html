@@ -24,15 +24,19 @@
                     <form>
                         <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
                     </form>
+                    <!-- contacts müssen geladen werden und entsprechend als option + value gerendert werden -->
                 <h2>Assinged to</h2>
-                    <div class="dropdown">
-                        <button class="dropdown-toggle" onclick="toggleDropdown()">Select contacts to assign</button>
-                        <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="#">Max Mustermann</a>
-                        <a href="#">Max Mustermann</a>
-                        <a href="#">Max Mustermann</a>
-                        </div>
+                <form>
+                    <select class="selectfield-task-assingment" name="task category" id="task-category">
+                        <option value="" >Select contacts to assign</option>
+                        <option value="Max Mustermann">Max Mustermann</option>
+                        <option value="Beate Test">Beate Test</option>
+                    </select>
+                    <!-- Contact icons müssen in div gerendert werden -->
+                    <div>
+
                     </div>
+                </form>
             </div>
             <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">
             <div>
