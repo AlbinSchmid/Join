@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacts</title>
-
     <link rel="stylesheet" href="/css/contact.css">
+    <script src="/java-script/header.js"></script>
     <script src="/java-script/contact.js"></script>
+    <title>Contacts</title>
 </head>
 
 <body onload="includeHTML()">
@@ -114,11 +114,13 @@
                         <span>Anton Mayer</span>
                         <div class="edit-delete">
                             <div class="edit-delete-btn dflex-c-c cp">
-                                <img src="./assets/img/icons/contact/edit.svg" alt="edit">
+                                <img src="./assets/img/icons/contact/edit_black.png" alt="edit">
+                                <img src="./assets/img/icons/contact/edit_blue.png" alt="edit">
                                 <span>Edit</span>
                             </div>
                             <div class="edit-delete-btn dflex-c-c cp">
-                                <img src="./assets/img/icons/contact/delete.svg" alt="delete">
+                                <img src="./assets/img/icons/contact/delete_black.png" alt="delete">
+                                <img src="./assets/img/icons/contact/delete_blue.png" alt="delete">
                                 <span>Delete</span>
                             </div>
                         </div>
@@ -142,43 +144,79 @@
         </section>
     </main>
 
-    <section class="overlay-bg dflex-c-c">
-        <div class="container-overlay">
-
-            <div class="overlay-left-bg">
-                <div class="overlay-left">
-                    <img src="./assets/img/logo_join_white.png" alt="logo_join_white">
-
-                    <h1>Add contact</h1>
-                    <span>Tasks are better with a team!</span>
-                    <div class="line-turn"></div>
+    <section class="overlay-add-contact">
+        <div class="overlay-bg dflex-c-c">
+            <div class="container-overlay">
+                <div class="overlay-left-bg">
+                    <div class="overlay-left">
+                        <img src="./assets/img/logo_join_white.png" alt="logo_join_white">
+                        <h1>Add contact</h1>
+                        <span>Tasks are better with a team!</span>
+                        <div class="line-turn"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="dflex-c-c">
-                <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png" alt="person_picture">
-            </div>
-            <img class="close-img cp" src="./assets/img/icons/contact/Close.png" alt="close">
+                <div class="dflex-c-c">
+                    <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png"alt="person_picture">
+                </div>
+                <img class="close-img cp" src="./assets/img/icons/contact/cancel_black.png" alt="close">
                 <div class="container-contact-right">
                     <form class="input-container dflex-c-c column">
                         <input class="inputfield" type="text" placeholder="Name" required>
                         <input class="inputfield" type="email" placeholder="Email" required>
                         <input class="inputfield" type="tel" placeholder="Phone" required>
                     </form>
-
                     <div class="btn-cancel-create dflex-c-c cp">
                         <div class="btn-outline-create-contact dflex-c-c">
                             <span>Cancel</span>
-                            <img src="./assets/img/icons/contact/Close.png" alt="cancel">
+                            <img src="./assets/img/icons/contact/cancel_black.png" alt="cancel">
+                            <img src="./assets/img/icons/contact/cancel_blue.png" alt="cancel">
                         </div>
                         <div class="btn-create-contact dflex-c-c cp">
                             <span>Create contact</span>
                             <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
                         </div>
                     </div>
+                </div>
             </div>
         </div>
-        </div>
     </section>
+
+    <section class="overlay-edit-contact">
+        <div class="overlay-bg dflex-c-c">
+            <div class="container-overlay">
+                <div class="overlay-left-bg">
+                    <div class="overlay-left">
+                        <img src="./assets/img/logo_join_white.png" alt="logo_join_white">
+                        <h1>Edit contact</h1>
+                        <div class="line-turn"></div>
+                    </div>
+                </div>
+                <div class="dflex-c-c">
+                    <div class="container-user-top">
+                        <div class=" first-letters-edit dflex-c-c">AM</div>
+                </div>
+                <img class="close-img cp" src="./assets/img/icons/contact/cancel_black.png" alt="close">
+                <div class="container-contact-right">
+                    <form class="input-container dflex-c-c column">
+                        <input class="inputfield" type="text" placeholder="Name" required>
+                        <input class="inputfield" type="email" placeholder="Email" required>
+                        <input class="inputfield" type="tel" placeholder="Phone" required>
+                    </form>
+                    <div class="btn-cancel-create dflex-c-c cp">
+                        <div class="btn-outline-create-contact dflex-c-c">
+                            <span>Delete</span>
+                        </div>
+                        <div class="btn-create-contact dflex-c-c cp">
+                            <span>Save</span>
+                            <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-contact-created dflex-c-c">Contact succesfully created</div>
+    </section>
+
 
 </body>
 

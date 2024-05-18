@@ -11,3 +11,12 @@ async function includeHTML() {
         }
     }
 }
+
+
+// ------------- EDIT ICONS
+
+
+function changeEditIcon() {
+    document.getElementById('editIcon').setAttribute('src', './assets/img/icons/contact/edit_blue.png');
+    
+}
