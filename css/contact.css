@@ -198,15 +198,6 @@
 
 /* ---------- OVERLAY ---------- */
 
-
-.overlay-add-contact {
-    display: none;
-}
-
-.overlay-edit-contact {
-    display: none;
-}
-
 .overlay-bg {
     position: fixed;
     top: 0;
@@ -408,8 +399,4 @@ input[type="tel"]:focus {
     font-size: 20px;
     font-weight: 400;
     color: #FFFFFF;
-}
-
-.btn-contact-created:hover {
-    background-color: var(--highlight-color);
 }

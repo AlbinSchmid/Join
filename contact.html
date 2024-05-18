@@ -10,7 +10,7 @@
     <title>Contacts</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(), init()">
     <div w3-include-html="/assets/templates/side-bar-template.html"></div>
 
     <main>
@@ -18,7 +18,7 @@
 
         <section class="container-contacts">
             <div class="bg-btn-add-new-contact  dflex-c-c">
-                <div class="btn-add-new-contact dflex-c-c">
+                <div onclick="showCreateNewContact()" class="btn-add-new-contact dflex-c-c">
                     <span>Add new contact</span>
                     <img src="./assets/img/icons/contact/person_add.png" alt="add-new-contact">
                 </div>
@@ -26,7 +26,9 @@
             <div class="contact-list">
                 <div class="container-letters">A</div>
 
-                <div class="container-contact">
+                
+
+                <div onclick="showContact()" class="container-contact">
                     <div class="first-letters-small dflex-c-c">AM</div>
                     <div class="name-mail">
                         <span>Anton Mayer</span>
@@ -107,13 +109,13 @@
                 <span>Better with a team</span>
             </div>
 
-            <div class="contact-data">
+            <div class="contact-data d-none" id="contactData">
                 <div class="container-user-top">
                     <div class="first-letters-big dflex-c-c">AM</div>
                     <div class="container-name-buttons">
                         <span>Anton Mayer</span>
                         <div class="edit-delete">
-                            <div class="edit-delete-btn dflex-c-c cp">
+                            <div onclick="showEditContact()" class="edit-delete-btn dflex-c-c cp">
                                 <img src="./assets/img/icons/contact/edit_black.png" alt="edit">
                                 <img src="./assets/img/icons/contact/edit_blue.png" alt="edit">
                                 <span>Edit</span>
@@ -144,7 +146,7 @@
         </section>
     </main>
 
-    <section class="overlay-add-contact">
+    <section class="d-none" id="addNewContact">
         <div class="overlay-bg dflex-c-c">
             <div class="container-overlay">
                 <div class="overlay-left-bg">
@@ -156,22 +158,24 @@
                     </div>
                 </div>
                 <div class="dflex-c-c">
-                    <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png"alt="person_picture">
+                    <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png"
+                        alt="person_picture">
                 </div>
-                <img class="close-img cp" src="./assets/img/icons/contact/cancel_black.png" alt="close">
+                <img onclick="showCreateNewContact()" class="close-img cp"
+                    src="./assets/img/icons/contact/cancel_black.png" alt="close">
                 <div class="container-contact-right">
                     <form class="input-container dflex-c-c column">
-                        <input class="inputfield" type="text" placeholder="Name" required>
-                        <input class="inputfield" type="email" placeholder="Email" required>
-                        <input class="inputfield" type="tel" placeholder="Phone" required>
+                        <input id="name" class="inputfield" type="text" placeholder="Name" required>
+                        <input id="mail" class="inputfield" type="email" placeholder="Email" required>
+                        <input id="phonenumber" class="inputfield" type="tel" placeholder="Phone" required>
                     </form>
                     <div class="btn-cancel-create dflex-c-c cp">
-                        <div class="btn-outline-create-contact dflex-c-c">
+                        <div onclick="showCreateNewContact()" class="btn-outline-create-contact dflex-c-c">
                             <span>Cancel</span>
                             <img src="./assets/img/icons/contact/cancel_black.png" alt="cancel">
                             <img src="./assets/img/icons/contact/cancel_blue.png" alt="cancel">
                         </div>
-                        <div class="btn-create-contact dflex-c-c cp">
+                        <div onclick="createNewContact()" class="btn-create-contact dflex-c-c cp">
                             <span>Create contact</span>
                             <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
                         </div>
@@ -181,7 +185,11 @@
         </div>
     </section>
 
-    <section class="overlay-edit-contact">
+    <section class="d-none" id="btnContactCreated">
+        <div class="btn-contact-created dflex-c-c">Contact succesfully created</div>
+    </section>
+
+    <section class="d-none" id="editContact">
         <div class="overlay-bg dflex-c-c">
             <div class="container-overlay">
                 <div class="overlay-left-bg">
@@ -194,28 +202,29 @@
                 <div class="dflex-c-c">
                     <div class="container-user-top">
                         <div class=" first-letters-edit dflex-c-c">AM</div>
-                </div>
-                <img class="close-img cp" src="./assets/img/icons/contact/cancel_black.png" alt="close">
-                <div class="container-contact-right">
-                    <form class="input-container dflex-c-c column">
-                        <input class="inputfield" type="text" placeholder="Name" required>
-                        <input class="inputfield" type="email" placeholder="Email" required>
-                        <input class="inputfield" type="tel" placeholder="Phone" required>
-                    </form>
-                    <div class="btn-cancel-create dflex-c-c cp">
-                        <div class="btn-outline-create-contact dflex-c-c">
-                            <span>Delete</span>
-                        </div>
-                        <div class="btn-create-contact dflex-c-c cp">
-                            <span>Save</span>
-                            <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
+                    </div>
+                    <img onclick="showEditContact()" class="close-img cp"
+                        src="./assets/img/icons/contact/cancel_black.png" alt="close">
+                    <div class="container-contact-right">
+                        <form class="input-container dflex-c-c column">
+                            <input class="inputfield" type="text" placeholder="Name" required>
+                            <input class="inputfield" type="email" placeholder="Email" required>
+                            <input class="inputfield" type="tel" placeholder="Phone" required>
+                        </form>
+                        <div class="btn-cancel-create dflex-c-c cp">
+                            <div onclick="showEditContact()" class="btn-outline-create-contact dflex-c-c">
+                                <span>Delete</span>
+                            </div>
+                            <div onclick="showEditContact()" class="btn-create-contact dflex-c-c cp">
+                                <span>Save</span>
+                                <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="btn-contact-created dflex-c-c">Contact succesfully created</div>
     </section>
+
 
 
 </body>
