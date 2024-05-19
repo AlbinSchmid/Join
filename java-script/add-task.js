@@ -1,3 +1,5 @@
+let tasks = [];
+
 function init() {
     includeHTML();
     renderAddTaskContent();
@@ -36,7 +38,7 @@ function getAddTaskHTMLLeftSide() {
                     <!-- contacts müssen geladen werden und entsprechend als option + value gerendert werden -->
           <h2>Assinged to</h2>
                 <form>
-                    <select class="selectfield-task-assingment" name="task category" id="task-category">
+                    <select class="selectfield-task-assingment" name="task category" id="task-assignment">
                         <option value="" >Select contacts to assign</option>
                         <option value="Max Mustermann">Max Mustermann</option>
                         <option value="Beate Test">Beate Test</option>
@@ -103,6 +105,41 @@ function getAddTaskHTMLRightSide() {
                   </div>
               </form>
           </div>`;
+}
+
+function clearTask() {
+  init();
+}
+
+function createTask() {
+    let taskTitle = document.getElementById('task-title').value;
+    let taskDescription = document.getElementById('task-description').value;
+    let taskAssignment = document.getElementById('task-assignment').value;
+    let taskDate = document.getElementById('task-date').value;
+    let taskPriorityHigh = document.getElementById('task-high-priority').checked;
+    let taskPriorityMedium = document.getElementById('task-medium-priority').checked;
+    let taskPriorityLow = document.getElementById('task-low-priority').checked;
+    let taskCategory = document.getElementById('task-category').value;
+    let subTask = document.getElementById('task-subtasks').value;
+    
+    let task = {
+      title: taskTitle,
+      description: taskDescription,
+      assignment: taskAssignment,
+      date: taskDate,
+      priorityHigh: taskPriorityHigh,
+      priorityMedium: taskPriorityMedium,
+      priorityLow: taskPriorityLow,
+      category: taskCategory,
+      subTask: subTask
+      };
+    
+    tasks.push(task);
+    localStorage.setItem('tasks',JSON.stringify(tasks));
+    
+    console.log('Task gespeichert:', task);
+    console.log('Alle Tasks:', tasks);
+
 }
 
 async function includeHTML() {
