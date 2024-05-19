@@ -27,7 +27,7 @@ function getAddTaskHTML() {
 function getAddTaskHTMLLeftSide() {
     return /*html*/`
       <div>
-          <h2>Title*</h2>
+          <h2>Title<p class="required-color">*</p></h2>
               <form>
                   <input required id="task-title" class="inputfield-title" placeholder="Enter a title" type="text">
               </form>
@@ -55,7 +55,7 @@ function getAddTaskHTMLLeftSide() {
 function getAddTaskHTMLRightSide() {
     return /*html*/`
       <div>
-          <h2>Due Date*</h2>
+          <h2>Due Date<p class="required-color">*</p></h2>
               <form>
                   <input id="task-date" type="date" name="task-date" class="date-selector">
               </form>
@@ -84,7 +84,7 @@ function getAddTaskHTMLRightSide() {
                   </label>
               </div>
                 <!-- options müssen ausgelesen werden -->  
-          <h2>Category*</h2>
+          <h2>Category<p class="required-color">*</p></h2>
               <form>
                   <select class="selectfield-task-category" name="task category" id="task-category">
                       <option value="" >Select task category</option>
@@ -136,6 +136,7 @@ function createTask() {
     
     tasks.push(task);
     localStorage.setItem('tasks',JSON.stringify(tasks));
+    init();
     
     console.log('Task gespeichert:', task);
     console.log('Alle Tasks:', tasks);
