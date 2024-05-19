@@ -48,7 +48,7 @@
 
 .container-letters {
     width: 352px;
-    padding: 17px 36px;
+    padding: 17px 0px;
     border-bottom: 1px solid #d1d1d1;
 }
 
@@ -71,10 +71,10 @@
     color: var(--white);
 }
 
+
 .first-letters-small {
-    width: 42px;
+    min-width: 42px;
     height: 42px;
-    background-color: #ff7a00;
     border-radius: 45px;
     font-size: 12px;
     color: var(--white);
