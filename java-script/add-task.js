@@ -24,6 +24,11 @@ function getAddTaskHTML() {
   return getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
 }
 
+/**
+ * 
+ * @returns add task container left side html
+ */
+
 function getAddTaskHTMLLeftSide() {
     return /*html*/`
       <div>
@@ -51,6 +56,11 @@ function getAddTaskHTMLLeftSide() {
             </div>
       <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">`;           
 }
+
+/**
+ * 
+ * @returns add task container right side html
+ */
 
 function getAddTaskHTMLRightSide() {
     return /*html*/`
