@@ -255,22 +255,44 @@ h2 {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-.create-task-btn {
+.create-task-btn-container {
     height: 56px;
     width: 183px;
     border-radius: 10px;
-    padding: 16px;
     background-color: #2A3647;
-    color: white;
-    font-size: 20px;
-    border: 0;
     margin-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.create-task-btn-container:hover, 
 .create-task-btn:hover {
     cursor: pointer;
     transition: ease-in-out 120ms;
     background-color: #29ABE2;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.create-task-btn {
+    height: 56px;
+    width: 183px;
+    border-radius: 10px;
+    background-color: #2A3647;
+    margin-left: 16px;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+
+.footer-btn-container {
+    display: flex;
+    align-items: end;
 }
 
