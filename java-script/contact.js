@@ -14,6 +14,7 @@ async function includeHTML() {
 
 
 let allContacts = [];
+let currentContact;
 let allFirstLetters = [];
 
 
@@ -52,10 +53,14 @@ function renderContactlist() {
     contactList.innerHTML = '';
     for (let i = 0; i < allContacts.length; i++) {
         let contact = allContacts[i];
-        contactList.innerHTML += renderContactOnListHTML(contact);
+        let name = contact['name'];
+        let initials = contact['initials'];
+        let mail = contact['mail'];
+        let color = contact['color'];
+        contactList.innerHTML += renderContactOnListHTML(i, name, initials, mail, color);
     }
 }
- 
+
 
 function addContact() {
     let name = document.getElementById('name');
@@ -120,7 +125,7 @@ function loadAllContacts() {
 
 
 function saveAllFirstletters() {
-    
+
 
 
     let allFirstLettersAsString = JSON.stringify(allFirstLetters);
@@ -165,13 +170,40 @@ function closeBtnSuccesfully() {
 }
 
 
-function showEditContact() {
+function editContact() {
+
+    let name = currentContact['name'];
+    let initials = currentContact['initials'];
+    let mail = currentContact['mail'];
+    let phonenumber = currentContact['phonenumber'];
+    let color = currentContact['color'];
+
+    let containerEdit = document.getElementById('editContact');
+    containerEdit.innerHTML = '';
+
+    // document.getElementById('edit-name').innerHTML = name;
+    // document.getElementById('edit-mail').value = mail;
+    // document.getElementById('edit-phonenumber').value = phonenumber;
+
+
+    containerEdit.innerHTML = editContactHTML(initials, color);
     document.getElementById('editContact').classList.toggle('d-none');
 }
 
 
-function showContact() {
-    document.getElementById('contactData').classList.toggle('d-none');
+function showContact(i) {
+    currentContact = allContacts[i];
+
+    let name = currentContact['name'];
+    let initials = currentContact['initials'];
+    let mail = currentContact['mail'];
+    let phonenumber = currentContact['phonenumber'];
+    let color = currentContact['color'];
+
+    let contactDetails = document.getElementById('showContactDetails');
+    contactDetails.innerHTML = '';
+    document.getElementById('showContactDetails').classList.toggle('d-none');
+    contactDetails.innerHTML = contactDetailsHTML(i, name, initials, mail, phonenumber, color);
 }
 
 
@@ -187,14 +219,93 @@ function changeEditIcon() {
 // ------------- HTML ------------- //
 
 
-function renderContactOnListHTML(contact) {
+function renderContactOnListHTML(i, name, initials, mail, color) {
     return `
-        <div onclick="showContact()" class="container-contact">
-            <div class="first-letters-small dflex-c-c" style="background-color: ${contact['color']};">${contact['initials']}</div>
+        <div onclick="showContact(${i})" class="container-contact">
+            <div class="first-letters-small dflex-c-c" style="background-color: ${color};">${initials}</div>
             <div class="name-mail">
-                <span>${contact['name']}</span>
-                <a href="mailto:${contact['mail']}">${contact['mail']}</a>
+                <span>${name}</span>
+                <a href="mailto:${mail}">${mail}</a>
             </div>
         </div>
         `;
 }
+
+
+function contactDetailsHTML(i, name, initials, mail, phonenumber, color) {
+    return `
+    <div class="contact-data" id="contactData">
+                <div class="container-user-top">
+                    <div class="first-letters-big dflex-c-c" style="background-color:${color}">${initials}</div>
+                    <div class="container-name-buttons">
+                        <span>${name}</span>
+                        <div class="edit-delete">
+                            <div onclick="editContact()" class="edit-delete-btn dflex-c-c cp">
+                                <img src="./assets/img/icons/contact/edit_black.png" alt="edit">
+                                <img src="./assets/img/icons/contact/edit_blue.png" alt="edit">
+                                <span>Edit</span>
+                            </div>
+                            <div class="edit-delete-btn dflex-c-c cp">
+                                <img src="./assets/img/icons/contact/delete_black.png" alt="delete">
+                                <img src="./assets/img/icons/contact/delete_blue.png" alt="delete">
+                                <span>Delete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-info-headline">Contact information</div>
+                <div class="contact-mail-number">
+                    <div class="mail-number">
+                        <div class="contact-mail-number-headline">E-Mail</div>
+                        <a href="mailto:${mail}">${mail}</a>
+                    </div>
+                    <div class="mail-number">
+                        <div class="contact-mail-number-headline">Phone</div>
+                        <a href="tel:${phonenumber}">${phonenumber}</a>
+                    </div>
+                </div>
+            </div>
+`
+}
+
+
+function editContactHTML(initials, color) {
+    return `
+    <div class="overlay-bg dflex-c-c">
+            <div class="container-overlay">
+                <div class="overlay-left-bg">
+                    <div class="overlay-left">
+                        <img src="./assets/img/logo_join_white.png" alt="logo_join_white">
+                        <h1>Edit contact</h1>
+                        <div class="line-turn"></div>
+                    </div>
+                </div>
+                <div class="dflex-c-c">
+                    <div class="container-user-top">
+                        <div class=" first-letters-edit dflex-c-c" style="background-color:${color}">${initials}</div>
+                    </div>
+                    <img onclick="editContact()" class="close-img cp"
+                        src="./assets/img/icons/contact/cancel_black.png" alt="close">
+                    <div class="container-contact-right">
+                        <form class="input-container dflex-c-c column">
+
+                        <input id="edit-name" class="inputfield" type="text" placeholder="Name" required>
+                        <input id="edit-mail" class="inputfield" type="email" placeholder="Email" required>
+                        <input id="edit-phonenumber" class="inputfield" type="text" placeholder="Phone" required>
+                        </form>
+                        <div class="btn-cancel-create dflex-c-c cp">
+                            <div onclick="" class="btn-outline-create-contact dflex-c-c">
+                                <span>Delete</span>
+                            </div>
+                            <div onclick="editContact()" class="btn-create-contact dflex-c-c cp">
+                                <span>Save</span>
+                                <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
+} 
+
+

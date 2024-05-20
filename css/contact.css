@@ -84,7 +84,6 @@
 .first-letters-big {
     width: 120px;
     height: 120px;
-    background-color: #ff7a00;
     border-radius: 70px;
     color: var(--white);
     border: 3px solid #ffffff;
@@ -381,7 +380,6 @@ input[type="tel"]:focus {
     width: 120px;
     height: 120px;
     margin: 83px;
-    background-color: #ff7a00;
     border-radius: 70px;
     color: var(--white);
     border: 3px solid #ffffff;

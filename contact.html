@@ -24,87 +24,8 @@
                 </div>
             </div>
             <div class="contact-list">
-
                 <div id="letter-category"></div>
-
                 <div id="contact-list"></div>
-
-
-<!-- 
-
-
-
-                <div onclick="showContact()" class="container-contact">
-                    <div class="first-letters-small dflex-c-c">AM</div>
-                    <div class="name-mail">
-                        <span>Anton Mayer</span>
-                        <a href="mailto:antom@gmail.com">antom@gmail.com</a>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="first-letters-small dflex-c-c">AS</div>
-                    <div class="name-mail">
-                        <span>Anaja Schulz</span>
-                        <a href="mailto:antom@gmail.com">schulz@hotmail.com</a>
-                    </div>
-                </div>
-
-                <div class="container-letters">B</div>
-
-                <div class="container-contact">
-                    <div class="first-letters-small dflex-c-c">BZ</div>
-                    <div class="name-mail">
-                        <span>Bernd Ziegler</span>
-                        <a href="mailto:antom@gmail.com">benedikt@gmail.com</a>
-                    </div>
-                </div>
-
-                <div class="container-letters">D</div>
-
-                <div class="container-contact">
-                    <div class="first-letters-small dflex-c-c">DE</div>
-                    <div class="name-mail">
-                        <span>David Eisenberg</span>
-                        <a href="mailto:antom@gmail.com">davidberg@gmail.com</a>
-                    </div>
-                </div>
-
-                <div class="container-letters">E</div>
-
-                <div class="container-contact">
-                    <div class="first-letters-small dflex-c-c">EF</div>
-                    <div class="name-mail">
-                        <span>Eva Fischer</span>
-                        <a href="mailto:antom@gmail.com">eva@gmail.com</a>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="first-letters-small dflex-c-c">EM</div>
-                    <div class="name-mail">
-                        <span>Emmanuel Mauer</span>
-                        <a href="mailto:antom@gmail.com">emmanuelma@gmail.com</a>
-                    </div>
-                </div>
-
-                <div class="container-letters">M</div>
-
-                <div class="container-contact">
-                    <div class="first-letters-small dflex-c-c">MB</div>
-                    <div class="name-mail">
-                        <span>Marcel Bauer</span>
-                        <a href="mailto:antom@gmail.com">bauer@gmail.com</a>
-                    </div>
-                </div>
-
-                <div class="container-letters">M</div>
-
-                <div class="container-contact">
-                    <div class="first-letters-small dflex-c-c">T</div>
-                    <div class="name-mail">
-                        <span>Tatjana Wolf</span>
-                        <a href="mailto:antom@gmail.com">wolf@gmail.com</a>
-                    </div>
-                </div> -->
             </div>
         </section>
 
@@ -115,40 +36,15 @@
                 <span>Better with a team</span>
             </div>
 
-            <div class="contact-data d-none" id="contactData">
-                <div class="container-user-top">
-                    <div class="first-letters-big dflex-c-c">AM</div>
-                    <div class="container-name-buttons">
-                        <span>Anton Mayer</span>
-                        <div class="edit-delete">
-                            <div onclick="showEditContact()" class="edit-delete-btn dflex-c-c cp">
-                                <img src="./assets/img/icons/contact/edit_black.png" alt="edit">
-                                <img src="./assets/img/icons/contact/edit_blue.png" alt="edit">
-                                <span>Edit</span>
-                            </div>
-                            <div class="edit-delete-btn dflex-c-c cp">
-                                <img src="./assets/img/icons/contact/delete_black.png" alt="delete">
-                                <img src="./assets/img/icons/contact/delete_blue.png" alt="delete">
-                                <span>Delete</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="contact-info-headline">Contact information</div>
 
-                <div class="contact-mail-number">
-                    <div class="mail-number">
-                        <div class="contact-mail-number-headline">E-Mail</div>
-                        <a href="mailto:antom@gmail.com">antom@gmail.com</a>
-                    </div>
-                    <div class="mail-number">
-                        <div class="contact-mail-number-headline">Phone</div>
-                        <a href="tel:+49 1111 111 11 1">+49 1111 111 11 1</a>
-                    </div>
-                </div>
 
-            </div>
+            <div class="d-none" id="showContactDetails"></div>
+
+            
+        
+        
+        
         </section>
     </main>
 
@@ -195,40 +91,10 @@
         <div class="btn-contact-created dflex-c-c">Contact succesfully created</div>
     </section>
 
+
+    
     <section class="d-none" id="editContact">
-        <div class="overlay-bg dflex-c-c">
-            <div class="container-overlay">
-                <div class="overlay-left-bg">
-                    <div class="overlay-left">
-                        <img src="./assets/img/logo_join_white.png" alt="logo_join_white">
-                        <h1>Edit contact</h1>
-                        <div class="line-turn"></div>
-                    </div>
-                </div>
-                <div class="dflex-c-c">
-                    <div class="container-user-top">
-                        <div class=" first-letters-edit dflex-c-c">AM</div>
-                    </div>
-                    <img onclick="showEditContact()" class="close-img cp"
-                        src="./assets/img/icons/contact/cancel_black.png" alt="close">
-                    <div class="container-contact-right">
-                        <form class="input-container dflex-c-c column">
-                            <input class="inputfield" type="text" placeholder="Name" required>
-                            <input class="inputfield" type="email" placeholder="Email" required>
-                            <input class="inputfield" type="tel" placeholder="Phone" required>
-                        </form>
-                        <div class="btn-cancel-create dflex-c-c cp">
-                            <div onclick="showEditContact()" class="btn-outline-create-contact dflex-c-c">
-                                <span>Delete</span>
-                            </div>
-                            <div onclick="showEditContact()" class="btn-create-contact dflex-c-c cp">
-                                <span>Save</span>
-                                <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        
     </section>
 
 
