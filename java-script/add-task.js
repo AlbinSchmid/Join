@@ -6,6 +6,10 @@ let subtaskCount = 0;
 function init() {
     includeHTML();
     renderAddTaskContent();
+    subtaskCount = 0;
+    subtasks = [];
+    document.querySelector('.subtasks-container').innerHTML = '';
+    clearInput();
 }
 
 /**
@@ -37,7 +41,7 @@ function getAddTaskHTMLLeftSide() {
       <div>
           <h2>Title<p class="required-color">*</p></h2>
               <form>
-                  <input required id="task-title" class="inputfield-title" placeholder="Enter a title" type="text">
+                  <input id="task-title" class="inputfield-title" placeholder="Enter a title" type="text" required>
               </form>
           <h2>Description</h2>
                 <form>
@@ -70,7 +74,7 @@ function getAddTaskHTMLRightSide() {
       <div>
           <h2>Due Date<p class="required-color">*</p></h2>
               <form>
-                  <input id="task-date" type="date" name="task-date" class="date-selector">
+                  <input id="task-date" type="date" name="task-date" class="date-selector" required>
               </form>
           <h2>Prio</h2>
               <div class="dp-flex-jc-sb">
@@ -99,7 +103,7 @@ function getAddTaskHTMLRightSide() {
                 <!-- options müssen ausgelesen werden -->  
           <h2>Category<p class="required-color">*</p></h2>
               <form>
-                  <select class="selectfield-task-category" name="task category" id="task-category">
+                  <select class="selectfield-task-category" name="task category" id="task-category" required>
                       <option value="" >Select task category</option>
                       <option value="Technical Task">Technical Task</option>
                       <option value="User Story">User Story</option>
@@ -124,31 +128,96 @@ function clearInput() {
 }
 
 function createSubtask() {
-    const inputField = document.getElementById('task-subtasks');
-    const subtaskText = inputField.value.trim();
+    let inputField = document.getElementById('task-subtasks');
+    let subtaskText = inputField.value.trim();
+
+    if (subtaskText === '') {
+        alert('Please enter a subtask.');
+        return;
+    }
 
     // Increment subtask count
     subtaskCount++;
 
     // Create new subtask element
-    const subtaskElement = document.createElement('div');
-    subtaskElement.textContent = subtaskText;
+    let subtaskElement = document.createElement('div');
+    subtaskElement.className = 'subtask';
+
+    let subtaskTextElement = document.createElement('span');
+    subtaskTextElement.className = 'subtask-text';
+    subtaskTextElement.textContent = subtaskText;
+
+    let editButton = document.createElement('button');
+    editButton.className = 'edit-button';
+    editButton.textContent = 'Edit';
+    editButton.onclick = () => editSubtask(subtaskElement, subtaskTextElement);
+
+    let deleteButton = document.createElement('button');
+    deleteButton.className = 'delete-button';
+    deleteButton.textContent = 'Delete';
+    deleteButton.onclick = () => deleteSubtask(subtaskElement, subtaskText);
+
+    subtaskElement.appendChild(subtaskTextElement);
+    subtaskElement.appendChild(editButton);
+    subtaskElement.appendChild(deleteButton);
+
     document.querySelector('.subtasks-container').appendChild(subtaskElement);
 
-    // Add subtask to tasks array
+    // Add subtask to subtasks array
     subtasks.push(subtaskText);
-    
-    // Save tasks to local storage
 
     // Clear input field
     clearInput();
 }
 
+function editSubtask(subtaskElement, subtaskTextElement) {
+    let oldText = subtaskTextElement.textContent;
+    let inputField = document.createElement('input');
+    inputField.type = 'text';
+    inputField.value = oldText;
+    inputField.className = 'inputfield-task-subtasks';
+    
+    // Replace subtaskTextElement with inputField temporarily
+    subtaskElement.replaceChild(inputField, subtaskTextElement);
+    
+    inputField.focus();
+    
+    inputField.addEventListener('blur', () => {
+        let newText = inputField.value.trim();
+        if (newText !== '') {
+            subtaskTextElement.textContent = newText;
+            let index = subtasks.indexOf(oldText);
+            if (index !== -1) {
+                subtasks[index] = newText;
+            }
+        }
+        
+        // Replace inputField back with subtaskTextElement
+        subtaskElement.replaceChild(subtaskTextElement, inputField);
+    });
+    
+    inputField.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            inputField.blur();
+        }
+    });
+}
+
+function deleteSubtask(subtaskElement, subtaskText) {
+    subtaskElement.remove();
+    let index = subtasks.indexOf(subtaskText);
+    if (index !== -1) {
+        subtasks.splice(index, 1);
+    }
+    subtaskCount--;
+}
+
+
 function clearTask() {
   init();
 }
 
-function createTask() {
+function createTask() { 
     let taskTitle = document.getElementById('task-title').value;
     let taskDescription = document.getElementById('task-description').value;
     let taskAssignment = document.getElementById('task-assignment').value;

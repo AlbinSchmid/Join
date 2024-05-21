@@ -304,6 +304,11 @@ h2 {
     color: green;
 }
 
+.subtask {
+    margin-top: 8px;
+    margin-left: 20px;
+}
+
 
 .add-task-footer {
     display: flex;
