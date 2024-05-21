@@ -82,6 +82,33 @@ function addContact() {
     init();
 }
 
+
+function updateContact(id) {
+    function find(contact) {
+        return contact.id === id;
+    }
+    let index = allContacts.findIndex(find);
+    let name = document.getElementById('edit-name');
+    let mail = document.getElementById('edit-mail');
+    let phonenumber = document.getElementById('edit-phonenumber');
+    allContacts[index] = {
+        id: allContacts[index].id,
+        'name': name.value,
+        'firstLetter': getFirstLetter(name.value),
+        'initials': getInitials(name.value),
+        'mail': mail.value,
+        'phonenumber': phonenumber.value,
+        'color': allContacts[index].color,
+    };
+    document.getElementById('editContact').classList.toggle('d-none');
+
+    let contactDetails = document.getElementById('showContactDetails');
+    contactDetails.innerHTML = contactDetailsHTML(allContacts[index]);
+    saveAllContacts();
+    renderContactlist();
+}
+
+
 function deleteContact(id) {
     function find(contact) {
         return contact.id === id;
@@ -278,7 +305,7 @@ function editContactHTML(contact) {
                             <div onclick="deleteContact('${contact.id}')" class="btn-outline-create-contact dflex-c-c">
                                 <span>Delete</span>
                             </div>
-                            <div onclick="editContact('${contact.id}')" class="btn-create-contact dflex-c-c cp">
+                            <div onclick="updateContact('${contact.id}')" class="btn-create-contact dflex-c-c cp">
                                 <span>Save</span>
                                 <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
                             </div>
