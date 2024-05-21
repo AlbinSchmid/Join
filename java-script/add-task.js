@@ -1,4 +1,6 @@
 let tasks = [];
+let subtaskCount = 0;
+
 
 function init() {
     includeHTML();
@@ -43,7 +45,7 @@ function getAddTaskHTMLLeftSide() {
                     <!-- contacts müssen geladen werden und entsprechend als option + value gerendert werden -->
           <h2>Assinged to</h2>
                 <form>
-                    <select class="selectfield-task-assingment" name="task category" id="task-assignment">
+                    <select class="selectfield-task-assignment" name="task category" id="task-assignment">
                         <option value="" >Select contacts to assign</option>
                         <option value="Max Mustermann">Max Mustermann</option>
                         <option value="Beate Test">Beate Test</option>
@@ -105,16 +107,46 @@ function getAddTaskHTMLRightSide() {
                 <!-- value muss ausgelesen werden für das Array, nachdem select, soll wieder die ersten Option angzeigt werden -->
           <h2>Subtasks</h2>
               <form>
-                  <select class="selectfield-task-subtasks" name="Subtasks" id="task-subtasks">
-                      <option value="">Add new subtask</option>
-                      <option value="Contact Form">Contact Form</option>
-                      <option value="Write Legal Imprint">Write Legal Imprint</option>
-                  </select>
-                  <div> <!-- Subtasks müssen in div-container gerendert werden -->
-
+                  <div class="input-container">
+                      <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50" placeholder="Add new subtask">
+                      <button type="button" class="clear-button" onclick="clearInput()">✖</button>
+                      <button type="button" class="add-button" onclick="createSubtask()">✔</button>
                   </div>
+                  <div class="subtasks-container"></div>
               </form>
+
           </div>`;
+}
+
+function clearInput() {
+  document.getElementById('task-subtasks').value = '';
+}
+
+function createSubtask() {
+  const inputField = document.getElementById('task-subtasks');
+  const subtaskText = inputField.value.trim();
+
+  if (subtaskText === '') {
+      alert('Please enter a subtask.');
+      return;
+  }
+
+  // Increment subtask count
+  subtaskCount++;
+
+  // Create new subtask element
+  const subtaskElement = document.createElement('div');
+  subtaskElement.textContent = subtaskText;
+  document.querySelector('.subtasks-container').appendChild(subtaskElement);
+
+  // Add subtask to tasks array
+  tasks.push(subtaskText);
+  
+  // Save tasks to local storage
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+
+  // Clear input field
+  clearInput();
 }
 
 function clearTask() {
@@ -133,24 +165,20 @@ function createTask() {
     let subTask = document.getElementById('task-subtasks').value;
     
     let task = {
-      title: taskTitle,
-      description: taskDescription,
-      assignment: taskAssignment,
-      date: taskDate,
-      priorityHigh: taskPriorityHigh,
-      priorityMedium: taskPriorityMedium,
-      priorityLow: taskPriorityLow,
-      category: taskCategory,
-      subTask: subTask
+        'title': taskTitle,
+        'description': taskDescription,
+        'assignment': taskAssignment,
+        'date': taskDate,
+        'priorityHigh': taskPriorityHigh,
+        'priorityMedium': taskPriorityMedium,
+        'priorityLow': taskPriorityLow,
+        'category': taskCategory,
+        'subTask': subTask
       };
     
     tasks.push(task);
     localStorage.setItem('tasks',JSON.stringify(tasks));
     init();
-    
-    console.log('Task gespeichert:', task);
-    console.log('Alle Tasks:', tasks);
-
 }
 
 async function includeHTML() {

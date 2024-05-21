@@ -67,7 +67,7 @@ h2 {
     cursor: pointer;
 }
 
-.selectfield-task-assingment {
+.selectfield-task-assignment {
     margin-top: 8px;
     width: 440px;
     height: 48px;
@@ -86,12 +86,12 @@ h2 {
     visibility: hidden;
 }
 
-.selectfield-task-assingment:hover {
+.selectfield-task-assignment:hover {
     cursor: pointer;
     border: 1px solid #A8A8A8;
 }
 
-.selectfield-task-assingment:focus {
+.selectfield-task-assignment:focus {
     border: 1px solid #29ABE2;
     outline: none;
 }
@@ -262,11 +262,12 @@ h2 {
     outline: none;
 }
 
-.selectfield-task-category:focus option[value=""] {
-    display: none;
+.input-container {
+    position: relative;
+    display: inline-block;
 }
 
-.selectfield-task-subtasks {
+.inputfield-task-subtasks {
     margin-top: 8px;
     width: 440px;
     height: 48px;
@@ -278,21 +279,31 @@ h2 {
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
+    box-sizing: border-box; /* Ensures padding is included in total width/height */
+    outline: none; /* Removes default outline */
 }
 
-.selectfield-task-subtasks:hover {
+.clear-button,
+.add-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
     cursor: pointer;
+    font-size: 20px; /* Adjust button size */
 }
 
-.selectfield-task-subtasks:focus {
-    border: 1px solid #29ABE2;
-    outline: none;
+.clear-button {
+    right: 40px;
+    color: red;
 }
 
-.selectfield-task-subtasks:focus option[value=""] {
-    display: none;
-    visibility: hidden;
+.add-button {
+    right: 10px;
+    color: green;
 }
+
 
 .add-task-footer {
     display: flex;
