@@ -37,9 +37,9 @@ function renderContactlist() {
     }
     contactList.innerHTML = '';
     let lastLetter = '';
-    let allContactsSorted = allContacts.sort(sorting);
+    allContacts.sort(sorting);
 
-    for (let i = 0; i < allContactsSorted.length; i++) {
+    for (let i = 0; i < allContacts.length; i++) {
         let contact = allContacts[i];
         let currentLetter = contact.name.substring(0,1).toUpperCase();
         if (currentLetter !== lastLetter) {
@@ -82,6 +82,18 @@ function addContact() {
     init();
 }
 
+function deleteContact(id) {
+    function find(contact) {
+        return contact.id === id;
+    }
+    let index = allContacts.findIndex(find);
+    allContacts.splice(index, 1);
+    let contactDetails = document.getElementById('showContactDetails');
+    contactDetails.innerHTML = '';
+    document.getElementById('editContact').classList.toggle('d-none');
+    saveAllContacts();
+    renderContactlist();
+}
 
 function getColor() {
     const bgColors = ['#ff7a00', '#9327ff', '#6e52ff', '#fC71ff', '#ffbb2b', '#1fd7c1'];
@@ -213,7 +225,7 @@ function contactDetailsHTML(contact) {
                                 <img src="./assets/img/icons/contact/edit_blue.png" alt="edit">
                                 <span>Edit</span>
                             </div>
-                            <div class="edit-delete-btn dflex-c-c cp">
+                            <div onclick="deleteContact('${contact.id}')" class="edit-delete-btn dflex-c-c cp">
                                 <img src="./assets/img/icons/contact/delete_black.png" alt="delete">
                                 <img src="./assets/img/icons/contact/delete_blue.png" alt="delete">
                                 <span>Delete</span>
@@ -263,7 +275,7 @@ function editContactHTML(contact) {
                         <input id="edit-phonenumber" value="${contact.phonenumber}" class="inputfield" type="text" placeholder="Phone" required>
                         </form>
                         <div class="btn-cancel-create dflex-c-c cp">
-                            <div onclick="" class="btn-outline-create-contact dflex-c-c">
+                            <div onclick="deleteContact('${contact.id}')" class="btn-outline-create-contact dflex-c-c">
                                 <span>Delete</span>
                             </div>
                             <div onclick="editContact('${contact.id}')" class="btn-create-contact dflex-c-c cp">
