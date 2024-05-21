@@ -1,4 +1,5 @@
 let tasks = [];
+let subtasks = [];
 let subtaskCount = 0;
 
 
@@ -119,34 +120,28 @@ function getAddTaskHTMLRightSide() {
 }
 
 function clearInput() {
-  document.getElementById('task-subtasks').value = '';
+    document.getElementById('task-subtasks').value = '';
 }
 
 function createSubtask() {
-  const inputField = document.getElementById('task-subtasks');
-  const subtaskText = inputField.value.trim();
+    const inputField = document.getElementById('task-subtasks');
+    const subtaskText = inputField.value.trim();
 
-  if (subtaskText === '') {
-      alert('Please enter a subtask.');
-      return;
-  }
+    // Increment subtask count
+    subtaskCount++;
 
-  // Increment subtask count
-  subtaskCount++;
+    // Create new subtask element
+    const subtaskElement = document.createElement('div');
+    subtaskElement.textContent = subtaskText;
+    document.querySelector('.subtasks-container').appendChild(subtaskElement);
 
-  // Create new subtask element
-  const subtaskElement = document.createElement('div');
-  subtaskElement.textContent = subtaskText;
-  document.querySelector('.subtasks-container').appendChild(subtaskElement);
+    // Add subtask to tasks array
+    subtasks.push(subtaskText);
+    
+    // Save tasks to local storage
 
-  // Add subtask to tasks array
-  tasks.push(subtaskText);
-  
-  // Save tasks to local storage
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-
-  // Clear input field
-  clearInput();
+    // Clear input field
+    clearInput();
 }
 
 function clearTask() {
@@ -162,7 +157,6 @@ function createTask() {
     let taskPriorityMedium = document.getElementById('task-medium-priority').checked;
     let taskPriorityLow = document.getElementById('task-low-priority').checked;
     let taskCategory = document.getElementById('task-category').value;
-    let subTask = document.getElementById('task-subtasks').value;
     
     let task = {
         'title': taskTitle,
@@ -173,11 +167,12 @@ function createTask() {
         'priorityMedium': taskPriorityMedium,
         'priorityLow': taskPriorityLow,
         'category': taskCategory,
-        'subTask': subTask
-      };
-    
+        'subtaskCount': subtaskCount,
+        'subtasks': subtasks.slice() // Add a copy of the subtasks array
+    };
+
     tasks.push(task);
-    localStorage.setItem('tasks',JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(tasks));
     init();
 }
 
