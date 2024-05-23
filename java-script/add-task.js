@@ -110,21 +110,25 @@ function getAddTaskHTMLRightSide() {
                   </select>
               </form>
                 <!-- value muss ausgelesen werden für das Array, nachdem select, soll wieder die ersten Option angzeigt werden -->
-          <h2>Subtasks</h2>
-              <form>
-                  <div class="input-container">
-                      <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50" placeholder="Add new subtask">
-                      <button type="button" class="clear-button" onclick="clearInput()">✖</button>
-                      <button type="button" class="add-button" onclick="createSubtask()">✔</button>
-                  </div>
-                  <div class="subtasks-container"></div>
-              </form>
+                <h2>Subtasks</h2>
+                    <form>
+                        <div class="input-container">
+                            <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50" placeholder="Add new subtask" onfocus="showInput()">
+                            <button type="button" class="add-plus-button" id="add-plus-button" onclick="showInput()"><img src="assets/img/icons/add_subtask_icon.svg" alt=""></button>
+                            <div class="subtask-btn-container" id="subtask-btn-container">
+                                <button type="button" class="clear-button" onclick="clearInput()"><img src="assets/img/icons/delete_icon.svg" alt=""></button>
+                                <button type="button" class="add-button" onclick="createSubtask()"><img src="assets/img/icons/check_edit_icon.svg" alt=""></button>
+                            </div>
+                        </div>
+                        <div class="subtasks-container"></div>
+                    </form>
 
           </div>`;
 }
 
 function clearInput() {
     document.getElementById('task-subtasks').value = '';
+    removeInput();
 }
 
 function createSubtask() {
@@ -136,10 +140,6 @@ function createSubtask() {
         return;
     }
 
-    // Increment subtask count
-    subtaskCount++;
-
-    // Create new subtask element
     let subtaskElement = document.createElement('div');
     subtaskElement.className = 'subtask';
 
@@ -163,44 +163,23 @@ function createSubtask() {
 
     document.querySelector('.subtasks-container').appendChild(subtaskElement);
 
-    // Add subtask to subtasks array
     subtasks.push(subtaskText);
-
-    // Clear input field
     clearInput();
+    removeInput();
 }
 
 function editSubtask(subtaskElement, subtaskTextElement) {
     let oldText = subtaskTextElement.textContent;
-    let inputField = document.createElement('input');
-    inputField.type = 'text';
-    inputField.value = oldText;
-    inputField.className = 'inputfield-task-subtasks';
-    
-    // Replace subtaskTextElement with inputField temporarily
-    subtaskElement.replaceChild(inputField, subtaskTextElement);
-    
-    inputField.focus();
-    
-    inputField.addEventListener('blur', () => {
-        let newText = inputField.value.trim();
-        if (newText !== '') {
-            subtaskTextElement.textContent = newText;
-            let index = subtasks.indexOf(oldText);
-            if (index !== -1) {
-                subtasks[index] = newText;
-            }
+    let newText = prompt('Edit your subtask:', oldText);
+
+    if (newText !== null && newText.trim() !== '') {
+        newText = newText.trim();
+        subtaskTextElement.textContent = newText;
+        let index = subtasks.indexOf(oldText);
+        if (index !== -1) {
+            subtasks[index] = newText;
         }
-        
-        // Replace inputField back with subtaskTextElement
-        subtaskElement.replaceChild(subtaskTextElement, inputField);
-    });
-    
-    inputField.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            inputField.blur();
-        }
-    });
+    }
 }
 
 function deleteSubtask(subtaskElement, subtaskText) {
@@ -209,9 +188,23 @@ function deleteSubtask(subtaskElement, subtaskText) {
     if (index !== -1) {
         subtasks.splice(index, 1);
     }
-    subtaskCount--;
 }
 
+function showInput() {
+    document.getElementById('task-subtasks').style.display = 'block';
+    document.getElementById('add-plus-button').style.display = 'none';
+    document.getElementById('subtask-btn-container').style.display = 'flex';
+}
+
+function removeInput() {
+    document.getElementById('add-plus-button').style.display = 'flex';
+    document.getElementById('subtask-btn-container').style.display = 'none';
+}
+
+
+function showButtons() {
+    document.getElementById('subtask-btn-container').style.display = 'flex';
+}
 
 function clearTask() {
   init();
@@ -226,6 +219,12 @@ function createTask() {
     let taskPriorityMedium = document.getElementById('task-medium-priority').checked;
     let taskPriorityLow = document.getElementById('task-low-priority').checked;
     let taskCategory = document.getElementById('task-category').value;
+
+    // Überprüfen, ob taskTitle, taskDate und taskCategory ausgefüllt sind
+    if (taskTitle === '' || taskDate === '' || taskCategory === '') {
+        alert('Please enter a title, select a date and a category to create a Task.');
+        return; // Beenden der Funktion, wenn die Felder nicht ausgefüllt sind
+    }
     
     let task = {
         'title': taskTitle,

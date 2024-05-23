@@ -263,52 +263,85 @@ h2 {
 }
 
 .input-container {
-    position: relative;
-    display: inline-block;
-}
-
-.inputfield-task-subtasks {
     margin-top: 8px;
-    width: 440px;
-    height: 48px;
     padding-left: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     padding-right: 16px;
     font-family: inter;
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
-    box-sizing: border-box; /* Ensures padding is included in total width/height */
-    outline: none; /* Removes default outline */
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.clear-button,
-.add-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    border: none;
-    background: none;
+.input-container:hover {
+    border: 1px solid #29ABE2;
+    outline: none;
     cursor: pointer;
-    font-size: 20px; /* Adjust button size */
 }
 
-.clear-button {
-    right: 40px;
-    color: red;
+.inputfield-task-subtasks {
+    box-sizing: border-box;
+    outline: none;
+    border: 0;
+    height: 34px;
+    font-size: 20px;
+    width: 300px;
+    /* display: none; /* Initially hidden */ 
 }
 
-.add-button {
-    right: 10px;
-    color: green;
+.inputfield-task-subtasks:hover {
+    cursor: pointer;
 }
+
+
+.clear-button, .add-button {
+    height: 24px;
+    width: 24px;
+    border: none;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding-inline: 4px;
+}
+
+.clear-button:hover, .add-button:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.subtask-btn-container {
+    gap: 8px;
+    display: none; /* Initially hidden */
+    align-items: center;
+}
+
+.add-plus-button {
+    height: 24px;
+    width: 24px;
+    border: none;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding-inline: 5px;
+}
+
+.add-plus-button:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
 
 .subtask {
     margin-top: 8px;
     margin-left: 20px;
 }
-
 
 .add-task-footer {
     display: flex;
