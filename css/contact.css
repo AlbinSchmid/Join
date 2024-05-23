@@ -295,6 +295,9 @@
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     font-size: 20px;
+}
+
+::placeholder {
     color: #d1d1d1;
 }
 
