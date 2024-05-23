@@ -217,7 +217,7 @@ h1 {
 .close-detail-button:hover {
     cursor: pointer;
     border-radius: 50%;
-    background-color: #A8A8A8;
+    background-color: #E7E7E7;
 }
 
 .title-detail {
@@ -236,7 +236,18 @@ h1 {
     display: flex;
     align-items: center;
     gap: 16px;
+    font-size: 20px;
+}
 
+.priority-detail {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 20px;
+}
+
+.assigned-detail {
+    font-size: 20px;
 }
 
 .to-do-task {
@@ -312,7 +323,6 @@ h1 {
     right: 0;
     bottom: 0;
     z-index: 1;
-    backdrop-filter: blur(4px);
     overflow-y: hidden;
     align-content: center;
 }

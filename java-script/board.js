@@ -102,7 +102,7 @@ function getTaskDetailViewHTML(index, technicalTask, title, subtasks, descriptio
                 <div><p class="title-detail">${title}</p></div>
                 <div><p class="description-detail">${description}</p></div>
                 <div class="date-detail"><p>Due Date:</p>${dueDate}</div>
-                <div><p>Priority:</p>${priority}</div>
+                <div class="priority-detail"><p>Priority:</p>${priority}</div>
                 <div><p>Assigned To:</p>
                     <div>${assignedTo}</div>
                 </div>
