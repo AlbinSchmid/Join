@@ -1,7 +1,6 @@
 let tasks = [];
-
 let currentTask = 0;
-const totalSubtasks = 2;
+let currentIndex = 0;
 
 
 function loadTasks() {
@@ -29,21 +28,22 @@ function init() {
 function renderBoard() {
     let container = document.getElementById('to-do-id');
     let technicalTask = tasks[0].category;
-    let subtask = tasks[0].subtasks;
+    let title = tasks[0].title;
     let description = tasks[0].description;
     let subtaskCount = tasks[0].subtaskCount;
     let assignedTo = tasks[0].assignment;
     let priority = tasks[0].priorityMedium;
     container.innerHTML = '';
     /* for loop => Array anlegen, welches über addTask() gepusht wird in local storage und parameter an die Render Funktion übergibt */
-    container.innerHTML = getToDoHTML(technicalTask, subtask, description, subtaskCount, assignedTo, priority);
+    container.innerHTML = getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex);
+    currentIndex++;
 }
 
-function getToDoHTML(technicalTask, subtask, description, subtaskCount, assignedTo, priority) {
+function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index) {
     return /*html*/`
-        <div id="to-do${1}" class="to-do-task-container" onclick="openTask()"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
+        <div id="to-do${index}" class="to-do-task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
             <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
-                <div><p class="to-do-task">${subtask}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
+                <div><p class="to-do-task">${title}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task-description">${description}</p></div>
                 <div class="progress-container">
                     <div class="progress-wrapper">
@@ -57,6 +57,52 @@ function getToDoHTML(technicalTask, subtask, description, subtaskCount, assigned
             </div>
         </div>`;
 }
+
+function openTask(index) {
+    if (index >= tasks.length) {
+        console.error("Ungültiger Index:", index);
+        return;
+    }
+
+    let container = document.getElementById('task-detail-view-container');
+    let task = tasks[index];
+
+    let technicalTask = task.category;
+    let title = task.title;
+    let description = task.description;
+    let dueDate = task.date;
+    let priority = task.priorityMedium;
+    let assignedTo = task.assignment;
+    
+    let subtasks = '';
+    if (task.subtasks && task.subtasks.length > 0) {
+        for (let i = 0; i < task.subtasks.length; i++) {
+            let subtask = task.subtasks[i];
+            subtasks += `<div class="subtask-container-detail-view"><input type="checkbox" id="subtask-checkbox"> ${subtask}</div>`;
+        }
+    }
+
+    container.innerHTML = '';
+    container.innerHTML = getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo);
+    container.classList.remove('d-hide');
+    container.classList.add('d-block');
+}
+
+function getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo) {
+    return /*html*/`
+        <div id="detail-task${index}" class="detail-task-container">
+            <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div>
+            <div><p class="to-do-task">${title}</p></div>
+            <div><p class="to-do-task-description">${description}</p></div>
+            <div><p>Due Date:</p>${dueDate}</div>
+            <div><p>Priority:</p>${priority}</div>
+            <div><p>Assigned To:</p>
+                <div>${assignedTo}</div>
+            </div>
+            <div><p>Subtasks</p>${subtasks}</div>
+        </div>`;
+}
+
 
 function addTask() {
     
