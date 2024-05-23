@@ -164,6 +164,7 @@ function createSubtask() {
     document.querySelector('.subtasks-container').appendChild(subtaskElement);
 
     subtasks.push(subtaskText);
+    subtaskCount++; // Erhöhe den Subtask-Zähler
     clearInput();
     removeInput();
 }
@@ -187,7 +188,9 @@ function deleteSubtask(subtaskElement, subtaskText) {
     let index = subtasks.indexOf(subtaskText);
     if (index !== -1) {
         subtasks.splice(index, 1);
+        subtaskCount--; // Verringere den Subtask-Zähler
     }
+    subtaskElement.remove();
 }
 
 function showInput() {
@@ -224,7 +227,7 @@ function createTask() {
     if (taskTitle === '' || taskDate === '' || taskCategory === '') {
         alert('Please enter a title, select a date and a category to create a Task.');
         return; // Beenden der Funktion, wenn die Felder nicht ausgefüllt sind
-    }
+    } else {
     
     let task = {
         'title': taskTitle,
@@ -242,6 +245,7 @@ function createTask() {
     tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     init();
+    }
 }
 
 async function includeHTML() {
