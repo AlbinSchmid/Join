@@ -32,7 +32,7 @@ function renderBoard() {
     let description = tasks[0].description;
     let subtaskCount = tasks[0].subtaskCount;
     let assignedTo = tasks[0].assignment;
-    let priority = tasks[0].priorityMedium;
+    let priority = tasks[0].priority;
     container.innerHTML = '';
     /* for loop => Array anlegen, welches über addTask() gepusht wird in local storage und parameter an die Render Funktion übergibt */
     container.innerHTML = getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex);
@@ -71,14 +71,14 @@ function openTask(index) {
     let title = task.title;
     let description = task.description;
     let dueDate = task.date;
-    let priority = task.priorityMedium;
+    let priority = task.priority;
     let assignedTo = task.assignment;
     
     let subtasks = '';
     if (task.subtasks && task.subtasks.length > 0) {
         for (let i = 0; i < task.subtasks.length; i++) {
             let subtask = task.subtasks[i];
-            subtasks += `<div class="subtask-container-detail-view"><input type="checkbox" id="subtask-checkbox"> ${subtask}</div>`;
+            subtasks += `<div class="subtask-container-detail-view"><input type="checkbox" id="subtask-checkbox${i}"> ${subtask}</div>`;
         }
     }
 
@@ -88,18 +88,26 @@ function openTask(index) {
     container.classList.add('d-block');
 }
 
+function closeTask() {
+    let container = document.getElementById('task-detail-view-container');
+    container.classList.add('d-hide');
+    container.classList.remove('d-block');
+}
+
 function getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo) {
     return /*html*/`
         <div id="detail-task${index}" class="detail-task-container">
-            <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div>
-            <div><p class="to-do-task">${title}</p></div>
-            <div><p class="to-do-task-description">${description}</p></div>
-            <div><p>Due Date:</p>${dueDate}</div>
-            <div><p>Priority:</p>${priority}</div>
-            <div><p>Assigned To:</p>
-                <div>${assignedTo}</div>
-            </div>
-            <div><p>Subtasks</p>${subtasks}</div>
+            <div class="detail-task-overview">
+                <div class="technical-task-container-detail"><p class="technical-task-detail">${technicalTask}</p><img class="close-detail-button" onclick="closeTask()" src="assets/img/icons/close__detailview_icon.svg" alt="close"></div>
+                <div><p class="title-detail">${title}</p></div>
+                <div><p class="description-detail">${description}</p></div>
+                <div class="date-detail"><p>Due Date:</p>${dueDate}</div>
+                <div><p>Priority:</p>${priority}</div>
+                <div><p>Assigned To:</p>
+                    <div>${assignedTo}</div>
+                </div>
+                <div><p>Subtasks</p>${subtasks}</div>
+            </div>    
         </div>`;
 }
 

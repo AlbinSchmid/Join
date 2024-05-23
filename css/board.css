@@ -195,6 +195,50 @@ h1 {
     margin-bottom: 24px;
 }
 
+.technical-task-container-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.technical-task-detail {
+    background-color: #0038FF;
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: 400;
+    padding: 4px 16px 4px 16px;
+    border-radius: 8px;
+    margin: 0;
+    text-align: center;
+    width: 128px;
+}
+
+.close-detail-button:hover {
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #A8A8A8;
+}
+
+.title-detail {
+    font-size: 61px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.description-detail {
+    font-weight: 400;
+    font-size: 20px;
+    color: #000000;
+}
+
+.date-detail {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+}
+
 .to-do-task {
     font-weight: 700;
     margin: 0;
@@ -260,6 +304,29 @@ h1 {
     display: block;
 }
 
-.detail-task-container {
+.task-detail-view-container {
+    background-color: rgba(0, 0, 0, 0.70);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    backdrop-filter: blur(4px);
+    overflow-y: hidden;
+    align-content: center;
+}
 
+.detail-task-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-task-overview {
+    background-color: white;
+    border-radius: 30px;
+    height: 931px;
+    width: 525px;
+    padding: 48px 40px 48px 40px;
 }
