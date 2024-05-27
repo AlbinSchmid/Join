@@ -27,6 +27,9 @@ function init() {
 function sorting(a, b) {
     return a.name.localeCompare(b.name)
 }
+function changeActivLink(section) {
+    document.getElementById(section).classList.add('test');
+}
 
 
 function renderContactlist() {
@@ -280,82 +283,88 @@ function contactDetailsHTML(contact) {
 
 function addContactHTML(contact) {
     return `
+        <div class="overlay-bg dflex-c-c">
+            <div class="container-overlay">
+                <div class="overlay-left-bg">
+                    <div class="overlay-left">
+                        <img src="./assets/img/logo_join_white.png" alt="logo_join_white">
+                        <h1>Add contact</h1>
+                        <span>Tasks are better with a team!</span>
+                        <div class="line-turn"></div>
+                    </div>
+                </div>
+                <div class="dflex-c-c">
+                    <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png" alt="person_picture">
+                </div>
+                <img onclick="showCreateNewContact()" class="close-img cp"
+                    src="./assets/img/icons/contact/cancel_black.png" alt="close">
+                <div class="container-contact-right">
+                    <form class="input-container dflex-c-c column" onsubmit="createNewContact(); return false;">
+                        <input id="name" class="inputfield" type="text" placeholder="Name" required>
+                        <input id="mail" class="inputfield" type="email" placeholder="Email" required>
+                        <input id="phonenumber" class="inputfield" type="number" placeholder="Phone" required>
+                    
+                        <div class="btn-cancel-create dflex-c-c cp">
+                            <div onclick="showCreateNewContact()" class="btn-outline-create-contact dflex-c-c">
+                                <span>Cancel</span>
+                                <img src="./assets/img/icons/contact/cancel_black.png" alt="cancel">
+                                <img src="./assets/img/icons/contact/cancel_blue.png" alt="cancel">
+                            </div>
+                            <div>
+                                <button type="submit" class="btn-create-contact dflex-c-c cp">
+                                    <span>Create contact</span>
+                                    <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        `;
+}
+
+
+function editContactHTML(contact) {
+    return `
     <div class="overlay-bg dflex-c-c">
         <div class="container-overlay">
             <div class="overlay-left-bg">
                 <div class="overlay-left">
                     <img src="./assets/img/logo_join_white.png" alt="logo_join_white">
-                    <h1>Add contact</h1>
-                    <span>Tasks are better with a team!</span>
-                    <div class="line-turn"></div>
+                    <h1>Edit contact</h1>
                 </div>
             </div>
             <div class="dflex-c-c">
-                <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png" alt="person_picture">
-            </div>
-                <img onclick="showCreateNewContact()" class="close-img cp"
+                <div class="container-user-top">
+                    <div class="first-letters-edit dflex-c-c" style="background-color:${contact.color}">
+                        ${contact.initials}
+                    </div>
+                </div>
+                <img onclick="editContact('${contact.id}')" class="close-img cp"
                     src="./assets/img/icons/contact/cancel_black.png" alt="close">
                 <div class="container-contact-right">
-                    <form class="input-container dflex-c-c column">
-                        <input id="name" class="inputfield" type="text" placeholder="Name" required>
-                        <input id="mail" class="inputfield" type="email" placeholder="Email" required>
-                        <input id="phonenumber" class="inputfield" type="number" placeholder="Phone" required>
-                    
-                    <div class="btn-cancel-create dflex-c-c cp">
-                        <div onsubmit="showCreateNewContact()" class="btn-outline-create-contact dflex-c-c">
-                            <span>Cancel</span>
-                            <img src="./assets/img/icons/contact/cancel_black.png" alt="cancel">
-                            <img src="./assets/img/icons/contact/cancel_blue.png" alt="cancel">
-                        </div>
-                        <div onclick="createNewContact()" class="btn-create-contact dflex-c-c cp">
-                            <span>Create contact</span>
-                            <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-
-function editContactHTML(contact) {
-    console.log(contact);
-    return `
-    <div class="overlay-bg dflex-c-c">
-            <div class="container-overlay">
-                <div class="overlay-left-bg">
-                    <div class="overlay-left">
-                        <img src="./assets/img/logo_join_white.png" alt="logo_join_white">
-                        <h1>Edit contact</h1>
-                    </div>
-                </div>
-                <div class="dflex-c-c">
-                    <div class="container-user-top">
-                        <div class=" first-letters-edit dflex-c-c" style="background-color:${contact.color}">${contact.initials}</div>
-                    </div>
-                    <img onclick="editContact('${contact.id}')" class="close-img cp"
-                        src="./assets/img/icons/contact/cancel_black.png" alt="close">
-                    <div class="container-contact-right">
-                        <form class="input-container dflex-c-c column">
+                    <form class="input-container dflex-c-c column" onsubmit="updateContact('${contact.id}'); return false;">
                         <input id="edit-name" value="${contact.name}" class="inputfield" type="text" placeholder="Name" required>
                         <input id="edit-mail" value="${contact.mail}" class="inputfield" type="email" placeholder="Email" required>
                         <input id="edit-phonenumber" value="${contact.phonenumber}" class="inputfield" type="number" placeholder="Phone" required>
-                        </form>
+                        
                         <div class="btn-cancel-create dflex-c-c cp">
                             <div onclick="deleteContact('${contact.id}')" class="btn-outline-create-contact dflex-c-c">
                                 <span>Delete</span>
                             </div>
-                            <div onclick="updateContact('${contact.id}')" class="btn-create-contact dflex-c-c cp">
+                            <button type="submit" class="btn-create-contact dflex-c-c cp">
                                 <span>Save</span>
-                                <img src="./assets/img/icons/contact/check.png" alt="Create-new-contact">
-                            </div>
+                                <img src="./assets/img/icons/contact/check.png" alt="Save-contact">
+                            </button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-            `;
+        </div>
+    </div>
+    `;
 }
+
 
 

@@ -85,7 +85,12 @@ nav {
 }
 
 .nav-btn-active {
+    color: red;
     background-color:  var(--secundary-color);
+}
+
+.test {
+    color: brown;
 }
 
 .nav-btn-active img{

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../css/color.css">
     <link rel="stylesheet" href="../../css/fonts.css">
     <link rel="stylesheet" href="/css/login-signup.css">
+    <script src="/java-script/login-signup.js"></script>
     <link rel="shortcut icon" href="../img/join-logo.png" type="image/x-icon">
     <title>JOIN</title>
 </head>
@@ -15,7 +16,7 @@
 <body>
     <img class="logo-end" src="./assets/img/join_logo_blue_big.png" alt="join-logo">
 
-    <section class="container-login-signup dflex-c-c ">
+    <section class="container-login-signup dflex-c-c">
         <div class="signup-mask dflex-c-c column">
             <div class="dflex-c-c column">
                 <a href="./log-in.html" class="arrow-back">
@@ -25,26 +26,25 @@
                 <div class="text-line"></div>
             </div>
 
-            <form class="input-container dflex-c-c column">
+            <form onsubmit="return closeBtnSignUpSuccesfully(event)" class="input-container dflex-c-c column">
                 <input class="inputfield" type="text" placeholder="Name" required>
                 <input class="inputfield" type="email" placeholder="Email" required>
                 <input class="inputfield" type="password" placeholder="Password" required>
                 <input class="inputfield" type="password" placeholder="Password" required>
-            </form>
+          
 
-            <form class="checkbox-signup">
+            <div class="checkbox-signup">
                 <input type="checkbox" name="remember-me" class="cp" required>
                 <span>I accept the <a href="./privacy-policy.html">Privacy policy</a></span>
-            </form>
-
-            <div class="footer-link dflex-c-c">
-                <a href="#">
-                    <button class="btn-small cp">Sign up</button>
-                </a>
             </div>
+
+                <a>
+                    <button type="submit" class="btn-small cp">Sign up</button>
+                </a>
+        </form>
         </div>
-        <div class="bg-signup-succesfully dflex-c-c">
-            <div class="btn-signup-succesfully dflex-c-c">You Signed Up successfully</div>
+      
+            <div id="bgSignupSuccesfully" class="d-none btn-signup-succesfully dflex-c-c">You Signed Up successfully</div>
         </div>
 
     </section>
