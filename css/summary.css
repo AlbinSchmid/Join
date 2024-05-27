@@ -6,6 +6,7 @@
 
 body {
     background-color: #F6F7F8 !important;
+    max-width: 1920px;
 }
 
 .headline-section {

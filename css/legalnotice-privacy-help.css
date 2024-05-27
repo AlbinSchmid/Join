@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    max-width: 1920px;
+}
+
 .content-section {
     padding: 60px 106px 0 106px;
 }
@@ -20,8 +24,6 @@
 }
 
 button {
-    position: fixed;
-    right: 106px;
     display: flex;
     justify-content: center;
     align-items: center;
