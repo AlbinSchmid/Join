@@ -62,11 +62,6 @@ function updateHTML(technicalTask, title, description, subtaskCount, assignedTo,
 }
 
 
-
-
-
-
-
 function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index) {
     return /*html*/`
         <div id="${index}" class="task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
@@ -87,8 +82,6 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
 }
 
 function openTask(index) {
-    
-
     let container = document.getElementById('task-detail-view-container');
     let task = tasks[index];
 
