@@ -159,8 +159,8 @@ function addTask() {
     
 }
 
-function startDragging(id) {
-    currentDraggedElement = id;
+function startDragging(index) {
+    currentDraggedElement = index;
 }
 
 function allowDrop(ev) {
