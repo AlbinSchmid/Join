@@ -73,9 +73,6 @@ nav {
     align-items: center;
     padding: 8px 56px;
     gap: 16px;
-}
-
-.nav-btn a {
     color: var(--lightgrey);
 }
 

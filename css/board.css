@@ -150,7 +150,8 @@ h1 {
     margin-right: 106px;
 }
 
-.to-do-container {
+
+.dragarea {
     width: 244px;
 }
 
@@ -166,7 +167,7 @@ h1 {
     color: #A8A8A8;
 }
 
-.to-do-task-container {
+.task-container {
     display: flex;
     flex-direction: column;
     text-align: start;
@@ -176,7 +177,7 @@ h1 {
     margin-top: 16px;
 }
 
-.to-do-task-container:hover {
+.task-container:hover {
     cursor: pointer;
 }
 
@@ -193,6 +194,61 @@ h1 {
     border-radius: 8px;
     margin: 0;
     margin-bottom: 24px;
+}
+
+.technical-task-container-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.technical-task-detail {
+    background-color: #0038FF;
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: 400;
+    padding: 4px 16px 4px 16px;
+    border-radius: 8px;
+    margin: 0;
+    text-align: center;
+    width: 128px;
+}
+
+.close-detail-button:hover {
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #E7E7E7;
+}
+
+.title-detail {
+    font-size: 61px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.description-detail {
+    font-weight: 400;
+    font-size: 20px;
+    color: #000000;
+}
+
+.date-detail {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 20px;
+}
+
+.priority-detail {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 20px;
+}
+
+.assigned-detail {
+    font-size: 20px;
 }
 
 .to-do-task {
@@ -250,4 +306,38 @@ h1 {
     align-items: center;
     display: flex;
     justify-content: center;
+}
+
+.d-hide {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
+.task-detail-view-container {
+    background-color: rgba(0, 0, 0, 0.70);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    overflow-y: hidden;
+    align-content: center;
+}
+
+.detail-task-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-task-overview {
+    background-color: white;
+    border-radius: 30px;
+    height: 931px;
+    width: 525px;
+    padding: 48px 40px 48px 40px;
 }

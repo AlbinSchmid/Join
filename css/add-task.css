@@ -8,7 +8,8 @@ h2 {
     font-weight: 400;
     color: #2A3647;
     margin: 0;
-    padding-top: 20px;
+    padding-top: 26px;
+    display: flex;
 }
 
 .add-task-container {
@@ -28,11 +29,18 @@ h2 {
     padding-right: 16px;
     margin-top: 8px;
     font-family: inter;
-    
     font-size: 20px;
     height: 30px;
 }
 
+.inputfield-title:hover {
+    cursor: pointer;
+}
+
+.inputfield-title:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+}
 
 .textareafied-description {
    width: 406px;
@@ -50,64 +58,43 @@ h2 {
     font-size: 20px;
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-    width: 440px;
-  }
-  
-  .dropdown-toggle {
-    width: 440px;
-    padding: 10px 16px 12px 16px;
-    border: 1px solid #D1D1D1;
-    border-radius: 10px;
-    background-color: #fff;
-    cursor: pointer;
+.textareafied-description:focus {
+    border: 1px solid #29ABE2;
     outline: none;
+}
+
+.textareafied-description:hover {
+    cursor: pointer;
+}
+
+.selectfield-task-assignment {
     margin-top: 8px;
-    text-align: start;
-    font-family: inter;
-    font-weight: 400;
-    font-size: 20px;
-    position: relative;
-  }
-  
-  /* Pfeil */
-  .dropdown-toggle::after {
-    content: "";
-    position: absolute;
-    top: calc(50% - 4px); /* Vertikal zentrieren */
-    right: 12px; /* Abstand vom rechten Rand */
-    border: solid #333;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 4px;
-    transform: translateY(-50%) rotate(45deg); /* Rotation für Pfeil nach unten */
-    transition: transform 0.3s ease; /* Animationsübergang für den Pfeil */
-  }
-  
-  /* Pfeil nach oben drehen, wenn das Dropdown-Menü geöffnet ist */
-  .dropdown-menu ~ .dropdown-toggle.active::after {
-    transform: translateY(-50%) rotate(-135deg); /* Rotation für Pfeil nach oben */
-  }
-  
-  .dropdown-menu {
-    display: none;
-    position: absolute;
     width: 440px;
-    background-color: #fff;
-    border: 1px solid #D1D1D1;
+    height: 48px;
+    padding-left: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 16px;
+    font-family: inter;
+    font-size: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-  }
-  
-  .dropdown-menu a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #333;
-  }
+    border: 1px solid #D1D1D1;
+}
+
+.selectfield-task-assignment:focus option[value=""] {
+    display: none;
+    visibility: hidden;
+}
+
+.selectfield-task-assignment:hover {
+    cursor: pointer;
+    border: 1px solid #A8A8A8;
+}
+
+.selectfield-task-assignment:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+}
  
 .date-selector {
     margin-top: 8px;
@@ -122,7 +109,19 @@ h2 {
     height: 30px;
     font-size: 20px;
     font-family: inter;
-    
+}
+
+.date-selector:hover {
+    cursor: pointer;
+}
+
+.date-selector:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+}
+
+.dp-flex {
+    display: flex;
 }
 
 .mg-l-r {
@@ -134,6 +133,11 @@ h2 {
 .dp-flex-jc-sb {
     display: flex;
     justify-content: space-between;
+}
+
+.required-color {
+    color: #FF8190;
+    margin: 0;
 }
 
 .custom-checkbox-high,
@@ -239,6 +243,7 @@ h2 {
 .selectfield-task-category {
     margin-top: 8px;
     width: 440px;
+    height: 48px;
     padding-left: 16px;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -249,27 +254,160 @@ h2 {
     border: 1px solid #D1D1D1;
 }
 
-.selectfield-task-category:focus option[value=""] {
-    display: none;
-    visibility: hidden;
+.selectfield-task-category:hover {
+    cursor: pointer;
 }
 
-.selectfield-task-subtasks {
+.selectfield-task-category:focus {
+    outline: none;
+}
+
+.input-container {
     margin-top: 8px;
-    width: 440px;
     padding-left: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     padding-right: 16px;
     font-family: inter;
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.selectfield-task-subtasks:focus option[value=""] {
-    display: none;
-    visibility: hidden;
+.input-container:hover {
+    border: 1px solid #29ABE2;
+    outline: none;
+    cursor: pointer;
 }
 
+.inputfield-task-subtasks {
+    box-sizing: border-box;
+    outline: none;
+    border: 0;
+    height: 34px;
+    font-size: 20px;
+    width: 300px;
+    /* display: none; /* Initially hidden */ 
+}
+
+.inputfield-task-subtasks:hover {
+    cursor: pointer;
+}
+
+
+.clear-button, .add-button {
+    height: 24px;
+    width: 24px;
+    border: none;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding-inline: 4px;
+}
+
+.clear-button:hover, .add-button:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.subtask-btn-container {
+    gap: 8px;
+    display: none; /* Initially hidden */
+    align-items: center;
+}
+
+.add-plus-button {
+    height: 24px;
+    width: 24px;
+    border: none;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding-inline: 5px;
+}
+
+.add-plus-button:hover {
+    background-color: #dddddd;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+
+.subtask {
+    margin-top: 8px;
+    margin-left: 20px;
+}
+
+.add-task-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-left: 106px;
+    margin-right: 106px;
+    max-width: 930px;
+    margin-top: 106px;
+}
+
+.clear-task-btn {
+    height: 56px;
+    width: 110px;
+    border-radius: 10px;
+    border: 1px solid #2A3647;
+    padding: 16px;
+    font-size: 20px;
+}
+
+.clear-task-btn:hover {
+    border-color: #29ABE2;
+    color: #29ABE2;
+    cursor: pointer;
+    transition: ease-in-out 120ms;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.create-task-btn-container {
+    height: 56px;
+    width: 183px;
+    border-radius: 10px;
+    background-color: #2A3647;
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-task-btn-container:hover, 
+.create-task-btn:hover {
+    cursor: pointer;
+    transition: ease-in-out 120ms;
+    background-color: #29ABE2;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+.create-task-btn {
+    height: 56px;
+    width: 183px;
+    border-radius: 10px;
+    background-color: #2A3647;
+    margin-left: 16px;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+
+.footer-btn-container {
+    display: flex;
+    align-items: end;
+}
 

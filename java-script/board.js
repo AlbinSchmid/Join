@@ -1,39 +1,176 @@
+let tasks = [];
 let currentTask = 0;
-const totalSubtasks = 2;
+let currentIndex = 1;
+let currentDraggedElement;
+loadTasks();
+console.log(tasks); // Zeigt die geladenen Tasks an
 
+function loadTasks() {
+    // Holen der Tasks aus dem Local Storage
+    const tasksFromStorage = localStorage.getItem('tasks');
+    
+    // Überprüfen, ob Tasks im Local Storage vorhanden sind
+    if (tasksFromStorage) {
+        // Parsen des JSON-Strings in ein JavaScript-Array und der globalen Variable zuweisen
+        tasks = JSON.parse(tasksFromStorage);
+    } else {
+        // Falls keine Tasks im Local Storage sind, leeres Array setzen
+        tasks = [];
+    }
+}
+
+
+
+/**
+ * function opens render relevated sub functions for generating the page content 
+ * includeHTML loads templates
+ * updateHTML filters the Array tasks after 'category' : '' to generate the right code into each div / drag area with the correct progress status / category
+ * renderBoard renders and generates the HTML code 
+ */
 function init() {
     includeHTML();
     renderBoard();
 }
 
+/**
+ * render function, filter category = "to-do","in-progress","await-feedback","done"
+ */
 function renderBoard() {
-    let container = document.getElementById('to-do-id');
-    container.innerHTML = '';
-    /* for loop => Array anlegen, welches über addTask() gepusht wird in local storage und parameter an die Render Funktion übergibt */
-    container.innerHTML = getToDoHTML();
+    let technicalTask = tasks[0].category;
+    let title = tasks[0].title;
+    let description = tasks[0].description;
+    let subtaskCount = tasks[0].subtaskCount;
+    let assignedTo = tasks[0].assignment;
+    let priority = tasks[0].priority;
+   
+    updateHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex);
+    currentIndex++;
 }
 
-function getToDoHTML() {
+
+
+function updateHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex) {
+    let todo = tasks.filter(t => t['category'] == 'to-do');
+
+    document.getElementById('to-do').innerHTML = '';
+
+    for (let index = 0; index < todo.length; index++) {
+        const element = todo[index];
+        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+    }
+
+    let inprogress = tasks.filter(t =>['category'] == 'in-progress');
+
+    document.getElementById('in-progress').innerHTML = '';
+
+    for (let index = 0; index < inprogress.length; index++) {
+        const element = inprogress[index];
+        document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+    }
+
+    let awaitFeedback = tasks.filter(t =>['category'] == 'await-feedback');
+
+    document.getElementById('await-feedback').innerHTML = '';
+
+    for (let index = 0; index < awaitFeedback.length; index++) {
+        const element = awaitFeedback[index];
+        document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+    }
+
+    let done = tasks.filter(t =>['category'] == 'done');
+
+    document.getElementById('done').innerHTML = '';
+
+    for (let index = 0; index < done.length; index++) {
+        const element = done[index];
+        document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+    }
+}
+
+
+function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, element) {
     return /*html*/`
-        <div id="to-do${1}" class="to-do-task-container" onclick="openTask()"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
-            <div class="to-do-title-container"><p class="to-do-title">User Story</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
-                <div><p class="to-do-task">Contact Form & Imprint</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
-                <div><p class="to-do-task-description">Create a contact form and imprint page...</p></div>
+        <div draggable="true" ondragstart="startDragging(${element['id']})" class="task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
+            <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
+                <div><p class="to-do-task">${title}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
+                <div><p class="to-do-task-description">${description}</p></div>
                 <div class="progress-container">
                     <div class="progress-wrapper">
                         <div class="progress-bar" id="progress-bar"></div>
                     </div>
-                    <div class="progress-count" id="progress-count">1/2 Subtasks</div>
+                    <div class="progress-count" id="progress-count">${subtaskCount} Subtasks</div>
                 </div>
             <div class="attributor-container">
-                <div><p class="attributor-icon">FE</p></div> <!-- auswählen bei addTask() -->
-                <div><img src="assets/img/icons/prio_baja_high.svg" alt=""></div> <!-- auswählen bei addTask() -->
+                <div><p class="attributor-icon">${assignedTo}</p></div> <!-- auswählen bei addTask() -->
+                <div><img src="${priority}" alt=""></div> <!-- auswählen bei addTask() -->
             </div>
         </div>`;
 }
 
+function openTask(index) {
+    let container = document.getElementById('task-detail-view-container');
+    let task = tasks[index];
+
+    let technicalTask = task.category;
+    let title = task.title;
+    let description = task.description;
+    let dueDate = task.date;
+    let priority = task.priority;
+    let assignedTo = task.assignment;
+    
+    let subtasks = '';
+    if (task.subtasks && task.subtasks.length > 0) {
+        for (let i = 0; i < task.subtasks.length; i++) {
+            let subtask = task.subtasks[i];
+            subtasks += `<div class="subtask-container-detail-view"><input type="checkbox" id="subtask-checkbox${i}"> ${subtask}</div>`;
+        }
+    }
+
+    container.innerHTML = '';
+    container.innerHTML = getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo);
+    container.classList.remove('d-hide');
+    container.classList.add('d-block');
+}
+
+function closeTask() {
+    let container = document.getElementById('task-detail-view-container');
+    container.classList.add('d-hide');
+    container.classList.remove('d-block');
+}
+
+function getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo) {
+    return /*html*/`
+        <div id="detail-task${index}" class="detail-task-container">
+            <div class="detail-task-overview">
+                <div class="technical-task-container-detail"><p class="technical-task-detail">${technicalTask}</p><img class="close-detail-button" onclick="closeTask()" src="assets/img/icons/close__detailview_icon.svg" alt="close"></div>
+                <div><p class="title-detail">${title}</p></div>
+                <div><p class="description-detail">${description}</p></div>
+                <div class="date-detail"><p>Due Date:</p>${dueDate}</div>
+                <div class="priority-detail"><p>Priority:</p>${priority}</div>
+                <div class="assigned-detail"><p>Assigned To:</p>
+                    <div>${assignedTo}</div>
+                </div>
+                <div><p>Subtasks</p>${subtasks}</div>
+            </div>    
+        </div>`;
+}
+
+
 function addTask() {
     
+}
+
+function startDragging(id) {
+    currentDraggedElement = id;
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function moveTo(category) {
+    tasks[currentDraggedElement]['category'] = category;
+    updateHTML();
 }
 
 function updateProgressBar() {

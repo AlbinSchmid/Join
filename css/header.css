@@ -2,6 +2,14 @@ main {
     width: calc(100vw - 232px);
 }
 
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
 header {
     height: 96px;
     display: flex;
@@ -44,4 +52,31 @@ header p {
 
 .header-right-user:hover {
     background-color: #e2e6ec;
+}
+
+.container-dropdown-menu{
+    display: none;
+}
+
+.header-dropdown-menu {
+    position: fixed;
+    top: 97px;
+    right: 40px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: var(--primary-color);
+    border-radius: 20px 0px 20px 20px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    z-index: 10;
+}
+
+.header-dropdown-menu a {
+    padding: 8px 16px;
+    color: var(--lightgrey);
+}
+
+.header-dropdown-menu a:hover {
+background-color: #2b3b59;
 }
