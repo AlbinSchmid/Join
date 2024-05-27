@@ -1,6 +1,6 @@
 let tasks = [];
 let subtasks = [];
-let taskIdCounter = 0;
+let taskIdCounter = tasks.length;
 let subtaskCount = 0;
 
 
