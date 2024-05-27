@@ -58,7 +58,7 @@ function updateHTML(technicalTask, title, description, subtaskCount, assignedTo,
         document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
     }
 
-    let inprogress = tasks.filter(t =>['category'] == 'in-progress');
+    let inprogress = tasks.filter(t => t['category'] == 'in-progress');
 
     document.getElementById('in-progress').innerHTML = '';
 
@@ -67,7 +67,7 @@ function updateHTML(technicalTask, title, description, subtaskCount, assignedTo,
         document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
     }
 
-    let awaitFeedback = tasks.filter(t =>['category'] == 'await-feedback');
+    let awaitFeedback = tasks.filter(t => t['category'] == 'await-feedback');
 
     document.getElementById('await-feedback').innerHTML = '';
 
@@ -76,7 +76,7 @@ function updateHTML(technicalTask, title, description, subtaskCount, assignedTo,
         document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
     }
 
-    let done = tasks.filter(t =>['category'] == 'done');
+    let done = tasks.filter(t => t['category'] == 'done');
 
     document.getElementById('done').innerHTML = '';
 
