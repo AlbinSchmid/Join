@@ -1,6 +1,6 @@
 let tasks = [];
 let currentTask = 0;
-let currentIndex = 1;
+let currentIndex = 0;
 let currentDraggedElement;
 loadTasks();
 console.log(tasks); // Zeigt die geladenen Tasks an
@@ -44,7 +44,6 @@ function renderBoard() {
     let priority = tasks[0].priority;
    
     updateHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex);
-    currentIndex++;
 }
 
 
