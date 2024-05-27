@@ -26,7 +26,7 @@ function init() {
 }
 
 function renderBoard() {
-    let container = document.getElementById('to-do-id');
+    let container = document.getElementById('to-do');
     let technicalTask = tasks[0].category;
     let title = tasks[0].title;
     let description = tasks[0].description;
@@ -103,7 +103,7 @@ function getTaskDetailViewHTML(index, technicalTask, title, subtasks, descriptio
                 <div><p class="description-detail">${description}</p></div>
                 <div class="date-detail"><p>Due Date:</p>${dueDate}</div>
                 <div class="priority-detail"><p>Priority:</p>${priority}</div>
-                <div><p>Assigned To:</p>
+                <div class="assigned-detail"><p>Assigned To:</p>
                     <div>${assignedTo}</div>
                 </div>
                 <div><p>Subtasks</p>${subtasks}</div>
