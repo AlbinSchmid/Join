@@ -2,22 +2,7 @@ let tasks = [];
 let currentTask = 0;
 let currentIndex = 0;
 let currentDraggedElement;
-loadTasks();
 console.log(tasks); // Zeigt die geladenen Tasks an
-
-function loadTasks() {
-    // Holen der Tasks aus dem Local Storage
-    const tasksFromStorage = localStorage.getItem('tasks');
-    
-    // Überprüfen, ob Tasks im Local Storage vorhanden sind
-    if (tasksFromStorage) {
-        // Parsen des JSON-Strings in ein JavaScript-Array und der globalen Variable zuweisen
-        tasks = JSON.parse(tasksFromStorage);
-    } else {
-        // Falls keine Tasks im Local Storage sind, leeres Array setzen
-        tasks = [];
-    }
-}
 
 
 
@@ -28,60 +13,87 @@ function loadTasks() {
  * renderBoard renders and generates the HTML code 
  */
 function init() {
+    loadTasks();
     includeHTML();
-    renderBoard();
+    updateHTML();
 }
 
-/**
- * render function, filter category = "to-do","in-progress","await-feedback","done"
- */
-function renderBoard() {
-    let technicalTask = tasks[0].category;
-    let title = tasks[0].title;
-    let description = tasks[0].description;
-    let subtaskCount = tasks[0].subtaskCount;
-    let assignedTo = tasks[0].assignment;
-    let priority = tasks[0].priority;
-   
-    updateHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex);
+function loadTasks() {
+    let tasksAsString = localStorage.getItem('tasks');
+    tasks = tasksAsString ? JSON.parse(tasksAsString) : [];
 }
 
+function saveTasks() {
+    let tasksAsString = JSON.stringify(tasks);
+    localStorage.setItem('tasks' , tasksAsString);
+}
 
-
-function updateHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex) {
+function updateHTML() {
     let todo = tasks.filter(t => t['category'] == 'to-do');
 
     document.getElementById('to-do').innerHTML = '';
 
     for (let index = 0; index < todo.length; index++) {
         const element = todo[index];
-        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+
+        let technicalTask = todo[index].category;
+        let title = todo[index].title;
+        let description = todo[index].description;
+        let subtaskCount = todo[index].subtaskCount;
+        let assignedTo = todo[index].assignment;
+        let priority = todo[index].priority;
+
+        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, element);
     }
 
-    let inprogress = tasks.filter(t =>['category'] == 'in-progress');
+    let inprogress = tasks.filter(t => t['category'] == 'in-progress');
 
     document.getElementById('in-progress').innerHTML = '';
 
     for (let index = 0; index < inprogress.length; index++) {
         const element = inprogress[index];
+
+        let technicalTask = inprogress[index].category;
+        let title = inprogress[index].title;
+        let description = inprogress[index].description;
+        let subtaskCount = inprogress[index].subtaskCount;
+        let assignedTo = inprogress[index].assignment;
+        let priority = inprogress[index].priority;
+
         document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
     }
 
-    let awaitFeedback = tasks.filter(t =>['category'] == 'await-feedback');
+    let awaitFeedback = tasks.filter(t => t['category'] == 'await-feedback');
 
     document.getElementById('await-feedback').innerHTML = '';
 
     for (let index = 0; index < awaitFeedback.length; index++) {
         const element = awaitFeedback[index];
+
+        let technicalTask = awaitFeedback[index].category;
+        let title = awaitFeedback[index].title;
+        let description = awaitFeedback[index].description;
+        let subtaskCount = awaitFeedback[index].subtaskCount;
+        let assignedTo = awaitFeedback[index].assignment;
+        let priority = awaitFeedback[index].priority;
+
         document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
     }
 
-    let done = tasks.filter(t =>['category'] == 'done');
+    let done = tasks.filter(t => t['category'] == 'done');
 
     document.getElementById('done').innerHTML = '';
 
     for (let index = 0; index < done.length; index++) {
         const element = done[index];
+
+        let technicalTask = done[index].category;
+        let title = done[index].title;
+        let description = done[index].description;
+        let subtaskCount = done[index].subtaskCount;
+        let assignedTo = done[index].assignment;
+        let priority = done[index].priority;
+
         document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
     }
 }
@@ -116,7 +128,7 @@ function openTask(index) {
     let dueDate = task.date;
     let priority = task.priority;
     let assignedTo = task.assignment;
-    
+
     let subtasks = '';
     if (task.subtasks && task.subtasks.length > 0) {
         for (let i = 0; i < task.subtasks.length; i++) {
@@ -156,7 +168,7 @@ function getTaskDetailViewHTML(index, technicalTask, title, subtasks, descriptio
 
 
 function addTask() {
-    
+
 }
 
 function startDragging(index) {
@@ -169,6 +181,8 @@ function allowDrop(ev) {
 
 function moveTo(category) {
     tasks[currentDraggedElement]['category'] = category;
+    saveTasks();
+    loadTasks();
     updateHTML();
 }
 
