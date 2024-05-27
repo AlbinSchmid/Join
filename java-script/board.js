@@ -2,22 +2,7 @@ let tasks = [];
 let currentTask = 0;
 let currentIndex = 0;
 let currentDraggedElement;
-loadTasks();
 console.log(tasks); // Zeigt die geladenen Tasks an
-
-function loadTasks() {
-    // Holen der Tasks aus dem Local Storage
-    const tasksFromStorage = localStorage.getItem('tasks');
-    
-    // Überprüfen, ob Tasks im Local Storage vorhanden sind
-    if (tasksFromStorage) {
-        // Parsen des JSON-Strings in ein JavaScript-Array und der globalen Variable zuweisen
-        tasks = JSON.parse(tasksFromStorage);
-    } else {
-        // Falls keine Tasks im Local Storage sind, leeres Array setzen
-        tasks = [];
-    }
-}
 
 
 
@@ -28,8 +13,14 @@ function loadTasks() {
  * renderBoard renders and generates the HTML code 
  */
 function init() {
+    loadTasks();
     includeHTML();
     renderBoard();
+}
+
+function loadTasks() {
+    let tasksAsString = localStorage.getItem('tasks');
+    tasks = tasksAsString ? JSON.parse(tasksAsString) : [];
 }
 
 /**
@@ -169,7 +160,7 @@ function allowDrop(ev) {
 
 function moveTo(category) {
     tasks[currentDraggedElement]['category'] = category;
-    updateHTML();
+    renderBoard();
 }
 
 function updateProgressBar() {

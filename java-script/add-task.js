@@ -6,6 +6,7 @@ let subtaskCount = 0;
 
 function init() {
     includeHTML();
+    loadTasks()
     renderAddTaskContent();
     subtaskCount = 0;
     subtasks = [];
@@ -246,13 +247,23 @@ function createTask() {
     };
 
     tasks.push(task);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    saveTasks() 
     init();
     
     // Reset subtaskCount and subtasks array after creating a task
     subtaskCount = 0;
     subtasks = [];
     taskIdCounter++; // Erhöhe die Task-ID für den nächsten Task
+}
+
+function saveTasks() {
+    let tasksAsString = JSON.stringify(tasks);
+    localStorage.setItem('tasks' , tasksAsString);
+}
+
+function loadTasks() {
+    let tasksAsString = localStorage.getItem('tasks');
+    tasks = tasksAsString ? JSON.parse(tasksAsString) : [];
 }
 
 async function includeHTML() {
