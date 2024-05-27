@@ -11,7 +11,7 @@
     <script src="/java-script/summary.js"></script>
 </head>
 
-<body onload="includeHTML()">
+<body onload="init()">
 
     <div w3-include-html="/assets/templates/side-bar-template.html"></div>
 
@@ -38,7 +38,7 @@
                             onmouseout="resetPencilImg(this)">
                             <img id="pencil-img" src="./assets/img/icons/summary/pencil-darkblue.png" alt="Pencil logo">
                             <div class="info-cardpart">
-                                <h2>1</h2>
+                                <h2 id="to-do"></h2>
                                 <p>To-do</p>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                             onmouseout="resetCheckImg(this)">
                             <img id="check-img" src="./assets/img/icons/summary/check-darkblue.png" alt="Check logo">
                             <div class="info-cardpart">
-                                <h2>1</h2>
+                                <h2 id="done"></h2>
                                 <p>Done</p>
                             </div>
                         </div>
@@ -71,17 +71,17 @@
 
                     <div class="card-overlying-div">
                         <div class="card-bottom">
-                            <h2>5</h2>
+                            <h2 id="tasks"></h2>
                             <h4>Task in Board</h4>
                         </div>
 
                         <div class="card-bottom">
-                            <h2>2</h2>
+                            <h2 id="task-in-progress"></h2>
                             <h4>Task in Progress</h4>
                         </div>
 
                         <div class="card-bottom">
-                            <h2>2</h2>
+                            <h2 id="awaiting-feedback"></h2>
                             <h4>Awaiting Feedback</h4>
                         </div>
                     </div>

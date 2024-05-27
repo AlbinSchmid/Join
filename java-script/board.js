@@ -23,6 +23,11 @@ function loadTasks() {
     tasks = tasksAsString ? JSON.parse(tasksAsString) : [];
 }
 
+function saveTasks() {
+    let tasksAsString = JSON.stringify(tasks);
+    localStorage.setItem('tasks' , tasksAsString);
+}
+
 function updateHTML() {
     let todo = tasks.filter(t => t['category'] == 'to-do');
 
@@ -176,6 +181,8 @@ function allowDrop(ev) {
 
 function moveTo(category) {
     tasks[currentDraggedElement]['category'] = category;
+    saveTasks();
+    loadTasks();
     updateHTML();
 }
 

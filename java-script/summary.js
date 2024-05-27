@@ -1,3 +1,46 @@
+let tasks = [];
+
+function init() {
+    includeHTML();
+    loadTasks();
+    filterToDo();
+    filterDone();
+    filterProgress();
+    filterFeedback();
+    document.getElementById('tasks').innerHTML = `${tasks.length}`;
+}
+
+function loadTasks() {
+    let tasksAsString = localStorage.getItem('tasks');
+    tasks = tasksAsString ? JSON.parse(tasksAsString) : [];
+}
+
+
+function filterToDo() {
+    let todo = tasks.filter(t => t['category'] == 'to-do');
+    document.getElementById('to-do').innerHTML = `${todo.length}`;
+}
+
+
+function filterDone() {
+    let done = tasks.filter(t => t['category'] == 'done');
+    document.getElementById('done').innerHTML = `${done.length}`;
+}
+
+
+function filterProgress() {
+    let inprogress = tasks.filter(t => t['category'] == 'in-progress');
+    document.getElementById('task-in-progress').innerHTML = `${inprogress.length}`;
+}
+
+
+function filterFeedback() {
+    let awaitFeedback = tasks.filter(t => t['category'] == 'await-feedback');
+    document.getElementById('awaiting-feedback').innerHTML = `${awaitFeedback.length}`;
+}
+
+
+
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
