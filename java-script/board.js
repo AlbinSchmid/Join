@@ -2,7 +2,8 @@ let tasks = [];
 let currentTask = 0;
 let currentIndex = 1;
 let currentDraggedElement;
-
+loadTasks();
+console.log(tasks); // Zeigt die geladenen Tasks an
 
 function loadTasks() {
     // Holen der Tasks aus dem Local Storage
@@ -18,8 +19,6 @@ function loadTasks() {
     }
 }
 
-loadTasks();
-console.log(tasks); // Zeigt die geladenen Tasks an
 
 
 /**
@@ -56,8 +55,35 @@ function updateHTML(technicalTask, title, description, subtaskCount, assignedTo,
     document.getElementById('to-do').innerHTML = '';
 
     for (let index = 0; index < todo.length; index++) {
-        const element = open[index];
+        const element = todo[index];
         document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+    }
+
+    let inprogress = tasks.filter(t =>['category'] == 'in-progress');
+
+    document.getElementById('in-progress').innerHTML = '';
+
+    for (let index = 0; index < inprogress.length; index++) {
+        const element = inprogress[index];
+        document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+    }
+
+    let awaitFeedback = tasks.filter(t =>['category'] == 'await-feedback');
+
+    document.getElementById('await-feedback').innerHTML = '';
+
+    for (let index = 0; index < awaitFeedback.length; index++) {
+        const element = awaitFeedback[index];
+        document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+    }
+
+    let done = tasks.filter(t =>['category'] == 'done');
+
+    document.getElementById('done').innerHTML = '';
+
+    for (let index = 0; index < done.length; index++) {
+        const element = done[index];
+        document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
     }
 }
 
