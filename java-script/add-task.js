@@ -1,5 +1,6 @@
 let tasks = [];
 let subtasks = [];
+let taskIdCounter = 1;
 let subtaskCount = 0;
 
 
@@ -225,11 +226,13 @@ function createTask() {
 
     // Überprüfen, ob taskTitle, taskDate und taskCategory ausgefüllt sind
     if (taskTitle === '' || taskDate === '' || taskCategory === '') {
-        alert('Please enter a title, select a date and a category to create a Task.');
+        alert('Bitte füllen Sie die Felder "Titel", "Datum" und "Kategorie" aus.');
         return; // Beenden der Funktion, wenn die Felder nicht ausgefüllt sind
-    } else {
+    }
     
     let task = {
+        'id': taskIdCounter, // ID hinzufügen
+        'category' : 'to-do',
         'title': taskTitle,
         'description': taskDescription,
         'assignment': taskAssignment,
@@ -237,7 +240,7 @@ function createTask() {
         'priorityHigh': taskPriorityHigh,
         'priorityMedium': taskPriorityMedium,
         'priorityLow': taskPriorityLow,
-        'category': taskCategory,
+        'taskcategory': taskCategory,
         'subtaskCount': subtaskCount,
         'subtasks': subtasks.slice() // Add a copy of the subtasks array
     };
@@ -245,7 +248,11 @@ function createTask() {
     tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     init();
-    }
+    
+    // Reset subtaskCount and subtasks array after creating a task
+    subtaskCount = 0;
+    subtasks = [];
+    taskIdCounter++; // Erhöhe die Task-ID für den nächsten Task
 }
 
 async function includeHTML() {

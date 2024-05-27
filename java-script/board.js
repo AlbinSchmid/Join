@@ -1,6 +1,6 @@
 let tasks = [];
 let currentTask = 0;
-let currentIndex = 0;
+let currentIndex = 1;
 
 
 function loadTasks() {
@@ -25,6 +25,10 @@ function init() {
     renderBoard();
 }
 
+
+/**
+ * render function, filter category = "to-do","in-progress","await-feedback","done"
+ */
 function renderBoard() {
     let container = document.getElementById('to-do');
     let technicalTask = tasks[0].category;
@@ -34,14 +38,13 @@ function renderBoard() {
     let assignedTo = tasks[0].assignment;
     let priority = tasks[0].priority;
     container.innerHTML = '';
-    /* for loop => Array anlegen, welches über addTask() gepusht wird in local storage und parameter an die Render Funktion übergibt */
     container.innerHTML = getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex);
     currentIndex++;
 }
 
 function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index) {
     return /*html*/`
-        <div id="to-do${index}" class="to-do-task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
+        <div id="${index}" class="to-do-task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
             <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task">${title}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task-description">${description}</p></div>
