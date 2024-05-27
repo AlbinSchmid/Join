@@ -88,9 +88,9 @@ function updateHTML(technicalTask, title, description, subtaskCount, assignedTo,
 }
 
 
-function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index) {
+function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, element) {
     return /*html*/`
-        <div id="${index}" class="task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
+        <div draggable="true" ondragstart="startDragging(${element['id']})" class="task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
             <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task">${title}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task-description">${description}</p></div>
@@ -162,6 +162,15 @@ function addTask() {
 
 function startDragging(id) {
     currentDraggedElement = id;
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function moveTo(category) {
+    tasks[currentDraggedElement]['category'] = category;
+    updateHTML();
 }
 
 function updateProgressBar() {
