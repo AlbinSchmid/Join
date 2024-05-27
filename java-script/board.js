@@ -1,6 +1,7 @@
 let tasks = [];
 let currentTask = 0;
 let currentIndex = 1;
+let currentDraggedElement;
 
 
 function loadTasks() {
@@ -20,31 +21,55 @@ function loadTasks() {
 loadTasks();
 console.log(tasks); // Zeigt die geladenen Tasks an
 
+
+/**
+ * function opens render relevated sub functions for generating the page content 
+ * includeHTML loads templates
+ * updateHTML filters the Array tasks after 'category' : '' to generate the right code into each div / drag area with the correct progress status / category
+ * renderBoard renders and generates the HTML code 
+ */
 function init() {
     includeHTML();
     renderBoard();
 }
 
-
 /**
  * render function, filter category = "to-do","in-progress","await-feedback","done"
  */
 function renderBoard() {
-    let container = document.getElementById('to-do');
     let technicalTask = tasks[0].category;
     let title = tasks[0].title;
     let description = tasks[0].description;
     let subtaskCount = tasks[0].subtaskCount;
     let assignedTo = tasks[0].assignment;
     let priority = tasks[0].priority;
-    container.innerHTML = '';
-    container.innerHTML = getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex);
+   
+    updateHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex);
     currentIndex++;
 }
 
+
+
+function updateHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex) {
+    let todo = tasks.filter(t => t['category'] == 'to-do');
+
+    document.getElementById('to-do').innerHTML = '';
+
+    for (let index = 0; index < todo.length; index++) {
+        const element = open[index];
+        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+    }
+}
+
+
+
+
+
+
+
 function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index) {
     return /*html*/`
-        <div id="${index}" class="to-do-task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
+        <div id="${index}" class="task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
             <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task">${title}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task-description">${description}</p></div>
@@ -62,10 +87,7 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
 }
 
 function openTask(index) {
-    if (index >= tasks.length) {
-        console.error("Ungültiger Index:", index);
-        return;
-    }
+    
 
     let container = document.getElementById('task-detail-view-container');
     let task = tasks[index];
@@ -117,6 +139,10 @@ function getTaskDetailViewHTML(index, technicalTask, title, subtasks, descriptio
 
 function addTask() {
     
+}
+
+function startDragging(id) {
+    currentDraggedElement = id;
 }
 
 function updateProgressBar() {
