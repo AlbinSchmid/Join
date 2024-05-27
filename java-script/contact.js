@@ -159,7 +159,6 @@ function saveAllContacts() {
 function loadAllContacts() {
     let allContactsAsString = localStorage.getItem('allContacts');
     allContacts = allContactsAsString ? JSON.parse(allContactsAsString) : [];
-    console.log(allContacts)
 }
 
 // ------------- ENABLE/DISABLE CONTAINER ------------- //
