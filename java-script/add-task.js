@@ -1,7 +1,7 @@
 let tasks = [];
 let subtasks = [];
-let taskIdCounter = tasks.length;
 let subtaskCount = 0;
+let taskIdCounter = 0;
 
 
 function init() {
@@ -245,7 +245,7 @@ function createTask() {
         'subtaskCount': subtaskCount,
         'subtasks': subtasks.slice() // Add a copy of the subtasks array
     };
-
+    taskIdCounter = taskIdCounter + 1; // Erhöhe die Task-ID für den nächsten Task
     tasks.push(task);
     saveTasks() 
     init();
@@ -253,7 +253,7 @@ function createTask() {
     // Reset subtaskCount and subtasks array after creating a task
     subtaskCount = 0;
     subtasks = [];
-    taskIdCounter++; // Erhöhe die Task-ID für den nächsten Task
+    
 }
 
 function saveTasks() {
