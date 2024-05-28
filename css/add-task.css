@@ -67,10 +67,11 @@ h2 {
     cursor: pointer;
 }
 
+
 .selectfield-task-assignment {
     margin-top: 8px;
-    width: 440px;
-    height: 48px;
+    width: 406px;
+    height: 30px;
     padding-left: 16px;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -79,6 +80,48 @@ h2 {
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
+    background-color: #FFFFFF;
+}
+
+.contact-container {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    justify-content: space-between;
+}
+
+.contact-name-container {
+    display: flex;
+    align-items: center;
+
+}
+
+
+.initials-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    min-width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    font-size: 12px;
+    border: 2px solid rgba(255, 255, 255, 1);
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 440px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+
+.dropdown-content div:hover {
+    background-color: #f1f1f1;
 }
 
 .selectfield-task-assignment:focus option[value=""] {
@@ -291,7 +334,6 @@ h2 {
     height: 34px;
     font-size: 20px;
     width: 300px;
-    /* display: none; /* Initially hidden */ 
 }
 
 .inputfield-task-subtasks:hover {

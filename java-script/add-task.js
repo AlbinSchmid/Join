@@ -1,4 +1,5 @@
 let tasks = [];
+let allContacts = [];
 let subtasks = [];
 let subtaskCount = 0;
 let taskIdCounter = 0;
@@ -7,12 +8,15 @@ let taskIdCounter = 0;
 function init() {
     includeHTML();
     loadTasks()
+    loadAllContacts();
     renderAddTaskContent();
-    subtaskCount = 0;
-    subtasks = [];
+    
     document.querySelector('.subtasks-container').innerHTML = '';
     clearInput();
+
+    console.log(allContacts);
 }
+
 
 /**
  * This function renders the main add-task-content into the section with id = 'add-task-content'
@@ -23,6 +27,8 @@ function init() {
 function renderAddTaskContent() {
     let container = document.getElementById('add-task-content');
     container.innerHTML = getAddTaskHTML();
+    setupDropdown();
+    renderContactOptions();
 }
 
 /**
@@ -40,31 +46,61 @@ function getAddTaskHTML() {
 
 function getAddTaskHTMLLeftSide() {
     return /*html*/`
-      <div>
-          <h2>Title<p class="required-color">*</p></h2>
-              <form>
-                  <input id="task-title" class="inputfield-title" placeholder="Enter a title" type="text" required>
-              </form>
-          <h2>Description</h2>
+        <div>
+            <h2>Title<p class="required-color">*</p></h2>
                 <form>
-                    <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
+                    <input id="task-title" class="inputfield-title" placeholder="Enter a title" type="text" required>
                 </form>
-                    <!-- contacts müssen geladen werden und entsprechend als option + value gerendert werden -->
-          <h2>Assinged to</h2>
-                <form>
-                    <select class="selectfield-task-assignment" name="task category" id="task-assignment">
-                        <option value="" >Select contacts to assign</option>
-                        <option value="Max Mustermann">Max Mustermann</option>
-                        <option value="Beate Test">Beate Test</option>
-                    </select>
-                    <!-- Contact icons müssen in div gerendert werden -->
-                    <div>
-
-                    </div>
-                </form>
-            </div>
-      <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">`;           
+            <h2>Description</h2>
+                    <form>
+                        <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
+                    </form>
+            <h2>Assigned to</h2>
+                <div>
+                    <form><input id="dropdownInput" class="selectfield-task-assignment" placeholder="Select contacts to assign"></form>
+                    <div id="task-assignment" class="dropdown-content"></div>
+                </div>
+        </div>                
+                
+            
+      <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">`;
+      
 }
+
+function renderContactOptions() {
+    let selectElement = document.getElementById('task-assignment');
+    let optionsHTML = '';
+    for (let i = 0; i < allContacts.length; i++) {
+        const contact = allContacts[i];
+        optionsHTML += `
+            <div class="contact-container">
+                <div class="contact-name-container">
+                    <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
+                    <span>${contact.name}</span>
+                </div>
+                
+                <input type="checkbox">
+            </div>`;
+    }
+    selectElement.innerHTML = optionsHTML;
+}
+
+function setupDropdown() {
+    const input = document.getElementById('dropdownInput');
+    const dropdown = document.getElementById('task-assignment');
+
+    input.addEventListener('click', () => {
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!input.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', init);
 
 /**
  * 
@@ -248,12 +284,15 @@ function createTask() {
     taskIdCounter = taskIdCounter + 1; // Erhöhe die Task-ID für den nächsten Task
     tasks.push(task);
     saveTasks() 
-    init();
-    
-    // Reset subtaskCount and subtasks array after creating a task
     subtaskCount = 0;
     subtasks = [];
-    
+    directToBoard();
+}
+
+function directToBoard() {
+    setTimeout(() => {
+        window.location.href = 'board.html';
+    }, 2000);
 }
 
 function saveTasks() {
@@ -264,6 +303,11 @@ function saveTasks() {
 function loadTasks() {
     let tasksAsString = localStorage.getItem('tasks');
     tasks = tasksAsString ? JSON.parse(tasksAsString) : [];
+}
+
+function loadAllContacts() {
+    let allContactsAsString = localStorage.getItem('allContacts');
+    allContacts = allContactsAsString ? JSON.parse(allContactsAsString) : [];
 }
 
 async function includeHTML() {
