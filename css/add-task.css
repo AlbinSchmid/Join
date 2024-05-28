@@ -93,9 +93,8 @@ h2 {
 .contact-name-container {
     display: flex;
     align-items: center;
-
+    gap: 8px;
 }
-
 
 .initials-container {
     display: flex;
@@ -109,7 +108,6 @@ h2 {
     border: 2px solid rgba(255, 255, 255, 1);
 }
 
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -119,9 +117,27 @@ h2 {
     z-index: 1;
 }
 
-
 .dropdown-content div:hover {
     background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+#selected-contacts {
+    display: flex;
+    margin-top: 8px;
+    gap: 8px;
+}
+
+.selected-contacts-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    font-size: 12px;
+    border: 2px solid rgba(255, 255, 255, 1);
 }
 
 .selectfield-task-assignment:focus option[value=""] {

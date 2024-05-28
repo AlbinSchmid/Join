@@ -59,6 +59,7 @@ function getAddTaskHTMLLeftSide() {
                 <div>
                     <form><input id="dropdownInput" class="selectfield-task-assignment" placeholder="Select contacts to assign"></form>
                     <div id="task-assignment" class="dropdown-content"></div>
+                    <div id="selected-contacts"></div>
                 </div>
         </div>                
                 
@@ -69,21 +70,41 @@ function getAddTaskHTMLLeftSide() {
 
 function renderContactOptions() {
     let selectElement = document.getElementById('task-assignment');
-    let optionsHTML = '';
+    let contactsHTML = '';
+    
     for (let i = 0; i < allContacts.length; i++) {
         const contact = allContacts[i];
-        optionsHTML += `
+        contactsHTML += `
             <div class="contact-container">
                 <div class="contact-name-container">
                     <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
                     <span>${contact.name}</span>
                 </div>
-                
-                <input type="checkbox">
+                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" onclick="renderSelectedContacts()">
             </div>`;
     }
-    selectElement.innerHTML = optionsHTML;
+    selectElement.innerHTML = contactsHTML;
 }
+
+
+function renderSelectedContacts() {
+    let selectedContactsContainer = document.getElementById('selected-contacts');
+    selectedContactsContainer.innerHTML = ''; 
+
+    let checkboxes = document.querySelectorAll('#task-assignment input[type="checkbox"]:checked');
+    checkboxes.forEach(checkbox => {
+        const contactColor = checkbox.dataset.color;
+        const contactName = checkbox.value;
+        
+        const contactDiv = document.createElement('div');
+        contactDiv.style.backgroundColor = contactColor;
+        contactDiv.classList.add('selected-contacts-container');
+        contactDiv.textContent = contactName;
+        
+        selectedContactsContainer.appendChild(contactDiv);
+    });
+}
+
 
 function setupDropdown() {
     const input = document.getElementById('dropdownInput');
