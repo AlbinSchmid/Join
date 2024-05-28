@@ -14,12 +14,12 @@ async function includeHTML() {
 
 
 let allContacts = [];
-let currentContact;
+let currentContact = {id: 'empty'};
 let allFirstLetters = [];
 
 
-function init() {
-    loadAllContacts();
+async function init() {
+    await loadAllContacts();
     renderContactlist();
 }
 
@@ -54,12 +54,11 @@ function renderContactlist() {
 }
 
 
-function addContact() {
+async function addContact() {
     let name = document.getElementById('name');
     let mail = document.getElementById('mail');
     let phonenumber = document.getElementById('phonenumber');
     let contact = {
-        'id': uuidv4(),
         'name': name.value,
         'firstLetter': getFirstLetter(name.value),
         'initials': getInitials(name.value),
@@ -69,61 +68,44 @@ function addContact() {
     }
     allContacts.push(contact);
 
+    await postData('contacts', contact)
+
     if (!allFirstLetters.includes(contact['firstLetter'])) {
         allFirstLetters.push(contact['firstLetter']);
     }
     name.value = '';
     mail.value = '';
     phonenumber.value = '';
-    saveAllContacts();
-    init();
+    await init();
 }
 
 
-function updateContact(id) {
-    function find(contact) {
-        return contact.id === id;
-    }
-    let index = allContacts.findIndex(find);
+async function updateContact(id) {
     let name = document.getElementById('edit-name');
     let mail = document.getElementById('edit-mail');
     let phonenumber = document.getElementById('edit-phonenumber');
-    allContacts[index] = {
-        id: allContacts[index].id,
-        'name': name.value,
-        'firstLetter': getFirstLetter(name.value),
-        'initials': getInitials(name.value),
-        'mail': mail.value,
-        'phonenumber': phonenumber.value,
-        'color': allContacts[index].color,
-    };
-    document.getElementById('editContact').classList.toggle('d-none');
+    let contact = await getData(`contacts/${id}`);
+    contact.name = name.value;
+    contact.firstLetter = getFirstLetter(name.value);
+    contact.initials = getInitials(name.value);
+    contact.mail = mail.value;
+    contact.phonenumber = phonenumber.value;
 
-    let contactDetails = document.getElementById('showContactDetails');
-    contactDetails.innerHTML = contactDetailsHTML(allContacts[index]);
-    saveAllContacts();
-    renderContactlist();
+    await putData(`contacts/${id}`, contact);
+    await init();
+    document.getElementById('editContact').classList.toggle('d-none');
+    contact.id = id;
+    let contactDetails = document.getElementById('showContactDetails'); 
+    contactDetails.innerHTML = contactDetailsHTML(contact);
 }
 
 
-function deleteContact(id) {
-    function find(contact) {
-        return contact.id === id;
-    }
-    let index = allContacts.findIndex(find);
-    allContacts.splice(index, 1);
+async function deleteContact(id) {
+    await deleteDate(`contacts/${id}`);
+    await init();
     let contactDetails = document.getElementById('showContactDetails');
     contactDetails.innerHTML = '';
-    document.getElementById('editContact').classList.toggle('d-none');
-    saveAllContacts();
-    renderContactlist();
-}
-
-
-function uuidv4() {
-    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
-        (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
-    );
+    document.getElementById('editContact').classList.add('d-none');
 }
 
 
@@ -150,15 +132,16 @@ function getFirstLetter(name) {
 }
 
 
-function saveAllContacts() {
-    let allContactsAsString = JSON.stringify(allContacts);
-    localStorage.setItem('allContacts', allContactsAsString);
-}
-
-
-function loadAllContacts() {
-    let allContactsAsString = localStorage.getItem('allContacts');
-    allContacts = allContactsAsString ? JSON.parse(allContactsAsString) : [];
+async function loadAllContacts() {
+    allContacts = [];
+    let contacts = await getData('contacts');
+    let ids = Object.keys(contacts || []);
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];
+        let contact = contacts[id];
+        contact.id = id;
+        allContacts.push(contact);
+    }
 }
 
 // ------------- ENABLE/DISABLE CONTAINER ------------- //
@@ -201,10 +184,14 @@ function showContact(id) {
     function find(contact) {
         return contact.id === id;
     }
-    currentContact = allContacts.find(find);
     let contactDetails = document.getElementById('showContactDetails');
     contactDetails.innerHTML = '';
-    document.getElementById('showContactDetails').classList.toggle('d-none');
+    if (id === currentContact.id) {
+        document.getElementById('showContactDetails').classList.toggle('d-none');
+    }   else {
+        document.getElementById('showContactDetails').classList.remove('d-none');
+    }
+    currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
 }
 
