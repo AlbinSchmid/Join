@@ -5,19 +5,27 @@ let selectedContacts = [];
 let subtaskCount = 0;
 let taskIdCounter = 0;
 
-
-function init() {
+async function init() {
+    await loadAllContacts();
     includeHTML();
     loadTasks()
-    loadAllContacts();
+   
     renderAddTaskContent();
-    
-    document.querySelector('.subtasks-container').innerHTML = '';
     clearInput();
-
-    console.log(allContacts);
 }
 
+async function loadAllContacts() {
+    allContacts = [];
+    let contacts = await getData('contacts');
+    let ids = Object.keys(contacts || []);
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];
+        let contact = contacts[id];
+        contact.id = id;
+        allContacts.push(contact);
+    }
+    console.log(allContacts);
+}
 
 /**
  * This function renders the main add-task-content into the section with id = 'add-task-content'
@@ -341,11 +349,6 @@ function saveTasks() {
 function loadTasks() {
     let tasksAsString = localStorage.getItem('tasks');
     tasks = tasksAsString ? JSON.parse(tasksAsString) : [];
-}
-
-function loadAllContacts() {
-    let allContactsAsString = localStorage.getItem('allContacts');
-    allContacts = allContactsAsString ? JSON.parse(allContactsAsString) : [];
 }
 
 async function includeHTML() {
