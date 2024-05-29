@@ -26,10 +26,8 @@ async function putData(path="", data={}) {
         },
         body: JSON.stringify(data)
     });
-
     return await response.json();
 }
-
 
 
 async function deleteDate(path="") {
