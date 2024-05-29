@@ -8,8 +8,6 @@ let taskIdCounter = 0;
 async function init() {
     await loadAllContacts();
     includeHTML();
-    loadTasks()
-   
     renderAddTaskContent();
     clearInput();
 }
@@ -330,12 +328,6 @@ function directToBoard() {
     }, 2000);
 }
 
-
-
-function loadTasks() {
-    let tasksAsString = localStorage.getItem('tasks');
-    tasks = tasksAsString ? JSON.parse(tasksAsString) : [];
-}
 
 async function initializeTasks() {
     try {
