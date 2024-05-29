@@ -126,6 +126,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+    margin-bottom: 50px;
 }
 
 .container-user-top {
@@ -182,6 +183,10 @@
     display: flex;
     flex-direction: column;
     gap: 22px;
+}
+
+.contact-mail-number a {
+    color: #007CEE;
 }
 
 .mail-number {

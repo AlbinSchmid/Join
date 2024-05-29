@@ -158,7 +158,7 @@ function showCreateNewContact() {
 function createNewContact() {
     document.getElementById('addNewContact').classList.toggle('d-none');
     document.getElementById('btnContactCreated').classList.toggle('d-none');
-    setTimeout(closeBtnSuccesfully, 1500);
+    setTimeout(closeBtnSuccesfully, 3000);
     addContact();
 }
 
