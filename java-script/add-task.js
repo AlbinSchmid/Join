@@ -1,6 +1,7 @@
 let tasks = [];
 let allContacts = [];
 let subtasks = [];
+let selectedContacts = [];
 let subtaskCount = 0;
 let taskIdCounter = 0;
 
@@ -71,7 +72,7 @@ function getAddTaskHTMLLeftSide() {
 function renderContactOptions() {
     let selectElement = document.getElementById('task-assignment');
     let contactsHTML = '';
-    
+
     for (let i = 0; i < allContacts.length; i++) {
         const contact = allContacts[i];
         contactsHTML += `
@@ -80,31 +81,39 @@ function renderContactOptions() {
                     <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
                     <span>${contact.name}</span>
                 </div>
-                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" onclick="renderSelectedContacts()">
+                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" onclick="renderSelectedContacts('${contact.color}', '${contact.name}', '${contact.initials}')">
             </div>`;
     }
     selectElement.innerHTML = contactsHTML;
 }
 
-
 function renderSelectedContacts() {
-    let selectedContactsContainer = document.getElementById('selected-contacts');
-    selectedContactsContainer.innerHTML = ''; 
-
     let checkboxes = document.querySelectorAll('#task-assignment input[type="checkbox"]:checked');
-    checkboxes.forEach(checkbox => {
-        const contactColor = checkbox.dataset.color;
-        const contactName = checkbox.value;
-        
-        const contactDiv = document.createElement('div');
-        contactDiv.style.backgroundColor = contactColor;
-        contactDiv.classList.add('selected-contacts-container');
-        contactDiv.textContent = contactName;
-        
-        selectedContactsContainer.appendChild(contactDiv);
-    });
-}
+    let selectedContactsContainer = document.getElementById('selected-contacts');
+    selectedContactsContainer.innerHTML = ''; // Clear previous selection
 
+    selectedContacts = []; // Clear the array
+
+    for (let i = 0; i < checkboxes.length; i++) {
+        const checkbox = checkboxes[i];
+        const color = checkbox.dataset.color;
+        const name = checkbox.dataset.name;
+        const initials = checkbox.value;
+
+        // Push to selectedContacts array
+        selectedContacts.push({ color, name, initials });
+
+        const contactDiv = document.createElement('div');
+        contactDiv.style.backgroundColor = color;
+        contactDiv.classList.add('selected-contacts-container');
+        contactDiv.textContent = initials;
+
+        selectedContactsContainer.appendChild(contactDiv);
+    }
+
+    // Debug output
+    console.log(selectedContacts);
+}
 
 function setupDropdown() {
     const input = document.getElementById('dropdownInput');
@@ -120,8 +129,6 @@ function setupDropdown() {
         }
     });
 }
-
-document.addEventListener('DOMContentLoaded', init);
 
 /**
  * 
@@ -300,7 +307,8 @@ function createTask() {
         'priorityLow': taskPriorityLow,
         'taskcategory': taskCategory,
         'subtaskCount': subtaskCount,
-        'subtasks': subtasks.slice() // Add a copy of the subtasks array
+        'subtasks': subtasks.slice(), // Add a copy of the subtasks array
+        'selectedContact' : selectedContacts.slice(),
     };
     taskIdCounter = taskIdCounter + 1; // Erhöhe die Task-ID für den nächsten Task
     tasks.push(task);
