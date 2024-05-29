@@ -12,15 +12,22 @@ console.log(tasks); // Zeigt die geladenen Tasks an
  * updateHTML filters the Array tasks after 'category' : '' to generate the right code into each div / drag area with the correct progress status / category
  * renderBoard renders and generates the HTML code 
  */
-function init() {
-    loadTasks();
+async function init() {
+    await loadTasks();
     includeHTML();
     updateHTML();
 }
 
-function loadTasks() {
-    let tasksAsString = localStorage.getItem('tasks');
-    tasks = tasksAsString ? JSON.parse(tasksAsString) : [];
+async function loadTasks() {
+    tasks = [];
+    let task = await getData('tasks');
+    let ids = Object.keys(task || []);
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];
+        let allTasks = task[id];
+        allTasks.id = id;
+        tasks.push(allTasks);
+    }
 }
 
 function saveTasks() {

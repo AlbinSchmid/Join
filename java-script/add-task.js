@@ -14,19 +14,6 @@ async function init() {
     clearInput();
 }
 
-async function loadAllContacts() {
-    allContacts = [];
-    let contacts = await getData('contacts');
-    let ids = Object.keys(contacts || []);
-    for (let i = 0; i < ids.length; i++) {
-        let id = ids[i];
-        let contact = contacts[id];
-        contact.id = id;
-        allContacts.push(contact);
-    }
-    console.log(allContacts);
-}
-
 /**
  * This function renders the main add-task-content into the section with id = 'add-task-content'
  * container variable
@@ -296,7 +283,7 @@ function clearTask() {
   init();
 }
 
-function createTask() { 
+async function createTask() { 
     let taskTitle = document.getElementById('task-title').value;
     let taskDescription = document.getElementById('task-description').value;
     let taskAssignment = document.getElementById('task-assignment').value;
@@ -329,7 +316,9 @@ function createTask() {
     };
     taskIdCounter = taskIdCounter + 1; // Erhöhe die Task-ID für den nächsten Task
     tasks.push(task);
-    saveTasks() 
+    await postData('tasks' ,task);
+
+    
     subtaskCount = 0;
     subtasks = [];
     directToBoard();
@@ -341,14 +330,32 @@ function directToBoard() {
     }, 2000);
 }
 
-function saveTasks() {
-    let tasksAsString = JSON.stringify(tasks);
-    localStorage.setItem('tasks' , tasksAsString);
+
+
+async function loadTasks() {
+    tasks = [];
+    let task = await getData('tasks');
+    let ids = Object.keys(task || []);
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];
+        let allTasks = task[id];
+        allTasks.id = id;
+        tasks.push(allTasks);
+    }
 }
 
-function loadTasks() {
-    let tasksAsString = localStorage.getItem('tasks');
-    tasks = tasksAsString ? JSON.parse(tasksAsString) : [];
+
+async function loadAllContacts() {
+    allContacts = [];
+    let contacts = await getData('contacts');
+    let ids = Object.keys(contacts || []);
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];
+        let contact = contacts[id];
+        contact.id = id;
+        allContacts.push(contact);
+    }
+    console.log(allContacts);
 }
 
 async function includeHTML() {
