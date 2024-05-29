@@ -25,9 +25,10 @@ async function loadTasks() {
     for (let i = 0; i < ids.length; i++) {
         let id = ids[i];
         let allTasks = task[id];
-        allTasks.id = id;
+        
         tasks.push(allTasks);
     }
+    console.log(tasks); // Zeigt die geladenen Tasks an
 }
 
 function saveTasks() {
@@ -189,7 +190,6 @@ function allowDrop(ev) {
 function moveTo(category) {
     tasks[currentDraggedElement]['category'] = category;
     saveTasks();
-    loadTasks();
     updateHTML();
 }
 
