@@ -30,7 +30,7 @@ function renderAddTaskContent() {
  */
 
 function getAddTaskHTML() {
-  return getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
+    return getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
 }
 
 /**
@@ -59,7 +59,7 @@ function getAddTaskHTMLLeftSide() {
                 
             
       <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">`;
-      
+
 }
 
 function renderContactOptions() {
@@ -278,10 +278,10 @@ function showButtons() {
 }
 
 function clearTask() {
-  init();
+    init();
 }
 
-async function createTask() { 
+async function createTask() {
     let taskTitle = document.getElementById('task-title').value;
     let taskDescription = document.getElementById('task-description').value;
     let taskAssignment = document.getElementById('task-assignment').value;
@@ -291,15 +291,20 @@ async function createTask() {
     let taskPriorityLow = document.getElementById('task-low-priority').checked;
     let taskCategory = document.getElementById('task-category').value;
 
+    tasks = [];
+    let taskFireBase = await getData('tasks');
+    let ids = Object.keys(taskFireBase || []);
+    id = ids.length + 1;
+
     // Überprüfen, ob taskTitle, taskDate und taskCategory ausgefüllt sind
     if (taskTitle === '' || taskDate === '' || taskCategory === '') {
         alert('Bitte füllen Sie die Felder "Titel", "Datum" und "Kategorie" aus.');
         return; // Beenden der Funktion, wenn die Felder nicht ausgefüllt sind
     }
-    
+
     let task = {
-        'id': taskIdCounter, // ID hinzufügen
-        'category' : 'to-do',
+        'id': id,
+        'category': 'to-do',
         'title': taskTitle,
         'description': taskDescription,
         'assignment': taskAssignment,
@@ -310,13 +315,12 @@ async function createTask() {
         'taskcategory': taskCategory,
         'subtaskCount': subtaskCount,
         'subtasks': subtasks.slice(), // Add a copy of the subtasks array
-        'selectedContact' : selectedContacts.slice(),
+        'selectedContact': selectedContacts.slice(),
     };
-    taskIdCounter = taskIdCounter + 1; // Erhöhe die Task-ID für den nächsten Task
     tasks.push(task);
-    await postData('tasks' ,task);
+    await postData('tasks', task);
 
-    
+
     subtaskCount = 0;
     subtasks = [];
     directToBoard();
@@ -333,7 +337,7 @@ async function initializeTasks() {
     try {
         let response = await fetch('https://your-firebase-url.firebaseio.com/tasks.json');
         let data = await response.json();
-        
+
         if (data) {
             tasks = Object.values(data);
             taskIdCounter = tasks.reduce((maxId, task) => Math.max(maxId, task.id), 0) + 1;
@@ -375,23 +379,22 @@ async function includeHTML() {
 function toggleDropdown() {
     var dropdownMenu = document.getElementById("dropdownMenu");
     if (dropdownMenu.style.display === "block") {
-      dropdownMenu.style.display = "none";
+        dropdownMenu.style.display = "none";
     } else {
-      dropdownMenu.style.display = "block";
+        dropdownMenu.style.display = "block";
     }
-  }
-  
-  // Close the dropdown if the user clicks outside of it
-  window.onclick = function(event) {
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function (event) {
     if (!event.target.matches('.dropdown-toggle')) {
-      var dropdowns = document.getElementsByClassName("dropdown-menu");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.style.display === "block") {
-          openDropdown.style.display = "none";
+        var dropdowns = document.getElementsByClassName("dropdown-menu");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.style.display === "block") {
+                openDropdown.style.display = "none";
+            }
         }
-      }
     }
-  }
-  
+}
