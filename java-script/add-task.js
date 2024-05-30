@@ -323,11 +323,16 @@ async function createTask() {
 
     subtaskCount = 0;
     subtasks = [];
+    confirmationMessage();
     directToBoard();
 }
 
-function directToBoard() {
+function confirmationMessage() {
     document.getElementById('add-task-confirmation').classList.remove('d-none');
+}
+
+function directToBoard() {
+    
     setTimeout(() => {
         window.location.href = 'board.html';
     }, 2000);

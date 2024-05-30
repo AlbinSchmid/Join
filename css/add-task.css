@@ -19,6 +19,66 @@ h2 {
     display: flex;
 }
 
+.task-confirmation-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    animation-name: logo-animation;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 500ms;
+    animation-delay: 500ms;
+    background-color: #2A3647;
+    border-radius: 10px;
+    color: #FFFFFF;
+    height: 48px;
+    width: 220px;
+    gap: 8px;
+}
+
+.task-confirmation-img {
+    border-radius: 14px;
+    height: 60px;
+}
+
+.screen-animation {
+    opacity: 0;
+    animation-name: screen-animation;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+    animation-duration: 500ms;
+    animation-delay: 700ms;
+    animation-iteration-count: 1;
+}
+
+@keyframes logo-animation {
+    from {
+        top: 100%;
+        left: 50%;
+        transform: translate(0%, -50%);
+    }
+
+    to {
+        top: 40%;
+        left: 50%;
+        transform: none;
+    }
+}
+
+@keyframes screen-animation {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 .inputfield-title {
     width: 406px;
     border-radius: 10px;
