@@ -7,6 +7,7 @@ let taskIdCounter = 0;
 
 async function init() {
     await loadAllContacts();
+    await loadTasks();
     includeHTML();
     renderAddTaskContent();
     clearInput();
@@ -291,6 +292,7 @@ async function createTask() {
     let taskPriorityLow = document.getElementById('task-low-priority').checked;
     let taskCategory = document.getElementById('task-category').value;
 
+
     // Überprüfen, ob taskTitle, taskDate und taskCategory ausgefüllt sind
     if (taskTitle === '' || taskDate === '' || taskCategory === '') {
         alert('Bitte füllen Sie die Felder "Titel", "Datum" und "Kategorie" aus.');
@@ -312,11 +314,10 @@ async function createTask() {
         'subtasks': subtasks.slice(), // Add a copy of the subtasks array
         'selectedContact' : selectedContacts.slice(),
     };
-    taskIdCounter = taskIdCounter + 1; // Erhöhe die Task-ID für den nächsten Task
+    taskIdCounter = taskIdCounter++; // Erhöhe die Task-ID für den nächsten Task
     tasks.push(task);
     await postData('tasks' ,task);
 
-    
     subtaskCount = 0;
     subtasks = [];
     directToBoard();
@@ -327,7 +328,6 @@ function directToBoard() {
         window.location.href = 'board.html';
     }, 2000);
 }
-
 
 async function initializeTasks() {
     try {
