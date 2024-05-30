@@ -183,6 +183,10 @@ h2 {
     display: flex;
 }
 
+.d-none {
+    display: none;
+}
+
 .mg-l-r {
     margin-left: 24px;
     margin-right: 24px;

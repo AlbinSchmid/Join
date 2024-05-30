@@ -7,7 +7,6 @@ let taskIdCounter = 0;
 
 async function init() {
     await loadAllContacts();
-    await loadTasks();
     includeHTML();
     renderAddTaskContent();
     clearInput();
@@ -292,6 +291,10 @@ async function createTask() {
     let taskPriorityLow = document.getElementById('task-low-priority').checked;
     let taskCategory = document.getElementById('task-category').value;
 
+    tasks = [];
+    let taskFireBase = await getData('tasks');
+    let ids = Object.keys(taskFireBase || []);
+    id = ids.length + 1;
 
     // Überprüfen, ob taskTitle, taskDate und taskCategory ausgefüllt sind
     if (taskTitle === '' || taskDate === '' || taskCategory === '') {
@@ -314,9 +317,9 @@ async function createTask() {
         'subtasks': subtasks.slice(), // Add a copy of the subtasks array
         'selectedContact': selectedContacts.slice(),
     };
-    taskIdCounter = taskIdCounter++; // Erhöhe die Task-ID für den nächsten Task
     tasks.push(task);
-    await postData('tasks' ,task);
+    await postData('tasks', task);
+
 
     subtaskCount = 0;
     subtasks = [];
@@ -324,10 +327,12 @@ async function createTask() {
 }
 
 function directToBoard() {
+    document.getElementById('add-task-confirmation').classList.remove('d-none');
     setTimeout(() => {
         window.location.href = 'board.html';
     }, 2000);
 }
+
 
 async function initializeTasks() {
     try {
