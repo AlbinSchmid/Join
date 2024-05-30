@@ -208,33 +208,40 @@ function createSubtask() {
         return;
     }
 
-    let subtaskElement = document.createElement('div');
-    subtaskElement.className = 'subtask';
-
-    let subtaskTextElement = document.createElement('span');
-    subtaskTextElement.className = 'subtask-text';
-    subtaskTextElement.textContent = subtaskText;
-
-    let editButton = document.createElement('button');
-    editButton.className = 'edit-button';
-    editButton.textContent = 'Edit';
-    editButton.onclick = () => editSubtask(subtaskElement, subtaskTextElement);
-
-    let deleteButton = document.createElement('button');
-    deleteButton.className = 'delete-button';
-    deleteButton.textContent = 'Delete';
-    deleteButton.onclick = () => deleteSubtask(subtaskElement, subtaskText);
-
-    subtaskElement.appendChild(subtaskTextElement);
-    subtaskElement.appendChild(editButton);
-    subtaskElement.appendChild(deleteButton);
-
-    document.querySelector('.subtasks-container').appendChild(subtaskElement);
-
     subtasks.push(subtaskText);
     subtaskCount++; // Erhöhe den Subtask-Zähler
     clearInput();
-    removeInput();
+    renderSubtasks();
+}
+
+function renderSubtasks() {
+    let container = document.querySelector('.subtasks-container');
+    container.innerHTML = ''; // Leere den Container
+
+    for (let subtaskText of subtasks) {
+        let subtaskElement = document.createElement('div');
+        subtaskElement.className = 'subtask';
+
+        let subtaskTextElement = document.createElement('span');
+        subtaskTextElement.className = 'subtask-text';
+        subtaskTextElement.textContent = subtaskText;
+
+        let editButton = document.createElement('button');
+        editButton.className = 'edit-button';
+        editButton.textContent = 'Edit';
+        editButton.onclick = () => editSubtask(subtaskElement, subtaskTextElement);
+
+        let deleteButton = document.createElement('button');
+        deleteButton.className = 'delete-button';
+        deleteButton.textContent = 'Delete';
+        deleteButton.onclick = () => deleteSubtask(subtaskElement, subtaskText);
+
+        subtaskElement.appendChild(subtaskTextElement);
+        subtaskElement.appendChild(editButton);
+        subtaskElement.appendChild(deleteButton);
+
+        container.appendChild(subtaskElement);
+    }
 }
 
 function editSubtask(subtaskElement, subtaskTextElement) {
@@ -248,18 +255,23 @@ function editSubtask(subtaskElement, subtaskTextElement) {
         if (index !== -1) {
             subtasks[index] = newText;
         }
+        renderSubtasks(); // Aktualisiere die Anzeige
     }
 }
 
 function deleteSubtask(subtaskElement, subtaskText) {
-    subtaskElement.remove();
     let index = subtasks.indexOf(subtaskText);
     if (index !== -1) {
         subtasks.splice(index, 1);
         subtaskCount--; // Verringere den Subtask-Zähler
+        renderSubtasks(); // Aktualisiere die Anzeige
     }
-    subtaskElement.remove();
 }
+
+function clearInput() {
+    document.getElementById('task-subtasks').value = '';
+}
+
 
 function showInput() {
     document.getElementById('task-subtasks').style.display = 'block';
