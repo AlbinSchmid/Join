@@ -71,3 +71,8 @@ function changeCheckImg(element) {
 function resetCheckImg(element) {
     document.getElementById('check-img').setAttribute('src', './assets/img/icons/summary/check-darkblue.png');
 }
+
+
+function loadBoardPage() {
+    window.location.href = "http://127.0.0.1:5500/board.html";
+}

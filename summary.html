@@ -35,7 +35,7 @@
 
                     <div class="card-overlying-div">
                         <div class="card hover-right" onmouseover="changePencilImg(this)"
-                            onmouseout="resetPencilImg(this)">
+                            onmouseout="resetPencilImg(this)" onclick="loadBoardPage()">
                             <img id="pencil-img" src="./assets/img/icons/summary/pencil-darkblue.png" alt="Pencil logo">
                             <div class="info-cardpart">
                                 <h2 id="to-do"></h2>
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div class="card hover-left" onmouseover="changeCheckImg(this)"
-                            onmouseout="resetCheckImg(this)">
+                            onmouseout="resetCheckImg(this)" onclick="loadBoardPage()">
                             <img id="check-img" src="./assets/img/icons/summary/check-darkblue.png" alt="Check logo">
                             <div class="info-cardpart">
                                 <h2 id="done"></h2>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div class="card-big hover-bottom">
+                    <div class="card-big hover-bottom" onclick="loadBoardPage()">
                         <div class="left-card-part-big">
                             <img src="./assets/img/icons/summary/up.png" alt="Arrows up">
                             <div class="info-cardpart">
@@ -70,17 +70,17 @@
                     </div>
 
                     <div class="card-overlying-div">
-                        <div class="card-bottom">
+                        <div class="card-bottom" onclick="loadBoardPage()">
                             <h2 id="tasks"></h2>
                             <h4>Task in Board</h4>
                         </div>
 
-                        <div class="card-bottom">
+                        <div class="card-bottom" onclick="loadBoardPage()">
                             <h2 id="task-in-progress"></h2>
                             <h4>Task in Progress</h4>
                         </div>
 
-                        <div class="card-bottom">
+                        <div class="card-bottom" onclick="loadBoardPage()">
                             <h2 id="awaiting-feedback"></h2>
                             <h4>Awaiting Feedback</h4>
                         </div>

@@ -31,11 +31,6 @@ async function loadTasks() {
     console.log(tasks); // Zeigt die geladenen Tasks an
 }
 
-function saveTasks() {
-    let tasksAsString = JSON.stringify(tasks);
-    localStorage.setItem('tasks' , tasksAsString);
-}
-
 function updateHTML() {
     let todo = tasks.filter(t => t['category'] == 'to-do');
 
@@ -51,7 +46,7 @@ function updateHTML() {
         let assignedTo = todo[index].assignment;
         let priority = todo[index].priority;
 
-        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, element);
+        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, todo);
     }
 
     let inprogress = tasks.filter(t => t['category'] == 'in-progress');
@@ -68,7 +63,7 @@ function updateHTML() {
         let assignedTo = inprogress[index].assignment;
         let priority = inprogress[index].priority;
 
-        document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+        document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, inprogress);
     }
 
     let awaitFeedback = tasks.filter(t => t['category'] == 'await-feedback');
@@ -85,7 +80,7 @@ function updateHTML() {
         let assignedTo = awaitFeedback[index].assignment;
         let priority = awaitFeedback[index].priority;
 
-        document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+        document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, awaitFeedback);
     }
 
     let done = tasks.filter(t => t['category'] == 'done');
@@ -102,14 +97,14 @@ function updateHTML() {
         let assignedTo = done[index].assignment;
         let priority = done[index].priority;
 
-        document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, currentIndex, element);
+        document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, done);
     }
 }
 
 
-function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, element) {
+function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, category) {
     return /*html*/`
-        <div draggable="true" ondragstart="startDragging(${element['id']})" class="task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
+        <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
             <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task">${title}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task-description">${description}</p></div>
@@ -180,17 +175,21 @@ function addTask() {
 }
 
 function startDragging(index) {
-    currentDraggedElement = index;
+    currentDraggedElement = index - 1;
 }
 
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function moveTo(category) {
-    tasks[currentDraggedElement]['category'] = category;
-    saveTasks();
-    updateHTML();
+async function moveTo(category) {
+    tasks = [];
+    let taskFireBase = await getData('tasks');
+    let ids = Object.keys(taskFireBase || []);
+        let id = ids[currentDraggedElement];
+    await putData(`tasks/${id}/category`, category);
+    await getData('tasks');
+    init();
 }
 
 function updateProgressBar() {
