@@ -153,7 +153,7 @@ h1 {
 
 .dragarea {
     width: 244px;
-    background-color: #2A3647;
+    padding-right: 24px;
 }
 
 .no-task-container {

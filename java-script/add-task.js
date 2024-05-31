@@ -50,16 +50,17 @@ function getAddTaskHTMLLeftSide() {
                         <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
                     </form>
             <h2>Assigned to</h2>
-                <div>
-                    <form><input id="dropdownInput" class="selectfield-task-assignment" placeholder="Select contacts to assign"></form>
-                    <div id="task-assignment" class="dropdown-content"></div>
-                    <div id="selected-contacts"></div>
-                </div>
+            <div>
+                <form>
+                    <div class="custom-select-container">
+                        <input id="dropdownInput" class="selectfield-task-assignment" placeholder="Select contacts to assign">
+                        <div id="task-assignment" class="dropdown-content"></div>
+                        <div id="selected-contacts"></div>
+                    </div>
+                </form>
+            </div>
         </div>                
-                
-            
       <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">`;
-
 }
 
 function renderContactOptions() {
@@ -136,46 +137,49 @@ function getAddTaskHTMLRightSide() {
                   <input id="task-date" type="date" name="task-date" class="date-selector" required>
               </form>
               <h2>Prio</h2>
-<div class="dp-flex-jc-sb">
-    <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)">
-    <label for="task-high-priority" class="checkbox-container">
-        <div class="checkbox-label-high">
-            Urgent
-            <img class="checkbox-image-high" src="assets/img/icons/prio_high.png" alt="priority high">
-        </div>
-    </label>
-    <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium" onclick="handleCheckboxClick(this)">
-    <label for="task-medium-priority" class="checkbox-container">
-        <div class="checkbox-label-medium">
-            Medium
-            <img class="checkbox-image-medium" src="assets/img/icons/prio_medium.png" alt="priority medium">
-        </div>
-    </label>
-    <input type="checkbox" id="task-low-priority" class="custom-checkbox-low" onclick="handleCheckboxClick(this)">
-    <label for="task-low-priority" class="checkbox-container">
-        <div class="checkbox-label-low">
-            Low
-            <img class="checkbox-image-low" src="assets/img/icons/prio_low.png" alt="priority low">
-        </div>
-    </label>
-</div>
+                <div class="dp-flex-jc-sb">
+                    <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)">
+                    <label for="task-high-priority" class="checkbox-container">
+                        <div class="checkbox-label-high">
+                            Urgent
+                            <img class="checkbox-image-high" src="assets/img/icons/prio_high.png" alt="priority high">
+                        </div>
+                    </label>
+                    <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium" onclick="handleCheckboxClick(this)">
+                    <label for="task-medium-priority" class="checkbox-container">
+                        <div class="checkbox-label-medium">
+                            Medium
+                            <img class="checkbox-image-medium" src="assets/img/icons/prio_medium.png" alt="priority medium">
+                        </div>
+                    </label>
+                    <input type="checkbox" id="task-low-priority" class="custom-checkbox-low" onclick="handleCheckboxClick(this)">
+                    <label for="task-low-priority" class="checkbox-container">
+                        <div class="checkbox-label-low">
+                            Low
+                            <img class="checkbox-image-low" src="assets/img/icons/prio_low.png" alt="priority low">
+                        </div>
+                    </label>
+                </div>
                 <!-- options müssen ausgelesen werden -->  
           <h2>Category<p class="required-color">*</p></h2>
-              <form>
-                  <select class="selectfield-task-category" name="task category" id="task-category" required>
-                      <option value="" >Select task category</option>
-                      <option value="Technical Task">Technical Task</option>
-                      <option value="User Story">User Story</option>
-                  </select>
-              </form>
+            <form>
+                <div class="custom-select-container">
+                    <select class="selectfield-task-category" name="task category" id="task-category" required>
+                        <option value="" disabled selected hidden>Select a category</option>
+                        <option value="Technial Task">Technial Task</option>
+                        <option value="User Story">User Story</option>
+                    </select>
+                </div>
+            </form>
                 <!-- value muss ausgelesen werden für das Array, nachdem select, soll wieder die ersten Option angzeigt werden -->
-                <h2>Subtasks</h2>
+            <h2>Subtasks</h2>
                     <form>
                         <div class="input-container">
                             <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50" placeholder="Add new subtask" onfocus="showInput()">
                             <button type="button" class="add-plus-button" id="add-plus-button" onclick="showInput()"><img src="assets/img/icons/add_subtask_icon.svg" alt=""></button>
                             <div class="subtask-btn-container" id="subtask-btn-container">
                                 <button type="button" class="clear-button" onclick="clearInput()"><img src="assets/img/icons/delete_icon.svg" alt=""></button>
+                                <img src="assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
                                 <button type="button" class="add-button" onclick="createSubtask()"><img src="assets/img/icons/check_edit_icon.svg" alt=""></button>
                             </div>
                         </div>
@@ -192,11 +196,6 @@ function handleCheckboxClick(clickedCheckbox) {
             checkbox.checked = false;
         }
     });
-}
-
-function clearInput() {
-    document.getElementById('task-subtasks').value = '';
-    removeInput();
 }
 
 function createSubtask() {
@@ -218,40 +217,35 @@ function renderSubtasks() {
     let container = document.querySelector('.subtasks-container');
     container.innerHTML = ''; // Leere den Container
 
-    for (let subtaskText of subtasks) {
-        let subtaskElement = document.createElement('div');
-        subtaskElement.className = 'subtask';
-
-        let subtaskTextElement = document.createElement('span');
-        subtaskTextElement.className = 'subtask-text';
-        subtaskTextElement.textContent = subtaskText;
-
-        let editButton = document.createElement('button');
-        editButton.className = 'edit-button';
-        editButton.textContent = 'Edit';
-        editButton.onclick = () => editSubtask(subtaskElement, subtaskTextElement);
-
-        let deleteButton = document.createElement('button');
-        deleteButton.className = 'delete-button';
-        deleteButton.textContent = 'Delete';
-        deleteButton.onclick = () => deleteSubtask(subtaskElement, subtaskText);
-
-        subtaskElement.appendChild(subtaskTextElement);
-        subtaskElement.appendChild(editButton);
-        subtaskElement.appendChild(deleteButton);
-
-        container.appendChild(subtaskElement);
+    for (let i = 0; i < subtasks.length; i++) {
+        const subtask = subtasks[i];
+        container.innerHTML += getSubtasksHTML(subtask);
     }
 }
 
-function editSubtask(subtaskElement, subtaskTextElement) {
-    let oldText = subtaskTextElement.textContent;
-    let newText = prompt('Edit your subtask:', oldText);
+function getSubtasksHTML(subtaskText) {
+    return /*html*/`
+        <div class="subtask">
+            <div class="subtask-text-container">
+                <img src="assets/img/icons/punkt.png" alt="">
+                <span>${subtaskText}</span>
+            </div>
+            <div class="subtask-button">
+                <img src="assets/img/icons/Subtasks_edit_icon.svg" alt="" class="edit-icon" onclick="editSubtask('${subtaskText}')">
+                <img src="assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
+                <img src="assets/img/icons/Subtasks_delete_icon.svg" alt="" class="delete-icon" onclick="deleteSubtask('${subtaskText}')"> 
+            </div>
+        </div>
+    `;
+}
+
+
+function editSubtask(subtaskText) {
+    let newText = prompt('Edit your subtask:', subtaskText);
 
     if (newText !== null && newText.trim() !== '') {
         newText = newText.trim();
-        subtaskTextElement.textContent = newText;
-        let index = subtasks.indexOf(oldText);
+        let index = subtasks.indexOf(subtaskText);
         if (index !== -1) {
             subtasks[index] = newText;
         }
@@ -259,7 +253,7 @@ function editSubtask(subtaskElement, subtaskTextElement) {
     }
 }
 
-function deleteSubtask(subtaskElement, subtaskText) {
+function deleteSubtask(subtaskText) {
     let index = subtasks.indexOf(subtaskText);
     if (index !== -1) {
         subtasks.splice(index, 1);
@@ -271,7 +265,6 @@ function deleteSubtask(subtaskElement, subtaskText) {
 function clearInput() {
     document.getElementById('task-subtasks').value = '';
 }
-
 
 function showInput() {
     document.getElementById('task-subtasks').style.display = 'block';

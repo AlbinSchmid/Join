@@ -128,20 +128,40 @@ h2 {
 }
 
 
+.custom-select-container {
+    position: relative;
+    display: inline-block;
+    width: 440px; /* Gleiche Breite wie die .selectfield-task-assignment Klasse */
+}
+
 .selectfield-task-assignment {
     margin-top: 8px;
-    width: 406px;
+    width: 382px;
     height: 30px;
     padding-left: 16px;
     padding-top: 8px;
     padding-bottom: 8px;
-    padding-right: 16px;
+    padding-right: 40px;
     font-family: inter;
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     background-color: #FFFFFF;
 }
+
+.selectfield-task-assignment::after {
+    content: '';
+    position: absolute;
+    right: 16px; /* Abstand vom rechten Rand */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px; /* Breite des Pfeilsymbols */
+    height: 24px; /* Höhe des Pfeilsymbols */
+    background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
+    background-size: 24px 24px; /* Größe des Pfeilsymbols */
+    pointer-events: none; /* Macht den Pfeil nicht anklickbar */
+}
+
 
 .contact-container {
     display: flex;
@@ -363,19 +383,38 @@ h2 {
     content: url('/assets/img/icons/white_prio_low.png'); 
 }
 
+
+
 .selectfield-task-category {
+    -webkit-appearance: none; /* Entfernt den Standard-Pfeil in Webkit-Browsern */
+    -moz-appearance: none; /* Entfernt den Standard-Pfeil in Firefox */
+    appearance: none; /* Entfernt den Standard-Pfeil in anderen Browsern */
     margin-top: 8px;
-    width: 440px;
+    width: 100%;
     height: 48px;
     padding-left: 16px;
     padding-top: 8px;
     padding-bottom: 8px;
-    padding-right: 16px;
+    padding-right: 40px; /* Platz für das Pfeilsymbol */
     font-family: inter;
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
 }
+
+.custom-select-container::after {
+    content: '';
+    position: absolute;
+    right: 16px; /* Abstand vom rechten Rand */
+    top: 55%;
+    transform: translateY(-50%);
+    width: 24px; /* Breite des Pfeilsymbols */
+    height: 24px; /* Höhe des Pfeilsymbols */
+    background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
+    background-size: 24px 24px; /* Größe des Pfeilsymbols */
+    pointer-events: none; /* Macht den Pfeil nicht anklickbar */
+}
+
 
 .selectfield-task-category:hover {
     cursor: pointer;
@@ -443,6 +482,11 @@ h2 {
     align-items: center;
 }
 
+.subtask-text-container {
+    display: flex;
+    align-items: center;
+}
+
 .add-plus-button {
     height: 24px;
     width: 24px;
@@ -459,11 +503,35 @@ h2 {
     border-radius: 50px;
 }
 
-
 .subtask {
     margin-top: 8px;
     margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.subtask-button {
+    display: flex;
+    gap: 8px;
+    margin-right: 16px;
+    align-items: center;
+}
+
+.subtask .subtask-button img {
+    display: none;
+}
+
+.subtask:hover .subtask-button img {
+    display: inline-block;
+}
+
+.subtask:hover {
+    cursor: pointer;
+    background-color: #D1D1D1;
+    border-radius: 10px;
+}
+
 
 .add-task-footer {
     display: flex;
