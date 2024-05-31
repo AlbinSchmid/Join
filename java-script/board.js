@@ -1,4 +1,5 @@
 let tasks = [];
+let allContacts = [];
 let currentTask = 0;
 let currentIndex = 0;
 let subtasks = [];
@@ -18,6 +19,7 @@ console.log(tasks); // Zeigt die geladenen Tasks an
  */
 async function init() {
     await loadTasks();
+    await loadAllContacts();
     includeHTML();
     updateHTML();
 }
@@ -537,6 +539,8 @@ async function createTask() {
     };
     tasks.push(task);
     await postData('tasks', task);
+
+
     subtaskCount = 0;
     subtasks = [];
     document.getElementById('addTask-board').classList.add('d-none');
@@ -559,6 +563,19 @@ async function moveTo(category) {
     await putData(`tasks/${id}/category`, category);
     await getData('tasks');
     init();
+}
+
+async function loadAllContacts() {
+    allContacts = [];
+    let contacts = await getData('contacts');
+    let ids = Object.keys(contacts || []);
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];
+        let contact = contacts[id];
+        contact.id = id;
+        allContacts.push(contact);
+    }
+    console.log(allContacts);
 }
 
 // Funktion zur Aktualisierung der Fortschrittsanzeige
