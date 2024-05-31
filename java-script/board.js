@@ -179,18 +179,25 @@ function addTask() {
     container.classList.remove('d-none');
     container.innerHTML = '';  // Clear the container
 
+    let headerContainer = document.createElement('div');
+    headerContainer.id = 'addTask-board-header';
+    headerContainer.className = 'addTask-board-header';
+
     // Create the new div with id="addTask-board-render-container" and class="addTask-board-render-container"
     let renderContainer = document.createElement('div');
     renderContainer.id = 'addTask-board-render-container';
     renderContainer.className = 'addTask-board-render-container';
-    
+
     // Create the new div with id="addTask-board-footer" and class="addTask-board-footer"
     let footerContainer = document.createElement('div');
     footerContainer.id = 'addTask-board-footer';
     footerContainer.className = 'addTask-board-footer';
+
     
     // Append the new divs to the main container
+    container.appendChild(headerContainer);
     container.appendChild(renderContainer);
+   
     container.appendChild(footerContainer);
 
     // Render the task HTML inside the new divs
@@ -198,10 +205,13 @@ function addTask() {
 }
 
 function getAddTaskHTML() {
+    let containerHeader = document.getElementById('addTask-board-header');
     let container = document.getElementById('addTask-board-render-container');
     let containerFooter = document.getElementById('addTask-board-footer')
+    containerHeader.innerHTML += getAddTaskHTMLHeader();
     container.innerHTML +=  getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
     containerFooter.innerHTML += getAddTaskHTMLFooter();
+   
 }
 
 /**
@@ -360,6 +370,19 @@ function getAddTaskHTMLRightSide() {
           </div>`;
 }
 
+function getAddTaskHTMLHeader() {
+    return /*html*/`
+        <div class="addTask-board-header-content">
+            <span>Add Task</span>
+            <img class="close-detail-button" src="assets/img/icons/close__detailview_icon.svg" alt="close" onclick="closeAddTask()">
+        </div>
+    `
+}
+
+function closeAddTask() {
+    document.getElementById('addTask-board').classList.add('d-none');
+}
+
 function getAddTaskHTMLFooter() {
     return /*html*/`
         <div class="add-task-footer-board">
@@ -514,13 +537,10 @@ async function createTask() {
     };
     tasks.push(task);
     await postData('tasks', task);
-
-
     subtaskCount = 0;
     subtasks = [];
     document.getElementById('addTask-board').classList.add('d-none');
     init();
-
 }
 
 function startDragging(index) {
