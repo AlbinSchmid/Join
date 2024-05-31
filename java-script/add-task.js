@@ -204,6 +204,7 @@ function createSubtask() {
 
     if (subtaskText === '') {
         alert('Please enter a subtask.');
+        clearInput();
         return;
     }
 
@@ -253,18 +254,33 @@ function editSubtask(subtaskText) {
     }
 }
 
+/**
+ * deletes created Subtask inside subtask-container
+ * @param {*} subtaskText 
+ */
+
 function deleteSubtask(subtaskText) {
     let index = subtasks.indexOf(subtaskText);
     if (index !== -1) {
         subtasks.splice(index, 1);
-        subtaskCount--; // Verringere den Subtask-Zähler
-        renderSubtasks(); // Aktualisiere die Anzeige
+        subtaskCount--; 
+        renderSubtasks();
     }
 }
 
+/**
+ * clears the inputfield for adding a subtask
+ */
+
 function clearInput() {
     document.getElementById('task-subtasks').value = '';
+    document.getElementById('subtask-btn-container').style.display = 'none'
+    document.getElementById('add-plus-button').style.display = 'flex';
 }
+
+/**
+ * shows the create subtask function icon and den clear input function icon
+ */
 
 function showInput() {
     document.getElementById('task-subtasks').style.display = 'block';
@@ -272,15 +288,6 @@ function showInput() {
     document.getElementById('subtask-btn-container').style.display = 'flex';
 }
 
-function removeInput() {
-    document.getElementById('add-plus-button').style.display = 'flex';
-    document.getElementById('subtask-btn-container').style.display = 'none';
-}
-
-
-function showButtons() {
-    document.getElementById('subtask-btn-container').style.display = 'flex';
-}
 
 function clearTask() {
     init();
