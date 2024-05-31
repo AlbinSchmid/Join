@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="/css/login-signup.css">
     <link rel="shortcut icon" href="../img/join-logo.png" type="image/x-icon">
     <title>JOIN</title>
+    <script src="/java-script/login-signup.js"></script>
     <script src="/java-script/header.js"></script> 
     <script src="/java-script/remoteStorage.js"></script>
 </head>
 
-<body>
+<body onload="loadUser()">
     <img class="logo-start" src="./assets/img/join_logo_blue_big.png" alt="join-logo">
     <section class="login-head screen-animation">
         <div class="login-head-top-right dflex-c-c">
@@ -31,16 +32,15 @@
                 <h1>Log in</h1>
                 <div class="text-line"></div>
             </div>
-
-            <form class="input-container dflex-c-c column" action="./summary.html" method="GET">
-                <input class="inputfield" type="email" placeholder="Email" required>
-                <input class="inputfield" type="password" placeholder="Password" required>
+            <form class="input-container dflex-c-c column" action="./summary.html" method="GET"></form>
+                <input id="inputLoginMail" class="inputfield" type="email" placeholder="Email" required>
+                <input id="inputLoginPassword" class="inputfield" type="password" placeholder="Password" required>
                 <div class="checkbox-login">
                     <input type="checkbox" name="remember-me" class="cp">
                     <span>Remember me</span>
                 </div>
                 <div class="footer-link dflex-c-c">
-                    <button type="submit" class="btn-small cp">Log in</button>
+                    <button onclick="login(); return false" type="submit" class="btn-small cp">Log in</button>
                     <a href="./summary.html">
                         <button type="button" class="btn-outline cp">Guest Log in</button>
                     </a>
