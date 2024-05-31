@@ -6,6 +6,7 @@
     <title>Board</title>
 
     <link rel="stylesheet" href="/css/board.css">
+    <link rel="stylesheet" href="css/add-task.css">
     <script src="/java-script/board.js"></script>
     <script src="/java-script/remoteStorage.js"></script>
     <script src="/java-script/header.js"></script> 
@@ -19,7 +20,7 @@
         <div w3-include-html="/assets/templates/header-template.html"></div>
         <div>
         <section class="board-header">
-            <div><h1>Board</h1></div>
+            <div><span class="board-h1">Board</span></div>
             <div class="operations-container">
                 <form class="search-area">
                     <input class="search-field" placeholder="Find Task" type="text"> <!-- vertical line und hover/eingabe desgin fehlt noch -->
@@ -36,12 +37,11 @@
             </div>
         </section>
 
-        <!-- 1.HTML return Funktion -->
         <section class="board-status-container">
             
             <div class="status-overiew-container">
                 <div>To do</div>
-                <p onclick="addTask()" class="status-bar-img">+</p> <!-- add Symbole überarbeiten -->
+                <p onclick="addTask()" class="status-bar-img">+</p>
             </div>
             <div class="status-overiew-container">
                 <div>In progress</div>
@@ -55,7 +55,9 @@
                 <div>done</div>
             </div>
                             
-        <!-- 2.HTML return Funktion -->
+        <div id="addTask-board" class="addTask-board-container d-none">
+            
+        </div>
         </section>
         <section class="board-task-container">
             <!-- <div class="no-task-container"><p>No tasks To do</p></div> --> <!-- if abfrage in der Renderfunktion, wird nur angezeigt wenn let toDo = [] leer ist bzw. nichts im local storage gespeichert ist-->

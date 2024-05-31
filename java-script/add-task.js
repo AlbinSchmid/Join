@@ -350,23 +350,6 @@ function directToBoard() {
     }, 2000);
 }
 
-
-async function initializeTasks() {
-    try {
-        let response = await fetch('https://your-firebase-url.firebaseio.com/tasks.json');
-        let data = await response.json();
-
-        if (data) {
-            tasks = Object.values(data);
-            taskIdCounter = tasks.reduce((maxId, task) => Math.max(maxId, task.id), 0) + 1;
-        } else {
-            taskIdCounter = 1;
-        }
-    } catch (error) {
-        console.error('Error fetching tasks from Firebase:', error);
-    }
-}
-
 async function loadAllContacts() {
     allContacts = [];
     let contacts = await getData('contacts');
