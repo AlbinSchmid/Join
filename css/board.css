@@ -122,6 +122,54 @@ h1 {
     text-wrap: nowrap;
 }
 
+.addTask-board-container {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.70);
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.add-task-footer-board {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    width: 930px;
+}
+
+.addTask-board-footer {
+    background-color: #FFFFFF;
+    display: flex;
+}
+.task-detail-view-container {
+    background-color: rgba(0, 0, 0, 0.70);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    overflow-y: hidden;
+    align-content: center;
+}
+
+.addTask-board-render-container{
+    display: flex;
+    background-color: #FFFFFF;
+}
+
+.d-none {
+    display: none;
+}
+
 .status-bar-img {
     display: flex;
     align-items: center;
@@ -342,3 +390,4 @@ h1 {
     width: 525px;
     padding: 48px 40px 48px 40px;
 }
+
