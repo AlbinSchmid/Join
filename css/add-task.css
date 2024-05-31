@@ -152,16 +152,15 @@ h2 {
 .selectfield-task-assignment::after {
     content: '';
     position: absolute;
-    right: 16px; /* Abstand vom rechten Rand */
+    right: 16px; 
     top: 50%;
     transform: translateY(-50%);
-    width: 24px; /* Breite des Pfeilsymbols */
-    height: 24px; /* Höhe des Pfeilsymbols */
+    width: 24px; 
+    height: 24px; 
     background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
-    background-size: 24px 24px; /* Größe des Pfeilsymbols */
-    pointer-events: none; /* Macht den Pfeil nicht anklickbar */
+    background-size: 24px 24px; 
+    pointer-events: none; 
 }
-
 
 .contact-container {
     display: flex;
@@ -383,8 +382,6 @@ h2 {
     content: url('/assets/img/icons/white_prio_low.png'); 
 }
 
-
-
 .selectfield-task-category {
     -webkit-appearance: none; /* Entfernt den Standard-Pfeil in Webkit-Browsern */
     -moz-appearance: none; /* Entfernt den Standard-Pfeil in Firefox */
@@ -415,13 +412,14 @@ h2 {
     pointer-events: none; /* Macht den Pfeil nicht anklickbar */
 }
 
-
 .selectfield-task-category:hover {
     cursor: pointer;
+    border: 1px solid #A8A8A8;
 }
 
 .selectfield-task-category:focus {
     outline: none;
+    border: 1px solid #29ABE2;
 }
 
 .input-container {
@@ -441,9 +439,13 @@ h2 {
 }
 
 .input-container:hover {
-    border: 1px solid #29ABE2;
-    outline: none;
+    border: 1px solid #A8A8A8;
     cursor: pointer;
+}
+
+.input-container:focus {
+    outline: none;
+    border: 1px solid #29ABE2;
 }
 
 .inputfield-task-subtasks {
@@ -458,7 +460,6 @@ h2 {
 .inputfield-task-subtasks:hover {
     cursor: pointer;
 }
-
 
 .clear-button, .add-button {
     height: 24px;
