@@ -302,6 +302,7 @@ async function createTask() {
     let taskPriorityMedium = document.getElementById('task-medium-priority').checked;
     let taskPriorityLow = document.getElementById('task-low-priority').checked;
     let taskCategory = document.getElementById('task-category').value;
+    console.log(taskDate);
 
     tasks = [];
     let taskFireBase = await getData('tasks');
@@ -320,7 +321,7 @@ async function createTask() {
         'title': taskTitle,
         'description': taskDescription,
         'assignment': taskAssignment,
-        'date': taskDate,
+        'date': new Date(taskDate),
         'priorityHigh': taskPriorityHigh,
         'priorityMedium': taskPriorityMedium,
         'priorityLow': taskPriorityLow,
