@@ -12,6 +12,7 @@ main {
 
 header {
     height: 96px;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,7 +29,8 @@ header p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;    
+    gap: 16px;  
+     
 }
 
 .header-right img {
@@ -79,4 +81,8 @@ header p {
 
 .header-dropdown-menu a:hover {
 background-color: #2b3b59;
+}
+
+.header-text {
+    margin: 0 !important;
 }

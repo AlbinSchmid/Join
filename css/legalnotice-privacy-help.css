@@ -8,6 +8,12 @@ body {
     max-width: 1920px;
 }
 
+.header-sticky {
+    display: flex;
+    position: sticky;
+    top: 0;
+}
+
 .content-section {
     padding: 60px 106px 0 106px;
 }
