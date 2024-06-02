@@ -15,7 +15,7 @@ function closeBtnSignUpSuccesfully(event) {
 
 function goToSummary() {
     setTimeout(function () {
-        window.location.href = "./log-in.html";
+        window.location.href = "./summary.html";
     }, 1500);
 }
 
@@ -60,10 +60,10 @@ function login() {
     let user = userList.find( u => u.mail == mail.value && u.password == password.value);
     console.log(user);
     if (user) {
-        console.log('Nutzer gefunden :)');
-        // goToSummary(); // WEITERLEITUNG ZU SUMMARY MACHEN
+        goToSummary();
     } else {
-        console.log('Nutzer nicht gefunden :(');
+        let failedLogin = document.getElementById('failedLogin');
+        failedLogin.innerHTML = "E-Mail or password are incorrect";;
     }
 }
 
