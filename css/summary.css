@@ -230,7 +230,9 @@ body {
     transform: scale(1.1);
 }
 
-
+.choosed-webside {
+    background-color: var(--white);
+}
 
 @media(max-width: 1024px) {
     .headline-section h1 {

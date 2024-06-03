@@ -94,6 +94,10 @@ background-color: #2b3b59;
     display: none;
 }
 
+.help-img-link {
+    background-color: transparent !important;
+}
+
 @media(max-width: 1024px) {
     main {
         width: 100vw;

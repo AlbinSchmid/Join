@@ -71,6 +71,10 @@ nav {
     background-color: transparent;
 }
 
+.choosed-webside {
+    background-color: var(--white);
+}
+
 @media(max-width: 1024px) {
     .d-none-mobile {
         display: none;
@@ -111,7 +115,7 @@ nav {
         padding: 0 12px;
         border-radius: 8px;
         font-size: 14px;
-        width: 70px;
+        width: 90px;
     }
 
     nav a img {

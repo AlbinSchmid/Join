@@ -11,3 +11,7 @@ async function includeHTML() {
         }
     }
 }
+
+function goToLastPage() {
+    history.back();
+}
