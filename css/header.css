@@ -50,6 +50,9 @@ header p {
     color: var(--highlight-color);
     font-size: 20px;
     font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-right-user:hover {
@@ -85,4 +88,29 @@ background-color: #2b3b59;
 
 .header-text {
     margin: 0 !important;
+}
+
+.logo-mobile {
+    display: none;
+}
+
+@media(max-width: 1024px) {
+    main {
+        width: 100vw;
+    }
+
+    .d-none-mobile {
+        display: none;
+    }
+
+    .logo-mobile {
+        display: flex;
+        width: 32px;
+        height: 39px;
+    }
+
+    header {
+        height: 80px;
+        padding: 0 clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) 0 clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem);
+    }
 }

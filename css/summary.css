@@ -9,6 +9,14 @@ body {
     max-width: 1920px;
 }
 
+.content {
+    padding: 110px clamp(2.875rem, -1.4287rem + 6.7114vw, 6.625rem) 0 clamp(2.875rem, -1.4287rem + 6.7114vw, 6.625rem);
+}
+
+.side-padding {
+    padding: 0 106px;
+}
+
 .header-sticky {
     display: flex;
     position: sticky;
@@ -18,11 +26,9 @@ body {
 .headline-section {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 630px;
     height: 73px;
     gap: 30px;
-    margin: 60px 0 0 106px;
+    margin-bottom: 60px;
 }
 
 .headline-section h1 {
@@ -42,13 +48,21 @@ body {
     border-radius: 3px;
 }
 
+.placeholder-mobile {
+    background-color: #29ABE2;
+    height: 3px;
+    width: 150px;
+    border-radius: 3px;
+    margin-top: 8px;
+    display: none;
+}
+
 .summary-section {
     display: flex;
-    gap: 90px;
+    gap: clamp(2.125rem, -1.8918rem + 6.264vw, 5.625rem);
 }
 
 .summary-left-section {
-    margin: 65px 0 0 106px;
     width: 560px;
     display: flex;
     flex-direction: column;
@@ -56,12 +70,12 @@ body {
 }
 
 .summary-left-section h2 {
-    font-size: 64px;
+    font-size: clamp(2.25rem, 2.025rem + 1.125vw, 3.375rem);
     font-weight: 600;
 }
 
 .summary-left-section p {
-    font-size: 20px;
+    font-size: clamp(0.875rem, 0.8rem + 0.375vw, 1.25rem);
     font-weight: 400;
 }
 
@@ -69,17 +83,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 18px;
+    gap: clamp(0.625rem, 0.525rem + 0.5vw, 1.125rem);
     background-color: white;
     border-radius: 30px;
     padding: 25px 62px;
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
     transition: 70ms all;
+    width: 50%;
 }
 
 .card img {
-    width: 69px;
-    height: 69px;
+    width: clamp(2.5rem, 2.1375rem + 1.8125vw, 4.3125rem);
+    height: clamp(2.5rem, 2.1375rem + 1.8125vw, 4.3125rem);
 }
 
 .info-cardpart {
@@ -99,10 +114,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 61px;
+    gap: clamp(0.5rem, -0.1625rem + 3.3125vw, 3.8125rem);
     background-color: white;
     border-radius: 30px;
-    padding: 38px 60px;
+    padding: clamp(1.25rem, 1.025rem + 1.125vw, 2.375rem) clamp(1.5rem, 1.05rem + 2.25vw, 3.75rem);
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.10);
     transition: 70ms all;
 }
@@ -111,12 +126,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 18px;
+    gap: clamp(0.625rem, 0.525rem + 0.5vw, 1.125rem);
 }
 
 .left-card-part-big img {
-    width: 60px;
-    height: 60px;
+    width: clamp(2.5rem, 2.25rem + 1.25vw, 3.75rem);
+    height: clamp(2.5rem, 2.25rem + 1.25vw, 3.75rem);
 }
 
 .paceholder-card-big {
@@ -128,7 +143,7 @@ body {
 .right-card-part-big {
     display: flex;
     flex-direction: column;
-    gap: 13px;
+    gap:clamp(0rem, -0.1625rem + 0.8125vw, 0.8125rem);
 }
 
 .right-card-part-big h3 {
@@ -137,7 +152,7 @@ body {
 }
 
 .right-card-part-big h4 {
-    font-size: 16px;
+    font-size: clamp(0.875rem, 0.8rem + 0.375vw, 1.25rem);
     font-weight: 400;
 }
 
@@ -146,7 +161,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 18px;
+    gap: clamp(0.625rem, 0.525rem + 0.5vw, 1.125rem);
     background-color: white;
     border-radius: 30px;
     padding: 20px 15px;
@@ -155,7 +170,7 @@ body {
 }
 
 .card-bottom h4 {
-    font-size: 20px;
+    font-size: clamp(0.875rem, 0.8rem + 0.375vw, 1.25rem);
     font-weight: 400;
     text-align: center;
 }
@@ -213,4 +228,55 @@ body {
     cursor: pointer;
     color: white;
     transform: scale(1.1);
+}
+
+
+
+@media(max-width: 1024px) {
+    .headline-section h1 {
+        font-size: 47px;
+    }
+
+    .d-none-mobile {
+        display: none;
+    }
+
+    .content {
+        padding: 48px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) 128px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem);
+    }
+
+    .placeholder {
+        display: none;
+    }
+
+    .headline-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        height: auto;
+    }
+
+    .placeholder-mobile {
+        display: block;
+    }
+
+    .summary-left-section {
+        width: 100%;
+        gap: clamp(0.9375rem, 0.75rem + 0.9375vw, 1.875rem);;
+    }
+
+    .card-overlying-div {
+        gap: 30px;
+        justify-content: space-between;
+        gap: clamp(0.9375rem, 0.75rem + 0.9375vw, 1.875rem);;
+    }
+
+    .card {
+        padding: clamp(0rem, -0.3125rem + 1.5625vw, 1.5625rem) clamp(0.875rem, 0.275rem + 3vw, 3.875rem);
+    }
+
+    .card-bottom {
+        width: 50%;
+        padding: clamp(0.625rem, 0.5rem + 0.625vw, 1.25rem) clamp(0.625rem, 0.5625rem + 0.3125vw, 0.9375rem);
+    }
 }

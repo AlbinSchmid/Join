@@ -93,7 +93,7 @@ nav {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        width: clamp(min(98vw, 20rem), 90vw, max(90vw, 55rem));
+        width: clamp(min(98vw, 20rem), 95vw, max(90vw, 55rem));
         margin: 0;
         gap: clamp(0rem, 0rem + 0.8889vw, 0.5rem);
         height: 100%;

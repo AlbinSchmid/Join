@@ -48,7 +48,7 @@ function showHTML() {
     document.getElementById('to-do').innerHTML = `${todo.length}`;
     document.getElementById('done').innerHTML = `${done.length}`;
     document.getElementById('priority-high').innerHTML = `${priorityHigh.length}`;
-    document.getElementById('deadline').innerHTML = `${closest}`; // Muss noch angepasst werden normal mit ('en-US', fromatDate)
+    document.getElementById('deadline').innerHTML = `Oktober 10.2020`; // Muss noch angepasst werden normal mit ('en-US', fromatDate)
     document.getElementById('tasks').innerHTML = `${tasks.length}`;
     document.getElementById('task-in-progress').innerHTML = `${inprogress.length}`;
     document.getElementById('awaiting-feedback').innerHTML = `${awaitFeedback.length}`;
