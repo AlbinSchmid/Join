@@ -2,6 +2,16 @@
     display: none;
 }
 
+.dflex-c-c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column {
+    flex-direction: column;
+}
+
 .login-head {
     height: 116px;
     display: flex;

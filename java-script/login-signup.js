@@ -13,12 +13,6 @@ function closeBtnSignUpSuccesfully(event) {
 };
 
 
-function goToSummary() {
-    setTimeout(function () {
-        window.location.href = "./summary.html";
-    }, 1500);
-}
-
 
 async function addUser() {
     let name = document.getElementById('inputSignUpName');
@@ -60,12 +54,15 @@ function login() {
     let user = userList.find( u => u.mail == mail.value && u.password == password.value);
     console.log(user);
     if (user) {
-        goToSummary();
+        let userAsText = JSON.stringify(user);
+        localStorage.setItem('user', userAsText);
+        window.location.href = "./summary.html";
     } else {
         let failedLogin = document.getElementById('failedLogin');
         failedLogin.innerHTML = "E-Mail or password are incorrect";;
     }
 }
+
 
 function getInitials(name) {
     return name
