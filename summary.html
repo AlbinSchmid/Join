@@ -9,11 +9,9 @@
     <script src="/java-script/summary.js"></script>
     <script src="/java-script/header.js"></script> 
     <script src="/java-script/remoteStorage.js"></script> 
-
-    
 </head>
 
-<body onload="init()">
+<body onload="onload()">
 
     <div w3-include-html="/assets/templates/side-bar-template.html"></div>
 
@@ -100,7 +98,13 @@
             </section>
         </div>
     </main>
-
+    
+<script>
+    async function onload() {
+        await init();
+    }
+</script>
+<script src="/java-script/init.js"></script> 
 </body>
 
 </html>

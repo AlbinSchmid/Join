@@ -6,10 +6,6 @@ let userList = [];
 
 function closeBtnSignUpSuccesfully(event) {
     event.preventDefault();
-        document.getElementById('bgSignupSuccesfully').classList.remove('d-none');
-        setTimeout(function () {
-            window.location.href = "./log-in.html";
-        }, 1500);
 };
 
 
@@ -26,11 +22,31 @@ async function addUser() {
         'password2': password2.value,
         'mail': mail.value,
     }
-    await postData('/users', user);
-    name.value = '';
-    mail.value = '';
-    password.value = '';
-    password2.value = '';
+    if (passwordCorrect(user, password, password2)) {
+    }
+    else {
+        console.log('falsch');
+    }
+    
+}
+
+
+async function passwordCorrect(user, password, password2) {
+    if (password.value === password2.value) {
+        document.getElementById('bgSignupSuccesfully').classList.remove('d-none');
+        setTimeout(function () {
+            window.location.href = "./log-in.html";
+        }, 1500);
+        await postData('/users', user);
+        return true;
+    } else {
+        let passwordIncorrect = document.getElementById('passwordIncorrect');
+        let inputSignUpPassword2 = document.getElementById('inputSignUpPassword2');
+        passwordIncorrect.innerHTML = "Ups! your password dont match";
+        inputSignUpPassword2.style.border =" 2px solid red;"
+
+        return false;
+    }
 }
 
 

@@ -9,7 +9,6 @@ async function init() {
     await loadTasks();
     sortDates();
     showHTML();
-    includeHTML();
 }
 
 

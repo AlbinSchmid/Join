@@ -1,5 +1,13 @@
 .d-none {
-    display: none;
+    display: none !important;
+}
+
+.cp {
+    cursor: pointer;
+}
+
+.fz-16px {
+    font-size: 16px !important;
 }
 
 .dflex-c-c {
@@ -37,7 +45,7 @@
 .container-login-signup {
     position: absolute;
     top: 265.5px;
-    bottom: 0;
+    bottom: 265.5px;
     left: 0;
     right: 0;
 }
@@ -144,11 +152,13 @@ input[type="password"]:focus {
 
 .login-footer a {
     padding: 8px;
+    text-decoration: none;
     color: #A8A8A8;
 }
 
 .login-footer a:hover {
     color: var(--highlight-color);
+    background-color: transparent;
     font-weight: 700;
 }
 
@@ -160,9 +170,10 @@ input[type="password"]:focus {
     z-index: 1;
 }
 
-#failedLogin {
+#failedLogin,#passwordIncorrect {
     color: red;
 }
+
 
 /* ------------ BUTTON ------------ */
 
