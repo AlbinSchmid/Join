@@ -49,7 +49,7 @@ function updateHTML() {
         let assignedTo = todo[index].selectedContact[index].initials
         let priority = getPriority(index);
 
-        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, todo);
+        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, todo, category);
     }
 
     let inprogress = tasks.filter(t => t['category'] == 'in-progress');
@@ -67,7 +67,7 @@ function updateHTML() {
         let assignedTo = inprogress[index].assignment;
         let priority = getPriority(index);
 
-        document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, inprogress);
+        document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, inprogress, category);
     }
 
     let awaitFeedback = tasks.filter(t => t['category'] == 'await-feedback');
@@ -85,7 +85,7 @@ function updateHTML() {
         let assignedTo = awaitFeedback[index].assignment;
         let priority = getPriority(index);
 
-        document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, awaitFeedback);
+        document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, awaitFeedback, category);
     }
 
     let done = tasks.filter(t => t['category'] == 'done');
@@ -103,7 +103,7 @@ function updateHTML() {
         let assignedTo = done[index].assignment;
         let priority = getPriority(index);
 
-        document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, done);
+        document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, done, category);
     }
 }
 
@@ -162,7 +162,7 @@ function openTask(index) {
     }
 
     container.innerHTML = '';
-    container.innerHTML = getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo);
+    container.innerHTML = getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category);
     container.classList.remove('d-hide');
     container.classList.add('d-block');
 }
@@ -173,7 +173,7 @@ function closeTask() {
     container.classList.remove('d-block');
 }
 
-function getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo) {
+function getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category) {
     return /*html*/`
         <div id="detail-task${index}" class="detail-task-container">
             <div class="detail-task-overview">
