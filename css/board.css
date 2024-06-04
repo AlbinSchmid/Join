@@ -322,9 +322,8 @@
 
 .priority-detail {
     display: flex;
-    align-items: center;
-    gap: 16px;
     font-size: 20px;
+    align-items: center;
 }
 
 .assigned-detail {
@@ -422,3 +421,36 @@
     padding: 48px 40px 48px 40px;
 }
 
+.high {
+    background: url('/assets/img/icons/prio_high.png') no-repeat center;
+    width: 24px;
+    height: 24px;
+}
+
+.medium {
+    background: url('/assets/img/icons/prio_medium.png') no-repeat center;
+    width: 24px;
+    height: 24px;
+}
+
+.low {
+    background: url('/assets/img/icons/prio_low.png') no-repeat center;
+    width: 24px;
+    height: 24px;
+}
+
+.detail-initials {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    width: 48px;
+    justify-content: center;
+    margin-left: 12px;
+}
+
+.detail-contacts {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}

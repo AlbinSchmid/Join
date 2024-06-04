@@ -103,9 +103,6 @@ function renderSelectedContacts() {
 
         selectedContactsContainer.appendChild(contactDiv);
     }
-
-    // Debug output
-    console.log(selectedContacts);
 }
 
 function setupDropdown() {
@@ -297,9 +294,9 @@ async function createTask() {
     let taskDescription = document.getElementById('task-description').value;
     let taskAssignment = document.getElementById('task-assignment').value;
     let taskDate = document.getElementById('task-date').value;
-    let taskPriorityHigh = document.getElementById('task-high-priority').checked;
-    let taskPriorityMedium = document.getElementById('task-medium-priority').checked;
-    let taskPriorityLow = document.getElementById('task-low-priority').checked;
+    let High = document.getElementById('task-high-priority').checked;
+    let Medium = document.getElementById('task-medium-priority').checked;
+    let Low = document.getElementById('task-low-priority').checked;
     let taskCategory = document.getElementById('task-category').value;
     console.log(taskDate);
 
@@ -321,9 +318,9 @@ async function createTask() {
         'description': taskDescription,
         'assignment': taskAssignment,
         'date': new Date(taskDate),
-        'priorityHigh': taskPriorityHigh,
-        'priorityMedium': taskPriorityMedium,
-        'priorityLow': taskPriorityLow,
+        'priorityHigh': High,
+        'priorityMedium': Medium,
+        'priorityLow': Low,
         'taskcategory': taskCategory,
         'subtaskCount': subtaskCount,
         'subtasks': subtasks.slice(), // Add a copy of the subtasks array

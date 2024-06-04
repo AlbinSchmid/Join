@@ -1,7 +1,5 @@
 let tasks = [];
 let allContacts = [];
-let currentTask = 0;
-let currentIndex = 0;
 let subtasks = [];
 let selectedContacts = [];
 let subtaskCount = 0;
@@ -42,14 +40,15 @@ function updateHTML() {
     for (let index = 0; index < todo.length; index++) {
         const element = todo[index];
 
-        let technicalTask = todo[index].category;
+        let technicalTask = todo[index].taskcategory;
+        let category = todo[index].category
         let title = todo[index].title;
         let description = todo[index].description;
         let subtaskCount = todo[index].subtaskCount;
-        let assignedTo = todo[index].assignment;
-        let priority = todo[index].priority;
+        let assignedTo = todo[index].selectedContact[index].initials
+        let priority = getPriority(index);
 
-        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, todo);
+        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, todo, category);
     }
 
     let inprogress = tasks.filter(t => t['category'] == 'in-progress');
@@ -59,14 +58,15 @@ function updateHTML() {
     for (let index = 0; index < inprogress.length; index++) {
         const element = inprogress[index];
 
-        let technicalTask = inprogress[index].category;
+        let technicalTask = inprogress[index].taskcategory;
+        let category = inprogress[index].category
         let title = inprogress[index].title;
         let description = inprogress[index].description;
         let subtaskCount = inprogress[index].subtaskCount;
         let assignedTo = inprogress[index].assignment;
-        let priority = inprogress[index].priority;
+        let priority = getPriority(index);
 
-        document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, inprogress);
+        document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, inprogress, category);
     }
 
     let awaitFeedback = tasks.filter(t => t['category'] == 'await-feedback');
@@ -76,14 +76,15 @@ function updateHTML() {
     for (let index = 0; index < awaitFeedback.length; index++) {
         const element = awaitFeedback[index];
 
-        let technicalTask = awaitFeedback[index].category;
+        let technicalTask = awaitFeedback[index].taskcategory;
+        let category = awaitFeedback[index].category
         let title = awaitFeedback[index].title;
         let description = awaitFeedback[index].description;
         let subtaskCount = awaitFeedback[index].subtaskCount;
         let assignedTo = awaitFeedback[index].assignment;
-        let priority = awaitFeedback[index].priority;
+        let priority = getPriority(index);
 
-        document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, awaitFeedback);
+        document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, awaitFeedback, category);
     }
 
     let done = tasks.filter(t => t['category'] == 'done');
@@ -93,15 +94,30 @@ function updateHTML() {
     for (let index = 0; index < done.length; index++) {
         const element = done[index];
 
-        let technicalTask = done[index].category;
+        let technicalTask = done[index].taskcategory;
+        let category = done[index].category
         let title = done[index].title;
         let description = done[index].description;
         let subtaskCount = done[index].subtaskCount;
         let assignedTo = done[index].assignment;
-        let priority = done[index].priority;
+        let priority = getPriority(index);
 
-        document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, done);
+        document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, done, category);
     }
+}
+
+function getPriority(index) {
+    let priorityClass = 'priority';
+
+    if(tasks[index].priorityHigh === true) {
+        priorityClass += ' high';
+    } else if (tasks[index].priorityMedium === true) {
+        priorityClass += ' medium';
+    } else if (tasks[index].priorityLow === true) {
+        priorityClass += ' low';
+    }
+
+    return priorityClass;
 }
 
 
@@ -128,11 +144,12 @@ function openTask(index) {
     let container = document.getElementById('task-detail-view-container');
     let task = tasks[index];
 
-    let technicalTask = task.category;
+    let technicalTask = task.taskcategory;
+    let category = task.category
     let title = task.title;
     let description = task.description;
     let dueDate = task.date;
-    let priority = task.priority;
+    let priority = getPriority(index);
     let assignedTo = task.assignment;
 
     let subtasks = '';
@@ -144,7 +161,7 @@ function openTask(index) {
     }
 
     container.innerHTML = '';
-    container.innerHTML = getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo);
+    container.innerHTML = getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category);
     container.classList.remove('d-hide');
     container.classList.add('d-block');
 }
@@ -155,7 +172,7 @@ function closeTask() {
     container.classList.remove('d-block');
 }
 
-function getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo) {
+function getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category) {
     return /*html*/`
         <div id="detail-task${index}" class="detail-task-container">
             <div class="detail-task-overview">
@@ -163,7 +180,7 @@ function getTaskDetailViewHTML(index, technicalTask, title, subtasks, descriptio
                 <div><p class="title-detail">${title}</p></div>
                 <div><p class="description-detail">${description}</p></div>
                 <div class="date-detail"><p>Due Date:</p>${dueDate}</div>
-                <div class="priority-detail"><p>Priority:</p>${priority}</div>
+                <div class="priority-detail"><p>Priority:</p><div class="${priority}"></div></div>
                 <div class="assigned-detail"><p>Assigned To:</p>
                     <div>${assignedTo}</div>
                 </div>
