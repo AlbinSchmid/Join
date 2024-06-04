@@ -17,7 +17,7 @@ nav a {
     padding: 8px 0 8px 25%;
 }
 
-a:hover {
+nav a:hover {
     background-color: #2A3D59;
 }
 

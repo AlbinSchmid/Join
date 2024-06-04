@@ -9,6 +9,20 @@
     top: 0;
 }
 
+.dflex-c-c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.cp {
+    cursor: pointer;
+}
+
 .container-contacts {
     width: 456px;
     height: calc(100% - 96px);

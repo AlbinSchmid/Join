@@ -44,7 +44,6 @@ async function passwordCorrect(user, password, password2) {
         let inputSignUpPassword2 = document.getElementById('inputSignUpPassword2');
         passwordIncorrect.innerHTML = "Ups! your password dont match";
         inputSignUpPassword2.style.border =" 2px solid red;"
-
         return false;
     }
 }
