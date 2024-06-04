@@ -7,8 +7,6 @@ let selectedContacts = [];
 let subtaskCount = 0;
 let taskIdCounter = 0;
 let currentDraggedElement;
-console.log(tasks); // Zeigt die geladenen Tasks an
-
 
 
 /**
@@ -185,41 +183,31 @@ function addTask() {
     headerContainer.id = 'addTask-board-header';
     headerContainer.className = 'addTask-board-header';
 
-    // Create the new div with id="addTask-board-render-container" and class="addTask-board-render-container"
     let renderContainer = document.createElement('div');
     renderContainer.id = 'addTask-board-render-container';
     renderContainer.className = 'addTask-board-render-container';
 
-    // Create the new div with id="addTask-board-footer" and class="addTask-board-footer"
     let footerContainer = document.createElement('div');
     footerContainer.id = 'addTask-board-footer';
     footerContainer.className = 'addTask-board-footer';
 
-    
-    // Append the new divs to the main container
     container.appendChild(headerContainer);
     container.appendChild(renderContainer);
-   
     container.appendChild(footerContainer);
 
-    // Render the task HTML inside the new divs
     getAddTaskHTML();
 }
 
 function getAddTaskHTML() {
     let containerHeader = document.getElementById('addTask-board-header');
     let container = document.getElementById('addTask-board-render-container');
-    let containerFooter = document.getElementById('addTask-board-footer')
+    let containerFooter = document.getElementById('addTask-board-footer');
     containerHeader.innerHTML += getAddTaskHTMLHeader();
     container.innerHTML +=  getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
     containerFooter.innerHTML += getAddTaskHTMLFooter();
-   
+    setupDropdown();
+    renderContactOptions(); // Ensure contacts are rendered
 }
-
-/**
- * 
- * @returns add task container left side html
- */
 
 function getAddTaskHTMLLeftSide() {
     return /*html*/`
@@ -235,7 +223,7 @@ function getAddTaskHTMLLeftSide() {
             <h2>Assigned to</h2>
             <div>
                 <form>
-                    <div class="custom-select-container">
+                    <div class="assignment-select-container">
                         <input id="dropdownInput" class="selectfield-task-assignment" placeholder="Select contacts to assign">
                         <div id="task-assignment" class="dropdown-content"></div>
                         <div id="selected-contacts"></div>
@@ -277,7 +265,6 @@ function renderSelectedContacts() {
         const name = checkbox.dataset.name;
         const initials = checkbox.value;
 
-        // Push to selectedContacts array
         selectedContacts.push({ color, name, initials });
 
         const contactDiv = document.createElement('div');
@@ -288,7 +275,6 @@ function renderSelectedContacts() {
         selectedContactsContainer.appendChild(contactDiv);
     }
 
-    // Debug output
     console.log(selectedContacts);
 }
 
@@ -306,6 +292,7 @@ function setupDropdown() {
         }
     });
 }
+
 
 /**
  * 

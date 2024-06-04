@@ -109,7 +109,7 @@ h2 {
 }
 
 .textareafied-description {
-   width: 406px;
+    width: 406px;
     height: 102px;
     text-wrap: wrap;
     border-radius: 10px;
@@ -133,11 +133,11 @@ h2 {
     cursor: pointer;
 }
 
-
-.custom-select-container {
+.assignment-select-container {
     position: relative;
     display: inline-block;
-    width: 440px; /* Gleiche Breite wie die .selectfield-task-assignment Klasse */
+    width: 440px;
+    z-index: 10; /* Ensure it's above other elements */
 }
 
 .selectfield-task-assignment {
@@ -147,25 +147,26 @@ h2 {
     padding-left: 16px;
     padding-top: 8px;
     padding-bottom: 8px;
-    padding-right: 40px;
-    font-family: inter;
+    padding-right: 40px; /* Leave space for the arrow */
+    font-family: Inter;
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     background-color: #FFFFFF;
+    position: relative; /* Ensure arrow is positioned relative to this container */
 }
 
-.selectfield-task-assignment::after {
+.assignment-select-container::after {
     content: '';
     position: absolute;
-    right: 16px; 
+    right: 16px; /* Abstand vom rechten Rand */
     top: 50%;
     transform: translateY(-50%);
-    width: 24px; 
-    height: 24px; 
+    width: 24px; /* Breite des Pfeilsymbols */
+    height: 24px; /* Höhe des Pfeilsymbols */
     background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
-    background-size: 24px 24px; 
-    pointer-events: none; 
+    background-size: 24px 24px; /* Größe des Pfeilsymbols */
+    pointer-events: none; /* Macht den Pfeil nicht anklickbar */
 }
 
 .contact-container {
@@ -199,7 +200,7 @@ h2 {
     background-color: #f9f9f9;
     width: 440px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 10; /* Ensure it's above other elements */
 }
 
 .dropdown-content div:hover {
@@ -239,6 +240,7 @@ h2 {
     border: 1px solid #29ABE2;
     outline: none;
 }
+
  
 .date-selector {
     margin-top: 8px;
@@ -405,6 +407,13 @@ h2 {
     border: 1px solid #D1D1D1;
 }
 
+.custom-select-container {
+    position: relative;
+    display: inline-block;
+    width: 440px;
+    z-index: 10; /* Ensure it's above other elements */
+}
+
 .custom-select-container::after {
     content: '';
     position: absolute;
@@ -538,7 +547,6 @@ h2 {
     background-color: #D1D1D1;
     border-radius: 10px;
 }
-
 
 .add-task-footer {
     display: flex;
