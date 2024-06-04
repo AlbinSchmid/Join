@@ -145,12 +145,13 @@ function openTask(index) {
     let container = document.getElementById('task-detail-view-container');
     let task = tasks[index];
 
-    let technicalTask = task.category;
+    let technicalTask = task.taskcategory;
+    let category = task.category
     let title = task.title;
     let description = task.description;
     let dueDate = task.date;
     let priority = getPriority(index);
-    let assignedTo = task.selectedContact[index].name;
+    let assignedTo = task.assignment;
 
     let subtasks = '';
     if (task.subtasks && task.subtasks.length > 0) {

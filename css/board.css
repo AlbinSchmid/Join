@@ -438,3 +438,19 @@
     width: 24px;
     height: 24px;
 }
+
+.detail-initials {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    width: 48px;
+    justify-content: center;
+    margin-left: 12px;
+}
+
+.detail-contacts {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
