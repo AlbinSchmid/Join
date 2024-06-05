@@ -35,25 +35,6 @@ async function loadTasks() {
 }
 
 
-function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, category) {
-    return /*html*/`
-        <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${category[index]['id']})">
-            <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div>
-            <div><p class="to-do-task">${title}</p></div>
-            <div><p class="to-do-task-description">${description}</p></div>
-            <div class="progress-container">
-                <div class="progress-wrapper">
-                    <div class="progress-bar" id="progress-bar"></div>
-                </div>
-                <div class="progress-count" id="progress-count">0/${subtaskCount} Subtasks</div>
-            </div>
-            <div class="attributor-container">
-                <div class="assigned-container">${assignedTo}</div> 
-                <div>${priority}</div>
-            </div>
-        </div>`;
-}
-
 function updateHTML() {
     const dragAreas = ['to-do', 'in-progress', 'await-feedback', 'done'];
 

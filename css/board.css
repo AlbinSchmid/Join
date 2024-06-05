@@ -232,7 +232,8 @@
 
 
 .dragarea {
-    width: 244px;
+    min-width: 244px;
+    min-height: 256px;
     padding-right: 24px;
 }
 
