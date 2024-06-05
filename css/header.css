@@ -79,7 +79,7 @@ header p {
     background-color: var(--primary-color);
     border-radius: 20px 0px 20px 20px;
     box-shadow: 0px 0px 4px 0px #0000001A;
-    z-index: 10;
+    z-index: 1;
 }
 
 .header-dropdown-menu a {

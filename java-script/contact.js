@@ -106,6 +106,7 @@ async function deleteContact(id) {
     let contactDetails = document.getElementById('showContactDetails');
     contactDetails.innerHTML = '';
     document.getElementById('editContact').classList.add('d-none');
+    document.getElementById('container-right').classList.toggle('container-right-dnone');
 }
 
 
@@ -188,16 +189,20 @@ function showContact(id) {
     contactDetails.innerHTML = '';
     if (id === currentContact.id) {
         document.getElementById('showContactDetails').classList.toggle('d-none');
+        document.getElementById('container-right').classList.toggle('container-right-dnone');
     }   else {
         document.getElementById('showContactDetails').classList.remove('d-none');
+        document.getElementById('container-right').classList.remove('container-right-dnone');
     }
     currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
+
 }
 
 
 function closeOpenContactDetails() {
-    document.getElementById('container-right').classList.toggle('d-none');
+    document.getElementById('showContactDetails').classList.toggle('d-none');
+    document.getElementById('container-right').classList.toggle('container-right-dnone');
 }
 
 // ------------- EDIT ICONS ------------- //
@@ -280,12 +285,13 @@ function addContactHTML(contact) {
                         <img src="./assets/img/logo_join_white.png" alt="logo_join_white">
                         <h1>Add contact</h1>
                         <span>Tasks are better with a team!</span>
-                        <div class="line-turn"></div>
                     </div>
                 </div>
-                <div class="dflex-c-c">
-                    <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png" alt="person_picture">
-                </div>
+                <div class="contact-data-mobile dflex-c-c">
+                    <div class="container-user-top">
+                        <img class="contact-pict dflex-c-c" src="./assets/img/icons/contact/person.png" alt="person_picture">
+                    </div>
+                    
                 <img onclick="showCreateNewContact()" class="close-img cp"
                     src="./assets/img/icons/contact/cancel_black.png" alt="close">
                 <div class="container-contact-right">
@@ -325,7 +331,7 @@ function editContactHTML(contact) {
                     <h1>Edit contact</h1>
                 </div>
             </div>
-            <div class="dflex-c-c">
+            <div class="contact-data-mobile dflex-c-c">
                 <div class="container-user-top">
                     <div class="first-letters-edit dflex-c-c" style="background-color:${contact.color}">
                         ${contact.initials}
