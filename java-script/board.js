@@ -194,7 +194,7 @@ function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, descripti
                 <div class="assigned-detail"><p>Assigned To:</p>
                     <div>${assignedTo}</div>
                 </div>
-                <div><p class="subtask-headline">Subtasks</p>${subtasks}</div>
+                <div><p class="subasks-headline">Subtasks</p>${subtasks}</div>
             </div>    
         </div>`;
 }
@@ -220,21 +220,21 @@ function generateDetailedPriorityHTML(task) {
     let priorityHTML = '';
     if (task.priorityHigh) {
         priorityHTML = `
-            <div class="priority-detail">
-                <img src="path/to/high-priority-icon.png" alt="High Priority">
+            <div class="priority-detail-container">
                 <p>High</p>
+                <img src="assets/img/icons/prio_high.png" alt="High Priority">
             </div>`;
     } else if (task.priorityMedium) {
         priorityHTML = `
-            <div class="priority-detail">
-                <img src="path/to/medium-priority-icon.png" alt="Medium Priority">
-                <p>Medium</p>
+            <div class="priority-detail-container">
+             <p>Medium</p>
+                <img src="assets/img/icons/prio_medium.png" alt="Medium Priority">
             </div>`;
     } else if (task.priorityLow) {
         priorityHTML = `
-            <div class="priority-detail">
-                <img src="path/to/low-priority-icon.png" alt="Low Priority">
-                <p>Low</p>
+            <div class="priority-detail-container">
+                 <p>Low</p>
+                <img src="assets/img/icons/prio_low.png" alt="Low Priority">
             </div>`;
     } else {
         priorityHTML = '';
