@@ -176,6 +176,7 @@
 .addTask-board-header-content {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 930px;
 }
 
@@ -292,7 +293,12 @@
     border-radius: 8px;
     margin: 0;
     text-align: center;
-    width: 128px;
+    text-wrap: nowrap;
+}
+
+.close-detail-button {
+    height: 24px;
+    width: 24px;
 }
 
 .close-detail-button:hover {
