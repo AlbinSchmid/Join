@@ -38,7 +38,6 @@ button {
     box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
     font-size: 20px;
     overflow-y: scroll;
-    cursor: pointer;
 }
 
 .btn-add-new-contact {
@@ -84,6 +83,7 @@ button {
     gap: 35px;
     padding: 15px 24px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .container-contact:hover {
@@ -512,6 +512,7 @@ input[type="tel"]:focus {
     .inputfield {
         width: 364px;
     }
+
 }
 
 
@@ -579,6 +580,10 @@ input[type="tel"]:focus {
     }
 
     .headline-desktop {
+        display: none;
+    }
+
+    .container-right-dnone {
         display: none;
     }
 

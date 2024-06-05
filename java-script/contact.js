@@ -106,6 +106,7 @@ async function deleteContact(id) {
     let contactDetails = document.getElementById('showContactDetails');
     contactDetails.innerHTML = '';
     document.getElementById('editContact').classList.add('d-none');
+    document.getElementById('container-right').classList.toggle('container-right-dnone');
 }
 
 
@@ -188,18 +189,20 @@ function showContact(id) {
     contactDetails.innerHTML = '';
     if (id === currentContact.id) {
         document.getElementById('showContactDetails').classList.toggle('d-none');
+        document.getElementById('container-right').classList.toggle('container-right-dnone');
     }   else {
         document.getElementById('showContactDetails').classList.remove('d-none');
+        document.getElementById('container-right').classList.remove('container-right-dnone');
     }
     currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
-    closeOpenContactDetails();
+
 }
 
 
 function closeOpenContactDetails() {
     document.getElementById('showContactDetails').classList.toggle('d-none');
-    document.getElementById('container-right').classList.toggle('d-none');
+    document.getElementById('container-right').classList.toggle('container-right-dnone');
 }
 
 // ------------- EDIT ICONS ------------- //
