@@ -41,48 +41,46 @@
                 </div>
             </section>
 
-            <section class="board-status-container">
-
-                <div class="status-overiew-container">
-                    <div>To do</div>
-                    <p onclick="addTask()" class="status-bar-img">+</p>
-                </div>
-                <div class="status-overiew-container">
-                    <div>In progress</div>
-                    <p onclick="addTask()" class="status-bar-img">+</p>
-                </div>
-                <div class="status-overiew-container">
-                    <div>Await feedback</div>
-                    <p onclick="addTask()" class="status-bar-img">+</p>
-                </div>
-                <div class="status-overiew-container">
-                    <div>done</div>
-                </div>
-
-                <div id="addTask-board" class="addTask-board-container d-none">
-
-                </div>
-            </section>
+          
             <section class="board-task-container">
                 <!-- <div class="no-task-container"><p>No tasks To do</p></div> -->
                 <!-- if abfrage in der Renderfunktion, wird nur angezeigt wenn let toDo = [] leer ist bzw. nichts im local storage gespeichert ist-->
                 <div id="task-detail-view-container" class="task-detail-view-container d-hide"></div>
-
-                <div id="to-do" class="dragarea" ondrop="moveTo('to-do')" ondragover="allowDrop(event)"></div>
-                <div id="in-progress" class="dragarea" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)">
+            
+                <div class="status-container">
+                    <div class="status-overiew-container">
+                        <div>To do</div>
+                        <p onclick="addTask()" class="status-bar-img">+</p>
+                    </div>
+                    <div id="to-do" class="dragarea" ondrop="moveTo('to-do')" ondragover="allowDrop(event)"></div>
                 </div>
-                <div id="await-feedback" class="dragarea" ondrop="moveTo('await-feedback')"
-                    ondragover="allowDrop(event)"></div>
-                <div id="done" class="dragarea" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
+            
+                <div class="status-container">
+                    <div class="status-overiew-container">
+                        <div>In progress</div>
+                        <p onclick="addTask()" class="status-bar-img">+</p>
+                    </div>
+                    <div id="in-progress" class="dragarea" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)"></div>
+                </div>
+            
+                <div class="status-container">
+                    <div class="status-overiew-container">
+                        <div>Await feedback</div>
+                        <p onclick="addTask()" class="status-bar-img">+</p>
+                    </div>
+                    <div id="await-feedback" class="dragarea" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)"></div>
+                </div>
+            
+                <div class="status-container">
+                    <div class="status-overiew-container">
+                        <div>Done</div>
+                        <p class="status-bar-img-done">+</p>
+                    </div>
+                    <div id="done" class="dragarea" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
+                </div>
             </section>
-        </div>
-        </section>
-
-        </section>
-
-
-
-        <script src="/java-script/init.js"></script>
+            <div id="addTask-board" class="addTask-board-container d-none"></div>
+            
 </body>
 
 </html>
