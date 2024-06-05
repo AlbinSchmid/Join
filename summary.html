@@ -35,16 +35,16 @@
                 <div class="summary-left-section">
 
                     <div class="card-overlying-div">
-                        <div class="card hover-right" onmouseover="changePencilImg(this)"
-                            onmouseout="resetPencilImg(this)" onclick="loadBoardPage()">
+                        <div class="card hover-right" onmouseover="changePencilImg()"
+                            onmouseout="resetPencilImg()" onclick="loadBoardPage()">
                             <img id="pencil-img" src="./assets/img/icons/summary/pencil-darkblue.png" alt="Pencil logo">
                             <div class="info-cardpart">
                                 <h2 id="to-do"></h2>
                                 <p>To-do</p>
                             </div>
                         </div>
-                        <div class="card hover-left" onmouseover="changeCheckImg(this)"
-                            onmouseout="resetCheckImg(this)" onclick="loadBoardPage()">
+                        <div class="card hover-left" onmouseover="changeCheckImg()"
+                            onmouseout="resetCheckImg()" onclick="loadBoardPage()">
                             <img id="check-img" src="./assets/img/icons/summary/check-darkblue.png" alt="Check logo">
                             <div class="info-cardpart">
                                 <h2 id="done"></h2>
@@ -65,7 +65,7 @@
                         <div class="paceholder-card-big"></div>
 
                         <div class="right-card-part-big">
-                            <h3 id="deadline">October 16, 2022</h3>
+                            <h3 id="deadline"></h3>
                             <h4>Upcoming Deadline</h4>
                         </div>
                     </div>
@@ -90,9 +90,7 @@
                 </div>
 
                 <div class="summary-right-section d-none-mobile">
-                    <div>
-                        <h2>Good morning,</h2>
-                        <h1>Sofia Müller</h1>
+                    <div id="greeting-text">
                     </div>
                 </div>
             </section>

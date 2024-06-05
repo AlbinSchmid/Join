@@ -20,28 +20,38 @@
 
     <main>
         <div w3-include-html="/assets/templates/header-template.html" class="header-sticky"></div>
-        <div>
+        <div class="padding">
             <section class="board-header">
                 <div><span class="board-h1">Board</span></div>
                 <div class="operations-container">
-                    <form class="search-area">
+                    <form class="search-area d-none-mobile">
                         <input class="search-field" placeholder="Find Task" type="text">
-                        <!-- vertical line und hover/eingabe desgin fehlt noch -->
+                            <!-- vertical line und hover/eingabe desgin fehlt noch -->
                         <div class="al-center">
                             <div class="vl"></div>
                             <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
                                     alt="search"></div>
                         </div>
-
                     </form>
                     <div onclick="addTask()" class="add-task-btn">
-                        <p>Add task</p>
+                        <p class="d-none-mobile">Add task</p>
                         <img src="assets/img/icons/add.svg" alt="">
                     </div>
                 </div>
             </section>
 
-          
+            <div class="operations-container">
+                <form class="search-area search-area-mobile d-flex-mobile">
+                    <input class="search-field" placeholder="Find Task" type="text">
+                        <!-- vertical line und hover/eingabe desgin fehlt noch -->
+                    <div class="al-center">
+                        <div class="vl"></div>
+                        <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
+                                alt="search"></div>
+                    </div>
+                </form>
+            </div>
+        
             <section class="board-task-container">
                 <div id="task-detail-view-container" class="task-detail-view-container d-hide"></div>
             
@@ -78,6 +88,7 @@
                 </div>
             </section>
             <div id="addTask-board" class="addTask-board-container d-none"></div>
+        </div>
             
 </body>
 

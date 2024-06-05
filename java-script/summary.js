@@ -3,12 +3,32 @@ let priorityHighDates = [];
 let dateToday = new Date();
 let closest;
 let formatDate = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+let guest = false;
+let user;
+let number = 15220;
+
 
 
 async function init() {
     await loadTasks();
+    laodLocalStorage();
     sortDates();
     showHTML();
+    includeHTML();
+}
+
+
+function laodLocalStorage() {
+    let userAsText = localStorage.getItem('user');
+
+    if (userAsText) {
+        user = JSON.parse(userAsText);
+    }
+}
+
+
+function guestLogIn() {
+    guest = true;
 }
 
 
@@ -47,12 +67,37 @@ function showHTML() {
     document.getElementById('to-do').innerHTML = `${todo.length}`;
     document.getElementById('done').innerHTML = `${done.length}`;
     document.getElementById('priority-high').innerHTML = `${priorityHigh.length}`;
-    document.getElementById('deadline').innerHTML = `Oktober 10.2020`; // Muss noch angepasst werden normal mit ('en-US', fromatDate)
+    document.getElementById('deadline').innerHTML = `${checkIfpriorityHighArray()}`; // Muss noch angepasst werden normal mit ('en-US', fromatDate)
     document.getElementById('tasks').innerHTML = `${tasks.length}`;
     document.getElementById('task-in-progress').innerHTML = `${inprogress.length}`;
     document.getElementById('awaiting-feedback').innerHTML = `${awaitFeedback.length}`;
+    document.getElementById('greeting-text').innerHTML = `${checkIfGuest()}`;
 }
 
+
+function checkIfpriorityHighArray() {
+    if (priorityHighDates.length === 0) {
+        return /*html*/`
+            No urgent to-dos
+        `;
+    } else {
+        return closest;
+    }
+}
+
+
+function checkIfGuest() {
+    if (guest === true) {
+        return /*html*/`
+            <h2>Good morning</h2>
+        `;
+    } else {
+        return /*html*/`
+            <h2>Good morning,</h2>
+            <h1>${user['name']}</h1>  
+        `;
+    }
+}
 
 
 async function includeHTML() {
@@ -70,19 +115,22 @@ async function includeHTML() {
 }
 
 
-function changePencilImg(element) {
+function changePencilImg() {
     document.getElementById('pencil-img').setAttribute('src', './assets/img/icons/summary/pencil-white.png');
 }
 
-function resetPencilImg(element) {
+
+function resetPencilImg() {
     document.getElementById('pencil-img').setAttribute('src', './assets/img/icons/summary/pencil-darkblue.png');
 }
 
-function changeCheckImg(element) {
+
+function changeCheckImg() {
     document.getElementById('check-img').setAttribute('src', './assets/img/icons/summary/check-white.png');
 }
 
-function resetCheckImg(element) {
+
+function resetCheckImg() {
     document.getElementById('check-img').setAttribute('src', './assets/img/icons/summary/check-darkblue.png');
 }
 

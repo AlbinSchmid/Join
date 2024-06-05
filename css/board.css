@@ -1,3 +1,5 @@
+
+
 .header-sticky {
     display: flex;
     position: sticky;
@@ -18,9 +20,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 106px;
-    padding-top: 106px;
-    margin-right: 106px;
 }
 
 .board-h1 {
@@ -226,15 +225,12 @@
 
 .board-task-container {
     display: flex;
-    margin-left: 106px;
-    margin-right: 106px;
 }
 
 
 .dragarea {
     min-width: 244px;
     min-height: 256px;
-    padding-right: 24px;
 }
 
 .no-task-container {
@@ -616,34 +612,34 @@
     color: #F4F4F4;
 }
 
+.padding {
+    padding: 110px clamp(2.875rem, -1.4287rem + 6.7114vw, 6.625rem) 0 clamp(2.875rem, -1.4287rem + 6.7114vw, 6.625rem);
+}
 
-@media(max-width: 1516px) {
-    .board-status-container {
-        display: none;
-    }
-
-    .board-header {
-        padding-top: 16px;
-        margin-left: 16px;
-    }
-
-    .board-task-container {
-        display: block;
-        margin-left: 16px;
-    }
-
-    .dragarea {
-        display: flex;
-        gap: 24px;
-        min-height: 256px;
-    }
-
-    .status-overiew-container {
-        padding-top: 12px;
-    }
+.d-flex-mobile {
+    display: none !important;
+}
+@media(max-width: 1300px) {
+    
 }
 
 @media(max-width: 1024px) {
+    .d-none-mobile {
+        display: none !important;
+    }
+
+    .d-flex-mobile {
+        display: flex !important;
+    }
+
+    .board-h1 {
+        font-size: 47px;
+    }
+
+    .padding {
+        padding: 48px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) 128px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem);
+    }
+
     .addTask-board-header {
         width: 440px;
     }
@@ -658,5 +654,43 @@
 
     .mg-l-r {
         display: none;
+    }
+
+    .board-status-container {
+        display: none;
+    }
+
+    .board-task-container {
+        display: block;
+    }
+
+    .dragarea {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        min-height: 256px;
+    }
+
+    .status-overiew-container {
+        padding-top: 12px;
+    }
+
+    .task-container {
+        margin: 0;
+    }
+
+    .search-area-mobile {
+        width: 100% !important;
+        height: 50px;
+        margin-top: 12px;
+    }
+
+    .search-field {
+        padding: 8px 10px 8px 10px;
+        margin: 0;
+    }
+
+    .search-btn-container {
+        margin-right: 0;
     }
 }
