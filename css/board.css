@@ -345,7 +345,7 @@
 
 .subasks-headline {
     font-size: 20px;
-    
+
 }
 
 .to-do-task {
@@ -372,13 +372,14 @@
 }
 
 .progress-bar {
-    width: 50%; /* Startbreite von 0% */
+    width: 0%; /* Startbreite von 0% */
     height: 8px;
     background-color: #0038FF;
     border-radius: 16px;
 }
 
 .progress-count {
+    text-wrap: nowrap;
     font-size: 12px;
     font-weight: 400;
     margin-left: 8px; /* Abstand zwischen Progressbar und Fortschrittszahl */

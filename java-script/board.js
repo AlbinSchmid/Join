@@ -130,7 +130,7 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
                 <div class="progress-wrapper">
                     <div class="progress-bar" id="progress-bar"></div>
                 </div>
-                <div class="progress-count" id="progress-count">${subtaskCount} Subtasks</div>
+                <div class="progress-count" id="progress-count">0/${subtaskCount} Subtasks</div>
             </div>
             <div class="attributor-container">
                 <div class="assigned-container">${assignedTo}</div> 
@@ -144,6 +144,7 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
 
 
 
+
 function updateProgressBar() {
     let totalSubtasks = document.querySelectorAll('.subtask-container-detail-view input[type="checkbox"]').length;
     let completedSubtasks = document.querySelectorAll('.subtask-container-detail-view input[type="checkbox"]:checked').length;
@@ -152,8 +153,9 @@ function updateProgressBar() {
     percent = Math.round(percent);
     
     document.getElementById('progress-bar').style.width = percent + "%";
-    document.getElementById('progress-count').innerHTML = completedSubtasks + "/" + totalSubtasks + " Subtasks";
+    document.getElementById('progress-count').innerHTML = `${completedSubtasks}/${totalSubtasks} Subtasks`;
 }
+
 
 function openTask(taskId, callback) {
     let container = document.getElementById('task-detail-view-container');
