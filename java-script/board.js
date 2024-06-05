@@ -427,21 +427,21 @@ function getAddTaskHTMLRightSide() {
                 <div class="dp-flex-jc-sb">
                     <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)">
                     <label for="task-high-priority" class="checkbox-container">
-                        <div class="checkbox-label-high">
+                        <div class="checkbox-label-high-detail">
                             Urgent
                             <img class="checkbox-image-high" src="assets/img/icons/prio_high.png" alt="priority high">
                         </div>
                     </label>
                     <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium" onclick="handleCheckboxClick(this)">
                     <label for="task-medium-priority" class="checkbox-container">
-                        <div class="checkbox-label-medium">
+                        <div class="checkbox-label-medium-detail">
                             Medium
                             <img class="checkbox-image-medium" src="assets/img/icons/prio_medium.png" alt="priority medium">
                         </div>
                     </label>
                     <input type="checkbox" id="task-low-priority" class="custom-checkbox-low" onclick="handleCheckboxClick(this)">
                     <label for="task-low-priority" class="checkbox-container">
-                        <div class="checkbox-label-low">
+                        <div class="checkbox-label-low-detail">
                             Low
                             <img class="checkbox-image-low" src="assets/img/icons/prio_low.png" alt="priority low">
                         </div>
