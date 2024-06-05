@@ -369,6 +369,7 @@
 .attributor-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-top: 24px;
 }
 
@@ -384,6 +385,17 @@
     align-items: center;
     display: flex;
     justify-content: center;
+}
+
+.assigned-container {
+    display: flex;
+}
+
+.priority-detail-container {
+    display: flex;
+    gap: 10px;
+    margin-left: 36px;
+    align-items: center;
 }
 
 .d-hide {

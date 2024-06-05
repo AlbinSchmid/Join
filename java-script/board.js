@@ -46,7 +46,8 @@ function updateHTML() {
         let description = element.description;
         let subtaskCount = element.subtaskCount;
         let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = element.priority;
+        let priority = generatePriorityHTML(element);
+
         document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, todo, category);
     }
 
@@ -60,7 +61,8 @@ function updateHTML() {
         let description = element.description;
         let subtaskCount = element.subtaskCount;
         let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = element.priority;
+        let priority = generatePriorityHTML(element);
+
         document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, inprogress, category);
     }
 
@@ -74,7 +76,8 @@ function updateHTML() {
         let description = element.description;
         let subtaskCount = element.subtaskCount;
         let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = element.priority;
+        let priority = generatePriorityHTML(element);
+
         document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, awaitFeedback, category);
     }
 
@@ -88,7 +91,8 @@ function updateHTML() {
         let description = element.description;
         let subtaskCount = element.subtaskCount;
         let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = element.priority;
+        let priority = generatePriorityHTML(element);
+
         document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, done, category);
     }
 }
@@ -100,6 +104,18 @@ function generateContactHTML(selectedContact) {
         contactHTML += `<div class="attributor-icon" style="background-color: ${contact.color}">${contact.initials}</div>`;
     }
     return contactHTML;
+}
+
+function generatePriorityHTML(task) {
+    let priorityHTML = '';
+    if (task.priorityHigh) {
+        priorityHTML = '<div class="priority-icon"><img src="assets/img/icons/prio_high.png" alt="High Priority"></div>';
+    } else if (task.priorityMedium) {
+        priorityHTML = '<div class="priority-icon"><img src="assets/img/icons/prio_medium.png" alt="Medium Priority"></div>';
+    } else if (task.priorityLow) {
+        priorityHTML = '<div class="priority-icon"><img src="assets/img/icons/prio_low.png" alt="Low Priority"></div>';
+    }
+    return priorityHTML;
 }
 
 
@@ -118,11 +134,13 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
                 <div class="progress-count" id="progress-count">${subtaskCount} Subtasks</div>
             </div>
             <div class="attributor-container">
-                ${assignedTo}
-                <div><img src="${priority}" alt=""></div>
+                <div class="assigned-container">${assignedTo}</div> 
+                <div>${priority}</div>
             </div>
+            
         </div>`;
 }
+
 
 
 
@@ -141,7 +159,7 @@ function openTask(taskId) {
     let title = task.title;
     let description = task.description;
     let dueDate = task.date;
-    let priority = task.priority;
+    let priority = generateDetailedPriorityHTML(task);
     let assignedTo = generateDetailedContactHTML(task.selectedContact);
 
     let subtasks = '';
@@ -193,6 +211,31 @@ function generateDetailedContactHTML(selectedContact) {
     }
     return contactHTML;
 }
+
+function generateDetailedPriorityHTML(task) {
+    let priorityHTML = '';
+    if (task.priorityHigh) {
+        priorityHTML = `
+            <div class="priority-detail-container">
+                <p>High</p> 
+                <img src="assets/img/icons/prio_high.png" alt="High Priority"> 
+            </div>`;
+    } else if (task.priorityMedium) {
+        priorityHTML = `
+            <div class="priority-detail-container">
+                <p>Medium</p>   
+                <img src="assets/img/icons/prio_medium.png" alt="Medium Priority">
+            </div>`;
+    } else if (task.priorityLow) {
+        priorityHTML = `
+            <div class="priority-detail-container">
+                <p>Low</p>
+                <img src="assets/img/icons/prio_low.png" alt="Low Priority">
+            </div>`;
+    }
+    return priorityHTML;
+}
+
 
 
 
