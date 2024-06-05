@@ -398,6 +398,14 @@
     align-items: center;
 }
 
+.subtask-container-detail-view {
+    margin-left: 16px;
+}
+
+.subtask-headline {
+    font-size: 20px;
+}
+
 .d-hide {
     display: none;
 }

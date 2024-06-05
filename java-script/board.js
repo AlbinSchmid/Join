@@ -194,7 +194,7 @@ function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, descripti
                 <div class="assigned-detail"><p>Assigned To:</p>
                     <div>${assignedTo}</div>
                 </div>
-                <div><p>Subtasks</p>${subtasks}</div>
+                <div><p class="subtask-headline">Subtasks</p>${subtasks}</div>
             </div>    
         </div>`;
 }
