@@ -1,13 +1,9 @@
 let userList = [];
 
-// function initlogIn() {
-//     loadUser();
-// }
 
 function closeBtnSignUpSuccesfully(event) {
     event.preventDefault();
 };
-
 
 
 async function addUser() {
@@ -27,7 +23,6 @@ async function addUser() {
     else {
         console.log('falsch');
     }
-    
 }
 
 
@@ -59,9 +54,9 @@ async function loadUser() {
         user.id = userID;
         userList.push(user);
     }
-
     console.log(userList);
 }
+
 
 function login() {
     let mail = document.getElementById('inputLoginMail');
@@ -76,6 +71,18 @@ function login() {
         let failedLogin = document.getElementById('failedLogin');
         failedLogin.innerHTML = "E-Mail or password are incorrect";;
     }
+}
+
+
+function guestLogin() {
+    let user = {
+        'initials': 'G',
+        'name': 'Gast'
+    };
+    let userAlsText = JSON.stringify(user);
+    localStorage.setItem('user', userAlsText);
+    window.location.href = "./summary.html";
+    console.log(userAlsText);
 }
 
 

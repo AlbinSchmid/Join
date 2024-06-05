@@ -17,14 +17,7 @@
 
 <body onload="loadUser()">
     <img class="logo-start" src="./assets/img/join_logo_blue_big.png" alt="join-logo">
-    <section class="login-head screen-animation">
-        <div class="login-head-top-right dflex-c-c">
-            <span>Not a Join user?</span>
-            <a href="./sign-up.html">
-                <button class="btn-small fz-16px cp">Sign up</button>
-            </a>
-        </div>
-    </section>
+   
 
     <section class="container-login-signup dflex-c-c screen-animation">
         <div class="login-mask dflex-c-c column">
@@ -42,13 +35,23 @@
                 </div>
                 <div class="footer-link dflex-c-c">
                     <button onclick="login()" type="submit" class="btn-small cp">Log in</button>
-                    <a href="./summary.html">
+                    <a onclick="guestLogin()" href="./summary.html">
                         <button type="button" class="btn-outline cp">Guest Log in</button>
                     </a>
                 </div>
             </form>
         </div>
     </section>
+
+    <section class="login-head screen-animation">
+        <div class="login-head-top-right dflex-c-c">
+            <span>Not a Join user?</span>
+            <a href="./sign-up.html">
+                <button class="btn-small fz-16px cp">Sign up</button>
+            </a>
+        </div>
+    </section>
+
 
     <section class="login-footer dflex-c-c screen-animation">
         <a href="./privacy-policy.html">Privacy Policy</a>

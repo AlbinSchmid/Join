@@ -26,5 +26,7 @@ function showUser() {
     }
     let userAsText = localStorage.getItem('user');
     let user = JSON.parse(userAsText);
+    console.log(user);
     userInitials.innerHTML = `<div>${user.initials}</div>`;
 }
+

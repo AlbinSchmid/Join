@@ -20,6 +20,12 @@
     flex-direction: column;
 }
 
+.text-line {
+    width: 150px;
+    border-bottom: 3px solid var(--highlight-color);
+    margin-top: 16px;
+}
+
 .login-head {
     height: 116px;
     display: flex;
@@ -170,7 +176,8 @@ input[type="password"]:focus {
     z-index: 1;
 }
 
-#failedLogin,#passwordIncorrect {
+#failedLogin,
+#passwordIncorrect {
     color: red;
 }
 
@@ -309,3 +316,101 @@ input[type="password"]:focus {
         opacity: 1;
     }
 }
+
+
+@media(max-width: 1024px) {
+    .logo-start {
+        width: 100px;
+        height: 122px;
+    }
+
+    .logo-end {
+        width: 64px;
+        height: 78px;
+    }
+
+    @keyframes logo-animation {
+        from {
+            width: 100px;
+            height: 122px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        to {
+            width: 64px;
+            height: 78px;
+            top: 80px;
+            left: 77px;
+            transform: revert-layer;
+        }
+    }
+
+    body {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    h1 {
+        font-size: 47px;
+
+    }
+
+    .text-line {
+        width: 88px;
+    }
+
+    .login-head {
+        position: relative;
+        padding-right: 0;
+    }
+
+    .login-mask,.signup-mask {
+        margin-top: 205.5px;
+        padding: 32px 10px;
+    }
+
+    .login-footer {
+        position: relative;
+        bottom: 0;
+    }
+
+    .footer-link {
+        gap: 21px;
+        flex-direction: column;
+    }
+
+    .footer-link button {
+        width: 180px;
+        height: 51px;
+    }
+
+    .container-login-signup {
+        position: relative;
+        top: 0;
+        bottom: 0;
+    }
+
+    .inputfield {
+        width: 364px;
+    }
+
+    .checkbox-signup {
+        margin: 30px 0px 20px 0px
+    }
+}
+
+
+
+
+@media(max-width: 430px) {
+
+    .inputfield {
+        width: 250px;
+    }
+}
+

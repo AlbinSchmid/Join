@@ -196,6 +196,10 @@ function showContact(id) {
 }
 
 
+function closeOpenContactDetails() {
+    document.getElementById('container-right').classList.toggle('d-none');
+}
+
 // ------------- EDIT ICONS ------------- //
 
 
