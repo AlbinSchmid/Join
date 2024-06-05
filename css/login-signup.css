@@ -16,6 +16,10 @@
     align-items: center;
 }
 
+a {
+    text-decoration: none;
+}
+
 .column {
     flex-direction: column;
 }
