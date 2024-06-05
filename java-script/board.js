@@ -35,86 +35,35 @@ async function loadTasks() {
 }
 
 
-function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, category) {
-    return /*html*/`
-        <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${category[index]['id']})">
-            <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div>
-            <div><p class="to-do-task">${title}</p></div>
-            <div><p class="to-do-task-description">${description}</p></div>
-            <div class="progress-container">
-                <div class="progress-wrapper">
-                    <div class="progress-bar" id="progress-bar"></div>
-                </div>
-                <div class="progress-count" id="progress-count">0/${subtaskCount} Subtasks</div>
-            </div>
-            <div class="attributor-container">
-                <div class="assigned-container">${assignedTo}</div> 
-                <div>${priority}</div>
-            </div>
-        </div>`;
-}
-
 function updateHTML() {
-    let todo = tasks.filter(t => t['category'] == 'to-do');
-    document.getElementById('to-do').innerHTML = '';
-    for (let index = 0; index < todo.length; index++) {
-        const element = todo[index];
-        let technicalTask = element.taskcategory;
-        let category = element.category;
-        let title = element.title;
-        let description = element.description;
-        let subtaskCount = element.subtaskCount;
-        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = generatePriorityHTML(element);
+    const dragAreas = ['to-do', 'in-progress', 'await-feedback', 'done'];
 
-        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, todo, category);
-    }
+    dragAreas.forEach(areaId => {
+        let tasksInArea = tasks.filter(t => t['category'] == areaId);
+        const areaElement = document.getElementById(areaId);
+        areaElement.innerHTML = '';
+    
 
-    let inprogress = tasks.filter(t => t['category'] == 'in-progress');
-    document.getElementById('in-progress').innerHTML = '';
-    for (let index = 0; index < inprogress.length; index++) {
-        const element = inprogress[index];
-        let technicalTask = element.taskcategory;
-        let category = element.category;
-        let title = element.title;
-        let description = element.description;
-        let subtaskCount = element.subtaskCount;
-        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = generatePriorityHTML(element);
+        for (let index = 0; index < tasksInArea.length; index++) {
+            const element = tasksInArea[index];
+            let technicalTask = element.taskcategory;
+            let category = element.category;
+            let title = element.title;
+            let description = element.description;
+            let subtaskCount = element.subtaskCount;
+            let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
+            let priority = generatePriorityHTML(element);
 
-        document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, inprogress, category);
-    }
-
-    let awaitFeedback = tasks.filter(t => t['category'] == 'await-feedback');
-    document.getElementById('await-feedback').innerHTML = '';
-    for (let index = 0; index < awaitFeedback.length; index++) {
-        const element = awaitFeedback[index];
-        let technicalTask = element.taskcategory;
-        let category = element.category;
-        let title = element.title;
-        let description = element.description;
-        let subtaskCount = element.subtaskCount;
-        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = generatePriorityHTML(element);
-
-        document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, awaitFeedback, category);
-    }
-
-    let done = tasks.filter(t => t['category'] == 'done');
-    document.getElementById('done').innerHTML = '';
-    for (let index = 0; index < done.length; index++) {
-        const element = done[index];
-        let technicalTask = element.taskcategory;
-        let category = element.category;
-        let title = element.title;
-        let description = element.description;
-        let subtaskCount = element.subtaskCount;
-        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = generatePriorityHTML(element);
-
-        document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, done, category);
-    }
+            areaElement.innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, tasksInArea, category);
+        }
+    });
 }
+
+/**
+ * 
+ * @param {*} selectedContact parameter for choosing the right object, within in the array
+ * @returns contactHTML with for-loop through array tasks, individuell css design for overlapping effect
+ */
 
 function generateContactHTML(selectedContact) {
     let contactHTML = '';
@@ -126,6 +75,12 @@ function generateContactHTML(selectedContact) {
     }
     return contactHTML;
 }
+
+/**
+ * 
+ * @param {} task 
+ * @returns priority image for updateHTML with if else query
+ */
 
 function generatePriorityHTML(task) {
     let priorityHTML = '';
@@ -140,6 +95,18 @@ function generatePriorityHTML(task) {
 }
 
 
+/**
+ * parameters got from updateHTML() to render the right content 
+ * @param {*} technicalTask 
+ * @param {*} title 
+ * @param {*} description 
+ * @param {*} subtaskCount 
+ * @param {*} assignedTo 
+ * @param {*} priority 
+ * @param {*} index 
+ * @param {*} category 
+ * @returns HTML for the board content
+ */
 
 function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, category) {
     return /*html*/`
@@ -160,9 +127,9 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
         </div>`;
 }
 
-
-
-
+/**
+ * updates progressBar but does not work correctly yet
+ */
 function updateProgressBar() {
     let totalSubtasks = document.querySelectorAll('.subtask-container-detail-view input[type="checkbox"]').length;
     let completedSubtasks = document.querySelectorAll('.subtask-container-detail-view input[type="checkbox"]:checked').length;
@@ -174,6 +141,12 @@ function updateProgressBar() {
     document.getElementById('progress-count').innerHTML = `${completedSubtasks}/${totalSubtasks} Subtasks`;
 }
 
+/**
+ * calls the getTaskDetailViewHTML where are more informations rendered, and also a callback function for the progress bar
+ * @param {*} taskId parameter necessary to get right task container and open the right content
+ * @param {*} callback 
+ * @returns 
+ */
 
 function openTask(taskId, callback) {
     let container = document.getElementById('task-detail-view-container');
@@ -211,6 +184,10 @@ function openTask(taskId, callback) {
     container.dataset.callback = callback;
 }
 
+/**
+ * closes the fullscreen task view
+ */
+
 function closeTask() {
     let container = document.getElementById('task-detail-view-container');
 
@@ -224,7 +201,18 @@ function closeTask() {
     container.classList.remove('d-block');
 }
 
-
+/**
+ * 
+ * @param {*} taskId 
+ * @param {*} technicalTask 
+ * @param {*} title 
+ * @param {*} subtasks 
+ * @param {*} description 
+ * @param {*} dueDate 
+ * @param {*} priority 
+ * @param {*} assignedTo 
+ * @returns fullscreen View with more informations then the normal board view, parameters deliever the right objects out of the Array
+ */
 
 function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo) {
     return /*html*/`
@@ -248,6 +236,12 @@ function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, descripti
         </div>`;
 }
 
+/**
+ * 
+ * @param {*} selectedContact 
+ * @returns contact name is added for the detail view
+ */
+
 function generateDetailedContactHTML(selectedContact) {
     if (!selectedContact || selectedContact.length === 0) {
         return '';
@@ -264,6 +258,12 @@ function generateDetailedContactHTML(selectedContact) {
     }
     return contactHTML;
 }
+
+/**
+ * 
+ * @param {*} task 
+ * @returns priority images with extra text besides the image
+ */
 
 function generateDetailedPriorityHTML(task) {
     let priorityHTML = '';
@@ -291,6 +291,10 @@ function generateDetailedPriorityHTML(task) {
     return priorityHTML;
 }
 
+/**
+ * calls the addTask function on the board.html 
+ */
+
 function addTask() {
     let container = document.getElementById('addTask-board');
     container.classList.remove('d-none');
@@ -315,6 +319,10 @@ function addTask() {
     getAddTaskHTML();
 }
 
+/**
+ * calls die getAddTaskHTML which is devided into 4 parts, cause of the fullscreen view on the board.html
+ */
+
 function getAddTaskHTML() {
     let containerHeader = document.getElementById('addTask-board-header');
     let container = document.getElementById('addTask-board-render-container');
@@ -325,6 +333,11 @@ function getAddTaskHTML() {
     setupDropdown();
     renderContactOptions(); // Ensure contacts are rendered
 }
+
+/**
+ * 
+ * @returns the left side of the addTask content window
+ */
 
 function getAddTaskHTMLLeftSide() {
     return /*html*/`
@@ -351,6 +364,10 @@ function getAddTaskHTMLLeftSide() {
       <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">`;
 }
 
+/**
+ * renders the contact options within the left HTML side
+ */
+
 function renderContactOptions() {
     let selectElement = document.getElementById('task-assignment');
     let contactsHTML = '';
@@ -369,12 +386,16 @@ function renderContactOptions() {
     selectElement.innerHTML = contactsHTML;
 }
 
+/**
+ * retunrs the selected contacts and creates the div content with the attributor informations
+ */
+
 function renderSelectedContacts() {
     let checkboxes = document.querySelectorAll('#task-assignment input[type="checkbox"]:checked');
     let selectedContactsContainer = document.getElementById('selected-contacts');
-    selectedContactsContainer.innerHTML = ''; // Clear previous selection
+    selectedContactsContainer.innerHTML = ''; 
 
-    selectedContacts = []; // Clear the array
+    selectedContacts = []; 
 
     for (let i = 0; i < checkboxes.length; i++) {
         const checkbox = checkboxes[i];
@@ -394,6 +415,10 @@ function renderSelectedContacts() {
 
     console.log(selectedContacts);
 }
+
+/**
+ * activates the contact dropdown menu
+ */
 
 function setupDropdown() {
     const input = document.getElementById('dropdownInput');
@@ -447,7 +472,6 @@ function getAddTaskHTMLRightSide() {
                         </div>
                     </label>
                 </div>
-                <!-- options müssen ausgelesen werden -->  
           <h2>Category<p class="required-color">*</p></h2>
             <form>
                 <div class="custom-select-container">
@@ -458,7 +482,6 @@ function getAddTaskHTMLRightSide() {
                     </select>
                 </div>
             </form>
-                <!-- value muss ausgelesen werden für das Array, nachdem select, soll wieder die ersten Option angzeigt werden -->
             <h2>Subtasks</h2>
                     <form>
                         <div class="input-container">
@@ -472,9 +495,13 @@ function getAddTaskHTMLRightSide() {
                         </div>
                         <div class="subtasks-container"></div>
                     </form>
-
           </div>`;
 }
+
+/**
+ * 
+ * @returns addTask header HTML
+ */
 
 function getAddTaskHTMLHeader() {
     return /*html*/`
@@ -485,9 +512,18 @@ function getAddTaskHTMLHeader() {
     `
 }
 
+/**
+ * closes the addTask window 
+ */
+
 function closeAddTask() {
     document.getElementById('addTask-board').classList.add('d-none');
 }
+
+/**
+ * 
+ * @returns addTask footer HTML
+ */
 
 function getAddTaskHTMLFooter() {
     return /*html*/`
@@ -501,6 +537,11 @@ function getAddTaskHTMLFooter() {
     `
 }
 
+/**
+ * 
+ * @param {*} clickedCheckbox parameter to check the input of the checkbox
+ */
+
 function handleCheckboxClick(clickedCheckbox) {
     const checkboxes = document.querySelectorAll('.dp-flex-jc-sb input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -509,6 +550,11 @@ function handleCheckboxClick(clickedCheckbox) {
         }
     });
 }
+
+/**
+ * 
+ * @returns creates a subtask within the addTask window
+ */
 
 function createSubtask() {
     let inputField = document.getElementById('task-subtasks');
@@ -521,10 +567,14 @@ function createSubtask() {
     }
 
     subtasks.push(subtaskText);
-    subtaskCount++; // Erhöhe den Subtask-Zähler
+    subtaskCount++; 
     clearInput();
     renderSubtasks();
 }
+
+/**
+ * renders the HTML content of the subtask created
+ */
 
 function renderSubtasks() {
     let container = document.querySelector('.subtasks-container');
@@ -535,6 +585,12 @@ function renderSubtasks() {
         container.innerHTML += getSubtasksHTML(subtask);
     }
 }
+
+/**
+ * 
+ * @param {*} subtaskText 
+ * @returns the html subtask text within div containers 
+ */
 
 function getSubtasksHTML(subtaskText) {
     return /*html*/`
@@ -552,6 +608,10 @@ function getSubtasksHTML(subtaskText) {
     `;
 }
 
+/**
+ * 
+ * @param {*} subtaskText edits the created and rendered subtask
+ */
 
 function editSubtask(subtaskText) {
     let newText = prompt('Edit your subtask:', subtaskText);
@@ -562,7 +622,7 @@ function editSubtask(subtaskText) {
         if (index !== -1) {
             subtasks[index] = newText;
         }
-        renderSubtasks(); // Aktualisiere die Anzeige
+        renderSubtasks(); 
     }
 }
 
@@ -600,10 +660,18 @@ function showInput() {
     document.getElementById('subtask-btn-container').style.display = 'flex';
 }
 
+/**
+ * resets the addTask window 
+ */
 
 function clearTask() {
     init();
 }
+
+/**
+ * 
+ * @returns the selected options out of the addTask window and pushes them into the json array, also updates the firebase 
+ */
 
 async function createTask() {
     let taskTitle = document.getElementById('task-title').value;
