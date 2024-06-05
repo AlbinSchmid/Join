@@ -55,66 +55,29 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
 }
 
 function updateHTML() {
-    let todo = tasks.filter(t => t['category'] == 'to-do');
-    document.getElementById('to-do').innerHTML = '';
-    for (let index = 0; index < todo.length; index++) {
-        const element = todo[index];
-        let technicalTask = element.taskcategory;
-        let category = element.category;
-        let title = element.title;
-        let description = element.description;
-        let subtaskCount = element.subtaskCount;
-        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = generatePriorityHTML(element);
+    const dragAreas = ['to-do', 'in-progress', 'await-feedback', 'done'];
 
-        document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, todo, category);
-    }
+    dragAreas.forEach(areaId => {
+        let tasksInArea = tasks.filter(t => t['category'] == areaId);
+        const areaElement = document.getElementById(areaId);
+        areaElement.innerHTML = '';
+    
 
-    let inprogress = tasks.filter(t => t['category'] == 'in-progress');
-    document.getElementById('in-progress').innerHTML = '';
-    for (let index = 0; index < inprogress.length; index++) {
-        const element = inprogress[index];
-        let technicalTask = element.taskcategory;
-        let category = element.category;
-        let title = element.title;
-        let description = element.description;
-        let subtaskCount = element.subtaskCount;
-        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = generatePriorityHTML(element);
+        for (let index = 0; index < tasksInArea.length; index++) {
+            const element = tasksInArea[index];
+            let technicalTask = element.taskcategory;
+            let category = element.category;
+            let title = element.title;
+            let description = element.description;
+            let subtaskCount = element.subtaskCount;
+            let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
+            let priority = generatePriorityHTML(element);
 
-        document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, inprogress, category);
-    }
-
-    let awaitFeedback = tasks.filter(t => t['category'] == 'await-feedback');
-    document.getElementById('await-feedback').innerHTML = '';
-    for (let index = 0; index < awaitFeedback.length; index++) {
-        const element = awaitFeedback[index];
-        let technicalTask = element.taskcategory;
-        let category = element.category;
-        let title = element.title;
-        let description = element.description;
-        let subtaskCount = element.subtaskCount;
-        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = generatePriorityHTML(element);
-
-        document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, awaitFeedback, category);
-    }
-
-    let done = tasks.filter(t => t['category'] == 'done');
-    document.getElementById('done').innerHTML = '';
-    for (let index = 0; index < done.length; index++) {
-        const element = done[index];
-        let technicalTask = element.taskcategory;
-        let category = element.category;
-        let title = element.title;
-        let description = element.description;
-        let subtaskCount = element.subtaskCount;
-        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
-        let priority = generatePriorityHTML(element);
-
-        document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, done, category);
-    }
+            areaElement.innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, tasksInArea, category);
+        }
+    });
 }
+
 
 function generateContactHTML(selectedContact) {
     let contactHTML = '';
