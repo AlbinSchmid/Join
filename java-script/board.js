@@ -142,7 +142,7 @@ function openTask(taskId) {
     let description = task.description;
     let dueDate = task.date;
     let priority = task.priority;
-    let assignedTo = task.assignment;
+    let assignedTo = generateDetailedContactHTML(task.selectedContact);
 
     let subtasks = '';
     if (task.subtasks && task.subtasks.length > 0) {
@@ -180,6 +180,20 @@ function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, descripti
             </div>    
         </div>`;
 }
+
+function generateDetailedContactHTML(selectedContact) {
+    let contactHTML = '';
+    for (let i = 0; i < selectedContact.length; i++) {
+        let contact = selectedContact[i];
+        contactHTML += `
+            <div class="contact-detail">
+                <div class="attributor-icon" style="background-color: ${contact.color}">${contact.initials}</div>
+                <p>${contact.name}</p>
+            </div>`;
+    }
+    return contactHTML;
+}
+
 
 
 

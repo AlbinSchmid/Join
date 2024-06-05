@@ -368,19 +368,18 @@
 
 .attributor-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-top: 24px;
 }
 
 .attributor-icon {
-    background-color: #FFBB2B;
-    height: 32px;
-    width: 32px;
+    height: 42px;
+    width: 42px;
     border: 1px solid #FFFFFF;
     border-radius: 45px;
     color: #FFFFFF;
     font-size: 12px;
+    font-weight: 400;
     text-align: center;
     align-items: center;
     display: flex;
@@ -449,8 +448,9 @@
     margin-left: 12px;
 }
 
-.detail-contacts {
+.contact-detail {
     display: flex;
     align-items: center;
-    gap: 12px;
+    margin-left: 16px;
+    gap: 16px;
 }
