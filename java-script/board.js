@@ -200,6 +200,10 @@ function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, descripti
 }
 
 function generateDetailedContactHTML(selectedContact) {
+    if (!selectedContact || selectedContact.length === 0) {
+        return '';
+    }
+    
     let contactHTML = '';
     for (let i = 0; i < selectedContact.length; i++) {
         let contact = selectedContact[i];
@@ -216,25 +220,28 @@ function generateDetailedPriorityHTML(task) {
     let priorityHTML = '';
     if (task.priorityHigh) {
         priorityHTML = `
-            <div class="priority-detail-container">
-                <p>High</p> 
-                <img src="assets/img/icons/prio_high.png" alt="High Priority"> 
+            <div class="priority-detail">
+                <img src="path/to/high-priority-icon.png" alt="High Priority">
+                <p>High</p>
             </div>`;
     } else if (task.priorityMedium) {
         priorityHTML = `
-            <div class="priority-detail-container">
-                <p>Medium</p>   
-                <img src="assets/img/icons/prio_medium.png" alt="Medium Priority">
+            <div class="priority-detail">
+                <img src="path/to/medium-priority-icon.png" alt="Medium Priority">
+                <p>Medium</p>
             </div>`;
     } else if (task.priorityLow) {
         priorityHTML = `
-            <div class="priority-detail-container">
+            <div class="priority-detail">
+                <img src="path/to/low-priority-icon.png" alt="Low Priority">
                 <p>Low</p>
-                <img src="assets/img/icons/prio_low.png" alt="Low Priority">
             </div>`;
+    } else {
+        priorityHTML = '';
     }
     return priorityHTML;
 }
+
 
 
 
