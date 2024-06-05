@@ -1,6 +1,5 @@
 let tasks = [];
 let allContacts = [];
-let currentTask = 0;
 let currentIndex = 0;
 let subtasks = [];
 let selectedContacts = [];
@@ -145,7 +144,18 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
 
 
 
-function openTask(taskId) {
+function updateProgressBar() {
+    let totalSubtasks = document.querySelectorAll('.subtask-container-detail-view input[type="checkbox"]').length;
+    let completedSubtasks = document.querySelectorAll('.subtask-container-detail-view input[type="checkbox"]:checked').length;
+
+    let percent = (completedSubtasks / totalSubtasks) * 100;
+    percent = Math.round(percent);
+    
+    document.getElementById('progress-bar').style.width = percent + "%";
+    document.getElementById('progress-count').innerHTML = completedSubtasks + "/" + totalSubtasks + " Subtasks";
+}
+
+function openTask(taskId, callback) {
     let container = document.getElementById('task-detail-view-container');
     let task = tasks.find(task => task.id === taskId);
 
@@ -153,6 +163,8 @@ function openTask(taskId) {
         console.error('Task not found');
         return;
     }
+
+    currentTask = tasks.findIndex(task => task.id === taskId);
 
     let technicalTask = task.taskcategory;
     let category = task.category;
@@ -166,7 +178,7 @@ function openTask(taskId) {
     if (task.subtasks && task.subtasks.length > 0) {
         for (let i = 0; i < task.subtasks.length; i++) {
             let subtask = task.subtasks[i];
-            subtasks += `<div class="subtask-container-detail-view"><input type="checkbox" id="subtask-checkbox${i}"> ${subtask}</div>`;
+            subtasks += `<div class="subtask-container-detail-view"><input type="checkbox" id="subtask-checkbox${i}" onclick="updateProgressBar()"> ${subtask}</div>`;
         }
     }
 
@@ -174,13 +186,25 @@ function openTask(taskId) {
     container.innerHTML = getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category);
     container.classList.remove('d-hide');
     container.classList.add('d-block');
+
+    // Rückruffunktion speichern, um sie später beim Schließen des Tasks aufzurufen
+    container.dataset.callback = callback;
 }
 
 function closeTask() {
     let container = document.getElementById('task-detail-view-container');
+
+    // Aufruf der Rückruffunktion mit der aktualisierten Subtask-Anzahl
+    if (typeof container.dataset.callback === 'function') {
+        let task = tasks.find(task => task.id === taskId);
+        container.dataset.callback(task.subtasks.length);
+    }
+
     container.classList.add('d-hide');
     container.classList.remove('d-block');
 }
+
+
 
 function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo) {
     return /*html*/`
@@ -241,11 +265,6 @@ function generateDetailedPriorityHTML(task) {
     }
     return priorityHTML;
 }
-
-
-
-
-
 
 function addTask() {
     let container = document.getElementById('addTask-board');
@@ -636,22 +655,6 @@ async function loadAllContacts() {
         allContacts.push(contact);
     }
     console.log(allContacts);
-}
-
-// Funktion zur Aktualisierung der Fortschrittsanzeige
-function updateProgressBar() {
-    let totalSubtasks = tasks.length; // Die Länge von tasks als totalSubtasks übernehmen
-    if (totalSubtasks === 0) {
-        // Vermeiden von Division durch 0
-        document.getElementById('progress-bar').style.width = "0%";
-        document.getElementById('progress-count').innerHTML = "0/0 Subtasks";
-        return;
-    }
-    
-    let percent = (currentTask / totalSubtasks) * 100; // Verwendung von totalSubtasks
-    percent = Math.round(percent);
-    document.getElementById('progress-bar').style.width = percent + "%";
-    document.getElementById('progress-count').innerHTML = (currentTask + 1) + "/" + totalSubtasks + " Subtasks"; // Aktualisierung der Subtask-Anzeige
 }
 
 async function includeHTML() {

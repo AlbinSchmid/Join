@@ -343,6 +343,11 @@
     font-size: 20px;
 }
 
+.subasks-headline {
+    font-size: 20px;
+    
+}
+
 .to-do-task {
     font-weight: 700;
     margin: 0;
