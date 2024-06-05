@@ -1,5 +1,7 @@
 let tasks = [];
 let allContacts = [];
+let currentTask = 0;
+let currentIndex = 0;
 let subtasks = [];
 let selectedContacts = [];
 let subtaskCount = 0;
@@ -16,6 +18,7 @@ let currentDraggedElement;
 async function init() {
     await loadTasks();
     await loadAllContacts();
+    includeHTML();
     updateHTML();
 }
 
@@ -45,8 +48,8 @@ function updateHTML() {
         let title = todo[index].title;
         let description = todo[index].description;
         let subtaskCount = todo[index].subtaskCount;
-        let assignedTo = todo[index].selectedContact[index].initials
-        let priority = getPriority(index);
+        let assignedTo = todo[index].assignment;
+        let priority = todo[index].priority;
 
         document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, todo, category);
     }
@@ -64,7 +67,7 @@ function updateHTML() {
         let description = inprogress[index].description;
         let subtaskCount = inprogress[index].subtaskCount;
         let assignedTo = inprogress[index].assignment;
-        let priority = getPriority(index);
+        let priority = inprogress[index].priority;
 
         document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, inprogress, category);
     }
@@ -82,7 +85,7 @@ function updateHTML() {
         let description = awaitFeedback[index].description;
         let subtaskCount = awaitFeedback[index].subtaskCount;
         let assignedTo = awaitFeedback[index].assignment;
-        let priority = getPriority(index);
+        let priority = awaitFeedback[index].priority;
 
         document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, awaitFeedback, category);
     }
@@ -100,30 +103,16 @@ function updateHTML() {
         let description = done[index].description;
         let subtaskCount = done[index].subtaskCount;
         let assignedTo = done[index].assignment;
-        let priority = getPriority(index);
+        let priority = done[index].priority;
 
         document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, done, category);
     }
 }
 
-function getPriority(index) {
-    let priorityClass = 'priority';
-
-    if(tasks[index].priorityHigh === true) {
-        priorityClass += ' high';
-    } else if (tasks[index].priorityMedium === true) {
-        priorityClass += ' medium';
-    } else if (tasks[index].priorityLow === true) {
-        priorityClass += ' low';
-    }
-
-    return priorityClass;
-}
-
 
 function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, category) {
     return /*html*/`
-        <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${index})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
+        <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${category[index]['id']})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
             <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task">${title}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
                 <div><p class="to-do-task-description">${description}</p></div>
@@ -140,16 +129,22 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
         </div>`;
 }
 
-function openTask(index) {
+
+function openTask(taskId) {
     let container = document.getElementById('task-detail-view-container');
-    let task = tasks[index];
+    let task = tasks.find(task => task.id === taskId);
+
+    if (!task) {
+        console.error('Task not found');
+        return;
+    }
 
     let technicalTask = task.taskcategory;
-    let category = task.category
+    let category = task.category;
     let title = task.title;
     let description = task.description;
     let dueDate = task.date;
-    let priority = getPriority(index);
+    let priority = task.priority;
     let assignedTo = task.assignment;
 
     let subtasks = '';
@@ -161,7 +156,7 @@ function openTask(index) {
     }
 
     container.innerHTML = '';
-    container.innerHTML = getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category);
+    container.innerHTML = getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category);
     container.classList.remove('d-hide');
     container.classList.add('d-block');
 }
@@ -172,15 +167,15 @@ function closeTask() {
     container.classList.remove('d-block');
 }
 
-function getTaskDetailViewHTML(index, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category) {
+function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo) {
     return /*html*/`
-        <div id="detail-task${index}" class="detail-task-container">
+        <div id="detail-task${taskId}" class="detail-task-container">
             <div class="detail-task-overview">
                 <div class="technical-task-container-detail"><p class="technical-task-detail">${technicalTask}</p><img class="close-detail-button" onclick="closeTask()" src="assets/img/icons/close__detailview_icon.svg" alt="close"></div>
                 <div><p class="title-detail">${title}</p></div>
                 <div><p class="description-detail">${description}</p></div>
                 <div class="date-detail"><p>Due Date:</p>${dueDate}</div>
-                <div class="priority-detail"><p>Priority:</p><div class="${priority}"></div></div>
+                <div class="priority-detail"><p>Priority:</p>${priority}</div>
                 <div class="assigned-detail"><p>Assigned To:</p>
                     <div>${assignedTo}</div>
                 </div>
@@ -188,6 +183,7 @@ function getTaskDetailViewHTML(index, technicalTask, title, subtasks, descriptio
             </div>    
         </div>`;
 }
+
 
 
 function addTask() {
@@ -595,4 +591,18 @@ function updateProgressBar() {
     percent = Math.round(percent);
     document.getElementById('progress-bar').style.width = percent + "%";
     document.getElementById('progress-count').innerHTML = (currentTask + 1) + "/" + totalSubtasks + " Subtasks"; // Aktualisierung der Subtask-Anzeige
+}
+
+async function includeHTML() {
+    let includeElements = document.querySelectorAll('[w3-include-html]');
+    for (let i = 0; i < includeElements.length; i++) {
+        const element = includeElements[i];
+        file = element.getAttribute("w3-include-html"); // "includes/header.html"
+        let resp = await fetch(file);
+        if (resp.ok) {
+            element.innerHTML = await resp.text();
+        } else {
+            element.innerHTML = 'Page not found';
+        }
+    }
 }
