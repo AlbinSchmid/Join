@@ -37,97 +37,94 @@ async function loadTasks() {
 
 function updateHTML() {
     let todo = tasks.filter(t => t['category'] == 'to-do');
-
     document.getElementById('to-do').innerHTML = '';
-
     for (let index = 0; index < todo.length; index++) {
         const element = todo[index];
-
-        let technicalTask = todo[index].taskcategory;
-        let category = todo[index].category
-        let title = todo[index].title;
-        let description = todo[index].description;
-        let subtaskCount = todo[index].subtaskCount;
-        let assignedTo = todo[index].assignment;
-        let priority = todo[index].priority;
-
+        let technicalTask = element.taskcategory;
+        let category = element.category;
+        let title = element.title;
+        let description = element.description;
+        let subtaskCount = element.subtaskCount;
+        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
+        let priority = element.priority;
         document.getElementById('to-do').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, todo, category);
     }
 
     let inprogress = tasks.filter(t => t['category'] == 'in-progress');
-
     document.getElementById('in-progress').innerHTML = '';
-
     for (let index = 0; index < inprogress.length; index++) {
         const element = inprogress[index];
-
-        let technicalTask = inprogress[index].taskcategory;
-        let category = inprogress[index].category
-        let title = inprogress[index].title;
-        let description = inprogress[index].description;
-        let subtaskCount = inprogress[index].subtaskCount;
-        let assignedTo = inprogress[index].assignment;
-        let priority = inprogress[index].priority;
-
+        let technicalTask = element.taskcategory;
+        let category = element.category;
+        let title = element.title;
+        let description = element.description;
+        let subtaskCount = element.subtaskCount;
+        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
+        let priority = element.priority;
         document.getElementById('in-progress').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, inprogress, category);
     }
 
     let awaitFeedback = tasks.filter(t => t['category'] == 'await-feedback');
-
     document.getElementById('await-feedback').innerHTML = '';
-
     for (let index = 0; index < awaitFeedback.length; index++) {
         const element = awaitFeedback[index];
-
-        let technicalTask = awaitFeedback[index].taskcategory;
-        let category = awaitFeedback[index].category
-        let title = awaitFeedback[index].title;
-        let description = awaitFeedback[index].description;
-        let subtaskCount = awaitFeedback[index].subtaskCount;
-        let assignedTo = awaitFeedback[index].assignment;
-        let priority = awaitFeedback[index].priority;
-
+        let technicalTask = element.taskcategory;
+        let category = element.category;
+        let title = element.title;
+        let description = element.description;
+        let subtaskCount = element.subtaskCount;
+        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
+        let priority = element.priority;
         document.getElementById('await-feedback').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, awaitFeedback, category);
     }
 
     let done = tasks.filter(t => t['category'] == 'done');
-
     document.getElementById('done').innerHTML = '';
-
     for (let index = 0; index < done.length; index++) {
         const element = done[index];
-
-        let technicalTask = done[index].taskcategory;
-        let category = done[index].category
-        let title = done[index].title;
-        let description = done[index].description;
-        let subtaskCount = done[index].subtaskCount;
-        let assignedTo = done[index].assignment;
-        let priority = done[index].priority;
-
+        let technicalTask = element.taskcategory;
+        let category = element.category;
+        let title = element.title;
+        let description = element.description;
+        let subtaskCount = element.subtaskCount;
+        let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
+        let priority = element.priority;
         document.getElementById('done').innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, done, category);
     }
 }
 
+function generateContactHTML(selectedContact) {
+    let contactHTML = '';
+    for (let i = 0; i < selectedContact.length; i++) {
+        let contact = selectedContact[i];
+        contactHTML += `<div class="attributor-icon" style="background-color: ${contact.color}">${contact.initials}</div>`;
+    }
+    return contactHTML;
+}
+
+
+
 
 function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, category) {
     return /*html*/`
-        <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${category[index]['id']})"> <!-- draggable per ID parameter (Junus Video + Code enstprechend implementieren) -->
-            <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
-                <div><p class="to-do-task">${title}</p></div> <!-- HTML Code muss entsprechend umgeschrieben werden, sodass von der addTask() Funktion die richtigen Parameter übergeben werden -->
-                <div><p class="to-do-task-description">${description}</p></div>
-                <div class="progress-container">
-                    <div class="progress-wrapper">
-                        <div class="progress-bar" id="progress-bar"></div>
-                    </div>
-                    <div class="progress-count" id="progress-count">${subtaskCount} Subtasks</div>
+        <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${category[index]['id']})">
+            <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div>
+            <div><p class="to-do-task">${title}</p></div>
+            <div><p class="to-do-task-description">${description}</p></div>
+            <div class="progress-container">
+                <div class="progress-wrapper">
+                    <div class="progress-bar" id="progress-bar"></div>
                 </div>
+                <div class="progress-count" id="progress-count">${subtaskCount} Subtasks</div>
+            </div>
             <div class="attributor-container">
-                <div><p class="attributor-icon">${assignedTo}</p></div> <!-- auswählen bei addTask() -->
-                <div><img src="${priority}" alt=""></div> <!-- auswählen bei addTask() -->
+                ${assignedTo}
+                <div><img src="${priority}" alt=""></div>
             </div>
         </div>`;
 }
+
+
 
 
 function openTask(taskId) {
