@@ -510,3 +510,21 @@
     margin-left: 16px;
     gap: 16px;
 }
+
+@media(max-width: 1024px) {
+    .addTask-board-header {
+        width: 440px;
+    }
+
+    .addTask-board-render-container {
+        display: block;
+    }
+
+    .addTask-board-footer {
+        width: 440px;
+    }
+
+    .mg-l-r {
+        display: none;
+    }
+}
