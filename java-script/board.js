@@ -34,6 +34,26 @@ async function loadTasks() {
     console.log(tasks); // Zeigt die geladenen Tasks an
 }
 
+
+function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, category) {
+    return /*html*/`
+        <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${category[index]['id']})">
+            <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div>
+            <div><p class="to-do-task">${title}</p></div>
+            <div><p class="to-do-task-description">${description}</p></div>
+            <div class="progress-container">
+                <div class="progress-wrapper">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <div class="progress-count" id="progress-count">0/${subtaskCount} Subtasks</div>
+            </div>
+            <div class="attributor-container">
+                <div class="assigned-container">${assignedTo}</div> 
+                <div>${priority}</div>
+            </div>
+        </div>`;
+}
+
 function updateHTML() {
     let todo = tasks.filter(t => t['category'] == 'to-do');
     document.getElementById('to-do').innerHTML = '';
@@ -100,7 +120,9 @@ function generateContactHTML(selectedContact) {
     let contactHTML = '';
     for (let i = 0; i < selectedContact.length; i++) {
         let contact = selectedContact[i];
-        contactHTML += `<div class="attributor-icon" style="background-color: ${contact.color}">${contact.initials}</div>`;
+        // Dynamische Zuweisung der CSS-Eigenschaften basierend auf dem Index
+        const assignedContainerStyle = `z-index: ${i + 1}; margin-left: ${i === 0 ? '0' : '-10px'};`;
+        contactHTML += `<div class="attributor-icon" style="background-color: ${contact.color}; ${assignedContainerStyle}">${contact.initials}</div>`;
     }
     return contactHTML;
 }
@@ -116,7 +138,6 @@ function generatePriorityHTML(task) {
     }
     return priorityHTML;
 }
-
 
 
 
@@ -138,8 +159,6 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
             </div>
         </div>`;
 }
-
-
 
 
 
