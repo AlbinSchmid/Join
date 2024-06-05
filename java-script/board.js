@@ -136,7 +136,6 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
                 <div class="assigned-container">${assignedTo}</div> 
                 <div>${priority}</div>
             </div>
-            
         </div>`;
 }
 
@@ -221,6 +220,11 @@ function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, descripti
                     <div>${assignedTo}</div>
                 </div>
                 <div><p class="subasks-headline">Subtasks</p>${subtasks}</div>
+                <div class="edit-detail-container">
+                    <div class="delete-detail-btn"><img src="assets/img/icons/delete_icon.svg" alt="delete"><p>Delete</p></div>
+                    <img src="assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
+                    <div class="edit-detail-btn"><img src="assets/img/icons/Subtasks_edit_icon.svg" alt="edit"><p>Edit</p></div>
+                </div>
             </div>    
         </div>`;
 }
