@@ -402,16 +402,16 @@ h2 {
 }
 
 .selectfield-task-category {
-    -webkit-appearance: none; /* Entfernt den Standard-Pfeil in Webkit-Browsern */
-    -moz-appearance: none; /* Entfernt den Standard-Pfeil in Firefox */
-    appearance: none; /* Entfernt den Standard-Pfeil in anderen Browsern */
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none; 
     margin-top: 8px;
     width: 100%;
     height: 48px;
     padding-left: 16px;
     padding-top: 8px;
     padding-bottom: 8px;
-    padding-right: 40px; /* Platz für das Pfeilsymbol */
+    padding-right: 40px; 
     font-family: Inter;
     font-size: 20px;
     border-radius: 10px;
@@ -428,9 +428,9 @@ h2 {
     content: '';
     position: absolute;
     right: 16px; 
-    top: 50%; /* Einheitlich auf 50% setzen */
-    transform: translateY(-50%) rotate(0deg); /* Initial position */
-    transition: transform 0.3s ease; /* Animation */
+    top: 60%; 
+    transform: translateY(-50%) rotate(0deg); 
+    transition: transform 0.3s ease; 
     width: 24px; 
     height: 24px; 
     background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
@@ -439,7 +439,7 @@ h2 {
 }
 
 .custom-select-container.open::after {
-    transform: translateY(-50%) rotate(180deg); /* Rotation */
+    transform: translateY(-50%) rotate(180deg); 
 }
 
 .selectfield-task-category:hover {
@@ -451,8 +451,6 @@ h2 {
     outline: none;
     border: 1px solid #29ABE2;
 }
-
-
 
 .input-container {
     margin-top: 8px;
@@ -511,7 +509,7 @@ h2 {
 
 .subtask-btn-container {
     gap: 8px;
-    display: none; /* Initially hidden */
+    display: none;
     align-items: center;
 }
 
