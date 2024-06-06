@@ -21,7 +21,7 @@ async function addUser() {
     if (passwordCorrect(user, password, password2)) {
     }
     else {
-        console.log('falsch');
+        console.error('password incorrect');
     }
 }
 
@@ -54,7 +54,6 @@ async function loadUser() {
         user.id = userID;
         userList.push(user);
     }
-    console.log(userList);
 }
 
 
@@ -62,7 +61,6 @@ function login() {
     let mail = document.getElementById('inputLoginMail');
     let password = document.getElementById('inputLoginPassword');
     let user = userList.find( u => u.mail == mail.value && u.password == password.value);
-    console.log(user);
     if (user) {
         let userAsText = JSON.stringify(user);
         localStorage.setItem('user', userAsText);
@@ -82,7 +80,6 @@ function guestLogin() {
     let userAlsText = JSON.stringify(user);
     localStorage.setItem('user', userAlsText);
     window.location.href = "./summary.html";
-    console.log(userAlsText);
 }
 
 
