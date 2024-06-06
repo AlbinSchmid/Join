@@ -138,13 +138,13 @@ h2 {
     width: 382px;
     height: 44px;
     padding-left: 16px;
-    padding-right: 40px; /* Leave space for the arrow */
+    padding-right: 40px; 
     font-family: Inter;
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     background-color: #FFFFFF;
-    position: relative; /* Ensure it can contain the arrow */
+    position: relative; 
 }
 
 .assignment-select-container {
@@ -165,15 +165,15 @@ h2 {
 .assignment-select-container::after {
     content: '';
     position: absolute;
-    right: 16px; /* Distance from the right edge */
+    right: 16px; 
     top: 60%;
     transform: translateY(-50%) rotate(0deg);
     transition: transform 0.3s ease;
-    width: 24px; /* Arrow width */
-    height: 24px; /* Arrow height */
+    width: 24px; 
+    height: 24px; 
     background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
-    background-size: 24px 24px; /* Arrow size */
-    pointer-events: none; /* Make the arrow not clickable */
+    background-size: 24px 24px; 
+    pointer-events: none; 
 }
 
 .assignment-select-container.open::after {
