@@ -350,17 +350,40 @@ function getAddTaskHTMLLeftSide() {
                         <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
                     </form>
             <h2>Assigned to</h2>
-            <div>
-                <form>
-                    <div class="assignment-select-container">
-                        <input id="dropdownInput" class="selectfield-task-assignment" placeholder="Select contacts to assign">
-                        <div id="task-assignment" class="dropdown-content"></div>
+                <div>
+                    <form>
+                        <div class="assignment-select-container">
+                            <input id="dropdownInput" class="assignment-task-assignment" placeholder="Select contacts to assign">
+                            <div id="task-assignment" class="dropdown-content"></div>
+                        </div>
                         <div id="selected-contacts"></div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
         </div>                
-      <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">`;
+      <img class="mg-l-r-board" src="assets/img/icons/Vector 4.png" alt="">`;
+}
+
+function setupDropdown() {
+    const input = document.getElementById('dropdownInput');
+    const dropdown = document.getElementById('task-assignment');
+    const container = document.querySelector('.assignment-select-container');
+
+    input.addEventListener('click', () => {
+        const isOpen = dropdown.style.display === 'block';
+        dropdown.style.display = isOpen ? 'none' : 'block';
+        if (isOpen) {
+            container.classList.remove('open');
+        } else {
+            container.classList.add('open');
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!input.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+            container.classList.remove('open');
+        }
+    });
 }
 
 /**

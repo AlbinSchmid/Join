@@ -623,6 +623,154 @@
     display: none !important;
 }
 
+.assignment-task-assignment {
+    margin-top: 8px;
+    width: 382px;
+    height: 44px;
+    padding-left: 16px;
+    padding-right: 40px; 
+    font-family: Inter;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    background-color: #FFFFFF;
+    position: relative; 
+}
+
+.assignment-select-container {
+    position: relative;
+    max-width: 440px;
+}
+
+.assignment-task-assignment:hover {
+    cursor: pointer;
+}
+
+.assignment-task-assignment:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+
+}
+
+.assignment-select-container::after {
+    content: '';
+    position: absolute;
+    right: 16px; 
+    top: 60%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease;
+    width: 24px; 
+    height: 24px; 
+    background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
+    background-size: 24px 24px; 
+    pointer-events: none; 
+}
+
+.assignment-select-container.open::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.contact-container {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    justify-content: space-between;
+}
+
+.contact-name-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.initials-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    min-width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    font-size: 12px;
+    border: 2px solid rgba(255, 255, 255, 1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 440px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10; 
+}
+
+.dropdown-content div:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+#selected-contacts {
+    display: flex;
+    margin-top: 8px;
+    gap: 8px;
+}
+
+.selected-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    font-size: 12px;
+    border: 2px solid rgba(255, 255, 255, 1);
+}
+
+.selectfield-task-assignment:focus option[value=""] {
+    display: none;
+    visibility: hidden;
+}
+
+.selectfield-task-assignment:hover {
+    cursor: pointer;
+    border: 1px solid #A8A8A8;
+}
+
+.selectfield-task-assignment:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+}
+
+.mg-l-r-board {
+    margin-left: 24px;
+    margin-right: 24px;
+    padding-top: 20px;
+}
+
+@media (max-width: 1440px) {
+    .addTask-board-header {
+        width: 450px;
+    }
+
+    .addTask-board-render-container {
+        display: block;
+    }
+
+    .addTask-board-footer {
+        width: 450px;
+    }
+
+    .mg-l-r-board {
+        display: none;
+    }
+
+    .addTask-board-container {
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+}
+
 
 @media(max-width: 1024px) {
     .d-none-mobile {
@@ -641,22 +789,7 @@
         padding: 48px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) 128px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem);
     }
 
-    .addTask-board-header {
-        width: 440px;
-    }
-
-    .addTask-board-render-container {
-        display: block;
-    }
-
-    .addTask-board-footer {
-        width: 440px;
-    }
-
-    .mg-l-r {
-        display: none;
-    }
-
+   
     .board-status-container {
         display: none;
     }

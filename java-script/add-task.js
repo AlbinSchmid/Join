@@ -59,7 +59,7 @@ function getAddTaskHTMLLeftSide() {
                 </form>
             </div>
         </div>                
-      <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">`;
+      <img class="mg-l-r-board" src="assets/img/icons/Vector 4.png" alt="">`;
 }
 
 function renderContactOptions() {
