@@ -110,6 +110,10 @@
 
 }
 
+.status-container {
+    padding-right: 24px;
+}
+
 .board-status-container {
     display: flex;
     margin-left: 106px;
@@ -124,7 +128,6 @@
     padding-top: 64px;
     font-size: 20px;
     font-weight: 700;
-    padding-right: 24px;
     width: 244px;
     text-wrap: nowrap;
 }
@@ -259,7 +262,7 @@
 
 .task-container:hover {
     cursor: pointer;
-    transform: rotate(+5deg); /* Beispiel für Skalierung während des Ziehens */
+    transform: rotate(+5deg);
     
 }
 
@@ -392,14 +395,14 @@
 }
 
 .progress-wrapper {
-    width: 128px; /* Die volle Breite innerhalb des Containers */
+    width: 128px;
     background-color:#F4F4F4;
     border-radius: 8px;
 
 }
 
 .progress-bar {
-    width: 0%; /* Startbreite von 0% */
+    width: 0%; 
     height: 8px;
     background-color: #0038FF;
     border-radius: 16px;
@@ -409,7 +412,7 @@
     text-wrap: nowrap;
     font-size: 12px;
     font-weight: 400;
-    margin-left: 8px; /* Abstand zwischen Progressbar und Fortschrittszahl */
+    margin-left: 8px; 
 }
 
 .attributor-container {
@@ -619,9 +622,7 @@
 .d-flex-mobile {
     display: none !important;
 }
-@media(max-width: 1300px) {
-    
-}
+
 
 @media(max-width: 1024px) {
     .d-none-mobile {

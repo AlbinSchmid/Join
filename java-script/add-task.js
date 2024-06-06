@@ -51,11 +51,11 @@ function getAddTaskHTMLLeftSide() {
             <h2>Assigned to</h2>
             <div>
                 <form>
-                    <div class="custom-select-container">
-                        <input id="dropdownInput" class="selectfield-task-assignment" placeholder="Select contacts to assign">
+                    <div class="assignment-select-container">
+                        <input id="dropdownInput" class="assignment-task-assignment" placeholder="Select contacts to assign">
                         <div id="task-assignment" class="dropdown-content"></div>
-                        <div id="selected-contacts"></div>
                     </div>
+                    <div id="selected-contacts"></div>
                 </form>
             </div>
         </div>                
@@ -74,7 +74,7 @@ function renderContactOptions() {
                     <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
                     <span>${contact.name}</span>
                 </div>
-                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" onclick="renderSelectedContacts('${contact.color}', '${contact.name}', '${contact.initials}')">
+                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" onclick="renderSelectedContacts()">
             </div>`;
     }
     selectElement.innerHTML = contactsHTML;
@@ -98,7 +98,7 @@ function renderSelectedContacts() {
 
         const contactDiv = document.createElement('div');
         contactDiv.style.backgroundColor = color;
-        contactDiv.classList.add('selected-contacts-container');
+        contactDiv.classList.add('selected-contact');
         contactDiv.textContent = initials;
 
         selectedContactsContainer.appendChild(contactDiv);
@@ -108,17 +108,26 @@ function renderSelectedContacts() {
 function setupDropdown() {
     const input = document.getElementById('dropdownInput');
     const dropdown = document.getElementById('task-assignment');
+    const container = document.querySelector('.assignment-select-container');
 
     input.addEventListener('click', () => {
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        const isOpen = dropdown.style.display === 'block';
+        dropdown.style.display = isOpen ? 'none' : 'block';
+        if (isOpen) {
+            container.classList.remove('open');
+        } else {
+            container.classList.add('open');
+        }
     });
 
     document.addEventListener('click', (event) => {
         if (!input.contains(event.target) && !dropdown.contains(event.target)) {
             dropdown.style.display = 'none';
+            container.classList.remove('open');
         }
     });
 }
+
 
 /**
  * 
@@ -155,19 +164,17 @@ function getAddTaskHTMLRightSide() {
                             <img class="checkbox-image-low" src="assets/img/icons/prio_low.png" alt="priority low">
                         </div>
                     </label>
-                </div>
-                <!-- options müssen ausgelesen werden -->  
+                </div> 
           <h2>Category<p class="required-color">*</p></h2>
-            <form>
-                <div class="custom-select-container">
-                    <select class="selectfield-task-category" name="task category" id="task-category" required>
-                        <option value="" disabled selected hidden>Select a category</option>
-                        <option value="Technial Task">Technial Task</option>
-                        <option value="User Story">User Story</option>
-                    </select>
-                </div>
-            </form>
-                <!-- value muss ausgelesen werden für das Array, nachdem select, soll wieder die ersten Option angzeigt werden -->
+                <form>
+                    <div class="custom-select-container">
+                        <select class="selectfield-task-category" name="task category" id="task-category" required>
+                            <option value="" disabled selected hidden>Select a category</option>
+                            <option value="Technical Task">Technical Task</option>
+                            <option value="User Story">User Story</option>
+                        </select>
+                    </div>
+                </form>
             <h2>Subtasks</h2>
                     <form>
                         <div class="input-container">
@@ -181,8 +188,26 @@ function getAddTaskHTMLRightSide() {
                         </div>
                         <div class="subtasks-container"></div>
                     </form>
+        </div>`;
+}
 
-          </div>`;
+function setupCategoryDropdown() {
+    const select = document.getElementById('task-category');
+    const container = document.querySelector('.custom-select-container');
+
+    select.addEventListener('click', () => {
+        if (container.classList.contains('open')) {
+            container.classList.remove('open');
+        } else {
+            container.classList.add('open');
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!select.contains(event.target)) {
+            container.classList.remove('open');
+        }
+    });
 }
 
 function handleCheckboxClick(clickedCheckbox) {
