@@ -252,9 +252,9 @@ input[type="password"]:focus {
 }
 
 #bgSignupSuccesfully {
-    position: absolute;
+    position: fixed;
     width: 100vw;
-    height: 100vh;
+    height: 110vh;
     background-color: rgba(0, 0, 0, 0.25);
 }
 
