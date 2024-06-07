@@ -1,5 +1,8 @@
 let userList = [];
 
+/**
+* This function generate a new User.
+*/
 
 async function addUser() {
     let mail = document.getElementById('inputSignUpMail');
@@ -22,6 +25,10 @@ async function addUser() {
 };
 
 
+/**
+* This function creates user data and returns it to the function AddUser().
+*/
+
 function createUserObject() {
     let name = document.getElementById('inputSignUpName').value;
     let mail = document.getElementById('inputSignUpMail').value;
@@ -35,18 +42,26 @@ function createUserObject() {
 }
 
 
+/**
+* This function checks whether the specified mail address is already registered and returns the answer to addUser().
+*/
+
 async function isEmailUnique(email) {
     await loadUser();
     return !userList.some(user => user.mail === email);
 }
 
 
+/**
+* This function checks the passwords and returns them to addUser()
+*/
+
 async function passwordCheck(user, password, password2) {
     const passwordValue = password.value.trim();
     const password2Value = password2.value.trim();
     if (await isPasswordEmpty(passwordValue, password2Value)) {
     }
-    if (await isPasswordEven(user,passwordValue, password2Value)) {
+    if (await isPasswordEqual(user, passwordValue, password2Value)) {
     } else {
         let passwordIncorrect = document.getElementById('passwordIncorrect');
         passwordIncorrect.innerHTML = "Ups! your passwords don't match";
@@ -56,7 +71,11 @@ async function passwordCheck(user, password, password2) {
 }
 
 
-async function isPasswordEven(user, passwordValue, password2Value) {
+/**
+* This function checks whether the passwords are identical and returns the result to passwordCheck().
+*/
+
+async function isPasswordEqual(user, passwordValue, password2Value) {
     if (passwordValue === password2Value) {
         document.getElementById('bgSignupSuccesfully').classList.remove('d-none');
         await postData('/users', user);
@@ -67,6 +86,11 @@ async function isPasswordEven(user, passwordValue, password2Value) {
     }
 }
 
+
+/**
+* This function checks whether the input fields for the passwords are filled in and returns the result to  passwordCheck().
+*/
+
 async function isPasswordEmpty(passwordValue, password2Value) {
     if (passwordValue === "" || password2Value === "") {
         let passwordIncorrect = document.getElementById('passwordIncorrect');
@@ -75,6 +99,11 @@ async function isPasswordEmpty(passwordValue, password2Value) {
         return false;
     }
 }
+
+
+/**
+* This function load the user data
+*/
 
 async function loadUser() {
     userList = [];
@@ -88,6 +117,10 @@ async function loadUser() {
     }
 }
 
+
+/**
+* This function is for the login
+*/
 
 function login() {
     let mail = document.getElementById('inputLoginMail');
@@ -104,6 +137,10 @@ function login() {
 }
 
 
+/**
+* This function is for the guest login
+*/
+
 function guestLogin() {
     let user = {
         'initials': 'G',
@@ -115,12 +152,16 @@ function guestLogin() {
 }
 
 
+/**
+* This function generates the initials of the names and returns them to addContact().
+*/
+
 function getInitials(name) {
     return name
-        .split(" ")                        // Teilt den Namen in Wörter auf
-        .filter(word => word.length > 0)   // Entfernt leere Wörter (falls vorhanden)
-        .map(word => word[0].toUpperCase())  // Nimmt den ersten Buchstaben jedes Wortes und wandelt ihn in Großbuchstaben um
-        .join("");                         // Verbindet die Buchstaben zu einer Zeichenkette
+        .split(" ")
+        .filter(word => word.length > 0)
+        .map(word => word[0].toUpperCase())
+        .join("");
 }
 
 

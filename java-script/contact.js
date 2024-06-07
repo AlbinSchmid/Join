@@ -1,18 +1,3 @@
-async function includeHTML() {
-    let includeElements = document.querySelectorAll('[w3-include-html]');
-    for (let i = 0; i < includeElements.length; i++) {
-        const element = includeElements[i];
-        file = element.getAttribute("w3-include-html"); // "includes/header.html"
-        let resp = await fetch(file);
-        if (resp.ok) {
-            element.innerHTML = await resp.text();
-        } else {
-            element.innerHTML = 'Page not found';
-        }
-    }
-}
-
-
 let allContacts = [];
 let currentContact = {id: 'empty'};
 let allFirstLetters = [];
@@ -24,13 +9,11 @@ async function init() {
 }
 
 
-function sorting(a, b) {
-    return a.name.localeCompare(b.name)
-}
-function changeActivLink(section) {
-    document.getElementById(section).classList.add('test');
-}
-
+/**
+ * This function renders the contactlist in the container with the ID 'contact-list'.
+ * 
+ * 
+ */
 
 function renderContactlist() {
     let contactList = document.getElementById('contact-list');
@@ -41,7 +24,6 @@ function renderContactlist() {
     contactList.innerHTML = '';
     let lastLetter = '';
     allContacts.sort(sorting);
-
     for (let i = 0; i < allContacts.length; i++) {
         let contact = allContacts[i];
         let currentLetter = contact.name.substring(0, 1).toUpperCase();
@@ -53,6 +35,19 @@ function renderContactlist() {
     }
 }
 
+
+/**
+ * The function returns the sorted list from a to z.
+ */
+
+function sorting(a, b) {
+    return a.name.localeCompare(b.name)
+}
+
+
+/**
+ * This function adds a new contact.
+ */
 
 async function addContact() {
     let name = document.getElementById('name');
@@ -67,9 +62,7 @@ async function addContact() {
         'color': getColor(),
     }
     allContacts.push(contact);
-
     await postData('contacts', contact)
-
     if (!allFirstLetters.includes(contact['firstLetter'])) {
         allFirstLetters.push(contact['firstLetter']);
     }
@@ -79,6 +72,10 @@ async function addContact() {
     await init();
 }
 
+
+/**
+* This function updated a new contact.
+*/
 
 async function updateContact(id) {
     let name = document.getElementById('edit-name');
@@ -90,7 +87,6 @@ async function updateContact(id) {
     contact.initials = getInitials(name.value);
     contact.mail = mail.value;
     contact.phonenumber = phonenumber.value;
-
     await putData(`contacts/${id}`, contact);
     await init();
     document.getElementById('editContact').classList.toggle('d-none');
@@ -99,6 +95,10 @@ async function updateContact(id) {
     contactDetails.innerHTML = contactDetailsHTML(contact);
 }
 
+
+/**
+* This function delete a contact.
+*/
 
 async function deleteContact(id) {
     await deleteDate(`contacts/${id}`);
@@ -110,6 +110,10 @@ async function deleteContact(id) {
 }
 
 
+/**
+* This function generates a radom color and returns it to addContact().
+*/
+
 function getColor() {
     const bgColors = ['#ff7a00', '#9327ff', '#6e52ff', '#fC71ff', '#ffbb2b', '#1fd7c1'];
     const randomColor = bgColors[Math.floor(bgColors.length * Math.random())];
@@ -117,21 +121,33 @@ function getColor() {
 }
 
 
+/**
+* This function generates the initials of the names and returns them to addContact().
+*/
+
 function getInitials(name) {
     return name
-        .split(" ")                        // Teilt den Namen in Wörter auf
-        .filter(word => word.length > 0)   // Entfernt leere Wörter (falls vorhanden)
-        .map(word => word[0].toUpperCase())  // Nimmt den ersten Buchstaben jedes Wortes und wandelt ihn in Großbuchstaben um
-        .join("");                         // Verbindet die Buchstaben zu einer Zeichenkette
+        .split(" ")                        
+        .filter(word => word.length > 0)  
+        .map(word => word[0].toUpperCase()) 
+        .join("");                       
 }
 
 
+/**
+* This function generates the first letter of the name and returns them to addContact().
+*/
+
 function getFirstLetter(name) {
-    let words = name.split(" ");  // Zerlegt den Namen in einzelne Wörter
-    let firstLetter = words[0][0].toUpperCase() // Wählt den ersten Buchstaben des ersten Wortes aus und wandelt ihn in Großbuchstaben um
+    let words = name.split(" ");
+    let firstLetter = words[0][0].toUpperCase()
     return firstLetter;
 }
 
+
+/**
+* This function load all contacts.
+*/
 
 async function loadAllContacts() {
     allContacts = [];
@@ -144,6 +160,7 @@ async function loadAllContacts() {
         allContacts.push(contact);
     }
 }
+
 
 // ------------- ENABLE/DISABLE CONTAINER ------------- //
 
@@ -196,14 +213,22 @@ function showContact(id) {
     }
     currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
-
+    let mediaQuery = window.matchMedia('(max-width: 1024px)');
+    if (mediaQuery.matches) {
+        document.getElementById('container-contacts').classList.toggle('d-none');
+    }
 }
 
 
 function closeOpenContactDetails() {
     document.getElementById('showContactDetails').classList.toggle('d-none');
     document.getElementById('container-right').classList.toggle('container-right-dnone');
+    let mediaQuery = window.matchMedia('(max-width: 1024px)');
+    if (mediaQuery.matches) {
+        document.getElementById('container-contacts').classList.toggle('d-none');
+    }
 }
+
 
 // ------------- EDIT ICONS ------------- //
 
