@@ -3,6 +3,7 @@ let userList = [];
 
 function closeBtnSignUpSuccesfully(event) {
     event.preventDefault();
+    addUser();
 };
 
 
@@ -11,6 +12,12 @@ async function addUser() {
     let mail = document.getElementById('inputSignUpMail');
     let password = document.getElementById('inputSignUpPassword1');
     let password2 = document.getElementById('inputSignUpPassword2');
+    let checkbox = document.getElementById('checkboxAccept');
+    if (!checkbox.checked) {
+        document.getElementById('passwordIncorrect').innerText = "You must accept the Privacy Policy";
+        checkbox.style.border = "2px solid red";
+        return;
+    }
     let user = {
         'name': name.value,
         'initials': getInitials(name.value),
@@ -18,27 +25,36 @@ async function addUser() {
         'password2': password2.value,
         'mail': mail.value,
     }
-    if (passwordCorrect(user, password, password2)) {
+    if (passwordCheck(user, password, password2)) {
     }
     else {
         console.error('password incorrect');
     }
-}
+};
 
+async function passwordCheck(user, password, password2) {
+    const passwordValue = password.value.trim();
+    const password2Value = password2.value.trim();
 
-async function passwordCorrect(user, password, password2) {
-    if (password.value === password2.value) {
+    if (passwordValue === "" || password2Value === "") {
+        let passwordIncorrect = document.getElementById('passwordIncorrect');
+        passwordIncorrect.innerHTML = "Passwords cannot be empty";
+        password.style.border = "2px solid red";
+        password2.style.border = "2px solid red";
+        return false;
+    }
+
+    if (passwordValue === password2Value) {
         document.getElementById('bgSignupSuccesfully').classList.remove('d-none');
+        await postData('/users', user);
         setTimeout(function () {
             window.location.href = "./log-in.html";
         }, 1500);
-        await postData('/users', user);
         return true;
     } else {
         let passwordIncorrect = document.getElementById('passwordIncorrect');
-        let inputSignUpPassword2 = document.getElementById('inputSignUpPassword2');
-        passwordIncorrect.innerHTML = "Ups! your password dont match";
-        inputSignUpPassword2.style.border =" 2px solid red;"
+        passwordIncorrect.innerHTML = "Ups! your passwords don't match";
+        password2.style.border = "2px solid red";
         return false;
     }
 }
