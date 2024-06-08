@@ -159,7 +159,20 @@ h2 {
 .assignment-task-assignment:focus {
     border: 1px solid #29ABE2;
     outline: none;
+}
 
+.selected-contacts-container {
+    height: 42px;
+    width: 42px;
+    border: 1px solid #FFFFFF;
+    border-radius: 45px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 .assignment-select-container::after {

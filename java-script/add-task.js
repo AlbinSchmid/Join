@@ -98,7 +98,7 @@ function renderSelectedContacts() {
 
         const contactDiv = document.createElement('div');
         contactDiv.style.backgroundColor = color;
-        contactDiv.classList.add('selected-contact');
+        contactDiv.classList.add('selected-contacts-container');
         contactDiv.textContent = initials;
 
         selectedContactsContainer.appendChild(contactDiv);

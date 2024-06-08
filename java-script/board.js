@@ -41,11 +41,10 @@ function updateHTML() {
         let tasksInArea = tasks.filter(t => t['category'] == areaId);
         const areaElement = document.getElementById(areaId);
         areaElement.innerHTML = '';
-    
 
         for (let index = 0; index < tasksInArea.length; index++) {
             const element = tasksInArea[index];
-            let technicalTask = element.taskcategory;
+            let taskcategory = element.taskcategory;
             let category = element.category;
             let title = element.title;
             let description = element.description;
@@ -53,10 +52,15 @@ function updateHTML() {
             let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
             let priority = generatePriorityHTML(element);
 
-            areaElement.innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, tasksInArea, category);
+            // Bestimmen der Hintergrundfarbe basierend auf der taskcategory
+            let backgroundColor = getBackgroundColor(taskcategory);
+
+            areaElement.innerHTML += getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo, priority, index, tasksInArea, backgroundColor);
         }
     });
 }
+
+
 
 /**
  * 
@@ -93,6 +97,14 @@ function generatePriorityHTML(task) {
     return priorityHTML;
 }
 
+function getBackgroundColor(taskcategory) {
+    if (taskcategory === 'Technical Task') {
+        return '#1FD7C1';
+    } else {
+        return '#0038FF'; // Default für User Story
+    }
+}
+
 
 /**
  * parameters got from updateHTML() to render the right content 
@@ -107,10 +119,12 @@ function generatePriorityHTML(task) {
  * @returns HTML for the board content
  */
 
-function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, category) {
+function getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo, priority, index, category, backgroundColor) {
     return /*html*/`
         <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${category[index]['id']})">
-            <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div>
+            <div class="to-do-title-container">
+                <p class="to-do-title" style="background-color: ${backgroundColor};">${taskcategory}</p>
+            </div>
             <div><p class="to-do-task">${title}</p></div>
             <div><p class="to-do-task-description">${description}</p></div>
             <div class="progress-container">
@@ -125,6 +139,8 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
             </div>
         </div>`;
 }
+
+
 
 /**
  * updates progressBar but does not work correctly yet
@@ -178,6 +194,7 @@ function openTask(taskId, callback) {
     container.innerHTML = getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category);
     container.classList.remove('d-hide');
     container.classList.add('d-block');
+    
 
     // Rückruffunktion speichern, um sie später beim Schließen des Tasks aufzurufen
     container.dataset.callback = callback;
