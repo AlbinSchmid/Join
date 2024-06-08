@@ -4,7 +4,7 @@
     top: 0;
 }
 
-h1 {
+.headline {
     padding-top: 106px;
     padding-left: 106px;
 }
@@ -133,39 +133,64 @@ h2 {
     cursor: pointer;
 }
 
-.assignment-select-container {
-    position: relative;
-    display: inline-block;
-    width: 440px;
-    z-index: 10; /* Ensure it's above other elements */
-}
-
-.selectfield-task-assignment {
+.assignment-task-assignment {
     margin-top: 8px;
     width: 382px;
-    height: 30px;
+    height: 44px;
     padding-left: 16px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-right: 40px; /* Leave space for the arrow */
+    padding-right: 40px; 
     font-family: Inter;
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     background-color: #FFFFFF;
+    position: relative; 
+}
+
+.assignment-select-container {
+    position: relative;
+    max-width: 440px;
+}
+
+.assignment-task-assignment:hover {
+    cursor: pointer;
+}
+
+.assignment-task-assignment:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+}
+
+.selected-contacts-container {
+    height: 42px;
+    width: 42px;
+    border: 1px solid #FFFFFF;
+    border-radius: 45px;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 .assignment-select-container::after {
     content: '';
     position: absolute;
-    right: 16px; /* Abstand vom rechten Rand */
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px; /* Breite des Pfeilsymbols */
-    height: 24px; /* Höhe des Pfeilsymbols */
+    right: 16px; 
+    top: 60%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease;
+    width: 24px; 
+    height: 24px; 
     background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
-    background-size: 24px 24px; /* Größe des Pfeilsymbols */
-    pointer-events: none; /* Macht den Pfeil nicht anklickbar */
+    background-size: 24px 24px; 
+    pointer-events: none; 
+}
+
+.assignment-select-container.open::after {
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .contact-container {
@@ -213,7 +238,7 @@ h2 {
     gap: 8px;
 }
 
-.selected-contacts-container {
+.selected-contact {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -224,6 +249,7 @@ h2 {
     font-size: 12px;
     border: 2px solid rgba(255, 255, 255, 1);
 }
+
 
 .selectfield-task-assignment:focus option[value=""] {
     display: none;
@@ -389,17 +415,17 @@ h2 {
 }
 
 .selectfield-task-category {
-    -webkit-appearance: none; /* Entfernt den Standard-Pfeil in Webkit-Browsern */
-    -moz-appearance: none; /* Entfernt den Standard-Pfeil in Firefox */
-    appearance: none; /* Entfernt den Standard-Pfeil in anderen Browsern */
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none; 
     margin-top: 8px;
     width: 100%;
     height: 48px;
     padding-left: 16px;
     padding-top: 8px;
     padding-bottom: 8px;
-    padding-right: 40px; /* Platz für das Pfeilsymbol */
-    font-family: inter;
+    padding-right: 40px; 
+    font-family: Inter;
     font-size: 20px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
@@ -409,20 +435,24 @@ h2 {
     position: relative;
     display: inline-block;
     width: 440px;
-    z-index: 10; /* Ensure it's above other elements */
 }
 
 .custom-select-container::after {
     content: '';
     position: absolute;
-    right: 16px; /* Abstand vom rechten Rand */
-    top: 60%;
-    transform: translateY(-50%);
-    width: 24px; /* Breite des Pfeilsymbols */
-    height: 24px; /* Höhe des Pfeilsymbols */
+    right: 16px; 
+    top: 60%; 
+    transform: translateY(-50%) rotate(0deg); 
+    transition: transform 0.3s ease; 
+    width: 24px; 
+    height: 24px; 
     background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
-    background-size: 24px 24px; /* Größe des Pfeilsymbols */
-    pointer-events: none; /* Macht den Pfeil nicht anklickbar */
+    background-size: 24px 24px; 
+    pointer-events: none; 
+}
+
+.custom-select-container.open::after {
+    transform: translateY(-50%) rotate(180deg); 
 }
 
 .selectfield-task-category:hover {
@@ -492,7 +522,7 @@ h2 {
 
 .subtask-btn-container {
     gap: 8px;
-    display: none; /* Initially hidden */
+    display: none;
     align-items: center;
 }
 
@@ -554,6 +584,7 @@ h2 {
     margin-right: 106px;
     max-width: 930px;
     margin-top: 106px;
+    margin-bottom: 60px;
 }
 
 .clear-task-btn {
@@ -609,8 +640,64 @@ h2 {
 }
 
 
+
 .footer-btn-container {
     display: flex;
     align-items: end;
 }
 
+@media(max-width: 1400px) {
+    .mg-l-r {
+        display: none;
+    }
+
+    .add-task-container {
+        display: block;
+        padding-top: 16px;
+    }
+
+    .dp-flex-jc-sb {
+        justify-content: flex-start;
+        gap: 18px;
+    }
+
+    .input-container {
+        max-width: 406px;
+    }
+
+    .add-task-footer {
+        margin-top: 16px;
+        display: block;
+        gap: 12px;
+    }
+
+    .subtask {
+        max-width: 420px;
+    }
+
+    .dp-flex {
+        margin-bottom: 12px;
+    }
+}
+
+@media(max-width: 1024px) {
+    .headline {
+        padding-top: 12px;
+    }
+}
+
+@media(max-width: 658px) {
+    .add-task-container {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .add-task-footer {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .headline {
+        padding-left: 12px;
+    }
+}

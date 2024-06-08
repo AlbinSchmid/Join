@@ -110,6 +110,10 @@
 
 }
 
+.status-container {
+    padding-right: 24px;
+}
+
 .board-status-container {
     display: flex;
     margin-left: 106px;
@@ -124,7 +128,6 @@
     padding-top: 64px;
     font-size: 20px;
     font-weight: 700;
-    padding-right: 24px;
     width: 244px;
     text-wrap: nowrap;
 }
@@ -187,7 +190,6 @@
     right: 0;
     bottom: 0;
     z-index: 100;
-    overflow-y: hidden;
     align-content: center;
 }
 
@@ -225,6 +227,7 @@
 
 .board-task-container {
     display: flex;
+    margin-bottom: 60px;
 }
 
 
@@ -252,6 +255,7 @@
     background-color: #FFFFFF;
     border-radius: 24px;
     padding: 16px;
+    width: 212px;
     margin-top: 16px;
     box-shadow: 0px 0px 10px 3px #00000014;
     transition: transform 0.3s ease-out;
@@ -259,8 +263,11 @@
 
 .task-container:hover {
     cursor: pointer;
-    transform: rotate(+5deg); /* Beispiel für Skalierung während des Ziehens */
-    
+    transform: rotate(+5deg);   
+}
+
+.overflow-hidden {
+   overflow: hidden !important;
 }
 
 .to-do-title-container {
@@ -268,11 +275,10 @@
 }
 
 .to-do-title {
-    background-color: #0038FF;
     color: #FFFFFF;
     font-size: 16px;
     font-weight: 400;
-    padding: 4px 16px 4px 16px;
+    padding: 4px 16px;
     border-radius: 8px;
     margin: 0;
     margin-bottom: 24px;
@@ -392,14 +398,14 @@
 }
 
 .progress-wrapper {
-    width: 128px; /* Die volle Breite innerhalb des Containers */
+    width: 128px;
     background-color:#F4F4F4;
     border-radius: 8px;
 
 }
 
 .progress-bar {
-    width: 0%; /* Startbreite von 0% */
+    width: 0%; 
     height: 8px;
     background-color: #0038FF;
     border-radius: 16px;
@@ -409,7 +415,7 @@
     text-wrap: nowrap;
     font-size: 12px;
     font-weight: 400;
-    margin-left: 8px; /* Abstand zwischen Progressbar und Fortschrittszahl */
+    margin-left: 8px; 
 }
 
 .attributor-container {
@@ -619,6 +625,7 @@
 .d-flex-mobile {
     display: none !important;
 }
+<<<<<<< HEAD
 @media(max-width: 1390px) {
     .board-task-container {
         display: block;
@@ -630,7 +637,193 @@
         gap: 24px;
         min-height: 256px;
     }
+=======
+
+.assignment-task-assignment {
+    margin-top: 8px;
+    width: 382px;
+    height: 44px;
+    padding-left: 16px;
+    padding-right: 40px; 
+    font-family: Inter;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    background-color: #FFFFFF;
+    position: relative; 
+>>>>>>> 7e6a5d07f6e81f538bf047397f17716d71f4fce4
 }
+
+.assignment-select-container {
+    position: relative;
+    max-width: 440px;
+}
+
+.assignment-task-assignment:hover {
+    cursor: pointer;
+}
+
+.assignment-task-assignment:focus {
+    border: 1px solid #29ABE2;
+    outline: none;
+
+}
+
+.assignment-select-container::after {
+    content: '';
+    position: absolute;
+    right: 16px; 
+    top: 60%;
+    transform: translateY(-50%) rotate(0deg);
+    transition: transform 0.3s ease;
+    width: 24px; 
+    height: 24px; 
+    background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
+    background-size: 24px 24px; 
+    pointer-events: none; 
+}
+
+.assignment-select-container.open::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.contact-container {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    justify-content: space-between;
+}
+
+.contact-name-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.initials-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    min-width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    font-size: 12px;
+    border: 2px solid rgba(255, 255, 255, 1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 440px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10; 
+}
+
+.dropdown-content div:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+#selected-contacts {
+    display: flex;
+    margin-top: 8px;
+    gap: 8px;
+}
+
+.selected-contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    font-size: 12px;
+    border: 2px solid rgba(255, 255, 255, 1);
+}
+
+.selectfield-task-category {
+    -webkit-appearance: none; /* Entfernt den Standard-Pfeil in Webkit-Browsern */
+    -moz-appearance: none; /* Entfernt den Standard-Pfeil in Firefox */
+    appearance: none; /* Entfernt den Standard-Pfeil in anderen Browsern */
+    margin-top: 8px;
+    width: 100%;
+    height: 48px;
+    padding-left: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 40px; /* Platz für das Pfeilsymbol */
+    font-family: Inter;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+}
+
+.custom-select-container {
+    position: relative;
+    display: inline-block;
+    width: 440px;
+}
+
+.custom-select-container::after {
+    content: '';
+    position: absolute;
+    right: 16px; 
+    top: 50%; /* Einheitlich auf 50% setzen */
+    transform: translateY(-50%) rotate(0deg); /* Initial position */
+    transition: transform 0.3s ease; /* Animation */
+    width: 24px; 
+    height: 24px; 
+    background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
+    background-size: 24px 24px; 
+    pointer-events: none; 
+}
+
+.custom-select-container.open::after {
+    transform: translateY(-50%) rotate(180deg); /* Rotation */
+}
+
+.selectfield-task-category:hover {
+    cursor: pointer;
+    border: 1px solid #A8A8A8;
+}
+
+.selectfield-task-category:focus {
+    outline: none;
+    border: 1px solid #29ABE2;
+}
+
+.mg-l-r-board {
+    margin-left: 24px;
+    margin-right: 24px;
+    padding-top: 20px;
+}
+
+@media (max-width: 1440px) {
+    .addTask-board-header {
+        width: 450px;
+    }
+
+    .addTask-board-render-container {
+        display: block;
+    }
+
+    .addTask-board-footer {
+        width: 450px;
+    }
+
+    .mg-l-r-board {
+        display: none;
+    }
+
+    .addTask-board-container {
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+}
+
 
 @media(max-width: 1024px) {
     .d-none-mobile {
@@ -649,22 +842,7 @@
         padding: 48px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) 128px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem);
     }
 
-    .addTask-board-header {
-        width: 440px;
-    }
-
-    .addTask-board-render-container {
-        display: block;
-    }
-
-    .addTask-board-footer {
-        width: 440px;
-    }
-
-    .mg-l-r {
-        display: none;
-    }
-
+   
     .board-status-container {
         display: none;
     }

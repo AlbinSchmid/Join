@@ -13,7 +13,6 @@ async function init() {
     laodLocalStorage();
     sortDates();
     showHTML();
-    includeHTML();
 }
 
 

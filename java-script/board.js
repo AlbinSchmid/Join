@@ -17,7 +17,6 @@ let currentDraggedElement;
 async function init() {
     await loadTasks();
     await loadAllContacts();
-    includeHTML();
     updateHTML();
 }
 
@@ -42,11 +41,10 @@ function updateHTML() {
         let tasksInArea = tasks.filter(t => t['category'] == areaId);
         const areaElement = document.getElementById(areaId);
         areaElement.innerHTML = '';
-    
 
         for (let index = 0; index < tasksInArea.length; index++) {
             const element = tasksInArea[index];
-            let technicalTask = element.taskcategory;
+            let taskcategory = element.taskcategory;
             let category = element.category;
             let title = element.title;
             let description = element.description;
@@ -54,10 +52,15 @@ function updateHTML() {
             let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
             let priority = generatePriorityHTML(element);
 
-            areaElement.innerHTML += getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, tasksInArea, category);
+            // Bestimmen der Hintergrundfarbe basierend auf der taskcategory
+            let backgroundColor = getBackgroundColor(taskcategory);
+
+            areaElement.innerHTML += getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo, priority, index, tasksInArea, backgroundColor);
         }
     });
 }
+
+
 
 /**
  * 
@@ -94,6 +97,14 @@ function generatePriorityHTML(task) {
     return priorityHTML;
 }
 
+function getBackgroundColor(taskcategory) {
+    if (taskcategory === 'Technical Task') {
+        return '#1FD7C1';
+    } else {
+        return '#0038FF'; // Default für User Story
+    }
+}
+
 
 /**
  * parameters got from updateHTML() to render the right content 
@@ -108,10 +119,12 @@ function generatePriorityHTML(task) {
  * @returns HTML for the board content
  */
 
-function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo, priority, index, category) {
+function getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo, priority, index, category, backgroundColor) {
     return /*html*/`
         <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${category[index]['id']})">
-            <div class="to-do-title-container"><p class="to-do-title">${technicalTask}</p></div>
+            <div class="to-do-title-container">
+                <p class="to-do-title" style="background-color: ${backgroundColor};">${taskcategory}</p>
+            </div>
             <div><p class="to-do-task">${title}</p></div>
             <div><p class="to-do-task-description">${description}</p></div>
             <div class="progress-container">
@@ -126,6 +139,8 @@ function getToDoHTML(technicalTask, title, description, subtaskCount, assignedTo
             </div>
         </div>`;
 }
+
+
 
 /**
  * updates progressBar but does not work correctly yet
@@ -179,6 +194,7 @@ function openTask(taskId, callback) {
     container.innerHTML = getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category);
     container.classList.remove('d-hide');
     container.classList.add('d-block');
+    
 
     // Rückruffunktion speichern, um sie später beim Schließen des Tasks aufzurufen
     container.dataset.callback = callback;
@@ -351,17 +367,40 @@ function getAddTaskHTMLLeftSide() {
                         <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
                     </form>
             <h2>Assigned to</h2>
-            <div>
-                <form>
-                    <div class="assignment-select-container">
-                        <input id="dropdownInput" class="selectfield-task-assignment" placeholder="Select contacts to assign">
-                        <div id="task-assignment" class="dropdown-content"></div>
+                <div>
+                    <form>
+                        <div class="assignment-select-container">
+                            <input id="dropdownInput" class="assignment-task-assignment" placeholder="Select contacts to assign">
+                            <div id="task-assignment" class="dropdown-content"></div>
+                        </div>
                         <div id="selected-contacts"></div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
         </div>                
-      <img class="mg-l-r" src="assets/img/icons/Vector 4.png" alt="">`;
+      <img class="mg-l-r-board" src="assets/img/icons/Vector 4.png" alt="">`;
+}
+
+function setupDropdown() {
+    const input = document.getElementById('dropdownInput');
+    const dropdown = document.getElementById('task-assignment');
+    const container = document.querySelector('.assignment-select-container');
+
+    input.addEventListener('click', () => {
+        const isOpen = dropdown.style.display === 'block';
+        dropdown.style.display = isOpen ? 'none' : 'block';
+        if (isOpen) {
+            container.classList.remove('open');
+        } else {
+            container.classList.add('open');
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!input.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+            container.classList.remove('open');
+        }
+    });
 }
 
 /**
@@ -750,16 +789,3 @@ async function loadAllContacts() {
     console.log(allContacts);
 }
 
-async function includeHTML() {
-    let includeElements = document.querySelectorAll('[w3-include-html]');
-    for (let i = 0; i < includeElements.length; i++) {
-        const element = includeElements[i];
-        file = element.getAttribute("w3-include-html"); // "includes/header.html"
-        let resp = await fetch(file);
-        if (resp.ok) {
-            element.innerHTML = await resp.text();
-        } else {
-            element.innerHTML = 'Page not found';
-        }
-    }
-}
