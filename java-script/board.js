@@ -73,7 +73,7 @@ function generateContactHTML(selectedContact) {
     for (let i = 0; i < selectedContact.length; i++) {
         let contact = selectedContact[i];
         // Dynamische Zuweisung der CSS-Eigenschaften basierend auf dem Index
-        const assignedContainerStyle = `z-index: ${i + 1}; margin-left: ${i === 0 ? '0' : '-10px'};`;
+        const assignedContainerStyle = `margin-left: ${i === 0 ? '0' : '-10px'};`;
         contactHTML += `<div class="attributor-icon" style="background-color: ${contact.color}; ${assignedContainerStyle}">${contact.initials}</div>`;
     }
     return contactHTML;
