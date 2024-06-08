@@ -3,9 +3,11 @@
     box-sizing: border-box;
 }
 
-body, html {
+body,
+html {
     height: 100%;
-    overflow: hidden; /* Prevent scrolling on the body */
+    overflow: hidden;
+    /* Prevent scrolling on the body */
 }
 
 button {
@@ -20,7 +22,8 @@ button {
 
 .content-wrapper {
     display: flex;
-    height: calc(100% - 60px); /* Adjust based on your header height */
+    height: calc(100% - 60px);
+    /* Adjust based on your header height */
 }
 
 .content-overall {
@@ -28,7 +31,9 @@ button {
     width: 100%;
     gap: 60px;
 }
-.container-contacts, #container-right {
+
+.container-contacts,
+#container-right {
     /* flex: 1; */
     overflow-y: scroll;
 }
@@ -531,6 +536,15 @@ input[type="tel"]:focus {
 
     .container-user-top-edit {
         margin: 0;
+    }
+
+    .container-user-top {
+        font-size: 27px;
+    }
+
+    .edit-delete {
+        gap: 8px;
+        flex-direction: column;
     }
 
     .first-letters-edit,
