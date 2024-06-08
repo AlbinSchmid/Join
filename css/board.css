@@ -625,7 +625,6 @@
 .d-flex-mobile {
     display: none !important;
 }
-<<<<<<< HEAD
 @media(max-width: 1390px) {
     .board-task-container {
         display: block;
@@ -637,21 +636,6 @@
         gap: 24px;
         min-height: 256px;
     }
-=======
-
-.assignment-task-assignment {
-    margin-top: 8px;
-    width: 382px;
-    height: 44px;
-    padding-left: 16px;
-    padding-right: 40px; 
-    font-family: Inter;
-    font-size: 20px;
-    border-radius: 10px;
-    border: 1px solid #D1D1D1;
-    background-color: #FFFFFF;
-    position: relative; 
->>>>>>> 7e6a5d07f6e81f538bf047397f17716d71f4fce4
 }
 
 .assignment-select-container {
