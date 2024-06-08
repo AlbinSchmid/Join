@@ -1,9 +1,8 @@
 let tasks = [];
 let priorityHighDates = [];
-let dateToday = new Date();
+let dateToday;
 let closest;
-let formatDate = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-let guest = false;
+let formatDate = {year: 'numeric', month: 'long', day: 'numeric'};
 let user;
 let number = 15220;
 
@@ -24,11 +23,6 @@ function laodLocalStorage() {
     if (userAsText) {
         user = JSON.parse(userAsText);
     }
-}
-
-
-function guestLogIn() {
-    guest = true;
 }
 
 
@@ -55,6 +49,7 @@ function sortDates() {
         const [aDate, bDate] = [a, b].map(d => Math.abs(new Date(d) - dateToday));
         return aDate - bDate;
     });
+
 }
 
 
@@ -67,7 +62,7 @@ function showHTML() {
     document.getElementById('to-do').innerHTML = `${todo.length}`;
     document.getElementById('done').innerHTML = `${done.length}`;
     document.getElementById('priority-high').innerHTML = `${priorityHigh.length}`;
-    document.getElementById('deadline').innerHTML = `${checkIfpriorityHighArray()}`; // Muss noch angepasst werden normal mit ('en-US', fromatDate)
+    document.getElementById('deadline').innerHTML = `${checkIfpriorityHighArray()}`;
     document.getElementById('tasks').innerHTML = `${tasks.length}`;
     document.getElementById('task-in-progress').innerHTML = `${inprogress.length}`;
     document.getElementById('awaiting-feedback').innerHTML = `${awaitFeedback.length}`;
@@ -81,13 +76,14 @@ function checkIfpriorityHighArray() {
             No urgent to-dos
         `;
     } else {
-        return closest;
+        dateToday = new Date(closest);
+        return dateToday.toLocaleDateString('en-US', formatDate)
     }
 }
 
 
 function checkIfGuest() {
-    if (guest === true) {
+    if (user['name'] === 'Gast') {
         return /*html*/`
             <h2>Good morning</h2>
         `;

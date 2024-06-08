@@ -470,7 +470,7 @@
     background-color: white;
     border-radius: 30px;
     width: 525px;
-    padding: 48px 40px 48px 40px;
+    padding: clamp(1.875rem, 1.65rem + 1.125vw, 3rem) clamp(0.875rem, 0.55rem + 1.625vw, 2.5rem);
 }
 
 .high {
@@ -619,8 +619,17 @@
 .d-flex-mobile {
     display: none !important;
 }
-@media(max-width: 1300px) {
-    
+@media(max-width: 1390px) {
+    .board-task-container {
+        display: block;
+    }
+
+    .dragarea {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        min-height: 256px;
+    }
 }
 
 @media(max-width: 1024px) {
