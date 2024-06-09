@@ -701,3 +701,46 @@ h2 {
         padding-left: 12px;
     }
 }
+
+@media(max-width: 480px) {
+    .inputfield-title {
+        width: 270px;
+    }
+
+    .textareafied-description {
+        width: 270px;
+    }
+
+    .assignment-task-assignment {
+        width: 246px;
+    }
+
+    .date-selector {
+        width: 270px;
+    }
+
+    .dp-flex-jc-sb {
+        flex-direction: column;
+    }
+
+    .selectfield-task-category {
+        width: 304px;
+    }
+
+    .assignment-select-container {
+        width: 420px;
+    }
+
+    .custom-select-container::after {
+        right: 140px;
+    }
+
+    .assignment-select-container::after {
+        right: 122px;
+    }
+
+    .input-container {
+        width: 270px;
+    }
+}
+
