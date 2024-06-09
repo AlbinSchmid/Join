@@ -199,13 +199,19 @@ function showContact(id) {
     if (id === currentContact.id) {
         document.getElementById('showContactDetails').classList.toggle('d-none');
         document.getElementById('container-right').classList.toggle('d-none');
+
+        if (document.getElementById('showContactDetails').classList.contains("d-none")) {
+            document.getElementById('container-contacts').classList.remove('d-none');
+        } else {
+            document.getElementById('container-contacts').classList.add('d-none');
+        }
     }   else {
         document.getElementById('showContactDetails').classList.remove('d-none');
         document.getElementById('container-right').classList.remove('d-none');
+        document.getElementById('container-contacts').classList.add('d-none');
     }
     currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
-    document.getElementById('container-contacts').classList.add('d-none');
 }
 
 

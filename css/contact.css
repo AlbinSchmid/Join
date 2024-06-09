@@ -304,8 +304,7 @@ button {
 
 .overlay-left img {
     width: 56px;
-    position: absolute;
-    top: 154px;
+    margin-top: -70px;
 }
 
 .overlay-left span {
@@ -558,7 +557,7 @@ input[type="tel"]:focus {
         width: 364px;
     }
 
-    .first-letters-edit {
+    .first-letters-edit, .contact-pict {
         margin: 0px 83px 0px 0px;
     }
 
@@ -567,7 +566,7 @@ input[type="tel"]:focus {
 @media(max-width: 1024px) {
 
     hr {
-        width: 85vw;
+        width: calc(100vw - 60px);
     }
 
     .contact-list {
@@ -650,6 +649,11 @@ input[type="tel"]:focus {
         font-size: 47px;
     }
 
+    .edit-delete {
+        flex-direction: row;
+        gap: 30px;
+    }
+
 }
 
 @media(min-width: 1024px) {
@@ -675,6 +679,10 @@ input[type="tel"]:focus {
 
 
 @media(max-width: 460px) {
+
+    hr {
+        width: 100vw;
+    }
 
     .headline {
         display: block;
