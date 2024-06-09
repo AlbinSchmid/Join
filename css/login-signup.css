@@ -157,10 +157,13 @@ input[type="password"]:focus {
     bottom: 35px;
     right: 0;
     left: 0;
-    gap: 16px;
+    gap: 8px;
 }
 
 .login-footer a {
+    display: flex;
+    justify-content: center;
+    width: 120px;
     padding: 8px;
     text-decoration: none;
     color: #A8A8A8;
@@ -331,6 +334,8 @@ input[type="password"]:focus {
     .logo-end {
         width: 64px;
         height: 78px;
+        top: 61px;
+        left: 45px;
     }
 
     @keyframes logo-animation {
@@ -345,7 +350,7 @@ input[type="password"]:focus {
         to {
             width: 64px;
             height: 78px;
-            top: 80px;
+            top: 100px;
             left: 77px;
             transform: revert-layer;
         }
@@ -369,13 +374,14 @@ input[type="password"]:focus {
     }
 
     .login-head {
+        height: 60px;
         position: relative;
         padding-right: 0;
     }
 
     .login-mask,.signup-mask {
-        margin-top: 205.5px;
-        padding: 32px 10px;
+        margin-top: 200px;
+        padding: 32px 32px;
     }
 
     .login-footer {
@@ -411,10 +417,50 @@ input[type="password"]:focus {
 
 
 
-@media(max-width: 430px) {
+@media(max-width: 520px) {
 
     .inputfield {
         width: 250px;
+    }
+
+    .login-head {
+        margin-top: 24px;
+    }
+
+    .login-head-top-right {
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    @keyframes logo-animation {
+        from {
+            width: 100px;
+            height: 122px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    
+        to {
+            width: 64px;
+            height: 78px;
+            top: 100px;
+            left: 50%;
+        }
+    }
+
+    .logo-end {
+          width: 64px;
+            height: 78px;
+            left: auto;
+    }
+}
+
+
+@media(max-width: 380px) {
+
+    .inputfield {
+        width: 200px;
     }
 }
 

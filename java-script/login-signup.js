@@ -3,19 +3,21 @@ let userList = [];
 /**
 * This function generate a new User.
 */
-
 async function addUser() {
     let mail = document.getElementById('inputSignUpMail');
     let password = document.getElementById('inputSignUpPassword1');
     let password2 = document.getElementById('inputSignUpPassword2');
     let checkbox = document.getElementById('checkboxAccept');
+    let passwordIncorrect = document.getElementById('passwordIncorrect');
     if (!checkbox.checked) {
-        document.getElementById('passwordIncorrect').innerText = "You must accept the Privacy Policy";
+        passwordIncorrect.classList.remove('d-none');
+        passwordIncorrect.innerText = "You must accept the Privacy Policy";
         checkbox.style.border = "2px solid red";
         return;
     }
     if (!(await isEmailUnique(mail.value))) {
-        document.getElementById('passwordIncorrect').innerText = "This email is already registered";
+        passwordIncorrect.classList.remove('d-none');
+        passwordIncorrect.innerText = "This email is already registered";
         mail.style.border = "2px solid red";
         return;
     }
@@ -28,7 +30,6 @@ async function addUser() {
 /**
 * This function creates user data and returns it to the function AddUser().
 */
-
 function createUserObject() {
     let name = document.getElementById('inputSignUpName').value;
     let mail = document.getElementById('inputSignUpMail').value;
@@ -45,7 +46,6 @@ function createUserObject() {
 /**
 * This function checks whether the specified mail address is already registered and returns the answer to addUser().
 */
-
 async function isEmailUnique(email) {
     await loadUser();
     return !userList.some(user => user.mail === email);
@@ -55,7 +55,6 @@ async function isEmailUnique(email) {
 /**
 * This function checks the passwords and returns them to addUser()
 */
-
 async function passwordCheck(user, password, password2) {
     const passwordValue = password.value.trim();
     const password2Value = password2.value.trim();
@@ -74,7 +73,6 @@ async function passwordCheck(user, password, password2) {
 /**
 * This function checks whether the passwords are identical and returns the result to passwordCheck().
 */
-
 async function isPasswordEqual(user, passwordValue, password2Value) {
     if (passwordValue === password2Value) {
         document.getElementById('bgSignupSuccesfully').classList.remove('d-none');
@@ -90,7 +88,6 @@ async function isPasswordEqual(user, passwordValue, password2Value) {
 /**
 * This function checks whether the input fields for the passwords are filled in and returns the result to  passwordCheck().
 */
-
 async function isPasswordEmpty(passwordValue, password2Value) {
     if (passwordValue === "" || password2Value === "") {
         let passwordIncorrect = document.getElementById('passwordIncorrect');
@@ -104,7 +101,6 @@ async function isPasswordEmpty(passwordValue, password2Value) {
 /**
 * This function load the user data
 */
-
 async function loadUser() {
     userList = [];
     let users = await getData('users');
@@ -121,7 +117,6 @@ async function loadUser() {
 /**
 * This function is for the login
 */
-
 function login() {
     let mail = document.getElementById('inputLoginMail');
     let password = document.getElementById('inputLoginPassword');
@@ -132,6 +127,7 @@ function login() {
         window.location.href = "./summary.html";
     } else {
         let failedLogin = document.getElementById('failedLogin');
+        failedLogin.classList.remove('d-none');
         failedLogin.innerHTML = "E-Mail or password are incorrect";;
     }
 }
@@ -140,7 +136,6 @@ function login() {
 /**
 * This function is for the guest login
 */
-
 function guestLogin() {
     let user = {
         'initials': 'G',
@@ -155,7 +150,6 @@ function guestLogin() {
 /**
 * This function generates the initials of the names and returns them to addContact().
 */
-
 function getInitials(name) {
     return name
         .split(" ")
