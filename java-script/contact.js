@@ -106,7 +106,8 @@ async function deleteContact(id) {
     let contactDetails = document.getElementById('showContactDetails');
     contactDetails.innerHTML = '';
     document.getElementById('editContact').classList.add('d-none');
-    document.getElementById('container-right').classList.toggle('container-right-dnone');
+    document.getElementById('container-right').classList.add('d-none');
+    document.getElementById('container-contacts').classList.remove('d-none');   
 }
 
 
@@ -206,23 +207,21 @@ function showContact(id) {
     contactDetails.innerHTML = '';
     if (id === currentContact.id) {
         document.getElementById('showContactDetails').classList.toggle('d-none');
-        document.getElementById('container-right').classList.toggle('container-right-dnone');
+        document.getElementById('container-right').classList.toggle('d-none');
     }   else {
+        console.log("hello");
         document.getElementById('showContactDetails').classList.remove('d-none');
-        document.getElementById('container-right').classList.remove('container-right-dnone');
+        document.getElementById('container-right').classList.remove('d-none');
     }
     currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
-    let mediaQuery = window.matchMedia('(max-width: 1024px)');
-    if (mediaQuery.matches) {
-        document.getElementById('container-contacts').classList.toggle('d-none');
-    }
+    document.getElementById('container-contacts').classList.add('d-none');
 }
 
 
 function closeOpenContactDetails() {
     document.getElementById('showContactDetails').classList.toggle('d-none');
-    document.getElementById('container-right').classList.toggle('container-right-dnone');
+    document.getElementById('container-right').classList.toggle('d-none');
     let mediaQuery = window.matchMedia('(max-width: 1024px)');
     if (mediaQuery.matches) {
         document.getElementById('container-contacts').classList.toggle('d-none');

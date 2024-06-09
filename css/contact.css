@@ -622,9 +622,6 @@ input[type="tel"]:focus {
         display: none;
     }
 
-    .container-right-dnone {
-        display: none;
-    }
 }
 
 
@@ -642,3 +639,11 @@ input[type="tel"]:focus {
 
     }
 }
+
+
+@media(min-width: 1024px) {
+    .show-big-always {
+        display: inherit !important;
+    }
+}
+
