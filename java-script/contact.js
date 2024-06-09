@@ -14,7 +14,6 @@ async function init() {
  * 
  * 
  */
-
 function renderContactlist() {
     let contactList = document.getElementById('contact-list');
     if (!contactList) {
@@ -37,9 +36,8 @@ function renderContactlist() {
 
 
 /**
- * The function returns the sorted list from a to z.
+ * The function returns the sorted list from letter A to Z.
  */
-
 function sorting(a, b) {
     return a.name.localeCompare(b.name)
 }
@@ -48,7 +46,6 @@ function sorting(a, b) {
 /**
  * This function adds a new contact.
  */
-
 async function addContact() {
     let name = document.getElementById('name');
     let mail = document.getElementById('mail');
@@ -76,7 +73,6 @@ async function addContact() {
 /**
 * This function updated a new contact.
 */
-
 async function updateContact(id) {
     let name = document.getElementById('edit-name');
     let mail = document.getElementById('edit-mail');
@@ -99,7 +95,6 @@ async function updateContact(id) {
 /**
 * This function delete a contact.
 */
-
 async function deleteContact(id) {
     await deleteDate(`contacts/${id}`);
     await init();
@@ -114,7 +109,6 @@ async function deleteContact(id) {
 /**
 * This function generates a radom color and returns it to addContact().
 */
-
 function getColor() {
     const bgColors = ['#ff7a00', '#9327ff', '#6e52ff', '#fC71ff', '#ffbb2b', '#1fd7c1'];
     const randomColor = bgColors[Math.floor(bgColors.length * Math.random())];
@@ -125,7 +119,6 @@ function getColor() {
 /**
 * This function generates the initials of the names and returns them to addContact().
 */
-
 function getInitials(name) {
     return name
         .split(" ")                        
@@ -138,7 +131,6 @@ function getInitials(name) {
 /**
 * This function generates the first letter of the name and returns them to addContact().
 */
-
 function getFirstLetter(name) {
     let words = name.split(" ");
     let firstLetter = words[0][0].toUpperCase()
@@ -149,7 +141,6 @@ function getFirstLetter(name) {
 /**
 * This function load all contacts.
 */
-
 async function loadAllContacts() {
     allContacts = [];
     let contacts = await getData('contacts');
@@ -209,7 +200,6 @@ function showContact(id) {
         document.getElementById('showContactDetails').classList.toggle('d-none');
         document.getElementById('container-right').classList.toggle('d-none');
     }   else {
-        console.log("hello");
         document.getElementById('showContactDetails').classList.remove('d-none');
         document.getElementById('container-right').classList.remove('d-none');
     }
