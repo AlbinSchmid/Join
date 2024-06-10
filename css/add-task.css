@@ -649,8 +649,6 @@ h2 {
     gap: 8px;
 }
 
-
-
 .footer-btn-container {
     display: flex;
     align-items: end;
@@ -661,23 +659,31 @@ h2 {
         display: none;
     }
 
+    .headline {
+        padding-top: 12px;
+        padding-left: 0px;
+        display: flex;
+        justify-content: center;
+    }
+
     .add-task-container {
         display: block;
         padding-top: 16px;
     }
 
     .dp-flex-jc-sb {
-        justify-content: flex-start;
+        justify-content: center;
         gap: 18px;
     }
 
     .input-container {
-        max-width: 406px;
+        width: 406px;
     }
 
     .add-task-footer {
-        margin-top: 16px;
-        display: block;
+        margin-top: 34px;
+        display: flex;
+        justify-content: center;
         gap: 12px;
     }
 
@@ -688,13 +694,17 @@ h2 {
     .dp-flex {
         margin-bottom: 12px;
     }
-}
 
-@media(max-width: 1024px) {
-    .headline {
-        padding-top: 12px;
+    h2 {
+        justify-content: center;
+    }
+
+    form {
+        display: flex;
+        justify-content: center;
     }
 }
+
 
 @media(max-width: 658px) {
     .add-task-container {
@@ -712,7 +722,19 @@ h2 {
     }
 }
 
-@media(max-width: 480px) {
+@media(max-width: 500px) {
+    .headline {
+        font-size: 50px;
+    }
+
+    h2 {
+        padding-top: 12px;
+    }
+
+    .custom-select-container {
+        margin-left: 84px;
+    }
+
     .inputfield-title {
         width: 270px;
     }
@@ -723,6 +745,7 @@ h2 {
 
     .assignment-task-assignment {
         width: 246px;
+        margin-left: 62px;
     }
 
     .date-selector {
@@ -731,6 +754,7 @@ h2 {
 
     .dp-flex-jc-sb {
         flex-direction: column;
+        align-items: center;
     }
 
     .selectfield-task-category {
@@ -742,11 +766,11 @@ h2 {
     }
 
     .custom-select-container::after {
-        right: 140px;
+        right: 98px;
     }
 
     .assignment-select-container::after {
-        right: 122px;
+        right: 72px;
     }
 
     .input-container {

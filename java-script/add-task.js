@@ -191,6 +191,9 @@ function getAddTaskHTMLRightSide() {
         </div>`;
 }
 
+/**
+ * opens the task category dropdown menu with eventlistener click event
+ */
 function setupCategoryDropdown() {
     const select = document.getElementById('task-category');
     const container = document.querySelector('.custom-select-container');
@@ -210,6 +213,10 @@ function setupCategoryDropdown() {
     });
 }
 
+/**
+ * 
+ * @param {*} clickedCheckbox recieves the input out of the checkboxes for the priority election 
+ */
 function handleCheckboxClick(clickedCheckbox) {
     const checkboxes = document.querySelectorAll('.dp-flex-jc-sb input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -219,6 +226,10 @@ function handleCheckboxClick(clickedCheckbox) {
     });
 }
 
+/**
+ * 
+ * @returns creates a new subtask and pushes the information into the array subtask for rendering afterwards
+ */
 function createSubtask() {
     let inputField = document.getElementById('task-subtasks');
     let subtaskText = inputField.value.trim();
@@ -230,14 +241,17 @@ function createSubtask() {
     }
 
     subtasks.push(subtaskText);
-    subtaskCount++; // Erhöhe den Subtask-Zähler
+    subtaskCount++; 
     clearInput();
     renderSubtasks();
 }
 
+/**
+ * recives the the subtask text out of the array and calls subTaskHTML function
+ */
 function renderSubtasks() {
     let container = document.querySelector('.subtasks-container');
-    container.innerHTML = ''; // Leere den Container
+    container.innerHTML = ''; 
 
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
@@ -245,6 +259,11 @@ function renderSubtasks() {
     }
 }
 
+/**
+ * 
+ * @param {*} subtaskText 
+ * @returns subtask html
+ */
 function getSubtasksHTML(subtaskText) {
     return /*html*/`
         <div class="subtask">
@@ -261,7 +280,10 @@ function getSubtasksHTML(subtaskText) {
     `;
 }
 
-
+/**
+ * 
+ * @param {*} subtaskText edit form validation pop up window for the subtasks content
+ */
 function editSubtask(subtaskText) {
     let newText = prompt('Edit your subtask:', subtaskText);
 
@@ -271,7 +293,7 @@ function editSubtask(subtaskText) {
         if (index !== -1) {
             subtasks[index] = newText;
         }
-        renderSubtasks(); // Aktualisiere die Anzeige
+        renderSubtasks(); 
     }
 }
 
@@ -279,7 +301,6 @@ function editSubtask(subtaskText) {
  * deletes created Subtask inside subtask-container
  * @param {*} subtaskText 
  */
-
 function deleteSubtask(subtaskText) {
     let index = subtasks.indexOf(subtaskText);
     if (index !== -1) {
@@ -292,7 +313,6 @@ function deleteSubtask(subtaskText) {
 /**
  * clears the inputfield for adding a subtask
  */
-
 function clearInput() {
     document.getElementById('task-subtasks').value = '';
     document.getElementById('subtask-btn-container').style.display = 'none'
@@ -302,18 +322,23 @@ function clearInput() {
 /**
  * shows the create subtask function icon and den clear input function icon
  */
-
 function showInput() {
     document.getElementById('task-subtasks').style.display = 'block';
     document.getElementById('add-plus-button').style.display = 'none';
     document.getElementById('subtask-btn-container').style.display = 'flex';
 }
 
-
+/**
+ * resets the addTask content and refreshs the page
+ */
 function clearTask() {
     init();
 }
 
+/**
+ * 
+ * @returns creates the an object which is pushed into the firebase array tasks, which includes all informations choosen by in input fields
+ */
 async function createTask() {
     let taskTitle = document.getElementById('task-title').value;
     let taskDescription = document.getElementById('task-description').value;
@@ -323,17 +348,14 @@ async function createTask() {
     let Medium = document.getElementById('task-medium-priority').checked;
     let Low = document.getElementById('task-low-priority').checked;
     let taskCategory = document.getElementById('task-category').value;
-    console.log(taskDate);
-
     tasks = [];
     let taskFireBase = await getData('tasks');
     let ids = Object.keys(taskFireBase || []);
     id = ids.length + 1;
-
-    // Überprüfen, ob taskTitle, taskDate und taskCategory ausgefüllt sind
+  
     if (taskTitle === '' || taskDate === '' || taskCategory === '') {
         alert('Bitte füllen Sie die Felder "Titel", "Datum" und "Kategorie" aus.');
-        return; // Beenden der Funktion, wenn die Felder nicht ausgefüllt sind
+        return; 
     }
 
     let task = {
@@ -348,30 +370,37 @@ async function createTask() {
         'priorityLow': Low,
         'taskcategory': taskCategory,
         'subtaskCount': subtaskCount,
-        'subtasks': subtasks.slice(), // Add a copy of the subtasks array
+        'subtasks': subtasks.slice(),
         'selectedContact': selectedContacts.slice(),
     };
+
     tasks.push(task);
     await postData('tasks', task);
-
-
     subtaskCount = 0;
     subtasks = [];
     confirmationMessage();
     directToBoard();
 }
 
+/**
+ * confirmation message after a task is created
+ */
 function confirmationMessage() {
     document.getElementById('add-task-confirmation').classList.remove('d-none');
 }
 
+/**
+ * board.html is called and will be shown after a timeout of 2 secs
+ */
 function directToBoard() {
-    
     setTimeout(() => {
         window.location.href = 'board.html';
     }, 2000);
 }
 
+/**
+ * loads all Contacts out of the firebase array allContacts
+ */
 async function loadAllContacts() {
     allContacts = [];
     let contacts = await getData('contacts');
@@ -385,8 +414,9 @@ async function loadAllContacts() {
     console.log(allContacts);
 }
 
-
-
+/**
+ * toggle the dropdown menu
+ */
 function toggleDropdown() {
     let dropdownMenu = document.getElementById("dropdownMenu");
     if (dropdownMenu.style.display === "block") {
@@ -396,7 +426,10 @@ function toggleDropdown() {
     }
 }
 
-
+/**
+ * 
+ * @param {} event activates the dropdown menu 
+ */
 window.onclick = function (event) {
     if (!event.target.matches('.dropdown-toggle')) {
         let dropdowns = document.getElementsByClassName("dropdown-menu");
