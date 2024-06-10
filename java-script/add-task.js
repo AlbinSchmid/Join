@@ -411,7 +411,6 @@ async function loadAllContacts() {
         contact.id = id;
         allContacts.push(contact);
     }
-    console.log(allContacts);
 }
 
 /**
