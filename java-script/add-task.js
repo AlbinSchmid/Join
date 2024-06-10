@@ -176,7 +176,7 @@ function getAddTaskHTMLRightSide() {
                     </div>
                 </form>
             <h2>Subtasks</h2>
-                    <form>
+                    <form class="subtask-form">
                         <div class="input-container">
                             <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50" placeholder="Add new subtask" onfocus="showInput()">
                             <button type="button" class="add-plus-button" id="add-plus-button" onclick="showInput()"><img src="assets/img/icons/add_subtask_icon.svg" alt=""></button>
@@ -276,8 +276,7 @@ function getSubtasksHTML(subtaskText) {
                 <img src="assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
                 <img src="assets/img/icons/Subtasks_delete_icon.svg" alt="" class="delete-icon" onclick="deleteSubtask('${subtaskText}')"> 
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
 /**

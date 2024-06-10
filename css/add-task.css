@@ -429,7 +429,7 @@ h2 {
     -moz-appearance: none; 
     appearance: none; 
     margin-top: 8px;
-    width: 100%;
+    width: 440px;
     height: 48px;
     padding-left: 16px;
     padding-top: 8px;
@@ -444,7 +444,6 @@ h2 {
 .custom-select-container {
     position: relative;
     display: inline-block;
-    width: 440px;
 }
 
 .custom-select-container::after {
@@ -654,6 +653,10 @@ h2 {
     align-items: end;
 }
 
+.subtask-form {
+    display: flex;
+}
+
 @media(max-width: 1400px) {
     .mg-l-r {
         display: none;
@@ -685,6 +688,9 @@ h2 {
         display: flex;
         justify-content: center;
         gap: 12px;
+        font-size: 12px;
+        flex-direction: column;
+        align-items: center;
     }
 
     .subtask {
@@ -702,6 +708,12 @@ h2 {
     form {
         display: flex;
         justify-content: center;
+    }
+
+    .subtask-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
@@ -731,10 +743,6 @@ h2 {
         padding-top: 12px;
     }
 
-    .custom-select-container {
-        margin-left: 84px;
-    }
-
     .inputfield-title {
         width: 270px;
     }
@@ -745,7 +753,7 @@ h2 {
 
     .assignment-task-assignment {
         width: 246px;
-        margin-left: 62px;
+        
     }
 
     .date-selector {
@@ -761,20 +769,13 @@ h2 {
         width: 304px;
     }
 
-    .assignment-select-container {
-        width: 420px;
-    }
-
-    .custom-select-container::after {
-        right: 98px;
-    }
-
-    .assignment-select-container::after {
-        right: 72px;
-    }
-
     .input-container {
         width: 270px;
+    }
+
+    .subtask-btn-container {
+        position: relative;
+        right: 38px;
     }
 }
 
