@@ -21,6 +21,10 @@ nav a:hover {
     background-color: #2A3D59;
 }
 
+.active-link {
+    background-color: var(--secundary-color);
+}
+
 h1 {
     font-size: 61px;
     font-weight: 700;
