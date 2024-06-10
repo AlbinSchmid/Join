@@ -20,6 +20,9 @@ async function init() {
     updateHTML();
 }
 
+/**
+ * loads the tasks array from firebase
+ */
 async function loadTasks() {
     tasks = [];
     let task = await getData('tasks');
@@ -30,10 +33,12 @@ async function loadTasks() {
         
         tasks.push(allTasks);
     }
-    console.log(tasks); // Zeigt die geladenen Tasks an
 }
 
-
+/**
+ * upadtes the HTML content on the board, when tasks are moved by drag&drop
+ * filters after categorys inside the tasks array
+ */
 function updateHTML() {
     const dragAreas = ['to-do', 'in-progress', 'await-feedback', 'done'];
 
@@ -51,8 +56,6 @@ function updateHTML() {
             let subtaskCount = element.subtaskCount;
             let assignedTo = element.selectedContact ? generateContactHTML(element.selectedContact) : '';
             let priority = generatePriorityHTML(element);
-
-            // Bestimmen der Hintergrundfarbe basierend auf der taskcategory
             let backgroundColor = getBackgroundColor(taskcategory);
 
             areaElement.innerHTML += getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo, priority, index, tasksInArea, backgroundColor);
@@ -60,14 +63,11 @@ function updateHTML() {
     });
 }
 
-
-
 /**
  * 
  * @param {*} selectedContact parameter for choosing the right object, within in the array
  * @returns contactHTML with for-loop through array tasks, individuell css design for overlapping effect
  */
-
 function generateContactHTML(selectedContact) {
     let contactHTML = '';
     for (let i = 0; i < selectedContact.length; i++) {
@@ -84,7 +84,6 @@ function generateContactHTML(selectedContact) {
  * @param {} task 
  * @returns priority image for updateHTML with if else query
  */
-
 function generatePriorityHTML(task) {
     let priorityHTML = '';
     if (task.priorityHigh) {
@@ -118,7 +117,6 @@ function getBackgroundColor(taskcategory) {
  * @param {*} category 
  * @returns HTML for the board content
  */
-
 function getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo, priority, index, category, backgroundColor) {
     return /*html*/`
         <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${category[index]['id']})">
@@ -140,8 +138,6 @@ function getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo,
         </div>`;
 }
 
-
-
 /**
  * updates progressBar but does not work correctly yet
  */
@@ -162,16 +158,9 @@ function updateProgressBar() {
  * @param {*} callback 
  * @returns 
  */
-
 function openTask(taskId, callback) {
     let container = document.getElementById('task-detail-view-container');
     let task = tasks.find(task => task.id === taskId);
-
-    if (!task) {
-        console.error('Task not found');
-        return;
-    }
-
     currentTask = tasks.findIndex(task => task.id === taskId);
 
     let technicalTask = task.taskcategory;
@@ -181,7 +170,6 @@ function openTask(taskId, callback) {
     let dueDate = task.date;
     let priority = generateDetailedPriorityHTML(task);
     let assignedTo = generateDetailedContactHTML(task.selectedContact);
-
     let subtasks = '';
     if (task.subtasks && task.subtasks.length > 0) {
         for (let i = 0; i < task.subtasks.length; i++) {
@@ -194,9 +182,7 @@ function openTask(taskId, callback) {
     container.innerHTML = getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category);
     container.classList.remove('d-hide');
     container.classList.add('d-block');
-    
-
-    // Rückruffunktion speichern, um sie später beim Schließen des Tasks aufzurufen
+    document.getElementById('body').classList.add('overflow-hidden');
     container.dataset.callback = callback;
 }
 
@@ -207,7 +193,6 @@ function openTask(taskId, callback) {
 function closeTask() {
     let container = document.getElementById('task-detail-view-container');
 
-    // Aufruf der Rückruffunktion mit der aktualisierten Subtask-Anzahl
     if (typeof container.dataset.callback === 'function') {
         let task = tasks.find(task => task.id === taskId);
         container.dataset.callback(task.subtasks.length);
@@ -215,6 +200,7 @@ function closeTask() {
 
     container.classList.add('d-hide');
     container.classList.remove('d-block');
+    document.getElementById('body').classList.remove('overflow-hidden');
 }
 
 /**
@@ -257,7 +243,6 @@ function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, descripti
  * @param {*} selectedContact 
  * @returns contact name is added for the detail view
  */
-
 function generateDetailedContactHTML(selectedContact) {
     if (!selectedContact || selectedContact.length === 0) {
         return '';
@@ -280,7 +265,6 @@ function generateDetailedContactHTML(selectedContact) {
  * @param {*} task 
  * @returns priority images with extra text besides the image
  */
-
 function generateDetailedPriorityHTML(task) {
     let priorityHTML = '';
     if (task.priorityHigh) {
@@ -310,11 +294,10 @@ function generateDetailedPriorityHTML(task) {
 /**
  * calls the addTask function on the board.html 
  */
-
 function addTask() {
     let container = document.getElementById('addTask-board');
     container.classList.remove('d-none');
-    container.innerHTML = '';  // Clear the container
+    container.innerHTML = '';  
 
     let headerContainer = document.createElement('div');
     headerContainer.id = 'addTask-board-header';
@@ -328,6 +311,8 @@ function addTask() {
     footerContainer.id = 'addTask-board-footer';
     footerContainer.className = 'addTask-board-footer';
 
+    document.getElementById('body').classList.add('overflow-hidden');
+
     container.appendChild(headerContainer);
     container.appendChild(renderContainer);
     container.appendChild(footerContainer);
@@ -336,9 +321,8 @@ function addTask() {
 }
 
 /**
- * calls die getAddTaskHTML which is devided into 4 parts, cause of the fullscreen view on the board.html
+ * calls the getAddTaskHTML which is devided into 4 parts, cause of the fullscreen view on the board.html
  */
-
 function getAddTaskHTML() {
     let containerHeader = document.getElementById('addTask-board-header');
     let container = document.getElementById('addTask-board-render-container');
@@ -347,14 +331,13 @@ function getAddTaskHTML() {
     container.innerHTML +=  getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
     containerFooter.innerHTML += getAddTaskHTMLFooter();
     setupDropdown();
-    renderContactOptions(); // Ensure contacts are rendered
+    renderContactOptions(); 
 }
 
 /**
  * 
  * @returns the left side of the addTask content window
  */
-
 function getAddTaskHTMLLeftSide() {
     return /*html*/`
         <div>
@@ -380,6 +363,9 @@ function getAddTaskHTMLLeftSide() {
       <img class="mg-l-r-board" src="assets/img/icons/Vector 4.png" alt="">`;
 }
 
+/**
+ * initiates the dropdown menu for task assignemt
+ */
 function setupDropdown() {
     const input = document.getElementById('dropdownInput');
     const dropdown = document.getElementById('task-assignment');
@@ -406,7 +392,6 @@ function setupDropdown() {
 /**
  * renders the contact options within the left HTML side
  */
-
 function renderContactOptions() {
     let selectElement = document.getElementById('task-assignment');
     let contactsHTML = '';
@@ -428,7 +413,6 @@ function renderContactOptions() {
 /**
  * retunrs the selected contacts and creates the div content with the attributor informations
  */
-
 function renderSelectedContacts() {
     let checkboxes = document.querySelectorAll('#task-assignment input[type="checkbox"]:checked');
     let selectedContactsContainer = document.getElementById('selected-contacts');
@@ -458,7 +442,6 @@ function renderSelectedContacts() {
 /**
  * activates the contact dropdown menu
  */
-
 function setupDropdown() {
     const input = document.getElementById('dropdownInput');
     const dropdown = document.getElementById('task-assignment');
@@ -473,8 +456,6 @@ function setupDropdown() {
         }
     });
 }
-
-
 /**
  * 
  * @returns add task container right side html
@@ -541,7 +522,6 @@ function getAddTaskHTMLRightSide() {
  * 
  * @returns addTask header HTML
  */
-
 function getAddTaskHTMLHeader() {
     return /*html*/`
         <div class="addTask-board-header-content">
@@ -554,9 +534,9 @@ function getAddTaskHTMLHeader() {
 /**
  * closes the addTask window 
  */
-
 function closeAddTask() {
     document.getElementById('addTask-board').classList.add('d-none');
+    document.getElementById('body').classList.remove('overflow-hidden');
 }
 
 /**
@@ -682,7 +662,6 @@ function deleteSubtask(subtaskText) {
 /**
  * clears the inputfield for adding a subtask
  */
-
 function clearInput() {
     document.getElementById('task-subtasks').value = '';
     document.getElementById('subtask-btn-container').style.display = 'none'
@@ -692,7 +671,6 @@ function clearInput() {
 /**
  * shows the create subtask function icon and den clear input function icon
  */
-
 function showInput() {
     document.getElementById('task-subtasks').style.display = 'block';
     document.getElementById('add-plus-button').style.display = 'none';
@@ -702,7 +680,6 @@ function showInput() {
 /**
  * resets the addTask window 
  */
-
 function clearTask() {
     init();
 }
@@ -711,7 +688,6 @@ function clearTask() {
  * 
  * @returns the selected options out of the addTask window and pushes them into the json array, also updates the firebase 
  */
-
 async function createTask() {
     let taskTitle = document.getElementById('task-title').value;
     let taskDescription = document.getElementById('task-description').value;
@@ -726,11 +702,10 @@ async function createTask() {
     let taskFireBase = await getData('tasks');
     let ids = Object.keys(taskFireBase || []);
     id = ids.length + 1;
-
-    // Überprüfen, ob taskTitle, taskDate und taskCategory ausgefüllt sind
+    
     if (taskTitle === '' || taskDate === '' || taskCategory === '') {
         alert('Bitte füllen Sie die Felder "Titel", "Datum" und "Kategorie" aus.');
-        return; // Beenden der Funktion, wenn die Felder nicht ausgefüllt sind
+        return; 
     }
 
     let task = {
@@ -745,13 +720,12 @@ async function createTask() {
         'priorityLow': taskPriorityLow,
         'taskcategory': taskCategory,
         'subtaskCount': subtaskCount,
-        'subtasks': subtasks.slice(), // Add a copy of the subtasks array
+        'subtasks': subtasks.slice(), 
         'selectedContact': selectedContacts.slice(),
     };
+
     tasks.push(task);
     await postData('tasks', task);
-
-
     subtaskCount = 0;
     subtasks = [];
     document.getElementById('addTask-board').classList.add('d-none');
@@ -786,6 +760,5 @@ async function loadAllContacts() {
         contact.id = id;
         allContacts.push(contact);
     }
-    console.log(allContacts);
 }
 

@@ -5,8 +5,15 @@
 }
 
 body {
-    background-color: #F6F7F8 !important;
+    font-family: inter;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: var(--bg-color);
+    margin: 0;
+    display: flex;
+    box-sizing: border-box;
     max-width: 1920px;
+    background-color: #F6F7F8 !important;
 }
 
 .content {
