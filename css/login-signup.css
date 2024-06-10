@@ -1,3 +1,13 @@
+body {
+    font-family: inter;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: var(--bg-color);
+    margin: 0;
+    display: flex;
+    box-sizing: border-box;
+}
+
 .d-none {
     display: none !important;
 }

@@ -388,7 +388,7 @@ async function loadAllContacts() {
 
 
 function toggleDropdown() {
-    var dropdownMenu = document.getElementById("dropdownMenu");
+    let dropdownMenu = document.getElementById("dropdownMenu");
     if (dropdownMenu.style.display === "block") {
         dropdownMenu.style.display = "none";
     } else {
@@ -396,11 +396,11 @@ function toggleDropdown() {
     }
 }
 
-// Close the dropdown if the user clicks outside of it
+
 window.onclick = function (event) {
     if (!event.target.matches('.dropdown-toggle')) {
-        var dropdowns = document.getElementsByClassName("dropdown-menu");
-        var i;
+        let dropdowns = document.getElementsByClassName("dropdown-menu");
+        let i;
         for (i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
             if (openDropdown.style.display === "block") {

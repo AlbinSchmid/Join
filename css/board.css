@@ -1,4 +1,12 @@
-
+body {
+    font-family: inter;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: var(--bg-color);
+    margin: 0;
+    display: flex;
+    box-sizing: border-box;
+}
 
 .header-sticky {
     display: flex;
@@ -264,10 +272,6 @@
 .task-container:hover {
     cursor: pointer;
     transform: rotate(+5deg);   
-}
-
-.overflow-hidden {
-   overflow: hidden !important;
 }
 
 .to-do-title-container {
@@ -625,18 +629,6 @@
 .d-flex-mobile {
     display: none !important;
 }
-@media(max-width: 1390px) {
-    .board-task-container {
-        display: block;
-    }
-
-    .dragarea {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-        min-height: 256px;
-    }
-}
 
 .assignment-select-container {
     position: relative;
@@ -729,16 +721,16 @@
 }
 
 .selectfield-task-category {
-    -webkit-appearance: none; /* Entfernt den Standard-Pfeil in Webkit-Browsern */
-    -moz-appearance: none; /* Entfernt den Standard-Pfeil in Firefox */
-    appearance: none; /* Entfernt den Standard-Pfeil in anderen Browsern */
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none; 
     margin-top: 8px;
     width: 100%;
     height: 48px;
     padding-left: 16px;
     padding-top: 8px;
     padding-bottom: 8px;
-    padding-right: 40px; /* Platz für das Pfeilsymbol */
+    padding-right: 40px; 
     font-family: Inter;
     font-size: 20px;
     border-radius: 10px;
@@ -755,9 +747,9 @@
     content: '';
     position: absolute;
     right: 16px; 
-    top: 50%; /* Einheitlich auf 50% setzen */
-    transform: translateY(-50%) rotate(0deg); /* Initial position */
-    transition: transform 0.3s ease; /* Animation */
+    top: 50%; 
+    transform: translateY(-50%) rotate(0deg); 
+    transition: transform 0.3s ease; 
     width: 24px; 
     height: 24px; 
     background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
@@ -766,7 +758,7 @@
 }
 
 .custom-select-container.open::after {
-    transform: translateY(-50%) rotate(180deg); /* Rotation */
+    transform: translateY(-50%) rotate(180deg); 
 }
 
 .selectfield-task-category:hover {
@@ -785,6 +777,10 @@
     padding-top: 20px;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
 @media (max-width: 1440px) {
     .addTask-board-header {
         width: 450px;
@@ -801,13 +797,20 @@
     .mg-l-r-board {
         display: none;
     }
-
-    .addTask-board-container {
-        overflow-y: hidden;
-        overflow-x: hidden;
-    }
 }
 
+@media(max-width: 1390px) {
+    .board-task-container {
+        display: block;
+    }
+
+    .dragarea {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        min-height: 256px;
+    }
+}
 
 @media(max-width: 1024px) {
     .d-none-mobile {
