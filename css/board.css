@@ -1,3 +1,15 @@
+body,
+html {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.board-main-content {
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 60px;
+}
+
 .header-sticky {
     display: flex;
     position: sticky;
@@ -139,11 +151,13 @@
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.70);
-    justify-content: center;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
+
+    /* ADDED BJÖRN */
+    height: 100%;
+    overflow-y: auto;
 }
 
 .add-task-footer-board {
@@ -853,6 +867,7 @@ h3 {
 
 .edit-delete-btn {
     display: flex;
+    width: 85px;
     gap: 8px;
     justify-content: flex-start;
 }
