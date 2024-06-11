@@ -1,8 +1,13 @@
 let allContacts = [];
-let currentContact = {id: 'empty'};
+let currentContact = { id: 'empty' };
 let allFirstLetters = [];
 
 
+/**
+ * Initializes the application by loading all contacts and rendering the contact list.
+ *
+ * 
+ * */
 async function init() {
     await loadAllContacts();
     renderContactlist();
@@ -10,9 +15,7 @@ async function init() {
 
 
 /**
- * This function renders the contactlist in the container with the ID 'contact-list'.
- * 
- * 
+ * Renders the contact list in the container with the ID 'contact-list'.
  */
 function renderContactlist() {
     let contactList = document.getElementById('contact-list');
@@ -36,15 +39,19 @@ function renderContactlist() {
 
 
 /**
- * The function returns the sorted list from letter A to Z.
+ * Sorts contacts by name in ascending order.
+ * 
+ * @param {Object} a - The first contact object.
+ * @param {Object} b - The second contact object.
+ * @returns {number} - The result of the compare.
  */
 function sorting(a, b) {
-    return a.name.localeCompare(b.name)
+    return a.name.localeCompare(b.name);
 }
 
 
 /**
- * This function adds a new contact.
+ * Adds a new contact to the contact list.
  */
 async function addContact() {
     let name = document.getElementById('name');
@@ -57,9 +64,9 @@ async function addContact() {
         'mail': mail.value,
         'phonenumber': phonenumber.value,
         'color': getColor(),
-    }
+    };
     allContacts.push(contact);
-    await postData('contacts', contact)
+    await postData('contacts', contact);
     if (!allFirstLetters.includes(contact['firstLetter'])) {
         allFirstLetters.push(contact['firstLetter']);
     }
@@ -71,8 +78,10 @@ async function addContact() {
 
 
 /**
-* This function updated a new contact.
-*/
+ * Updates an existing contact.
+ * 
+ * @param {string} id - The ID of the contact to update.
+ */
 async function updateContact(id) {
     let name = document.getElementById('edit-name');
     let mail = document.getElementById('edit-mail');
@@ -93,8 +102,10 @@ async function updateContact(id) {
 
 
 /**
-* This function delete a contact.
-*/
+ * Deletes a contact.
+ * 
+ * @param {string} id - The ID of the contact to delete.
+ */
 async function deleteContact(id) {
     await deleteDate(`contacts/${id}`);
     await init();
@@ -107,8 +118,10 @@ async function deleteContact(id) {
 
 
 /**
-* This function generates a radom color and returns it to addContact().
-*/
+ * Generates a random color and returns it.
+ * 
+ * @returns {string} - A random color in hexadecimal format.
+ */
 function getColor() {
     const bgColors = ['#ff7a00', '#9327ff', '#6e52ff', '#fC71ff', '#ffbb2b', '#1fd7c1'];
     const randomColor = bgColors[Math.floor(bgColors.length * Math.random())];
@@ -117,30 +130,36 @@ function getColor() {
 
 
 /**
-* This function generates the initials of the names and returns them to addContact().
-*/
+ * Generates the initials of a name.
+ * 
+ * @param {string} name - The name of the contact.
+ * @returns {string} - The initials of the name.
+ */
 function getInitials(name) {
     return name
-        .split(" ")                        
-        .filter(word => word.length > 0)  
-        .map(word => word[0].toUpperCase()) 
-        .join("");                       
+        .split(" ")
+        .filter(word => word.length > 0)
+        .map(word => word[0].toUpperCase())
+        .join("");
 }
 
 
 /**
-* This function generates the first letter of the name and returns them to addContact().
-*/
+ * Gets the first letter of a name.
+ * 
+ * @param {string} name - The name of the contact.
+ * @returns {string} - The first letter of the name.
+ */
 function getFirstLetter(name) {
     let words = name.split(" ");
-    let firstLetter = words[0][0].toUpperCase()
+    let firstLetter = words[0][0].toUpperCase();
     return firstLetter;
 }
 
 
 /**
-* This function load all contacts.
-*/
+ * Loads all contacts from the data source.
+ */
 async function loadAllContacts() {
     allContacts = [];
     let contacts = await getData('contacts');
@@ -154,17 +173,20 @@ async function loadAllContacts() {
 }
 
 
-// ------------- ENABLE/DISABLE CONTAINER ------------- //
-
-
+/**
+ * Shows the container for creating a new contact.
+ */
 function showCreateNewContact() {
     let containerAdd = document.getElementById('addNewContact');
-    containerAdd.innerHTML = ''
+    containerAdd.innerHTML = '';
     containerAdd.innerHTML = addContactHTML();
     document.getElementById('addNewContact').classList.toggle('d-none');
 }
 
 
+/**
+ * Creates a new contact and hides the creation form after submission.
+ */
 function createNewContact() {
     document.getElementById('addNewContact').classList.toggle('d-none');
     document.getElementById('btnContactCreated').classList.toggle('d-none');
@@ -173,11 +195,19 @@ function createNewContact() {
 }
 
 
+/**
+ * Closes the button indicating successful contact creation.
+ */
 function closeBtnSuccesfully() {
-    document.getElementById('btnContactCreated').classList.add('d-none')
+    document.getElementById('btnContactCreated').classList.add('d-none');
 }
 
 
+/**
+ * Opens the form for editing an existing contact.
+ * 
+ * @param {string} id - The ID of the contact to edit.
+ */
 function editContact(id) {
     function find(contact) {
         return contact.id === id;
@@ -189,32 +219,49 @@ function editContact(id) {
     document.getElementById('editContact').classList.toggle('d-none');
 }
 
-
+/**
+ * Shows the details of a contact.
+ * 
+ * @param {string} id - The ID of the contact to display.
+ */
 function showContact(id) {
     function find(contact) {
         return contact.id === id;
     }
     let contactDetails = document.getElementById('showContactDetails');
     contactDetails.innerHTML = '';
-    if (id === currentContact.id) {
-        document.getElementById('showContactDetails').classList.toggle('d-none');
-        document.getElementById('container-right').classList.toggle('d-none');
-
-        if (document.getElementById('showContactDetails').classList.contains("d-none")) {
-            document.getElementById('container-contacts').classList.remove('d-none');
-        } else {
-            document.getElementById('container-contacts').classList.add('d-none');
-        }
-    }   else {
-        document.getElementById('showContactDetails').classList.remove('d-none');
-        document.getElementById('container-right').classList.remove('d-none');
-        document.getElementById('container-contacts').classList.add('d-none');
-    }
+    conditionFoRShowContactDetails(id);
     currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
 }
 
 
+/**
+ * Toggles the visibility of contact details and adjusts the layout based on the current contact.
+ * 
+ * @param {string} id - The ID of the contact to conditionally display.
+ */
+function conditionFoRShowContactDetails(id) {
+    if (id === currentContact.id) {
+        document.getElementById('showContactDetails').classList.toggle('d-none');
+        document.getElementById('container-right').classList.toggle('d-none');
+
+        if (document.getElementById('showContactDetails').classList.contains('d-none')) {
+            document.getElementById('container-contacts').classList.remove('d-none');
+        } else {
+            document.getElementById('container-contacts').classList.add('d-none');
+        }
+    } else {
+        document.getElementById('showContactDetails').classList.remove('d-none');
+        document.getElementById('container-right').classList.remove('d-none');
+        document.getElementById('container-contacts').classList.add('d-none');
+    }
+}
+
+
+/**
+ * Toggles the visibility of the contact details and adjusts layout based on screen size.
+ */
 function closeOpenContactDetails() {
     document.getElementById('showContactDetails').classList.toggle('d-none');
     document.getElementById('container-right').classList.toggle('d-none');
@@ -225,18 +272,20 @@ function closeOpenContactDetails() {
 }
 
 
-// ------------- EDIT ICONS ------------- //
-
-
+/**
+ * Changes the source of the edit icon to the blue version.
+ */
 function changeEditIcon() {
     document.getElementById('editIcon').setAttribute('src', './assets/img/icons/contact/edit_blue.png');
-
 }
 
 
-// ------------- HTML ------------- //
-
-
+/**
+ * Generates the HTML for a contact in the contact list.
+ * 
+ * @param {Object} contact - The contact object.
+ * @returns {string} - The HTML string for the contact.
+ */
 function renderContactOnListHTML(contact) {
     return `
         <div onclick="showContact('${contact.id}')" class="container-contact">
@@ -250,6 +299,12 @@ function renderContactOnListHTML(contact) {
 }
 
 
+/**
+ * Generates the HTML for a contact header based on the current letter.
+ * 
+ * @param {string} currentLetter - The current letter for the contact group.
+ * @returns {string} - The HTML string for the contact header.
+ */
 function renderContactHeaderHTML(currentLetter) {
     return `
     <div>
@@ -258,7 +313,12 @@ function renderContactHeaderHTML(currentLetter) {
     `;
 }
 
-
+/**
+ * Generates the HTML for displaying contact details.
+ * 
+ * @param {Object} contact - The contact object.
+ * @returns {string} - The HTML string for the contact details.
+ */
 function contactDetailsHTML(contact) {
     return `
     <div class="contact-data" id="contactData">
@@ -295,8 +355,12 @@ function contactDetailsHTML(contact) {
     `;
 }
 
-
-function addContactHTML(contact) {
+/**
+ * Generates the HTML for the add contact form.
+ * 
+ * @returns {string} - The HTML string for the add contact form.
+ */
+function addContactHTML() {
     return `
         <div class="overlay-bg dflex-c-c">
             <div class="container-overlay">
@@ -340,7 +404,12 @@ function addContactHTML(contact) {
         `;
 }
 
-
+/**
+ * Generates the HTML for the edit contact form.
+ * 
+ * @param {Object} contact - The contact object.
+ * @returns {string} - The HTML string for the edit contact form.
+ */
 function editContactHTML(contact) {
     return `
     <div class="overlay-bg dflex-c-c">
@@ -381,6 +450,3 @@ function editContactHTML(contact) {
     </div>
     `;
 }
-
-
-

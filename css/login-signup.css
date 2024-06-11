@@ -334,7 +334,8 @@ input[type="password"]:focus {
     .logo-end {
         width: 64px;
         height: 78px;
-        left: auto;
+        top: 80px;
+        left: 20%;
     }
 
     @keyframes logo-animation {
@@ -455,7 +456,8 @@ input[type="password"]:focus {
     .logo-end {
         width: 64px;
         height: 78px;
-        left: auto;
+        top: 80px;
+        left: 20%;
     }
 }
 

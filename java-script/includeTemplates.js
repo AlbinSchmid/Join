@@ -1,3 +1,9 @@
+/**
+ * Includes HTML content from external files into the current document.
+ * 
+ * This function finds elements with the 'w3-include-html' attribute, fetches the content of the specified file,
+ * and replaces the innerHTML of those elements with the fetched content. If the fetch fails, it displays a "Page not found" message.
+ */
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");
     for (let i = 0; i < includeElements.length; i++) {
@@ -12,13 +18,12 @@ async function includeHTML() {
     }
 }
 
-(async function () {
-    await includeHTML();
-    showUser();
-    linkActive();
-})();
 
-
+/**
+ * Sets the active state for the current link to the current page.
+ * 
+ * This function checks the current pathname and applies the 'active-link' class to the current navigation link element.
+ */
 function linkActive() {
     const links = {
         "/summary.html": "link-summary",
@@ -35,7 +40,11 @@ function linkActive() {
     document.getElementById(id).classList.toggle("active-link");
 }
 
-
+/**
+ * Displays the initials of the logged-in user.
+ * 
+ * This function retrieves the user details from local storage, extracts the initials, and displays them in the designated container.
+ */
 function showUser() {
     let userInitials = document.getElementById("userInitials");
     if (!userInitials) {
