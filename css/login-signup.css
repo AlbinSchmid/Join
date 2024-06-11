@@ -387,6 +387,7 @@ input[type="password"]:focus {
 
     .login-footer {
         position: relative;
+        padding-bottom: 30px;
         bottom: 0;
     }
 
