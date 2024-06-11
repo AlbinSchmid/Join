@@ -67,6 +67,7 @@ nav {
 .nav-bottom-link a {
     text-decoration: none;
     color: #A8A8A8;
+    width: 110px;
 }
 
 .nav-bottom-link a:hover {
