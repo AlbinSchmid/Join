@@ -800,6 +800,38 @@
     font-size: 20px;
 }
 
+.edit-delete {
+    display: flex;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.edit-delete-btn {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+}
+
+.edit-delete-btn img:nth-child(2) {
+    display: none;
+}
+
+.edit-delete-btn:hover {
+    font-weight: 700;
+    color: var(--highlight-color);
+}
+
+.edit-delete-btn:hover img:nth-child(1) {
+    display: none;
+}
+
+.edit-delete-btn:hover img:nth-child(2) {
+    display: block;
+}
+
 @media (max-width: 1440px) {
     .addTask-board-header {
         width: 444px;

@@ -213,7 +213,7 @@ function closeTask() {
  * @param {*} dueDate 
  * @param {*} priority 
  * @param {*} assignedTo 
- * @returns fullscreen View with more informations then the normal board view, parameters deliever the right objects out of the Array
+ * @returns fullscreen View with more informations then the normal board view, parameters deliever the right objects and their value out of the Array tasks
  */
 
 function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo) {
@@ -229,11 +229,19 @@ function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, descripti
                     <div>${assignedTo}</div>
                 </div>
                 <div><p class="subasks-headline">Subtasks</p>${subtasks}</div>
-                <div class="edit-detail-container">
-                    <div class="delete-detail-btn"><img src="assets/img/icons/delete_icon.svg" alt="delete"><p>Delete</p></div>
-                    <img src="assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
-                    <div class="edit-detail-btn"><img src="assets/img/icons/Subtasks_edit_icon.svg" alt="edit"><p>Edit</p></div>
-                </div>
+                <div class="edit-delete">
+                        <div onclick="deleteTask('${taskId}')" class="edit-delete-btn cp">
+                            <img src="./assets/img/icons/contact/delete_black.png" alt="delete">
+                            <img src="./assets/img/icons/contact/delete_blue.png" alt="delete">
+                            <span>Delete</span>
+                        </div>
+                        <img src="assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
+                        <div onclick="editTask('${taskId}')" class="edit-delete-btn cp">
+                            <img src="./assets/img/icons/contact/edit_black.png" alt="edit">
+                            <img src="./assets/img/icons/contact/edit_blue.png" alt="edit">
+                            <span>Edit</span>
+                        </div>
+                    </div>
             </div>    
         </div>`;
 }
