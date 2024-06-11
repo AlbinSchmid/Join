@@ -49,8 +49,8 @@ function getAddTaskHTMLLeftSide() {
                         <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
                     </form>
             <h2>Assigned to</h2>
-            <div>
-                <form>
+            <div class="jc-center">
+                <form class="contacts-form">
                     <div class="assignment-select-container">
                         <input id="dropdownInput" class="assignment-task-assignment" placeholder="Select contacts to assign">
                         <div id="task-assignment" class="dropdown-content"></div>
@@ -83,9 +83,8 @@ function renderContactOptions() {
 function renderSelectedContacts() {
     let checkboxes = document.querySelectorAll('#task-assignment input[type="checkbox"]:checked');
     let selectedContactsContainer = document.getElementById('selected-contacts');
-    selectedContactsContainer.innerHTML = ''; // Clear previous selection
-
-    selectedContacts = []; // Clear the array
+    selectedContactsContainer.innerHTML = ''; 
+    selectedContacts = []; 
 
     for (let i = 0; i < checkboxes.length; i++) {
         const checkbox = checkboxes[i];
@@ -93,7 +92,6 @@ function renderSelectedContacts() {
         const name = checkbox.dataset.name;
         const initials = checkbox.value;
 
-        // Push to selectedContacts array
         selectedContacts.push({ color, name, initials });
 
         const contactDiv = document.createElement('div');
@@ -133,7 +131,6 @@ function setupDropdown() {
  * 
  * @returns add task container right side html
  */
-
 function getAddTaskHTMLRightSide() {
     return /*html*/`
       <div>

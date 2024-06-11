@@ -461,6 +461,12 @@
     display: block;
 }
 
+h3 {
+    font-family: inter;
+    font-weight: 400;
+    font-size: 21px;
+}
+
 .detail-task-container {
     display: flex;
     align-items: center;
@@ -800,6 +806,34 @@
     font-size: 20px;
 }
 
+.close-btn-edit-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.edit-container {
+    background-color: rgba(0, 0, 0, 0.70);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    align-content: center;
+}
+
+.edit-task-container {
+    background-color: white;
+    border-radius: 30px;
+    padding: clamp(1.875rem, 1.65rem + 1.125vw, 3rem) clamp(0.875rem, 0.55rem + 1.625vw, 2.5rem);
+}
+
+.edit-task-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .edit-delete {
     display: flex;
     gap: 8px;
@@ -830,6 +864,42 @@
 
 .edit-delete-btn:hover img:nth-child(2) {
     display: block;
+}
+
+.edit-contacts-loaded {
+    display: flex;
+}
+
+.save-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 24px;
+}
+
+.save-btn {
+    background-color: #2A3647;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 57px;
+    width: 89px;
+}
+
+.save-btn:hover {
+    cursor: pointer;
+    transition: ease-in-out 120ms;
+    background-color: #29ABE2;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    border: none;
+}
+
+.subtask-form-edit {
+    display: flex;
+    flex-direction: column;
 }
 
 @media (max-width: 1440px) {
@@ -973,11 +1043,5 @@
 
     .addTask-board-header {
         padding: 38px 16px 0px 16px;
-    }
-
-    .subtask-form {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
     }
 }

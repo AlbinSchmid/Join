@@ -13,7 +13,7 @@
     <script src="/java-script/header.js"></script>
 </head>
 
-<body id="body" onload="init()"> <!-- init() => includeHTML(),renderBoardContent() -->
+<body id="body" onload="init()"> 
 
 
     <div w3-include-html="/assets/templates/side-bar-template.html"></div>
@@ -26,7 +26,6 @@
                 <div class="operations-container">
                     <form class="search-area d-none-mobile">
                         <input class="search-field" placeholder="Find Task" type="text">
-                            <!-- vertical line und hover/eingabe desgin fehlt noch -->
                         <div class="al-center">
                             <div class="vl"></div>
                             <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
@@ -43,7 +42,6 @@
             <div class="operations-container">
                 <form class="search-area search-area-mobile d-flex-mobile">
                     <input class="search-field" placeholder="Find Task" type="text">
-                        <!-- vertical line und hover/eingabe desgin fehlt noch -->
                     <div class="al-center">
                         <div class="vl"></div>
                         <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
@@ -54,6 +52,7 @@
         
             <section class="board-task-container">
                 <div id="task-detail-view-container" class="task-detail-view-container d-hide"></div>
+                <div id="edit-container" class="edit-container d-hide"></div>
             
                 <div class="status-container">
                     <div class="status-overiew-container">
