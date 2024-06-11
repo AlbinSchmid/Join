@@ -774,7 +774,7 @@
 
 @media (max-width: 1440px) {
     .addTask-board-header {
-        width: 450px;
+        width: 444px;
     }
 
     .addTask-board-render-container {
@@ -782,7 +782,7 @@
     }
 
     .addTask-board-footer {
-        width: 450px;
+        width: 444px;
     }
 
     .mg-l-r-board {
@@ -857,5 +857,50 @@
 
     .search-btn-container {
         margin-right: 0;
+    }
+}
+
+@media (max-width: 560px) {
+    .headline {
+        font-size: 50px;
+    }
+
+    h2 {
+        padding-top: 12px;
+    }
+
+    .inputfield-title {
+        width: 270px;
+    }
+
+    .textareafied-description {
+        width: 270px;
+    }
+
+    .assignment-task-assignment {
+        width: 246px;
+        
+    }
+
+    .date-selector {
+        width: 270px;
+    }
+
+    .dp-flex-jc-sb {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .selectfield-task-category {
+        width: 304px;
+    }
+
+    .input-container {
+        width: 270px;
+    }
+
+    .subtask-btn-container {
+        position: relative;
+        right: 38px;
     }
 }

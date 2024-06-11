@@ -469,29 +469,29 @@ function getAddTaskHTMLRightSide() {
                   <input id="task-date" type="date" name="task-date" class="date-selector" required>
               </form>
               <h2>Prio</h2>
-                <div class="dp-flex-jc-sb">
-                    <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)">
-                    <label for="task-high-priority" class="checkbox-container">
-                        <div class="checkbox-label-high-detail">
-                            Urgent
-                            <img class="checkbox-image-high" src="assets/img/icons/prio_high.png" alt="priority high">
-                        </div>
-                    </label>
-                    <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium" onclick="handleCheckboxClick(this)">
-                    <label for="task-medium-priority" class="checkbox-container">
-                        <div class="checkbox-label-medium-detail">
-                            Medium
-                            <img class="checkbox-image-medium" src="assets/img/icons/prio_medium.png" alt="priority medium">
-                        </div>
-                    </label>
-                    <input type="checkbox" id="task-low-priority" class="custom-checkbox-low" onclick="handleCheckboxClick(this)">
-                    <label for="task-low-priority" class="checkbox-container">
-                        <div class="checkbox-label-low-detail">
-                            Low
-                            <img class="checkbox-image-low" src="assets/img/icons/prio_low.png" alt="priority low">
-                        </div>
-                    </label>
-                </div>
+                    <div class="dp-flex-jc-sb">
+                        <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)">
+                        <label for="task-high-priority" class="checkbox-container">
+                            <div class="checkbox-label-high">
+                                Urgent
+                                <img class="checkbox-image-high" src="assets/img/icons/prio_high.png" alt="priority high">
+                            </div>
+                        </label>
+                        <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium" onclick="handleCheckboxClick(this)" checked>
+                        <label for="task-medium-priority" class="checkbox-container">
+                            <div class="checkbox-label-medium">
+                                Medium
+                                <img class="checkbox-image-medium" src="assets/img/icons/prio_medium.png" alt="priority medium">
+                            </div>
+                        </label>
+                        <input type="checkbox" id="task-low-priority" class="custom-checkbox-low" onclick="handleCheckboxClick(this)">
+                        <label for="task-low-priority" class="checkbox-container">
+                            <div class="checkbox-label-low">
+                                Low
+                                <img class="checkbox-image-low" src="assets/img/icons/prio_low.png" alt="priority low">
+                            </div>
+                        </label>
+                    </div>
           <h2>Category<p class="required-color">*</p></h2>
             <form>
                 <div class="custom-select-container">
@@ -527,8 +527,7 @@ function getAddTaskHTMLHeader() {
         <div class="addTask-board-header-content">
             <span>Add Task</span>
             <img class="close-detail-button" src="assets/img/icons/close__detailview_icon.svg" alt="close" onclick="closeAddTask()">
-        </div>
-    `
+        </div>`;
 }
 
 /**
@@ -543,7 +542,6 @@ function closeAddTask() {
  * 
  * @returns addTask footer HTML
  */
-
 function getAddTaskHTMLFooter() {
     return /*html*/`
         <div class="add-task-footer-board">
@@ -552,15 +550,13 @@ function getAddTaskHTMLFooter() {
                 <button onclick="clearTask()" class="clear-task-btn">Clear X</button>
                 <button id="create-task" onclick="createTask()" class="create-task-btn">Create Task<img src="assets/img/icons/check.svg" alt=""></button><!-- Alert! Task added to Board -> Weiterleitung auf board.html -->
             </div>
-        </div>
-    `
+        </div>`;
 }
 
 /**
  * 
  * @param {*} clickedCheckbox parameter to check the input of the checkbox
  */
-
 function handleCheckboxClick(clickedCheckbox) {
     const checkboxes = document.querySelectorAll('.dp-flex-jc-sb input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -574,7 +570,6 @@ function handleCheckboxClick(clickedCheckbox) {
  * 
  * @returns creates a subtask within the addTask window
  */
-
 function createSubtask() {
     let inputField = document.getElementById('task-subtasks');
     let subtaskText = inputField.value.trim();
@@ -594,7 +589,6 @@ function createSubtask() {
 /**
  * renders the HTML content of the subtask created
  */
-
 function renderSubtasks() {
     let container = document.querySelector('.subtasks-container');
     container.innerHTML = ''; // Leere den Container
@@ -610,7 +604,6 @@ function renderSubtasks() {
  * @param {*} subtaskText 
  * @returns the html subtask text within div containers 
  */
-
 function getSubtasksHTML(subtaskText) {
     return /*html*/`
         <div class="subtask">
@@ -631,7 +624,6 @@ function getSubtasksHTML(subtaskText) {
  * 
  * @param {*} subtaskText edits the created and rendered subtask
  */
-
 function editSubtask(subtaskText) {
     let newText = prompt('Edit your subtask:', subtaskText);
 
@@ -649,7 +641,6 @@ function editSubtask(subtaskText) {
  * deletes created Subtask inside subtask-container
  * @param {*} subtaskText 
  */
-
 function deleteSubtask(subtaskText) {
     let index = subtasks.indexOf(subtaskText);
     if (index !== -1) {
@@ -732,14 +723,26 @@ async function createTask() {
     init();
 }
 
+/**
+ * 
+ * @param {*} index start dragging tasks container and makes them moveable for drag&drop
+ */
 function startDragging(index) {
     currentDraggedElement = index - 1;
 }
 
+/**
+ * 
+ * @param {*} ev event allows to drop task container inside new category / dragarea
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
+/**
+ * 
+ * @param {*} category delivers the new category information to the firebase array tasks to update the page content
+ */
 async function moveTo(category) {
     tasks = [];
     let taskFireBase = await getData('tasks');
@@ -750,6 +753,9 @@ async function moveTo(category) {
     init();
 }
 
+/**
+ * loads all contacts out of the firebase array allContacts
+ */
 async function loadAllContacts() {
     allContacts = [];
     let contacts = await getData('contacts');

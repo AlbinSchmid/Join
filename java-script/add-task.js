@@ -142,29 +142,29 @@ function getAddTaskHTMLRightSide() {
                   <input id="task-date" type="date" name="task-date" class="date-selector" required>
               </form>
               <h2>Prio</h2>
-                <div class="dp-flex-jc-sb">
-                    <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)">
-                    <label for="task-high-priority" class="checkbox-container">
-                        <div class="checkbox-label-high">
-                            Urgent
-                            <img class="checkbox-image-high" src="assets/img/icons/prio_high.png" alt="priority high">
-                        </div>
-                    </label>
-                    <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium" onclick="handleCheckboxClick(this)">
-                    <label for="task-medium-priority" class="checkbox-container">
-                        <div class="checkbox-label-medium">
-                            Medium
-                            <img class="checkbox-image-medium" src="assets/img/icons/prio_medium.png" alt="priority medium">
-                        </div>
-                    </label>
-                    <input type="checkbox" id="task-low-priority" class="custom-checkbox-low" onclick="handleCheckboxClick(this)">
-                    <label for="task-low-priority" class="checkbox-container">
-                        <div class="checkbox-label-low">
-                            Low
-                            <img class="checkbox-image-low" src="assets/img/icons/prio_low.png" alt="priority low">
-                        </div>
-                    </label>
-                </div> 
+                    <div class="dp-flex-jc-sb">
+                        <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)">
+                        <label for="task-high-priority" class="checkbox-container">
+                            <div class="checkbox-label-high">
+                                Urgent
+                                <img class="checkbox-image-high" src="assets/img/icons/prio_high.png" alt="priority high">
+                            </div>
+                        </label>
+                        <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium" onclick="handleCheckboxClick(this)" checked>
+                        <label for="task-medium-priority" class="checkbox-container">
+                            <div class="checkbox-label-medium">
+                                Medium
+                                <img class="checkbox-image-medium" src="assets/img/icons/prio_medium.png" alt="priority medium">
+                            </div>
+                        </label>
+                        <input type="checkbox" id="task-low-priority" class="custom-checkbox-low" onclick="handleCheckboxClick(this)">
+                        <label for="task-low-priority" class="checkbox-container">
+                            <div class="checkbox-label-low">
+                                Low
+                                <img class="checkbox-image-low" src="assets/img/icons/prio_low.png" alt="priority low">
+                            </div>
+                        </label>
+                    </div>
           <h2>Category<p class="required-color">*</p></h2>
                 <form>
                     <div class="custom-select-container">
