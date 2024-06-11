@@ -343,18 +343,18 @@ function getAddTaskHTMLLeftSide() {
         <div>
             <h2>Title<p class="required-color">*</p></h2>
                 <form>
-                    <input id="task-title" class="inputfield-title" placeholder="Enter a title" type="text" required>
+                    <input id="task-title" class="inputfield-title-board" placeholder="Enter a title" type="text" required>
                 </form>
             <h2>Description</h2>
                     <form>
-                        <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
+                        <textarea id="task-description" class="textareafied-description-board" placeholder="Enter a Description" rows="10"></textarea>
                     </form>
             <h2>Assigned to</h2>
                 <div>
                     <form>
                         <div class="assignment-select-container">
                             <input id="dropdownInput" class="assignment-task-assignment" placeholder="Select contacts to assign">
-                            <div id="task-assignment" class="dropdown-content"></div>
+                            <div id="task-assignment" class="dropdown-content-board"></div>
                         </div>
                         <div id="selected-contacts"></div>
                     </form>
@@ -435,8 +435,6 @@ function renderSelectedContacts() {
 
         selectedContactsContainer.appendChild(contactDiv);
     }
-
-    console.log(selectedContacts);
 }
 
 /**
@@ -456,11 +454,11 @@ function setupDropdown() {
         }
     });
 }
+
 /**
  * 
  * @returns add task container right side html
  */
-
 function getAddTaskHTMLRightSide() {
     return /*html*/`
       <div>
@@ -503,7 +501,7 @@ function getAddTaskHTMLRightSide() {
                 </div>
             </form>
             <h2>Subtasks</h2>
-                    <form>
+                    <form class="subtask-form">
                         <div class="input-container">
                             <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50" placeholder="Add new subtask" onfocus="showInput()">
                             <button type="button" class="add-plus-button" id="add-plus-button" onclick="showInput()"><img src="assets/img/icons/add_subtask_icon.svg" alt=""></button>
@@ -596,7 +594,7 @@ function renderSubtasks() {
     for (let i = 0; i < subtasks.length; i++) {
         const subtask = subtasks[i];
         container.innerHTML += getSubtasksHTML(subtask);
-    }
+    };
 }
 
 /**
@@ -616,8 +614,7 @@ function getSubtasksHTML(subtaskText) {
                 <img src="assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
                 <img src="assets/img/icons/Subtasks_delete_icon.svg" alt="" class="delete-icon" onclick="deleteSubtask('${subtaskText}')"> 
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
 /**

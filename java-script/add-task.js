@@ -331,6 +331,7 @@ function showInput() {
  * resets the addTask content and refreshs the page
  */
 function clearTask() {
+    deleteSubtask();
     init();
 }
 
