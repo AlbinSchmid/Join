@@ -261,6 +261,9 @@ function editTask(taskId) {
     document.getElementById('task-detail-view-container').classList.add('d-hide');
     container.classList.remove('d-hide');
     container.classList.add('d-block');
+
+    setupDropdown();
+    renderContactOptions()
 }
 
 function generateSubtasksHTML(subtasks) {
@@ -286,24 +289,28 @@ function generateSubtasksHTML(subtasks) {
 
 
 function getEditPriorityHTML(task) {
+    let priorityHighChecked = task.priorityHigh ? 'checked' : '';
+    let priorityMediumChecked = task.priorityMedium ? 'checked' : '';
+    let priorityLowChecked = task.priorityLow ? 'checked' : '';
+
     let priorityHTML = /*html*/`
-        <h3>Prio</h3>
+        <h2>Prio</h2>
         <div class="dp-flex-jc-sb">
-            <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)" ${task.priority === 'High' ? 'checked' : ''}>
+            <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)" ${priorityHighChecked}>
             <label for="task-high-priority" class="checkbox-container">
                 <div class="checkbox-label-high">
                     Urgent
                     <img class="checkbox-image-high" src="assets/img/icons/prio_high.png" alt="priority high">
                 </div>
             </label>
-            <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium" onclick="handleCheckboxClick(this)" ${task.priority === 'Medium' ? 'checked' : ''}>
+            <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium" onclick="handleCheckboxClick(this)" ${priorityMediumChecked}>
             <label for="task-medium-priority" class="checkbox-container">
                 <div class="checkbox-label-medium">
                     Medium
                     <img class="checkbox-image-medium" src="assets/img/icons/prio_medium.png" alt="priority medium">
                 </div>
             </label>
-            <input type="checkbox" id="task-low-priority" class="custom-checkbox-low" onclick="handleCheckboxClick(this)" ${task.priority === 'Low' ? 'checked' : ''}>
+            <input type="checkbox" id="task-low-priority" class="custom-checkbox-low" onclick="handleCheckboxClick(this)" ${priorityLowChecked}>
             <label for="task-low-priority" class="checkbox-container">
                 <div class="checkbox-label-low">
                     Low
@@ -313,6 +320,7 @@ function getEditPriorityHTML(task) {
         </div>`;
     return priorityHTML;
 }
+
 
 function getEditTaskHTML(taskId, title, description, dueDate, priority, contacts, subtasks) {
     return /*html*/`
@@ -334,7 +342,7 @@ function getEditTaskHTML(taskId, title, description, dueDate, priority, contacts
             <div>${priority}</div>
             <h3>Assigned to</h3>
                 <div>
-                    <form>
+                    <form class="contacts-form">
                         <div class="assignment-select-container">
                             <input id="dropdownInput" class="assignment-task-assignment" placeholder="Select contacts to assign">
                             <div id="task-assignment" class="dropdown-content-board"></div>
@@ -342,7 +350,7 @@ function getEditTaskHTML(taskId, title, description, dueDate, priority, contacts
                         <div id="selected-contacts"></div>
                     </form>
                 </div>
-            <div class="edit-contacts-loaded">${contacts}</div>
+            <div  id="pre-selected-contacts${taskId}" class="edit-contacts-loaded">${contacts}</div>
             <h3>Subtasks</h3>
             <form class="subtask-form-edit">
                         <div class="input-container">
@@ -361,6 +369,16 @@ function getEditTaskHTML(taskId, title, description, dueDate, priority, contacts
             </div>
         </div>
     `;
+}
+
+async function saveTask(taskId) {
+    let taskTitle = document.getElementById('task-title').value;
+    let taskDescription = document.getElementById('task-description').value;
+    let taskAssignment = document.getElementById('task-assignment').value;
+    let taskDate = document.getElementById('task-date').value;
+    let updatedTask = await getData(`tasks/${id}`, id);
+    await putData(`tasks/${taskId}`, id);
+     // es muss korrekt durch das firebase array mit der individuellen ID iteriert werden und innerhalb dieser der ID Vergleich stattfinden.
 }
 
 
@@ -453,21 +471,20 @@ function addTask() {
 }
 
 /**
- * calls the getAddTaskHTML which is devided into 4 parts, cause of the fullscreen view on the board.html
+ * calls the getAddTaskHTML which is divided into 4 parts, cause of the fullscreen view on the board.html
  */
 function getAddTaskHTML() {
     let containerHeader = document.getElementById('addTask-board-header');
     let container = document.getElementById('addTask-board-render-container');
     let containerFooter = document.getElementById('addTask-board-footer');
     containerHeader.innerHTML += getAddTaskHTMLHeader();
-    container.innerHTML +=  getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
+    container.innerHTML += getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
     containerFooter.innerHTML += getAddTaskHTMLFooter();
     setupDropdown();
     renderContactOptions(); 
 }
 
 /**
- * 
  * @returns the left side of the addTask content window
  */
 function getAddTaskHTMLLeftSide() {
@@ -496,21 +513,18 @@ function getAddTaskHTMLLeftSide() {
 }
 
 /**
- * initiates the dropdown menu for task assignemt
+ * initiates the dropdown menu for task assignment
  */
 function setupDropdown() {
     const input = document.getElementById('dropdownInput');
     const dropdown = document.getElementById('task-assignment');
     const container = document.querySelector('.assignment-select-container');
 
-    input.addEventListener('click', () => {
+    input.addEventListener('click', (event) => {
+        event.stopPropagation();  
         const isOpen = dropdown.style.display === 'block';
         dropdown.style.display = isOpen ? 'none' : 'block';
-        if (isOpen) {
-            container.classList.remove('open');
-        } else {
-            container.classList.add('open');
-        }
+        container.classList.toggle('open', !isOpen);
     });
 
     document.addEventListener('click', (event) => {
@@ -536,19 +550,20 @@ function renderContactOptions() {
                     <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
                     <span>${contact.name}</span>
                 </div>
-                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" onclick="renderSelectedContacts('${contact.color}', '${contact.name}', '${contact.initials}')">
+                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" onclick="renderSelectedContacts()">
             </div>`;
     }
     selectElement.innerHTML = contactsHTML;
 }
 
 /**
- * retunrs the selected contacts and creates the div content with the attributor informations
+ * renders the selected contacts and creates the div content with the attributor informations
  */
 function renderSelectedContacts() {
     let checkboxes = document.querySelectorAll('#task-assignment input[type="checkbox"]:checked');
     let selectedContactsContainer = document.getElementById('selected-contacts');
     selectedContactsContainer.innerHTML = ''; 
+
 
     selectedContacts = []; 
 
@@ -562,29 +577,11 @@ function renderSelectedContacts() {
 
         const contactDiv = document.createElement('div');
         contactDiv.style.backgroundColor = color;
-        contactDiv.classList.add('selected-contacts-container');
+        contactDiv.classList.add('selected-contact');
         contactDiv.textContent = initials;
 
         selectedContactsContainer.appendChild(contactDiv);
-    }
-}
-
-/**
- * activates the contact dropdown menu
- */
-function setupDropdown() {
-    const input = document.getElementById('dropdownInput');
-    const dropdown = document.getElementById('task-assignment');
-
-    input.addEventListener('click', () => {
-        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-    });
-
-    document.addEventListener('click', (event) => {
-        if (!input.contains(event.target) && !dropdown.contains(event.target)) {
-            dropdown.style.display = 'none';
-        }
-    });
+    }; 
 }
 
 /**
@@ -778,7 +775,6 @@ function deleteSubtask(subtaskText) {
         renderSubtasks();
     }
 }
-
 
 /**
  * clears the inputfield for adding a subtask

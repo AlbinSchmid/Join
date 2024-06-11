@@ -632,7 +632,6 @@ h3 {
     max-width: 440px;
 }
 
-
 .assignment-task-assignment:hover {
     cursor: pointer;
 }
@@ -640,7 +639,6 @@ h3 {
 .assignment-task-assignment:focus {
     border: 1px solid #29ABE2;
     outline: none;
-
 }
 
 .assignment-select-container::after {
@@ -655,6 +653,7 @@ h3 {
     background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
     background-size: 24px 24px; 
     pointer-events: none; 
+    z-index: 120;
 }
 
 .assignment-select-container.open::after {
@@ -692,7 +691,7 @@ h3 {
     background-color: #f9f9f9;
     width: 440px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 10; 
+    z-index: 1000; 
 }
 
 .dropdown-content-board div:hover {
@@ -717,6 +716,7 @@ h3 {
     font-size: 12px;
     border: 2px solid rgba(255, 255, 255, 1);
 }
+
 
 .selectfield-task-category {
     margin-top: 8px;
