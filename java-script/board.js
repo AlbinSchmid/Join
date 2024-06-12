@@ -761,7 +761,7 @@ function renderSubtasks() {
  */
 function getSubtasksHTML(subtaskText) {
     return /*html*/`
-        <div class="subtask">
+        <div class="subtask" data-subtask-text="${subtaskText}">
             <div class="subtask-text-container">
                 <img src="assets/img/icons/punkt.png" alt="">
                 <span>${subtaskText}</span>
@@ -774,20 +774,38 @@ function getSubtasksHTML(subtaskText) {
         </div>`;
 }
 
+
 /**
  * 
  * @param {*} subtaskText edits the created and rendered subtask
  */
 function editSubtask(subtaskText) {
-    let newText = prompt('Edit your subtask:', subtaskText);
-
-    if (newText !== null && newText.trim() !== '') {
-        newText = newText.trim();
-        let index = subtasks.indexOf(subtaskText);
-        if (index !== -1) {
-            subtasks[index] = newText;
+    let index = subtasks.indexOf(subtaskText);
+    if (index !== -1) {
+        let subtaskElement = document.querySelector(`[data-subtask-text="${subtaskText}"]`);
+        if (subtaskElement) {
+            subtaskElement.innerHTML = `
+                <div class="subtask-edit-container">
+                    <input type="text" class="input-edit-subtask" value="${subtaskText}" onblur="saveEditedSubtask(this, ${index})" />
+                    <button class="add-button" onclick="saveEditedSubtask(this.previousElementSibling, ${index})"><img src="assets/img/icons/check_edit_icon.svg" alt=""></button>
+                </div>`;
+            subtaskElement.querySelector('.input-edit-subtask').focus();
+        } else {
+            console.error('Subtask element not found for:', subtaskText);
         }
-        renderSubtasks(); 
+    }
+}
+
+/**
+ * 
+ * @param {*} input 
+ * @param {*} index saves the edited subtask text and calls the render subtask function to be up to date
+ */
+function saveEditedSubtask(input, index) {
+    let newText = input.value.trim();
+    if (newText !== '' && index !== -1) {
+        subtasks[index] = newText;
+        renderSubtasks();
     }
 }
 
