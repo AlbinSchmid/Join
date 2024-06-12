@@ -81,13 +81,22 @@ function generatePriorityHTML(task) {
     return priorityHTML;
 }
 
+/**
+ * 
+ * @param {} taskcategory 
+ * @returns defines the background color depending on the choosen taskcategory
+ */
 function getBackgroundColor(taskcategory) {
+    let backgroundColor = '';
+
     if (taskcategory === 'Technical Task') {
-        return '#1FD7C1';
-    } else {
-        return '#0038FF'; // Default für User Story
+        backgroundColor = 'technical-task-color';
+    } else if (taskcategory === 'User Story') {
+        backgroundColor = 'user-story-color';
     }
+    return backgroundColor;
 }
+
 
 
 /**
@@ -106,7 +115,7 @@ function getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo,
     return /*html*/`
         <div draggable="true" ondragstart="startDragging(${category[index]['id']})" class="task-container" onclick="openTask(${category[index]['id']})">
             <div class="to-do-title-container">
-                <p class="to-do-title" style="background-color: ${backgroundColor};">${taskcategory}</p>
+                <p class="to-do-title ${backgroundColor}">${taskcategory}</p>
             </div>
             <div><p class="to-do-task">${title}</p></div>
             <div><p class="to-do-task-description">${description}</p></div>
@@ -122,6 +131,7 @@ function getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo,
             </div>
         </div>`;
 }
+
 
 /**
  * updates progressBar but does not work correctly yet
@@ -361,6 +371,9 @@ async function saveTask(taskId) {
     let taskDescription = document.getElementById('task-description').value;
     let taskAssignment = document.getElementById('task-assignment').value;
     let taskDate = document.getElementById('task-date').value;
+    let High = document.getElementById('task-high-priority').checked;
+    let Medium = document.getElementById('task-medium-priority').checked;
+    let Low = document.getElementById('task-low-priority').checked;
 
     let tasks = await getData('tasks');
     let firebaseId = null;
@@ -381,16 +394,19 @@ async function saveTask(taskId) {
     // Update the task values
     let updatedTask = {
         ...tasks[firebaseId],
-        title: taskTitle,
-        description: taskDescription,
-        assignment: taskAssignment,
-        date: taskDate
+        'title': taskTitle,
+        'description': taskDescription,
+        'assignment': taskAssignment,
+        'date': taskDate,
+        'priorityHigh': High,
+        'priorityMedium': Medium,
+        'priorityLow': Low,
+        'subtaskCount': subtaskCount,
+        'subtasks': subtasks.slice(),
+        'selectedContact': selectedContacts.slice(),
     };
 
-    // Push the updated task to Firebase
     await putData(`tasks/${firebaseId}`, updatedTask);
-
-    // Update the UI by re-initializing
     init();
 }
 
@@ -637,7 +653,7 @@ function getAddTaskHTMLRightSide() {
                 <div class="custom-select-container">
                     <select class="selectfield-task-category" name="task category" id="task-category" required>
                         <option value="" disabled selected hidden>Select a category</option>
-                        <option value="Technial Task">Technial Task</option>
+                        <option value="Technical Task">Technical Task</option>
                         <option value="User Story">User Story</option>
                     </select>
                 </div>

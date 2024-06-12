@@ -5,6 +5,22 @@
     top: 0;
 }
 
+.subtask-edit-container {
+    display: flex;
+    align-items: center;
+}
+
+.input-edit-subtask {
+    flex: 1;
+    padding: 4px;
+}
+
+.save-subtask-button {
+    margin-left: 8px;
+    padding: 4px 8px;
+}
+
+
 .headline {
     padding-top: 106px;
     padding-left: 106px;
@@ -658,6 +674,7 @@ h2 {
 
 .subtask-form {
     display: flex;
+    flex-direction: column;
 }
 
 @media(max-width: 1400px) {
@@ -714,8 +731,6 @@ h2 {
     }
 
     .subtask-form {
-        display: flex;
-        flex-direction: column;
         align-items: center;
     }
 }
