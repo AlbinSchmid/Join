@@ -17,22 +17,8 @@ let currentDraggedElement;
 async function init() {
     await loadTasks();
     await loadAllContacts();
+    includeHTML();
     updateHTML();
-}
-
-/**
- * loads the tasks array from firebase
- */
-async function loadTasks() {
-    tasks = [];
-    let task = await getData('tasks');
-    let ids = Object.keys(task || []);
-    for (let i = 0; i < ids.length; i++) {
-        let id = ids[i];
-        let allTasks = task[id];
-        
-        tasks.push(allTasks);
-    }
 }
 
 /**
@@ -376,9 +362,37 @@ async function saveTask(taskId) {
     let taskDescription = document.getElementById('task-description').value;
     let taskAssignment = document.getElementById('task-assignment').value;
     let taskDate = document.getElementById('task-date').value;
-    let updatedTask = await getData(`tasks/${id}`, id);
-    await putData(`tasks/${taskId}`, id);
-     // es muss korrekt durch das firebase array mit der individuellen ID iteriert werden und innerhalb dieser der ID Vergleich stattfinden.
+
+    let tasks = await getData('tasks');
+    let firebaseId = null;
+
+    // Find the Firebase ID for the given taskId
+    for (let [key, value] of Object.entries(tasks)) {
+        if (value.id === taskId) {
+            firebaseId = key;
+            break;
+        }
+    }
+
+    if (!firebaseId) {
+        console.error(`Task with ID ${taskId} not found.`);
+        return;
+    }
+
+    // Update the task values
+    let updatedTask = {
+        ...tasks[firebaseId],
+        title: taskTitle,
+        description: taskDescription,
+        assignment: taskAssignment,
+        date: taskDate
+    };
+
+    // Push the updated task to Firebase
+    await putData(`tasks/${firebaseId}`, updatedTask);
+
+    // Update the UI by re-initializing
+    init();
 }
 
 
@@ -877,6 +891,21 @@ async function moveTo(category) {
     await putData(`tasks/${id}/category`, category);
     await getData('tasks');
     init();
+}
+
+/**
+ * loads the tasks array from firebase
+ */
+async function loadTasks() {
+    tasks = [];
+    let task = await getData('tasks');
+    let ids = Object.keys(task || []);
+    for (let i = 0; i < ids.length; i++) {
+        let id = ids[i];
+        let allTasks = task[id];
+        
+        tasks.push(allTasks);
+    }
 }
 
 /**
