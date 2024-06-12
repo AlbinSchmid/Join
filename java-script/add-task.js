@@ -302,7 +302,7 @@ function editSubtask(subtaskText) {
         subtaskElement.innerHTML = `
             <div class="subtask-edit-container">
                 <input type="text" class="input-edit-subtask" value="${subtaskText}" onblur="saveEditedSubtask(this, ${index})" />
-                <button class="save-subtask-button" onclick="saveEditedSubtask(this.previousElementSibling, ${index})">Save</button>
+                <button class="edit icon" onclick="saveEditedSubtask(this.previousElementSibling, ${index})"><img src="assets/img/icons/check_edit_icon.svg" alt=""></button>
             </div>`;
         subtaskElement.querySelector('.input-edit-subtask').focus();
     }
