@@ -11,7 +11,6 @@ let allFirstLetters = [];
 async function init() {
     await loadAllContacts();
     renderContactlist();
-    includeHTML();
 }
 
 

@@ -10,7 +10,6 @@ let currentDraggedElement;
 
 /**
  * function opens render relevated sub functions for generating the page content 
- * includeHTML loads templates
  * updateHTML filters the Array tasks after 'category' : '' to generate the right code into each div / drag area with the correct progress status / category
  * renderBoard renders and generates the HTML code 
  */
