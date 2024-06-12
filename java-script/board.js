@@ -17,7 +17,6 @@ let currentDraggedElement;
 async function init() {
     await loadTasks();
     await loadAllContacts();
-    includeHTML();
     updateHTML();
 }
 
