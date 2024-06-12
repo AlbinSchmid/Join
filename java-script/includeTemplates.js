@@ -20,6 +20,16 @@ async function includeHTML() {
 
 
 /**
+ * Initializes the web page by including external HTML content, displaying the user initials, and setting the active link.
+ */
+(async function () {
+    await includeHTML();
+    showUser();
+    linkActive();
+})();
+
+
+/**
  * Sets the active state for the current link to the current page.
  * 
  * This function checks the current pathname and applies the 'active-link' class to the current navigation link element.

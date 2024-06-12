@@ -11,7 +11,6 @@ let allFirstLetters = [];
 async function init() {
     await loadAllContacts();
     renderContactlist();
-    includeHTML();
 }
 
 
@@ -174,6 +173,8 @@ async function loadAllContacts() {
 }
 
 
+// ------------- ENABLE/DISABLE CONTAINER ------------- //
+
 /**
  * Shows the container for creating a new contact.
  */
@@ -273,6 +274,8 @@ function closeOpenContactDetails() {
 }
 
 
+// ------------- EDIT ICONS ------------- //
+
 /**
  * Changes the source of the edit icon to the blue version.
  */
@@ -280,6 +283,8 @@ function changeEditIcon() {
     document.getElementById('editIcon').setAttribute('src', './assets/img/icons/contact/edit_blue.png');
 }
 
+
+// ------------- HTML ------------- //
 
 /**
  * Generates the HTML for a contact in the contact list.

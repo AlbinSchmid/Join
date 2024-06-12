@@ -12,7 +12,6 @@ let taskIdCounter = 0;
 async function init() {
     await loadAllContacts();
     renderAddTaskContent();
-    includeHTML();
     clearInput();
 }
 
