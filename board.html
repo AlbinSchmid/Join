@@ -13,7 +13,8 @@
     <script src="/java-script/header.js"></script>
 </head>
 
-<body id="body" onload="includeHTML()"> 
+<body id="body" onload="init()"> 
+
 
     <div w3-include-html="/assets/templates/side-bar-template.html"></div>
 
@@ -22,12 +23,15 @@
         <div class="board-main-content padding">
             <section class="board-header">
                 <div><span class="board-h1">Board</span></div>
+
+                <div id="list"></div>
+                
                 <div class="operations-container">
                     <form class="search-area d-none-mobile">
                         <input id="search-field-board" class="search-field" placeholder="Find Task" type="text">
                         <div class="al-center">
                             <div class="vl"></div>
-                            <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
+                            <div onclick="searchTask()" class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
                                     alt="search"></div>
                         </div>
                     </form>
@@ -43,7 +47,7 @@
                     <input class="search-field" placeholder="Find Task" type="text">
                     <div class="al-center">
                         <div class="vl"></div>
-                        <div onclick="search()" class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
+                        <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
                                 alt="search"></div>
                     </div>
                 </form>

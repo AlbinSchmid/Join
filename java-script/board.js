@@ -19,6 +19,31 @@ async function init() {
     updateHTML();
 }
 
+
+
+
+
+function searchTask() {
+    let searchTask = document.getElementById('search-field-board').value.toLowerCase();
+
+    for (let currentTask of tasks) {
+        let title = currentTask['title'].toLowerCase();
+        let description = currentTask['description'].toLowerCase();
+
+        if (title.includes(searchTask) || description.includes(searchTask)) {
+            console.log(currentTask, 'GEFUNDEN')
+            // currentTask.style.display = 'block';
+        } else {
+            console.log(currentTask, 'NICHT GEFUNDEN')
+            // currentTask.style.display = 'none';
+        }
+    }
+}
+
+
+
+
+
 /**
  * upadtes the HTML content on the board, when tasks are moved by drag&drop
  * filters after categorys inside the tasks array
@@ -141,7 +166,7 @@ function updateProgressBar() {
 
     let percent = (completedSubtasks / totalSubtasks) * 100;
     percent = Math.round(percent);
-    
+
     document.getElementById('progress-bar').style.width = percent + "%";
     document.getElementById('progress-count').innerHTML = `${completedSubtasks}/${totalSubtasks} Subtasks`;
 }
@@ -425,7 +450,7 @@ function generateDetailedContactHTML(selectedContact) {
     if (!selectedContact || selectedContact.length === 0) {
         return '';
     }
-    
+
     let contactHTML = '';
     for (let i = 0; i < selectedContact.length; i++) {
         let contact = selectedContact[i];
@@ -475,7 +500,7 @@ function generateDetailedPriorityHTML(task) {
 function addTask() {
     let container = document.getElementById('addTask-board');
     container.classList.remove('d-none');
-    container.innerHTML = '';  
+    container.innerHTML = '';
 
     let headerContainer = document.createElement('div');
     headerContainer.id = 'addTask-board-header';
@@ -509,7 +534,7 @@ function getAddTaskHTML() {
     container.innerHTML += getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
     containerFooter.innerHTML += getAddTaskHTMLFooter();
     setupDropdown();
-    renderContactOptions(); 
+    renderContactOptions();
 }
 
 /**
@@ -549,7 +574,7 @@ function setupDropdown() {
     const container = document.querySelector('.assignment-select-container');
 
     input.addEventListener('click', (event) => {
-        event.stopPropagation();  
+        event.stopPropagation();
         const isOpen = dropdown.style.display === 'block';
         dropdown.style.display = isOpen ? 'none' : 'block';
         container.classList.toggle('open', !isOpen);
@@ -590,10 +615,10 @@ function renderContactOptions() {
 function renderSelectedContacts() {
     let checkboxes = document.querySelectorAll('#task-assignment input[type="checkbox"]:checked');
     let selectedContactsContainer = document.getElementById('selected-contacts');
-    selectedContactsContainer.innerHTML = ''; 
+    selectedContactsContainer.innerHTML = '';
 
 
-    selectedContacts = []; 
+    selectedContacts = [];
 
     for (let i = 0; i < checkboxes.length; i++) {
         const checkbox = checkboxes[i];
@@ -609,7 +634,7 @@ function renderSelectedContacts() {
         contactDiv.textContent = initials;
 
         selectedContactsContainer.appendChild(contactDiv);
-    }; 
+    };
 }
 
 /**
@@ -736,7 +761,7 @@ function createSubtask() {
     }
 
     subtasks.push(subtaskText);
-    subtaskCount++; 
+    subtaskCount++;
     clearInput();
     renderSubtasks();
 }
@@ -817,7 +842,7 @@ function deleteSubtask(subtaskText) {
     let index = subtasks.indexOf(subtaskText);
     if (index !== -1) {
         subtasks.splice(index, 1);
-        subtaskCount--; 
+        subtaskCount--;
         renderSubtasks();
     }
 }
@@ -865,10 +890,10 @@ async function createTask() {
     let taskFireBase = await getData('tasks');
     let ids = Object.keys(taskFireBase || []);
     id = ids.length + 1;
-    
+
     if (taskTitle === '' || taskDate === '' || taskCategory === '') {
         alert('Bitte füllen Sie die Felder "Titel", "Datum" und "Kategorie" aus.');
-        return; 
+        return;
     }
 
     let task = {
@@ -883,7 +908,7 @@ async function createTask() {
         'priorityLow': taskPriorityLow,
         'taskcategory': taskCategory,
         'subtaskCount': subtaskCount,
-        'subtasks': subtasks.slice(), 
+        'subtasks': subtasks.slice(),
         'selectedContact': selectedContacts.slice(),
     };
 
@@ -919,7 +944,7 @@ async function moveTo(category) {
     tasks = [];
     let taskFireBase = await getData('tasks');
     let ids = Object.keys(taskFireBase || []);
-        let id = ids[currentDraggedElement];
+    let id = ids[currentDraggedElement];
     await putData(`tasks/${id}/category`, category);
     await getData('tasks');
     init();
@@ -935,7 +960,7 @@ async function loadTasks() {
     for (let i = 0; i < ids.length; i++) {
         let id = ids[i];
         let allTasks = task[id];
-        
+
         tasks.push(allTasks);
     }
 }
