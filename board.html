@@ -25,7 +25,7 @@
                 <div><span class="board-h1">Board</span></div>
                 <div class="operations-container">
                     <form class="search-area d-none-mobile">
-                        <input class="search-field" placeholder="Find Task" type="text">
+                        <input id="search-field-board" class="search-field" placeholder="Find Task" type="text">
                         <div class="al-center">
                             <div class="vl"></div>
                             <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
@@ -44,7 +44,7 @@
                     <input class="search-field" placeholder="Find Task" type="text">
                     <div class="al-center">
                         <div class="vl"></div>
-                        <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
+                        <div onclick="search()" class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
                                 alt="search"></div>
                     </div>
                 </form>

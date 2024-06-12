@@ -107,7 +107,7 @@ async function updateContact(id) {
  * @param {string} id - The ID of the contact to delete.
  */
 async function deleteContact(id) {
-    await deleteDate(`contacts/${id}`);
+    await deleteData(`contacts/${id}`);
     await init();
     let contactDetails = document.getElementById('showContactDetails');
     contactDetails.innerHTML = '';

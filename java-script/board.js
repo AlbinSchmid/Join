@@ -116,7 +116,7 @@ function getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo,
             <div class="to-do-title-container">
                 <p class="to-do-title ${backgroundColor}">${taskcategory}</p>
             </div>
-            <div><p class="to-do-task">${title}</p></div>
+            <div ><p id="to-do-task" class="to-do-task">${title}</p></div>
             <div><p class="to-do-task-description">${description}</p></div>
             <div class="progress-container">
                 <div class="progress-wrapper">
