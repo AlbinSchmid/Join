@@ -470,6 +470,7 @@ async function deleteTask(taskId) {
     }
     document.getElementById('task-detail-view-container').classList.add('d-hide');
     document.getElementById('task-detail-view-container').classList.remove('d-block');
+    document.getElementById('body').classList.remove('overflow-hidden');
     init();
 }
 
