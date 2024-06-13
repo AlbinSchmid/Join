@@ -173,6 +173,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
 
     /* ADDED BJÖRN */
     height: 100%;
