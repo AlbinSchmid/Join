@@ -21,7 +21,7 @@ button {
 
 .content-wrapper {
     display: flex;
-    height: calc(100% - 60px);
+    height: calc(100% - 110px);
 }
 
 .content-overall {
