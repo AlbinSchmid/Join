@@ -66,6 +66,16 @@
     margin-left: 4px;
 }
 
+.search-field:hover {
+    cursor: pointer;
+    border: 1px solid #29ABE2;
+}
+
+.search-field:focus {
+    outline: none;
+    border: none;
+}
+
 .al-center {
     display: flex;
     align-items: center;
@@ -797,9 +807,7 @@ h3 {
     padding-top: 20px;
 }
 
-.overflow-hidden {
-    overflow: hidden;
-}
+
 
 .inputfield-title-board {
     width: 406px;
@@ -813,6 +821,16 @@ h3 {
     font-family: inter;
     font-size: 20px;
     height: 30px;
+}
+
+.inputfield-title-board:hover {
+    cursor: pointer;
+    border: 1px solid #A8A8A8;
+}
+
+.inputfield-title-board:focus {
+    outline: none;
+    border: 1px solid #29ABE2;
 }
 
 .textareafied-description-board {
@@ -829,6 +847,16 @@ h3 {
     resize: none;
     font-family: inter;
     font-size: 20px;
+}
+
+.textareafied-description-board:hover {
+    cursor: pointer;
+    border: 1px solid #A8A8A8;
+}
+
+.textareafied-description-board:focus {
+    outline: none;
+    border: 1px solid #29ABE2;
 }
 
 .close-btn-edit-container {

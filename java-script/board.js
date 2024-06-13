@@ -26,18 +26,15 @@ async function init() {
 function searchTask() {
     let searchTask = document.getElementById('search-field-board').value.toLowerCase();
 
-    for (let currentTask of tasks) {
-        let title = currentTask['title'].toLowerCase();
-        let description = currentTask['description'].toLowerCase();
+    // Filter the tasks based on the search term
+    let filteredTasks = tasks.filter(task => {
+        let title = task['title'].toLowerCase();
+        let description = task['description'].toLowerCase();
+        return title.includes(searchTask) || description.includes(searchTask);
+    });
 
-        if (title.includes(searchTask) || description.includes(searchTask)) {
-            console.log(currentTask, 'GEFUNDEN')
-            // currentTask.style.display = 'block';
-        } else {
-            console.log(currentTask, 'NICHT GEFUNDEN')
-            // currentTask.style.display = 'none';
-        }
-    }
+    // Update the HTML to display only the filtered tasks
+    updateHTML(filteredTasks);
 }
 
 
@@ -48,11 +45,11 @@ function searchTask() {
  * upadtes the HTML content on the board, when tasks are moved by drag&drop
  * filters after categorys inside the tasks array
  */
-function updateHTML() {
+function updateHTML(filteredTasks = tasks) {
     const dragAreas = ['to-do', 'in-progress', 'await-feedback', 'done'];
 
     dragAreas.forEach(areaId => {
-        let tasksInArea = tasks.filter(t => t['category'] == areaId);
+        let tasksInArea = filteredTasks.filter(t => t['category'] == areaId);
         const areaElement = document.getElementById(areaId);
         areaElement.innerHTML = '';
 
@@ -71,6 +68,7 @@ function updateHTML() {
         }
     });
 }
+
 
 /**
  * 
@@ -448,36 +446,33 @@ async function saveTask(taskId) {
  * @returns deletes choosen task 
  */
 async function deleteTask(taskId) {
-    let firebaseId = null;
-
-    console.log("Task ID to delete:", taskId); // Debugging line
-
-    for (let [key, value] of Object.entries(tasks)) {
-        console.log("Checking task:", value); // Debugging line
-        if (value.id === taskId) {
-            firebaseId = key;
-            break;
-        }
-    }
-
-    console.log("Firebase ID found:", firebaseId); // Debugging line
-
-    if (!firebaseId) {
-        console.error(`Task with ID ${taskId} not found.`);
-        return;
-    }
-
     try {
+        let tasks = await getData('tasks');
+        let firebaseId = null;
+
+        for (let [key, value] of Object.entries(tasks)) {
+            if (value.id === taskId) {
+                firebaseId = key;
+                break;
+            }
+        }
+
+        if (!firebaseId) {
+            console.error(`Task with ID ${taskId} not found.`);
+            return;
+        }
+
         await deleteData(`tasks/${firebaseId}`);
-        console.log(`Task with ID ${taskId} deleted successfully.`);
-        
-        // Remove the task from the local tasks object
-        delete tasks[firebaseId];
-        init(); // Update the UI
+        delete tasks[firebaseId]; 
+
     } catch (error) {
         console.error(`Failed to delete task with ID ${taskId}:`, error);
     }
+    document.getElementById('task-detail-view-container').classList.add('d-hide');
+    document.getElementById('task-detail-view-container').classList.remove('d-block');
+    init();
 }
+
 
 /**
  * closes edit task window
