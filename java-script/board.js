@@ -291,6 +291,11 @@ function editTask(taskId) {
     renderContactOptions()
 }
 
+/**
+ * 
+ * @param {*} subtasks 
+ * @returns subtask html content
+ */
 function generateSubtasksHTML(subtasks) {
     let subtasksHTML = '';
     if (subtasks && subtasks.length > 0) {
@@ -312,7 +317,11 @@ function generateSubtasksHTML(subtasks) {
     return subtasksHTML;
 }
 
-
+/**
+ * 
+ * @param {*} task 
+ * @returns edit priority html content
+ */
 function getEditPriorityHTML(task) {
     let priorityHighChecked = task.priorityHigh ? 'checked' : '';
     let priorityMediumChecked = task.priorityMedium ? 'checked' : '';
@@ -346,7 +355,17 @@ function getEditPriorityHTML(task) {
     return priorityHTML;
 }
 
-
+/**
+ * 
+ * @param {*} taskId 
+ * @param {*} title 
+ * @param {*} description 
+ * @param {*} dueDate 
+ * @param {*} priority 
+ * @param {*} contacts 
+ * @param {*} subtasks 
+ * @returns edit task html code with inputfields to edit exisiting content
+ */
 function getEditTaskHTML(taskId, title, description, dueDate, priority, contacts, subtasks) {
     return /*html*/`
         <div id="edit-task${taskId}" class="edit-task-layout">
@@ -396,6 +415,11 @@ function getEditTaskHTML(taskId, title, description, dueDate, priority, contacts
     `;
 }
 
+/**
+ * 
+ * @param {*} taskId 
+ * @returns taskId will be checked inside array and edited changes will be pushed into the firebase array tasks and initiates init() for refreshing the content
+ */
 async function saveTask(taskId) {
     let taskTitle = document.getElementById('task-title').value;
     let taskDescription = document.getElementById('task-description').value;
