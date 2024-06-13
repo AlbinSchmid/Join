@@ -53,10 +53,13 @@ function updateHTML() {
  * @returns contactHTML with for-loop through array tasks, individuell css design for overlapping effect
  */
 function generateContactHTML(selectedContact) {
+    if (!selectedContact || selectedContact.length === 0) {
+        return ''; 
+    }
+
     let contactHTML = '';
     for (let i = 0; i < selectedContact.length; i++) {
         let contact = selectedContact[i];
-        // Dynamische Zuweisung der CSS-Eigenschaften basierend auf dem Index
         const assignedContainerStyle = `margin-left: ${i === 0 ? '0' : '-10px'};`;
         contactHTML += `<div class="attributor-icon" style="background-color: ${contact.color}; ${assignedContainerStyle}">${contact.initials}</div>`;
     }
@@ -238,6 +241,10 @@ function getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, descripti
         </div>`;
 }
 
+/**
+ * 
+ * @param {*} edit function for editing the  
+ */
 function editTask(taskId) {
     let container = document.getElementById('edit-container');
     let task = tasks.find(task => task.id === taskId);
@@ -253,6 +260,7 @@ function editTask(taskId) {
     container.innerHTML = '';
     container.innerHTML = getEditTaskHTML(taskId, title, description, dueDate, priority, contacts, subtasks);
     document.getElementById('task-detail-view-container').classList.add('d-hide');
+    document.getElementById('task-detail-view-container').classList.remove('d-block');
     container.classList.remove('d-hide');
     container.classList.add('d-block');
 
@@ -373,11 +381,9 @@ async function saveTask(taskId) {
     let High = document.getElementById('task-high-priority').checked;
     let Medium = document.getElementById('task-medium-priority').checked;
     let Low = document.getElementById('task-low-priority').checked;
-
     let tasks = await getData('tasks');
     let firebaseId = null;
 
-    // Find the Firebase ID for the given taskId
     for (let [key, value] of Object.entries(tasks)) {
         if (value.id === taskId) {
             firebaseId = key;
@@ -390,7 +396,6 @@ async function saveTask(taskId) {
         return;
     }
 
-    // Update the task values
     let updatedTask = {
         ...tasks[firebaseId],
         'title': taskTitle,
@@ -406,10 +411,52 @@ async function saveTask(taskId) {
     };
 
     await putData(`tasks/${firebaseId}`, updatedTask);
+    document.getElementById('edit-container').classList.remove('d-block');
+    document.getElementById('edit-container').classList.add('d-hide');
+
     init();
 }
 
+/**
+ * 
+ * @param {*} taskId 
+ * @returns deletes choosen task 
+ */
+async function deleteTask(taskId) {
+    let firebaseId = null;
 
+    console.log("Task ID to delete:", taskId); // Debugging line
+
+    for (let [key, value] of Object.entries(tasks)) {
+        console.log("Checking task:", value); // Debugging line
+        if (value.id === taskId) {
+            firebaseId = key;
+            break;
+        }
+    }
+
+    console.log("Firebase ID found:", firebaseId); // Debugging line
+
+    if (!firebaseId) {
+        console.error(`Task with ID ${taskId} not found.`);
+        return;
+    }
+
+    try {
+        await deleteData(`tasks/${firebaseId}`);
+        console.log(`Task with ID ${taskId} deleted successfully.`);
+        
+        // Remove the task from the local tasks object
+        delete tasks[firebaseId];
+        init(); // Update the UI
+    } catch (error) {
+        console.error(`Failed to delete task with ID ${taskId}:`, error);
+    }
+}
+
+/**
+ * closes edit task window
+ */
 function closeEdit() {
     let container = document.getElementById('edit-container');
     container.classList.add('d-hide');
@@ -454,13 +501,13 @@ function generateDetailedPriorityHTML(task) {
     } else if (task.priorityMedium) {
         priorityHTML = `
             <div class="priority-detail-container">
-             <p>Medium</p>
+                <p>Medium</p>
                 <img src="assets/img/icons/prio_medium.png" alt="Medium Priority">
             </div>`;
     } else if (task.priorityLow) {
         priorityHTML = `
             <div class="priority-detail-container">
-                 <p>Low</p>
+                <p>Low</p>
                 <img src="assets/img/icons/prio_low.png" alt="Low Priority">
             </div>`;
     } else {
