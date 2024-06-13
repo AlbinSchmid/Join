@@ -678,6 +678,7 @@ h2 {
 .footer-btn-container {
     display: flex;
     align-items: end;
+    margin-bottom: 80px;
 }
 
 .subtask-form {
