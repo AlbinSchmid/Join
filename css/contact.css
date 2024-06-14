@@ -7,6 +7,17 @@ body,
 html {
     height: 100vh;
     overflow: hidden;
+
+    -ms-overflow-style: none;
+    /* for Internet Explorer, Edge */
+    scrollbar-width: none;
+    /* for Firefox */
+    overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+    /* for Chrome, Safari, and Opera */
 }
 
 button {
@@ -85,7 +96,7 @@ button {
 }
 
 .bg-btn-add-new-contact {
-    width: 440px;
+    width: 438px;
     height: 100px;
     background-color: #FFFFFF;
     position: fixed;
@@ -553,7 +564,8 @@ input[type="tel"]:focus {
         width: 364px;
     }
 
-    .first-letters-edit, .contact-pict {
+    .first-letters-edit,
+    .contact-pict {
         margin: -90px 80px 0px 80px;
     }
 
@@ -605,7 +617,7 @@ input[type="tel"]:focus {
     .headline {
         display: flex;
         flex-direction: row;
-        
+
     }
 
     .headline h1 {
