@@ -96,7 +96,7 @@ async function updateContact(id) {
     await init();
     document.getElementById('editContact').classList.toggle('d-none');
     contact.id = id;
-    let contactDetails = document.getElementById('showContactDetails'); 
+    let contactDetails = document.getElementById('showContactDetails');
     contactDetails.innerHTML = contactDetailsHTML(contact);
 }
 
@@ -113,7 +113,7 @@ async function deleteContact(id) {
     contactDetails.innerHTML = '';
     document.getElementById('editContact').classList.add('d-none');
     document.getElementById('container-right').classList.add('d-none');
-    document.getElementById('container-contacts').classList.remove('d-none');   
+    document.getElementById('container-contacts').classList.remove('d-none');
 }
 
 
@@ -221,32 +221,44 @@ function editContact(id) {
     document.getElementById('editContact').classList.toggle('d-none');
 }
 
+
 /**
- * Shows the details of a contact.
- * 
- * @param {string} id - The ID of the contact to display.
+ * Displays the details of a contact and manages the selection of the active contact.
+ *
+ * @param {string} id - The ID of the contact whose details are to be displayed.
  */
 function showContact(id) {
     function find(contact) {
         return contact.id === id;
     }
     let contactDetails = document.getElementById('showContactDetails');
-
-    const className = "contact-active";
-    const contacts = document.getElementsByClassName(className);
-    for(let contact of contacts) {
-        contact.classList.remove(className);
-    }
-    const contact = document.getElementById(id);
-    contact.classList.add(className);
-
-
+    checkSelectionAktiv(contactDetails, id)
     contactDetails.innerHTML = '';
     conditionFoRShowContactDetails(id);
     currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
+}
+    
 
-
+/**
+ * Checks if a contact is already marked as active and manages the class assignment.
+ *
+ * @param {HTMLElement} contactDetails - The HTML element that displays the contact information.
+ * @param {string} id - The ID of the contact to be checked and possibly marked as active.
+ */
+function checkSelectionAktiv(contactDetails, id) {
+    const className = "contact-active";
+    const contact = document.getElementById(id);
+    if (contact.classList.contains(className)) {
+        contact.classList.remove(className);
+        contactDetails.innerHTML = '';
+        return;
+    }
+    const contacts = document.getElementsByClassName(className);
+    for (let activeContact of contacts) {
+        activeContact.classList.remove(className);
+    }
+    contact.classList.add(className);
 }
 
 
