@@ -1,4 +1,23 @@
 
+
+body,
+html {
+    height: 100vh;
+    overflow: hidden;
+
+    -ms-overflow-style: none;
+    /* for Internet Explorer, Edge */
+    scrollbar-width: none;
+    /* for Firefox */
+    overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+    /* for Chrome, Safari, and Opera */
+}
+
+
 .d-none {
     display: none;
 }
@@ -456,6 +475,7 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 24px;
+    gap: 8px;
 }
 
 .attributor-icon {
@@ -474,6 +494,10 @@
 
 .assigned-container {
     display: flex;
+    max-width: 210px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-end;
 }
 
 .priority-detail-container {
