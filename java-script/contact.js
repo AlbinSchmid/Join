@@ -231,10 +231,22 @@ function showContact(id) {
         return contact.id === id;
     }
     let contactDetails = document.getElementById('showContactDetails');
+
+    const className = "contact-active";
+    const contacts = document.getElementsByClassName(className);
+    for(let contact of contacts) {
+        contact.classList.remove(className);
+    }
+    const contact = document.getElementById(id);
+    contact.classList.add(className);
+
+
     contactDetails.innerHTML = '';
     conditionFoRShowContactDetails(id);
     currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
+
+
 }
 
 
@@ -294,7 +306,7 @@ function changeEditIcon() {
  */
 function renderContactOnListHTML(contact) {
     return `
-        <div onclick="showContact('${contact.id}')" class="container-contact">
+        <div id="${contact.id}" onclick="showContact('${contact.id}')" class="container-contact">
             <div class="first-letters-small dflex-c-c" style="background-color: ${contact.color};">${contact.initials}</div>
             <div class="name-mail">
                 <span>${contact.name}</span>
@@ -313,7 +325,7 @@ function renderContactOnListHTML(contact) {
  */
 function renderContactHeaderHTML(currentLetter) {
     return `
-    <div>
+    <div style="margin: 12px 0px 8px 0px;">
         ${currentLetter}<hr></hr>
     </div>
     `;

@@ -3,13 +3,13 @@
     box-sizing: border-box;
 }
 
-
 body,
 html {
     height: 100vh;
     overflow: hidden;
 }
 
+a
 button {
     border: none;
 }
@@ -22,7 +22,7 @@ button {
 
 .content-wrapper {
     display: flex;
-    height: calc(100% - 110px);
+    height: calc(100% - 80px);
 }
 
 .content-overall {
@@ -255,6 +255,14 @@ button {
     font-weight: 700;
 }
 
+.contact-active {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.contact-active:hover {
+    background-color: var(--primary-color);
+}
 
 /* ---------- OVERLAY ---------- */
 
