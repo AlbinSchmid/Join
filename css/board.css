@@ -348,7 +348,7 @@
 }
 
 .title-detail {
-    font-size: 61px;
+    font-size: clamp(1.875rem, 1.625rem + 1.25vw, 3.125rem);
     font-weight: 700;
     margin: 0;
 }
@@ -456,13 +456,12 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 24px;
+    width: 212px;
 }
 
 .attributor-icon {
-    height: 42px;
-    width: 42px;
     border: 1px solid #FFFFFF;
-    border-radius: 45px;
+    border-radius: 50%;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: 400;
@@ -470,11 +469,19 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    min-width: 42px;
+    height: 42px;
 }
 
 .assigned-container {
     display: flex;
+    max-width: 180px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #0038FF white;
+    padding-bottom: 8px;
 }
+
 
 .priority-detail-container {
     display: flex;
@@ -509,6 +516,7 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem);
 }
 
 .detail-task-overview {
@@ -886,12 +894,14 @@ h3 {
     background-color: white;
     border-radius: 30px;
     padding: clamp(1.875rem, 1.65rem + 1.125vw, 3rem) clamp(0.875rem, 0.55rem + 1.625vw, 2.5rem);
+    width: 1000px;
 }
 
 .edit-task-layout {
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem);
 }
 
 .edit-delete {
@@ -961,6 +971,55 @@ h3 {
 .subtask-form-edit {
     display: flex;
     flex-direction: column;
+}
+
+.detail-view-contacts-list {
+    overflow: auto;
+    max-height: 25vh;
+    scrollbar-width: thin;
+    scrollbar-color: #0038FF white;
+}
+
+.input-field-respnsive-width {
+    width: 100% !important;
+}
+
+.prio {
+    justify-content: flex-start !important;
+}
+
+.prio-design-board {
+    flex-wrap: wrap !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+}
+
+.board-input-width {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.board-design-selected-contacts {
+    width: 100% !important;
+}
+
+.board-design-buttons {
+    right: 0px !important;
+}
+
+.attributor-icon-board {
+    border: 1px solid #FFFFFF;
+    border-radius: 50%;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
 }
 
 @media (max-width: 1440px) {
