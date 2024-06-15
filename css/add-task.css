@@ -18,7 +18,6 @@ body::-webkit-scrollbar {
 
 
 
-
 .header-sticky {
     display: flex;
     position: sticky;
@@ -718,6 +717,10 @@ h2 {
         justify-content: center;
     }
 
+    h2 {
+        padding-top: 12px;
+    }
+
     .add-task-container {
         display: block;
         padding-top: 16px;
@@ -782,6 +785,10 @@ h2 {
 }
 
 @media(max-width: 500px) {
+    main {
+        overflow-x: hidden;
+    }
+
     .headline {
         font-size: 50px;
     }
@@ -818,6 +825,10 @@ h2 {
 
     .input-container {
         width: 270px;
+    }
+
+    .dropdown-content{
+        max-width: 304px;
     }
 
     /* .subtask-btn-container {

@@ -233,7 +233,7 @@ function openTask(taskId, callback) {
     container.innerHTML = getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category);
     container.classList.remove('d-hide');
     container.classList.add('d-block');
-    document.getElementById('body').classList.add('overflow-hidden');
+    // document.getElementById('body').classList.add('overflow-hidden');
     container.dataset.callback = callback;
 }
 
@@ -250,7 +250,7 @@ function closeTask() {
 
     container.classList.add('d-hide');
     container.classList.remove('d-block');
-    document.getElementById('body').classList.remove('overflow-hidden');
+    // document.getElementById('body').classList.remove('overflow-hidden');
 }
 
 /**
@@ -402,20 +402,20 @@ function getEditTaskHTML(taskId, title, description, dueDate, priority, contacts
         <div id="edit-task${taskId}" class="edit-task-layout">
         <div class="edit-task-container">
             <div class="close-btn-edit-container"><img class="close-detail-button" onclick="closeEdit()" src="assets/img/icons/close__detailview_icon.svg" alt="close"></div>
-            <h3>Title</h3>
+            <h3 class="margin-board">Title</h3>
             <form>
                 <input id="task-title" value="${title}" class="inputfield-title input-field-respnsive-width" placeholder="Enter a title" type="text" required>
             </form>
-            <h3>Description</h3>
+            <h3 class="margin-board">Description</h3>
             <form>
                 <textarea id="task-description" class="textareafied-description input-field-respnsive-width" placeholder="Enter a Description" rows="10">${description}</textarea>
             </form>
-            <h3>Due Date</h3>
+            <h3 class="margin-board">Due Date</h3>
             <form>
                 <input id="task-date" value="${dueDate}" type="date" name="task-date" class="date-selector input-field-respnsive-width" required>
             </form>
             <div>${priority}</div>
-            <h3>Assigned to</h3>
+            <h3 class="margin-board">Assigned to</h3>
                 <div>
                     <form class="contacts-form">
                         <div class="assignment-select-container board-input-width">
@@ -426,7 +426,7 @@ function getEditTaskHTML(taskId, title, description, dueDate, priority, contacts
                     </form>
                 </div>
             <div  id="pre-selected-contacts${taskId}" class="edit-contacts-loaded">${contacts}</div>
-            <h3>Subtasks</h3>
+            <h3 class="margin-board">Subtasks</h3>
             <form class="subtask-form-edit">
                         <div class="input-container board-input-width">
                             <input type="text" class="inputfield-task-subtasks board-input-width" id="task-subtasks" maxlength="50" placeholder="Add new subtask" onfocus="showInput()">
@@ -525,7 +525,7 @@ async function deleteTask(taskId) {
     }
     document.getElementById('task-detail-view-container').classList.add('d-hide');
     document.getElementById('task-detail-view-container').classList.remove('d-block');
-    document.getElementById('body').classList.remove('overflow-hidden');
+    // document.getElementById('body').classList.remove('overflow-hidden');
     init();
 }
 
@@ -535,8 +535,11 @@ async function deleteTask(taskId) {
  */
 function closeEdit() {
     let container = document.getElementById('edit-container');
+    let containerTask = document.getElementById('task-detail-view-container');
     container.classList.add('d-hide');
-    container.classList.remove('d-block');
+    container.classList.remove('d-block');   
+    containerTask.classList.add('d-hide');
+    containerTask.classList.remove('d-block');
 }
 
 /**
@@ -612,7 +615,7 @@ function addTask() {
     footerContainer.id = 'addTask-board-footer';
     footerContainer.className = 'addTask-board-footer';
 
-    document.getElementById('body').classList.add('overflow-hidden');
+    // document.getElementById('body').classList.add('overflow-hidden');
 
     container.appendChild(headerContainer);
     container.appendChild(renderContainer);
@@ -814,7 +817,7 @@ function getAddTaskHTMLHeader() {
  */
 function closeAddTask() {
     document.getElementById('addTask-board').classList.add('d-none');
-    document.getElementById('body').classList.remove('overflow-hidden');
+    // document.getElementById('body').classList.remove('overflow-hidden');
 }
 
 /**

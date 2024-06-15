@@ -166,7 +166,7 @@ body::-webkit-scrollbar {
     justify-content: space-between;
     align-items: center;
     color: #42526E;
-    padding-top: 64px;
+    padding-top: 12px;
     font-size: 20px;
     font-weight: 700;
     width: 244px;
@@ -193,6 +193,8 @@ body::-webkit-scrollbar {
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    padding: 12px;
+    
 
     /* ADDED BJÖRN */
     height: 100%;
@@ -210,7 +212,7 @@ body::-webkit-scrollbar {
 .addTask-board-footer {
     background-color: #FFFFFF;
     display: flex;
-    padding: 48px 48px 48px 48px;
+    padding: clamp(0.75rem, -8.7rem + 14.4vw, 3rem) clamp(0.75rem, -8.7rem + 14.4vw, 3rem) clamp(0.75rem, -8.7rem + 14.4vw, 3rem) clamp(0.75rem, -8.7rem + 14.4vw, 3rem);
     border-bottom-left-radius: 24px;
     border-bottom-right-radius: 24px;
 }
@@ -219,7 +221,7 @@ body::-webkit-scrollbar {
     display: flex;
     justify-content: space-between;
     background-color: #FFFFFF;
-    padding: 48px 48px 0px 48px;
+    padding: clamp(0.75rem, -8.7rem + 14.4vw, 3rem) clamp(0.75rem, -8.7rem + 14.4vw, 3rem) 0px clamp(0.75rem, -8.7rem + 14.4vw, 3rem);
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
     width: 930px;
@@ -252,7 +254,7 @@ body::-webkit-scrollbar {
 .addTask-board-render-container {
     display: flex;
     background-color: #FFFFFF;
-    padding: 48px 48px 0px 48px;
+    padding: clamp(0.75rem, -8.7rem + 14.4vw, 3rem)clamp(0.75rem, -8.7rem + 14.4vw, 3rem) 0px clamp(0.75rem, -8.7rem + 14.4vw, 3rem);
 }
 
 .d-none {
@@ -475,6 +477,7 @@ body::-webkit-scrollbar {
     align-items: center;
     justify-content: space-between;
     margin-top: 24px;
+    width: 212px;
 }
 
 .attributor-icon {
@@ -493,6 +496,11 @@ body::-webkit-scrollbar {
 
 .assigned-container {
     display: flex;
+    max-width: 180px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #0038FF white;
+    padding-bottom: 8px;
 }
 
 
@@ -906,7 +914,7 @@ h3 {
 .edit-task-container {
     background-color: white;
     border-radius: 30px;
-    padding: clamp(1.875rem, 1.65rem + 1.125vw, 3rem) clamp(0.875rem, 0.55rem + 1.625vw, 2.5rem);
+    padding: 16px clamp(0.875rem, 0.55rem + 1.625vw, 2.5rem);
     width: 1000px;
 }
 
@@ -952,6 +960,10 @@ h3 {
 
 .edit-contacts-loaded {
     display: flex;
+    width: clamp(15.6875rem, -3.5176rem + 96.0256vw, 62.5rem);;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #0038FF white;
 }
 
 .save-btn-container {
@@ -995,6 +1007,8 @@ h3 {
 
 .input-field-respnsive-width {
     width: 100% !important;
+    box-sizing: border-box;
+    padding: 20px 16px 20px 16px !important;
 }
 
 .prio {
@@ -1035,22 +1049,24 @@ h3 {
     height: 42px;
 }
 
-@media (max-width: 1440px) {
-    .addTask-board-header {
-        width: 444px;
-    }
+.margin-board {
+    margin-bottom: 0;
+}
 
-    .addTask-board-render-container {
-        display: block;
-    }
+.dp-flex {
+    margin-bottom: 0 !important;
+}
 
-    .addTask-board-footer {
-        width: 444px;
-    }
+h2 {
+    justify-content: flex-start !important;
+}
 
-    .mg-l-r-board {
-        display: none;
-    }
+.dp-flex-jc-sb {
+    gap: 4px !important;
+}
+
+.footer-btn-container {
+    margin-bottom: 0 !important;
 }
 
 @media(max-width: 1390px) {
@@ -1119,6 +1135,48 @@ h3 {
 
     }
 }
+
+@media (max-width: 980px) {
+    .mg-l-r-board {
+        display: none;
+    }
+
+    .addTask-board-render-container {
+        display: block;
+        width: 90%;
+    }
+
+    .addTask-board-header {
+        width: 90%;
+        margin-top: 120px;
+    }
+
+    .addTask-board-footer {
+        width: 90% !important;
+    }
+
+    .addTask-board-container {
+        box-sizing: border-box;
+        padding-bottom: 8px;
+    }
+
+    .inputfield-title-board {
+        width: 100%;
+    }
+
+    .textareafied-description-board {
+        width: 100%;
+    }
+
+    .assignment-select-container {
+        max-width: none !important;
+    }
+
+    .assignment-task-assignment {
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+} 
 
 @media (max-width: 500px) {
     .inputfield-title-board {
