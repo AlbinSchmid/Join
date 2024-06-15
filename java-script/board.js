@@ -658,7 +658,7 @@ function getAddTaskHTMLLeftSide() {
                             <input id="dropdownInput" class="assignment-task-assignment" placeholder="Select contacts to assign">
                             <div id="task-assignment" class="dropdown-content-board"></div>
                         </div>
-                        <div id="selected-contacts board-design-selected-contacts"></div>
+                        <div id="selected-contacts"></div>
                     </form>
                 </div>
         </div>                
@@ -719,7 +719,7 @@ function toggleContactSelection(index, taskId) {
  * renders the selected contacts and creates the div content with the contact infos informations
  */
 function renderSelectedContacts(taskId) {
-    document.getElementById(`pre-selected-contacts${taskId}`).innerHTML = '';
+    // document.getElementById(`pre-selected-contacts${taskId}`).innerHTML = '';
     let checkboxes = document.querySelectorAll('#task-assignment input[type="checkbox"]:checked');
     let selectedContactsContainer = document.getElementById('selected-contacts');
     selectedContactsContainer.innerHTML = '';
