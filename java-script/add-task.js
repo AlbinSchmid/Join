@@ -76,15 +76,21 @@ function renderContactOptions() {
     for (let i = 0; i < allContacts.length; i++) {
         const contact = allContacts[i];
         contactsHTML += `
-            <div class="contact-container">
+            <div class="contact-container" onclick="toggleContactSelection(${i})">
                 <div class="contact-name-container">
                     <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
                     <span>${contact.name}</span>
                 </div>
-                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" onclick="renderSelectedContacts()">
+                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}"  onclick="toggleContactSelection(${i})" style="cursor: pointer;">
             </div>`;
     }
     selectElement.innerHTML = contactsHTML;
+}
+
+function toggleContactSelection(index) {
+    let checkbox = document.getElementById(`contact-${index}`);
+    checkbox.checked = !checkbox.checked;
+    renderSelectedContacts();
 }
 
 /**
@@ -112,6 +118,10 @@ function renderSelectedContacts() {
         selectedContactsContainer.appendChild(contactDiv);
     }
 }
+
+
+
+
 
 /**
  * opens the dropdown menu and adds the eventlistener with a click event

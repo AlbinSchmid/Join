@@ -96,7 +96,7 @@ async function updateContact(id) {
     await init();
     document.getElementById('editContact').classList.toggle('d-none');
     contact.id = id;
-    let contactDetails = document.getElementById('showContactDetails'); 
+    let contactDetails = document.getElementById('showContactDetails');
     contactDetails.innerHTML = contactDetailsHTML(contact);
 }
 
@@ -113,7 +113,7 @@ async function deleteContact(id) {
     contactDetails.innerHTML = '';
     document.getElementById('editContact').classList.add('d-none');
     document.getElementById('container-right').classList.add('d-none');
-    document.getElementById('container-contacts').classList.remove('d-none');   
+    document.getElementById('container-contacts').classList.remove('d-none');
 }
 
 
@@ -221,20 +221,44 @@ function editContact(id) {
     document.getElementById('editContact').classList.toggle('d-none');
 }
 
+
 /**
- * Shows the details of a contact.
- * 
- * @param {string} id - The ID of the contact to display.
+ * Displays the details of a contact and manages the selection of the active contact.
+ *
+ * @param {string} id - The ID of the contact whose details are to be displayed.
  */
 function showContact(id) {
     function find(contact) {
         return contact.id === id;
     }
     let contactDetails = document.getElementById('showContactDetails');
+    checkSelectionAktiv(contactDetails, id)
     contactDetails.innerHTML = '';
     conditionFoRShowContactDetails(id);
     currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
+}
+    
+
+/**
+ * Checks if a contact is already marked as active and manages the class assignment.
+ *
+ * @param {HTMLElement} contactDetails - The HTML element that displays the contact information.
+ * @param {string} id - The ID of the contact to be checked and possibly marked as active.
+ */
+function checkSelectionAktiv(contactDetails, id) {
+    const className = "contact-active";
+    const contact = document.getElementById(id);
+    if (contact.classList.contains(className)) {
+        contact.classList.remove(className);
+        contactDetails.innerHTML = '';
+        return;
+    }
+    const contacts = document.getElementsByClassName(className);
+    for (let activeContact of contacts) {
+        activeContact.classList.remove(className);
+    }
+    contact.classList.add(className);
 }
 
 
@@ -294,7 +318,7 @@ function changeEditIcon() {
  */
 function renderContactOnListHTML(contact) {
     return `
-        <div onclick="showContact('${contact.id}')" class="container-contact">
+        <div id="${contact.id}" onclick="showContact('${contact.id}')" class="container-contact">
             <div class="first-letters-small dflex-c-c" style="background-color: ${contact.color};">${contact.initials}</div>
             <div class="name-mail">
                 <span>${contact.name}</span>
@@ -313,7 +337,7 @@ function renderContactOnListHTML(contact) {
  */
 function renderContactHeaderHTML(currentLetter) {
     return `
-    <div>
+    <div style="margin: 12px 0px 8px 0px;">
         ${currentLetter}<hr></hr>
     </div>
     `;
