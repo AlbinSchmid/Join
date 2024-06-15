@@ -262,7 +262,6 @@
 
 .board-task-container {
     display: flex;
-    margin-bottom: 60px;
 }
 
 
@@ -1066,7 +1065,16 @@ h2 {
     margin-bottom: 0 !important;
 }
 
-@media(max-width: 1390px) {
+.board-task-container {
+    box-sizing: border-box;
+    height: 67vh !important;
+    padding-left: 20px;
+    padding-bottom: 70px !important;
+    overflow-y: scroll;
+    scrollbar-width: thin !important;
+}
+
+@media(max-width: 1490px) {
     .board-task-container {
         display: block;
     }

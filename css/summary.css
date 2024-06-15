@@ -5,12 +5,7 @@
 }
 
 .content {
-    margin-bottom: 60px;
-    padding: 110px clamp(2.875rem, -1.4287rem + 6.7114vw, 6.625rem) 0 clamp(2.875rem, -1.4287rem + 6.7114vw, 6.625rem);
-}
-
-.side-padding {
-    padding: 0 106px;
+    padding: 110px clamp(2.875rem, -1.4287rem + 6.7114vw, 6.625rem) 10px clamp(2.875rem, -1.4287rem + 6.7114vw, 6.625rem);
 }
 
 .header-sticky {
@@ -240,7 +235,7 @@
     }
 
     .content {
-        padding: 48px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) 128px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem);
+        padding: 48px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem) 120px clamp(0.625rem, 0.0568rem + 2.8409vw, 1.875rem);
     }
 
     .placeholder {

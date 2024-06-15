@@ -195,6 +195,7 @@ function getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo,
 function updateProgressBar(i) {
     let totalSubtasks = document.querySelectorAll('.subtask-container-detail-view input[type="checkbox"]').length;
     let completedSubtasks = document.querySelectorAll('.subtask-container-detail-view input[type="checkbox"]:checked').length;
+    console.log(completedSubtasks);
 
     let percent = (completedSubtasks / totalSubtasks) * 100;
     percent = Math.round(percent);

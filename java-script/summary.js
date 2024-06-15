@@ -15,7 +15,7 @@ async function init() {
     showHTML();
 }
 
-
+// Ladet den user Namen
 function laodLocalStorage() {
     let userAsText = localStorage.getItem('user');
 
@@ -24,7 +24,7 @@ function laodLocalStorage() {
     }
 }
 
-
+// Ladet die Tasks von der Firebase
 async function loadTasks() {
     tasks = [];
     let task = await getData('tasks');
@@ -51,7 +51,7 @@ function sortDates() {
 
 }
 
-
+// Task werden visualisiert 
 function showHTML() {
     let todo = tasks.filter(t => t['category'] == 'to-do');
     let done = tasks.filter(t => t['category'] == 'done');
@@ -68,7 +68,7 @@ function showHTML() {
     document.getElementById('greeting-text').innerHTML = `${checkIfGuest()}`;
 }
 
-
+// Zeige das naheliegendste Datum
 function checkIfpriorityHighArray() {
     if (priorityHighDates.length === 0) {
         return /*html*/`
@@ -80,7 +80,7 @@ function checkIfpriorityHighArray() {
     }
 }
 
-
+// Check ob es ein User oder ein Gast ist
 function checkIfGuest() {
     if (user['name'] === 'Gast') {
         return /*html*/`
@@ -94,7 +94,7 @@ function checkIfGuest() {
     }
 }
 
-
+// Die nächsten zeilen ändern die IMG wenn man auf sie hovert
 function changePencilImg() {
     document.getElementById('pencil-img').setAttribute('src', './assets/img/icons/summary/pencil-white.png');
 }
