@@ -1026,6 +1026,24 @@ h3 {
     justify-content: center;
     min-width: 42px;
     height: 42px;
+    margin-left: -18.2px;
+}
+
+.board-contact-div-add-task {
+    padding-left: 20px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #0038FF white;
+}
+
+.board-contact-div-edit {
+    padding-left: 20px;
+    box-sizing: border-box;
+    width: clamp(15.6875rem, -3.5176rem + 96.0256vw, 62.5rem);
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #0038FF white;
 }
 
 .margin-board {
@@ -1127,7 +1145,7 @@ h2 {
 
     .addTask-board-header {
         width: 91%;
-        margin-top: 25px;
+        margin-top: 14%;
     }
 
     .addTask-board-footer {
@@ -1195,7 +1213,7 @@ h2 {
     }
 
     .addTask-board-header {
-        margin-top: 150px;
+        margin-top: 200px;
     }
 }
 
@@ -1211,6 +1229,6 @@ h2 {
     }
 
     .addTask-board-header {
-        margin-top: 220px;
+        margin-top: 270px;
     }
 }

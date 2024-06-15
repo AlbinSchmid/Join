@@ -177,9 +177,9 @@ function getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo,
             <div><p class="to-do-task-description">${description}</p></div>
             <div class="progress-container">
                 <div class="progress-wrapper">
-                    <div class="progress-bar" id="progress-bar"></div>
+                    <div class="progress-bar" id='progress-bar${category[index]['id']}'></div>
                 </div>
-                <div class="progress-count" id="progress-count">0/${subtaskCount} Subtasks</div>
+                <div class="progress-count" id="progress-count${category[index]['id']}">0/${subtaskCount} Subtasks</div>
             </div>
             <div class="attributor-container">
                 <div class="assigned-container">${assignedTo}</div> 
@@ -192,15 +192,15 @@ function getToDoHTML(taskcategory, title, description, subtaskCount, assignedTo,
 /**
  * updates progressBar but does not work correctly yet
  */
-function updateProgressBar() {
+function updateProgressBar(i) {
     let totalSubtasks = document.querySelectorAll('.subtask-container-detail-view input[type="checkbox"]').length;
     let completedSubtasks = document.querySelectorAll('.subtask-container-detail-view input[type="checkbox"]:checked').length;
 
     let percent = (completedSubtasks / totalSubtasks) * 100;
     percent = Math.round(percent);
 
-    document.getElementById('progress-bar').style.width = percent + "%";
-    document.getElementById('progress-count').innerHTML = `${completedSubtasks}/${totalSubtasks} Subtasks`;
+    document.getElementById(`progress-bar${i}`).style.width = percent + "%";
+    document.getElementById(`progress-count${i}`).innerHTML = `${completedSubtasks}/${totalSubtasks} Subtasks`;
 }
 
 /**
@@ -225,7 +225,7 @@ function openTask(taskId, callback) {
     if (task.subtasks && task.subtasks.length > 0) {
         for (let i = 0; i < task.subtasks.length; i++) {
             let subtask = task.subtasks[i];
-            subtasks += `<div class="subtask-container-detail-view"><input type="checkbox" id="subtask-checkbox${i}" onclick="updateProgressBar()"> ${subtask}</div>`;
+            subtasks += `<div class="subtask-container-detail-view"><input type="checkbox" id="subtask-checkbox${i}" onclick="updateProgressBar(${taskId})"> ${subtask}</div>`;
         }
     }
 
@@ -422,7 +422,7 @@ function getEditTaskHTML(taskId, title, description, dueDate, priority, contacts
                             <input id="dropdownInput" class="assignment-task-assignment board-input-width" placeholder="Select contacts to assign">
                             <div id="task-assignment" class="dropdown-content-board board-input-width"></div>
                         </div>
-                        <div id="selected-contacts"></div>
+                        <div id="selected-contacts" class="board-contact-div-edit"></div>
                     </form>
                 </div>
             <div  id="pre-selected-contacts${taskId}" class="edit-contacts-loaded">${contacts}</div>
@@ -658,7 +658,7 @@ function getAddTaskHTMLLeftSide() {
                             <input id="dropdownInput" class="assignment-task-assignment" placeholder="Select contacts to assign">
                             <div id="task-assignment" class="dropdown-content-board"></div>
                         </div>
-                        <div id="selected-contacts"></div>
+                        <div id="selected-contacts"  class="board-contact-div-add-task"></div>
                     </form>
                 </div>
         </div>                
