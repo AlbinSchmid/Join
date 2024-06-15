@@ -7,10 +7,6 @@
     display: block;
 }
 
-.overflow-hidden {
-    overflow: hidden;
-}
-
 .header-sticky {
     display: flex;
     position: sticky;
@@ -474,6 +470,7 @@
 
 .assigned-container {
     display: flex;
+    flex-wrap: wrap;
 }
 
 

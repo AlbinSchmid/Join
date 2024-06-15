@@ -612,7 +612,6 @@ function addTask() {
     footerContainer.id = 'addTask-board-footer';
     footerContainer.className = 'addTask-board-footer';
 
-    document.getElementById('body').classList.add('overflow-hidden');
 
     container.appendChild(headerContainer);
     container.appendChild(renderContainer);
@@ -696,19 +695,25 @@ function renderContactOptions(taskId) {
     for (let i = 0; i < allContacts.length; i++) {
         const contact = allContacts[i];
         contactsHTML += `
-            <div class="contact-container">
+            <div class="contact-container" onclick="toggleContactSelection(${i}, ${taskId})">
                 <div class="contact-name-container">
                     <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
                     <span>${contact.name}</span>
                 </div>
-                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" onclick="renderSelectedContacts(${taskId})">
+                <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" onclick="toggleContactSelection(${i}, ${taskId})" style="cursor: pointer;">
             </div>`;
     }
     selectElement.innerHTML = contactsHTML;
 }
 
+function toggleContactSelection(index, taskId) {
+    let checkbox = document.getElementById(`contact-${index}`);
+    checkbox.checked = !checkbox.checked;
+    renderSelectedContacts(taskId);
+}
+
 /**
- * renders the selected contacts and creates the div content with the attributor informations
+ * renders the selected contacts and creates the div content with the contact infos informations
  */
 function renderSelectedContacts(taskId) {
     document.getElementById(`pre-selected-contacts${taskId}`).innerHTML = '';
@@ -814,7 +819,6 @@ function getAddTaskHTMLHeader() {
  */
 function closeAddTask() {
     document.getElementById('addTask-board').classList.add('d-none');
-    document.getElementById('body').classList.remove('overflow-hidden');
 }
 
 /**

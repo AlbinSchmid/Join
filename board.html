@@ -28,10 +28,10 @@
                 
                 <div class="operations-container">
                     <form class="search-area d-none-mobile">
-                        <input id="search-field-board" class="search-field" placeholder="Find Task" type="search" onkeydown="searchTask('desktop')">
+                        <input id="search-field-board" class="search-field" placeholder="Find Task" type="search">
                         <div class="al-center">
                             <div class="vl"></div>
-                            <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
+                            <div  onclick="searchTask('desktop')" class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
                                     alt="search"></div>
                         </div>
                     </form>
@@ -44,10 +44,10 @@
 
             <div class="operations-container">
                 <form class="search-area search-area-mobile d-flex-mobile">
-                    <input class="search-field" placeholder="Find Task" type="search" onkeydown="searchTask()" id="search-field-board-mobile">
+                    <input class="search-field" placeholder="Find Task" type="search" id="search-field-board-mobile">
                     <div class="al-center">
                         <div class="vl"></div>
-                        <div class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
+                        <div onclick="searchTask()" class="search-btn-container"><img class="search-btn" src="assets/img/icons/search.svg"
                                 alt="search"></div>
                     </div>
                 </form>
