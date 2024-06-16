@@ -487,6 +487,10 @@
     align-items: center;
 }
 
+.subtasks-container {
+    width: 100%;
+}
+
 .subtask-container-detail-view {
     margin-left: 16px;
 }
@@ -1153,16 +1157,19 @@ h2 {
 
     .addTask-board-header {
         width: 91%;
-        margin-top: 14%;
+        padding-top: 60px;
+        /* margin-top: 14%; */
     }
 
     .addTask-board-footer {
         width: 91% !important;
+        padding-bottom: 60px;
     }
 
     .addTask-board-container {
         box-sizing: border-box;
         padding-bottom: 8px;
+        justify-content: flex-start;
     }
 
     .inputfield-title-board {
@@ -1219,10 +1226,10 @@ h2 {
         flex-direction: column;
         gap: 6px;
     }
-
+/* 
     .addTask-board-header {
         margin-top: 200px;
-    }
+    } */
 }
 
 @media (max-width: 400px) {
@@ -1236,7 +1243,7 @@ h2 {
         margin: 0 !important;
     }
 
-    .addTask-board-header {
+    /* .addTask-board-header {
         margin-top: 270px;
-    }
+    } */
 }
