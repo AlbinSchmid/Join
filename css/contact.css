@@ -65,6 +65,7 @@ button {
     font-size: 20px;
     height: 100%;
     overflow-y: auto;
+    scrollbar-width: none;
 }
 
 .btn-add-new-contact {
@@ -158,6 +159,7 @@ button {
     height: 100%;
     width: 100%;
     padding: 60px 30px 60px 0px;
+    scrollbar-width: none;
 }
 
 .headline {
