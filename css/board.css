@@ -999,7 +999,6 @@ h3 {
 
 .prio-design-board {
     flex-wrap: wrap !important;
-    flex-direction: row !important;
     justify-content: space-between !important;
 }
 

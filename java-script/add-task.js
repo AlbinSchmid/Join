@@ -377,6 +377,7 @@ async function createTask() {
     let Medium = document.getElementById('task-medium-priority').checked;
     let Low = document.getElementById('task-low-priority').checked;
     let taskCategory = document.getElementById('task-category').value;
+    
     tasks = [];
     let taskFireBase = await getData('tasks');
     let ids = Object.keys(taskFireBase || []);
@@ -400,6 +401,7 @@ async function createTask() {
         'taskcategory': taskCategory,
         'subtaskCount': subtaskCount,
         'subtasks': subtasks.slice(),
+        'completedSubtasks' : 0,
         'selectedContact': selectedContacts.slice(),
     };
 

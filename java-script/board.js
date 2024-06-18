@@ -232,7 +232,7 @@ function openTask(taskId, callback) {
     let category = task.category;
     let title = task.title;
     let description = task.description;
-    let dueDate = task.date;
+    let dueDate = formatDateForSave(task.date);
     let priority = generateDetailedPriorityHTML(task);
     let assignedTo = generateDetailedContactHTML(task.selectedContact);
     let subtasks = '';
@@ -578,10 +578,10 @@ function generateDetailedContactHTML(selectedContact) {
     for (let i = 0; i < selectedContact.length; i++) {
         let contact = selectedContact[i];
         contactHTML += `
- <div class="contact-detail">
- <div class="attributor-icon" style="background-color: ${contact.color}">${contact.initials}</div>
- <p>${contact.name}</p>
- </div>`;
+            <div class="contact-detail">
+            <div class="attributor-icon" style="background-color: ${contact.color}">${contact.initials}</div>
+            <p>${contact.name}</p>
+            </div>`;
     }
     return contactHTML;
 }
@@ -687,84 +687,95 @@ function getAddTaskHTMLLeftSide() {
  <img class="mg-l-r-board" src="assets/img/icons/Vector 4.png" alt="">`;
 }
 
-/**
- * initiates the dropdown menu for task assignment
- */
+document.addEventListener('DOMContentLoaded', () => {
+    renderContactOptions();
+    setupDropdown();
+});
+
 function setupDropdown() {
     const input = document.getElementById('dropdownInput');
     const dropdown = document.getElementById('task-assignment');
     const container = document.querySelector('.assignment-select-container');
 
-    input.addEventListener('click', (event) => {
-        event.stopPropagation();
-        const isOpen = dropdown.style.display === 'block';
-        dropdown.style.display = isOpen ? 'none' : 'block';
-        container.classList.toggle('open', !isOpen);
-    });
+    if (input && dropdown && container) {
+        input.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const isOpen = dropdown.style.display === 'block';
+            dropdown.style.display = isOpen ? 'none' : 'block';
+            container.classList.toggle('open', !isOpen);
+        });
 
-    document.addEventListener('click', (event) => {
-        if (!input.contains(event.target) && !dropdown.contains(event.target)) {
-            dropdown.style.display = 'none';
-            container.classList.remove('open');
-        }
-    });
+        document.addEventListener('click', (event) => {
+            if (!input.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.style.display = 'none';
+                container.classList.remove('open');
+            }
+        });
+    }
 }
 
-/**
- * renders the contact options within the left HTML side
- */
-function renderContactOptions(taskId) {
-    let selectElement = document.getElementById('task-assignment');
+function renderContactOptions() {
+    const selectElement = document.getElementById('task-assignment');
     let contactsHTML = '';
 
-    for (let i = 0; i < allContacts.length; i++) {
-        const contact = allContacts[i];
-        contactsHTML += `
- <div class="contact-container" onclick="toggleContactSelection(${i}, ${taskId})">
- <div class="contact-name-container">
- <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
- <span>${contact.name}</span>
- </div>
- <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" onclick="toggleContactSelection(${i}, ${taskId})" style="cursor: pointer;">
- </div>`;
+    if (selectElement) {
+        for (let i = 0; i < allContacts.length; i++) {
+            const contact = allContacts[i];
+            contactsHTML += `
+                <div class="contact-container" data-index="${i}">
+                    <div class="contact-name-container">
+                        <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
+                        <span>${contact.name}</span>
+                    </div>
+                    <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" style="cursor: pointer;">
+                </div>`;
+        }
+        selectElement.innerHTML = contactsHTML;
+
+        const contactContainers = document.querySelectorAll('.contact-container');
+        contactContainers.forEach(container => {
+            container.addEventListener('click', (event) => {
+                const index = container.getAttribute('data-index');
+                toggleContactSelection(index);
+                event.stopPropagation();  
+            });
+        });
     }
-    selectElement.innerHTML = contactsHTML;
 }
 
-function toggleContactSelection(index, taskId) {
-    let checkbox = document.getElementById(`contact-${index}`);
-    checkbox.checked = !checkbox.checked;
-    renderSelectedContacts(taskId);
+function toggleContactSelection(index) {
+    const checkbox = document.getElementById(`contact-${index}`);
+    if (checkbox) {
+        checkbox.checked = !checkbox.checked;
+        renderSelectedContacts();
+    }
 }
 
-/**
- * renders the selected contacts and creates the div content with the contact infos informations
- */
-function renderSelectedContacts(taskId) {
-    // document.getElementById(`pre-selected-contacts${taskId}`).innerHTML = '';
-    let checkboxes = document.querySelectorAll('#task-assignment input[type="checkbox"]:checked');
-    let selectedContactsContainer = document.getElementById('selected-contacts');
-    selectedContactsContainer.innerHTML = '';
+function renderSelectedContacts() {
+    const selectedContactsContainer = document.getElementById('selected-contacts');
+    const checkboxes = document.querySelectorAll('#task-assignment input[type="checkbox"]:checked');
+    if (selectedContactsContainer) {
+        selectedContactsContainer.innerHTML = '';
 
+        if (checkboxes.length === 0) {
+            selectedContactsContainer.innerHTML = '';  // Return empty content if no contacts are selected
+            return;
+        }
 
-    selectedContacts = [];
+        checkboxes.forEach((checkbox, i) => {
+            const color = checkbox.dataset.color;
+            const initials = checkbox.value;
 
-    for (let i = 0; i < checkboxes.length; i++) {
-        const checkbox = checkboxes[i];
-        const color = checkbox.dataset.color;
-        const name = checkbox.dataset.name;
-        const initials = checkbox.value;
+            const contactDiv = document.createElement('div');
+            contactDiv.style.backgroundColor = color;
+            contactDiv.classList.add('attributor-icon-board');
+            contactDiv.textContent = initials;
 
-        selectedContacts.push({ color, name, initials });
-
-        const contactDiv = document.createElement('div');
-        contactDiv.style.backgroundColor = color; `margin-left: ${i === 0 ? '0' : '-30px'};`;
-        contactDiv.classList.add('attributor-icon-board');
-        contactDiv.textContent = initials;
-
-        selectedContactsContainer.appendChild(contactDiv);
-    };
+            selectedContactsContainer.appendChild(contactDiv);
+        });
+    }
 }
+
 
 /**
  * 
@@ -1038,13 +1049,14 @@ async function createTask() {
         'title': taskTitle,
         'description': taskDescription,
         'assignment': taskAssignment,
-        'date': taskDate,
+        'date': new Date(taskDate),
         'priorityHigh': taskPriorityHigh,
         'priorityMedium': taskPriorityMedium,
         'priorityLow': taskPriorityLow,
         'taskcategory': taskCategory,
         'subtaskCount': subtaskCount,
         'subtasks': [],
+        'completedSubtasks' : 0,
         'selectedContact': selectedContacts.slice(),
     };
 

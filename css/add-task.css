@@ -266,6 +266,7 @@ h2 {
     display: flex;
     margin-top: 8px;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 .selected-contact {

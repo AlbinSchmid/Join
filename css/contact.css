@@ -86,7 +86,7 @@ button {
 }
 
 .bg-btn-add-new-contact {
-    width: 438px;
+    width: 456px;
     height: 100px;
     background-color: #FFFFFF;
     position: fixed;
@@ -511,7 +511,7 @@ input[type="tel"]:focus {
         border-radius: 30px 30px 0px 0px;
         flex-direction: column;
         margin: 0;
-        overflow-y: auto;
+       
     }
 
     .overlay-left-bg {
@@ -731,6 +731,22 @@ input[type="tel"]:focus {
     .contact-mail-number {
         flex-direction: column;
         gap: 22px;
+    }
+
+    /* css media querry added by florian*/
+
+    .container-contacts {
+        padding-left: 4px;
+    }
+
+    .container-contact {
+        gap: 8px;
+        padding: 15px 8px;
+    }
+
+    .btn-cancel-create {
+        display: flex;
+        flex-direction: column;
     }
 
 }
