@@ -1,6 +1,7 @@
 let allContacts = [];
 let currentContact = { id: 'empty' };
 let allFirstLetters = [];
+let currentID;
 
 
 /**
@@ -237,6 +238,7 @@ function showContact(id) {
     conditionFoRShowContactDetails(id);
     currentContact = allContacts.find(find);
     contactDetails.innerHTML = contactDetailsHTML(currentContact);
+    currentID = id;
 }
     
 
@@ -294,6 +296,7 @@ function closeOpenContactDetails() {
     let mediaQuery = window.matchMedia('(max-width: 1024px)');
     if (mediaQuery.matches) {
         document.getElementById('container-contacts').classList.toggle('d-none');
+        document.getElementById(currentID).classList.remove('contact-active');
     }
 }
 
@@ -350,7 +353,7 @@ function renderContactHeaderHTML(currentLetter) {
  * @returns {string} - The HTML string for the contact details.
  */
 function contactDetailsHTML(contact) {
-    return `
+    return /*html*/ `
     <div class="contact-data" id="contactData">
         <div class="container-user-top">
             <div class="first-letters-big dflex-c-c" style="background-color:${contact.color}">${contact.initials}</div>
@@ -391,7 +394,7 @@ function contactDetailsHTML(contact) {
  * @returns {string} - The HTML string for the add contact form.
  */
 function addContactHTML() {
-    return `
+    return /*html*/`
         <div class="overlay-bg dflex-c-c">
             <div class="container-overlay">
                 <div class="overlay-left-bg">
@@ -441,7 +444,7 @@ function addContactHTML() {
  * @returns {string} - The HTML string for the edit contact form.
  */
 function editContactHTML(contact) {
-    return `
+    return /*html*/`
     <div class="overlay-bg dflex-c-c">
         <div class="container-overlay">
             <div class="overlay-left-bg">
