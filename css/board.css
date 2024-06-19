@@ -993,7 +993,7 @@ h3 {
     scrollbar-color: #0038FF white;
 }
 
-.input-field-respnsive-width {
+/* .input-field-respnsive-width {
     width: 100% !important;
     box-sizing: border-box;
     padding: 20px 16px 20px 16px !important;
@@ -1020,7 +1020,7 @@ h3 {
 
 .board-design-buttons {
     right: 0px !important;
-}
+} */
 
 .attributor-icon-board {
     border: 1px solid #FFFFFF;
@@ -1190,12 +1190,12 @@ h2 {
     }
 
     .assignment-task-assignment {
-        width: 100% !important;
+        width: 404px !important;
         box-sizing: border-box;
     }
 
     .date-selector {
-        width: 100% !important;
+        width: 91% !important;
     }
 
     .custom-select-container {

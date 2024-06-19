@@ -638,9 +638,19 @@ p {
     flex-direction: column;
 }
 
-@media(max-width: 1400px) {
+@media(max-width: 1300px) {
     .mg-l-r {
         display: none;
+    }
+
+    .left-menu {
+        display: flex;
+        justify-content: center;
+    }
+
+    .right-menu {
+        display: flex;
+        justify-content: center;
     }
 
     .headline {
@@ -657,8 +667,9 @@ p {
 
 
     .add-task-container {
-        display: block;
-        padding-top: 16px;
+       flex-direction: column;
+       padding-top: 16px;
+        
     }
 
     .dp-flex-jc-sb {
@@ -692,10 +703,10 @@ p {
         justify-content: center;
     }
 
-    form {
+   /*  form {
         display: flex;
         justify-content: center;
-    }
+    } */
 
     .subtask-form {
         align-items: center;
@@ -766,8 +777,8 @@ p {
         max-width: 304px;
     }
 
-    /* .subtask-btn-container {
+    .subtask-btn-container {
         position: relative;
         right: 38px;
-    } */
+    }
 }

@@ -247,7 +247,6 @@ function openTask(taskId, callback) {
  container.innerHTML = getTaskDetailViewHTML(taskId, technicalTask, title, subtasks, description, dueDate, priority, assignedTo, category);
  container.classList.remove('d-hide');
  container.classList.add('d-block');
- // document.getElementById('body').classList.add('overflow-hidden');
  container.dataset.callback = callback;
 }
 
@@ -256,15 +255,8 @@ function openTask(taskId, callback) {
  */
 function closeTask() {
  let container = document.getElementById('task-detail-view-container');
-
- if (typeof container.dataset.callback === 'function') {
- let task = tasks.find(task => task.id === taskId);
- container.dataset.callback(task.subtasks.length);
- }
-
  container.classList.add('d-hide');
  container.classList.remove('d-block');
- // document.getElementById('body').classList.remove('overflow-hidden');
 }
 
 /**
@@ -621,6 +613,7 @@ function generateDetailedPriorityHTML(task) {
 function addTask() {
     let container = document.getElementById('addTask-board');
     container.classList.remove('d-none');
+
 /* subtasks = [];
 
  let container = document.getElementById('addTask-board');

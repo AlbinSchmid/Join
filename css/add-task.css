@@ -687,7 +687,7 @@ h2 {
     flex-direction: column;
 }
 
-@media(max-width: 1400px) {
+/* @media(max-width: 1400px) {
     .mg-l-r {
         display: none;
     }
@@ -815,9 +815,9 @@ h2 {
         max-width: 304px;
     }
 
-    /* .subtask-btn-container {
+    .subtask-btn-container {
         position: relative;
         right: 38px;
-    } */
-}
+    }
+} */
 

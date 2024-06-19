@@ -1,43 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Task</title>
-    <link rel="stylesheet" href="/css/add-task-template.css">
-    <link rel="stylesheet" href="/css/color.css">
-    <link rel="stylesheet" href="/css/fonts.css">
-    <script src="/java-script/add-task-template.js" ></script>
-</head>
 <body>
     <h1 class="headline">Add Task</h1>
     <section id="add-task-content" class="add-task-container">
-        <div>
+        
+        <div class="left-menu">
+            <form>
             <h2>Title<p class="required-color">*</p></h2>
-                <form>
                 <input id="task-title" class="inputfield-title" placeholder="Enter a title" type="text" required>
-                </form>
             <h2>Description</h2>
-                <form>
                 <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description" rows="10"></textarea>
-                </form>
             <h2>Assigned to</h2>
             <div class="jc-center">
-                <form class="contacts-form">
+                <div class="contacts-form">
                     <div class="assignment-select-container">
                     <input id="dropdownInput" class="assignment-task-assignment" placeholder="Select contacts to assign">
                     <div id="task-assignment" class="dropdown-content"></div>
+                        </div><div id="selected-contacts"></div></div> 
             </div>
-                    <div id="selected-contacts"></div>
-                </form>
-            </div>
+            </form>
         </div>                
       <img class="mg-l-r" src="/assets/img/icons/Vector 4.png" alt="">
-        <div>
+        <div class="right-menu">
+            <form>
             <h2>Due Date<p class="required-color">*</p></h2>
-                <form>
                 <input id="task-date" type="date" name="task-date" class="date-selector" required>
-                </form>
             <h2>Prio</h2>
                 <div class="dp-flex-jc-sb">
                     <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)">
@@ -54,29 +39,29 @@
                     </label>
                 </div>
         <h2>Category<p class="required-color">*</p></h2>
-              <form>
-                  <div class="custom-select-container">
-                      <select class="selectfield-task-category" name="task category" id="task-category" required>
-                          <option value="" disabled selected hidden>Select a category</option>
-                          <option value="Technical Task">Technical Task</option>
-                          <option value="User Story">User Story</option>
-                      </select>
-                  </div>
-              </form>
+                <div class="custom-select-container">
+                    <select class="selectfield-task-category" name="task category" id="task-category" required>
+                        <option value="" disabled selected hidden>Select a category</option>
+                        <option value="Technical Task">Technical Task</option>
+                        <option value="User Story">User Story</option>
+                    </select>
+                </div>
           <h2>Subtasks</h2>
-                  <form class="subtask-form">
-                      <div class="input-container">
-                          <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50" placeholder="Add new subtask" onfocus="showInput()">
-                          <button type="button" class="add-plus-button" id="add-plus-button" onclick="showInput()"><img src="/assets/img/icons/add_subtask_icon.svg" alt=""></button>
-                          <div class="subtask-btn-container" id="subtask-btn-container">
-                              <button type="button" class="clear-button" onclick="clearInput()"><img src="/assets/img/icons/delete_icon.svg" alt=""></button>
-                              <img src="/assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
-                              <button type="button" class="add-button" onclick="createSubtask()"><img src="/assets/img/icons/check_edit_icon.svg" alt=""></button>
-                          </div>
-                      </div>
-         <div class="subtasks-container"></div>
-        </form>
-      </div>
+                <div class="subtask-form">
+                    <div class="input-container">
+                        <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50" placeholder="Add new subtask" onfocus="showInput()">
+                        <button type="button" class="add-plus-button" id="add-plus-button" onclick="showInput()"><img src="/assets/img/icons/add_subtask_icon.svg" alt=""></button>
+                        <div class="subtask-btn-container" id="subtask-btn-container">
+                            <button type="button" class="clear-button" onclick="clearInput()"><img src="/assets/img/icons/delete_icon.svg" alt=""></button>
+                            <img src="/assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
+                            <button type="button" class="add-button" onclick="createSubtask()"><img src="/assets/img/icons/check_edit_icon.svg" alt=""></button>
+                        </div>
+                    </div>
+                         <div class="subtasks-container"></div>
+                    </div>
+            </form>        
+        </div>
+    
     </section>
     <div class="add-task-footer">
         <div class="dp-flex">
@@ -90,4 +75,3 @@
         </div>
     </div>
 </body>
-</html>
