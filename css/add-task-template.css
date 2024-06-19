@@ -1,8 +1,26 @@
+.headline {
+    padding-top: 106px;
+    padding-left: 106px;
+}
 
-.header-sticky {
+h1 {
+    font-size: 61px;
+    font-weight: 700;
+    font-family: inter;
+}
+
+h2 {
+    font-size: 20px;
+    font-weight: 400;
+    color: #2A3647;
+    margin: 0;
+    padding-top: 26px;
     display: flex;
-    position: sticky;
-    top: 0;
+    font-family: inter;
+}
+
+p {
+    font-family: inter;
 }
 
 .dp-flex {
@@ -34,109 +52,11 @@
     margin: 0;
 }
 
-.subtask-edit-container {
-    display: flex;
-    align-items: center;
-}
-
-.input-edit-subtask {
-    flex: 1;
-    padding: 4px;
-    font-size: 16px;
-    height: 30px;
-}
-
-.input-edit-subtask:focus {
-    outline: none;
-    text-decoration: underline;
-    border: 0px;
-}
-
-.save-subtask-button {
-    margin-left: 8px;
-    padding: 4px 8px;
-}
-
-
-.headline {
-    padding-top: 106px;
-    padding-left: 106px;
-}
-
-h2 {
-    font-size: 20px;
-    font-weight: 400;
-    color: #2A3647;
-    margin: 0;
-    padding-top: 26px;
-    display: flex;
-}
-
 .add-task-container {
     margin-left: 106px;
     margin-right: 106px;
     padding-top: 64px;
     display: flex;
-}
-
-.task-confirmation-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    animation-name: logo-animation;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-    animation-duration: 500ms;
-    animation-delay: 500ms;
-    background-color: #2A3647;
-    border-radius: 10px;
-    color: #FFFFFF;
-    height: 48px;
-    width: 220px;
-    gap: 8px;
-}
-
-.task-confirmation-img {
-    border-radius: 14px;
-    height: 60px;
-}
-
-.screen-animation {
-    opacity: 0;
-    animation-name: screen-animation;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-    animation-duration: 500ms;
-    animation-delay: 700ms;
-    animation-iteration-count: 1;
-}
-
-@keyframes logo-animation {
-    from {
-        top: 100%;
-        left: 50%;
-        transform: translate(0%, -50%);
-    }
-
-    to {
-        top: 40%;
-        left: 50%;
-        transform: none;
-    }
-}
-
-@keyframes screen-animation {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
 }
 
 .inputfield-title {
@@ -227,6 +147,13 @@ h2 {
     align-items: center;
     display: flex;
     justify-content: center;
+}
+
+#selected-contacts {
+    display: flex;
+    margin-top: 8px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .assignment-select-container::after {
@@ -483,7 +410,8 @@ h2 {
     height: 24px; 
     background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
     background-size: 24px 24px; 
-    pointer-events: none; 
+    pointer-events: none;
+    z-index: 1000; 
 }
 
 .custom-select-container.open::after {
@@ -611,6 +539,29 @@ h2 {
     cursor: pointer;
     background-color: #D1D1D1;
     border-radius: 10px;
+}
+
+.subtask-edit-container {
+    display: flex;
+    align-items: center;
+}
+
+.input-edit-subtask {
+    flex: 1;
+    padding: 4px;
+    font-size: 16px;
+    height: 30px;
+}
+
+.input-edit-subtask:focus {
+    outline: none;
+    text-decoration: underline;
+    border: 0px;
+}
+
+.save-subtask-button {
+    margin-left: 8px;
+    padding: 4px 8px;
 }
 
 .add-task-footer {
@@ -820,4 +771,3 @@ h2 {
         right: 38px;
     } */
 }
-

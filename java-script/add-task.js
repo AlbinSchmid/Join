@@ -11,7 +11,7 @@ let taskIdCounter = 0;
  */
 async function init() {
     await loadAllContacts();
-    renderAddTaskContent();
+    /* renderAddTaskContent(); */
     clearInput();
 }
 
@@ -32,9 +32,9 @@ function renderAddTaskContent() {
  * This function returns the addTask HTML Code
  */
 
-function getAddTaskHTML() {
+/* function getAddTaskHTML() {
     return getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
-}
+} */
 
 /**
  * 
