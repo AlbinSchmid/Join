@@ -619,7 +619,10 @@ function generateDetailedPriorityHTML(task) {
  * calls the addTask function on the board.html 
  */
 function addTask() {
- subtasks = [];
+    let container = document.getElementById('addTask-board');
+    container.classList.remove('d-none');
+/* subtasks = [];
+
  let container = document.getElementById('addTask-board');
  container.classList.remove('d-none');
  container.innerHTML = '';
@@ -641,7 +644,7 @@ function addTask() {
  container.appendChild(renderContainer);
  container.appendChild(footerContainer);
 
- getAddTaskHTML();
+ getAddTaskHTML(); */
 }
 
 /**

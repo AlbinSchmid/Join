@@ -89,7 +89,9 @@
                     <div id="done" class="dragarea" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
                 </div>
             </section>
-            <div id="addTask-board" class="addTask-board-container d-none"></div>
+            <div id="addTask-board" class="addTask-board-container d-none">
+                <div w3-include-html="assets/templates/addTask-template.html" class="overlay-background"></div>
+            </div>
         </div>
         <script src="/java-script/includeTemplates.js"></script> 
 </body>
