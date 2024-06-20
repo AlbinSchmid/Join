@@ -184,7 +184,12 @@ function setupSubmit() {
     task.category = "to-do";
 
     await postData("tasks", task);
-    setTimeout(() => (window.location = "/board.html"), 2000);
+
+    if (window.location.pathname.startsWith("/board")) {
+      window.location = "/board.html";
+    } else {
+      setTimeout(() => (window.location = "/board.html"), 2000);
+    }
   });
 }
 
