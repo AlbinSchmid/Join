@@ -123,9 +123,6 @@ function renderSelectedContacts() {
 }
 
 
-
-
-
 /**
  * opens the dropdown menu and adds the eventlistener with a click event
  */
