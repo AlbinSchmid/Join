@@ -26,8 +26,9 @@ async function includeHTML() {
     await includeHTML();
     showUser();
     linkActive();
-})();
-
+    document.dispatchEvent(new CustomEvent("init"));
+  })();
+  
 
 /**
  * Sets the active state for the current link to the current page.

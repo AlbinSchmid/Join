@@ -377,6 +377,10 @@ p {
     content: url('/assets/img/icons/white_prio_low.png'); 
 }
 
+.option-select{
+    color: #757575;
+}
+
 .selectfield-task-category {
     -webkit-appearance: none; 
     -moz-appearance: none; 

@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JOIN - Add Task</title>
-    <link rel="shortcut icon" href="/assets/img/join-logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="/css/add-task.css">
-    <link rel="stylesheet" href="/css/add-task-template.css">
-    <script src="/java-script/add-task.js"></script>
+    <link
+      rel="shortcut icon"
+      href="/assets/img/join-logo.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/css/add-task.css" />
+    <link rel="stylesheet" href="/css/add-task-template.css" />
+    <!-- <script src="/java-script/add-task.js"></script> -->
     <script src="/java-script/remoteStorage.js"></script>
     <script src="/java-script/header.js"></script>
-    
-</head>
+  </head>
 
-<body>
-    <div w3-include-html="/assets/templates/side-bar-template.html" class="fixed"></div>
+  <body>
+    <div
+      w3-include-html="/assets/templates/side-bar-template.html"
+      class="fixed"
+    ></div>
 
     <main>
-        <div w3-include-html="/assets/templates/header-template.html" class="header-sticky"></div>
-
-        <div w3-include-html="assets/templates/taskForm.html"></div>
-       <!--  <h1 class="headline">Add Task</h1>
-        <div id="add-task-confirmation" class="task-confirmation-container d-none">task added to board <img
-                src="assets/img/icons/Board icon.svg" alt=""></div>
-        <section id="add-task-content" class="add-task-container"></section> -->
+      <div
+        w3-include-html="/assets/templates/header-template.html"
+        class="header-sticky"
+      ></div>
+      <div w3-include-html="assets/templates/taskForm.html"></div>
     </main>
-        <script src="/java-script/includeTemplates.js"></script> 
-</body>
-
+    <script src="/java-script/task-form.js"></script>
+    <script src="/java-script/includeTemplates.js"></script>
+  </body>
 </html>
