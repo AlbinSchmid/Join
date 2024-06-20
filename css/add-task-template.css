@@ -645,12 +645,16 @@ p {
 
     .left-menu {
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
     }
 
     .right-menu {
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
     }
 
     .headline {
@@ -702,11 +706,6 @@ p {
     h2 {
         justify-content: center;
     }
-
-   /*  form {
-        display: flex;
-        justify-content: center;
-    } */
 
     .subtask-form {
         align-items: center;

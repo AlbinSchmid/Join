@@ -787,11 +787,7 @@ h3 {
     border: 1px solid #D1D1D1;
 }
 
-.custom-select-container {
-    position: relative;
-    display: inline-block;
-    width: 440px;
-}
+
 
 .custom-select-container::after {
     content: '';
@@ -1160,82 +1156,13 @@ h2 {
         width: 91%;
     }
 
-    .addTask-board-header {
-        width: 91%;
-        padding-top: 60px;
-        /* margin-top: 14%; */
-    }
-
-    .addTask-board-footer {
-        width: 91% !important;
-        padding-bottom: 60px;
-    }
-
     .addTask-board-container {
         box-sizing: border-box;
         padding-bottom: 8px;
         justify-content: flex-start;
-    }
-
-    .inputfield-title-board {
-        width: 100%;
-    }
-
-    .textareafied-description-board {
-        width: 100%;
-    }
-
-    .assignment-select-container {
-        max-width: none !important;
-    }
-
-    .assignment-task-assignment {
-        width: 404px !important;
-        box-sizing: border-box;
-    }
-
-    .date-selector {
-        width: 91% !important;
-    }
-
-    .custom-select-container {
-        width: 100% !important;
-    }
-
-    .selectfield-task-category {
-        width: 100% !important;
-    } 
-
-    .input-container {
-        width: 100% !important; 
-        box-sizing: border-box;
-    }
-
-    .inputfield-task-subtasks {
-        width: 100% !important;
+        overflow-x: hidden;
     }
 } 
-
-@media (max-width: 501px) {
-    .addTask-board-header-content {
-        font-size: 50px;
-    }
-
-    .custom-select-container {
-        display: flex;
-        justify-content: center;
-    }
-        
-    .add-task-footer-board {
-        padding: 0 !important;
-        flex-direction: column;
-        gap: 6px;
-    }
-/* 
-    .addTask-board-header {
-        margin-top: 200px;
-    } */
-}
 
 @media (max-width: 400px) {
     .footer-btn-container {
@@ -1248,7 +1175,4 @@ h2 {
         margin: 0 !important;
     }
 
-    /* .addTask-board-header {
-        margin-top: 270px;
-    } */
 }
