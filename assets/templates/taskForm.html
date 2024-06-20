@@ -61,16 +61,16 @@
         <div class="subtask-form">
           <div class="input-container">
             <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50" name="subtasks"
-              placeholder="Add new subtask" onfocus="showInput()" />
-            <button type="button" class="add-plus-button" id="add-plus-button" onclick="showInput()">
+              placeholder="Add new subtask" onfocus="subtasksShowInput()" />
+            <button type="button" class="add-plus-button" id="add-plus-button" onclick="subtasksShowInput()">
               <img src="/assets/img/icons/add_subtask_icon.svg" alt="" />
             </button>
             <div class="subtask-btn-container" id="subtask-btn-container">
-              <button type="button" class="clear-button" onclick="clearInput()">
+              <button type="button" class="clear-button" onclick="subtasksClearInput()">
                 <img src="/assets/img/icons/delete_icon.svg" alt="" />
               </button>
               <img src="/assets/img/icons/Vector 19.svg" alt="" class="vector-icon" />
-              <button type="button" class="add-button" onclick="createSubtask()">
+              <button type="button" class="add-button" onclick="subtasksCreate()">
                 <img src="/assets/img/icons/check_edit_icon.svg" alt="" />
               </button>
             </div>
