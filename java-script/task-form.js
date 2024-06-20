@@ -1,6 +1,7 @@
 let contacts;
 let subtasks;
 let selectedContacts;
+let isEdit = false;
 
 document.addEventListener("init", () => {
   initTaskForm();
@@ -183,16 +184,46 @@ function setupSubmit() {
     task.id = new Date().getTime();
     task.category = "to-do";
 
-    await postData("tasks", task);
-
-    if (window.location.pathname.startsWith("/board")) {
-      window.location = "/board.html";
+    if (isEdit) {
+      console.log("update");
     } else {
-      setTimeout(() => (window.location = "/board.html"), 2000);
+      await postData("tasks", task);
+      window.location = "/board.html";
     }
   });
 }
 
 function getForm() {
   return document.getElementById("task-form");
+}
+
+async function setFormularToAdd() {
+  isEdit = false;
+  document.getElementById("task-form-title").innerText = "Add Task";
+  document.getElementById("create-task").innerText = "Create Task";
+
+  selectedContacts = [];
+  subtasks = [];
+}
+
+async function setFormularToEdit(task) {
+  isEdit = true;
+  document.getElementById("task-form-title").innerText = "Edit Task";
+  document.getElementById("create-task").innerText = "Edit Task";
+  selectedContacts = task.selectedContact;
+  subtasks = task.subtasks;
+
+  const form = getForm();
+  for (const [key, val] of new URLSearchParams(task).entries()) {
+    const input = form.elements[key];
+    if (!input) {
+      continue;
+    }
+    if (input.type === "checkbox") {
+      input.checked = !!val;
+    } else {
+      input.value = val;
+    }
+  }
+  contactsRender();
 }
