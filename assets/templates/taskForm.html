@@ -1,21 +1,20 @@
 <div>
-    <form>
+    <form id="task-form">
     <h1 class="headline">Add Task</h1>
     <section id="add-task-content" class="add-task-container">
         
         <div class="left-menu">
                 <h2>Title<p class="required-color">*</p>
                 </h2>
-                <input id="task-title" class="inputfield-title" placeholder="Enter a title" type="text" required>
+                <input id="task-title" class="inputfield-title" placeholder="Enter a title" type="text" name="title" required>
                 <h2>Description</h2>
-                <textarea id="task-description" class="textareafied-description" placeholder="Enter a Description"
+                <textarea id="task-description" name="description" class="textareafied-description" placeholder="Enter a Description"
                     rows="10"></textarea>
                 <h2>Assigned to</h2>
                 <div class="jc-center">
                     <div class="contacts-form">
                         <div class="assignment-select-container">
-                            <input id="dropdownInput" class="assignment-task-assignment"
-                                placeholder="Select contacts to assign">
+                            <input id="dropdownInput" class="assignment-task-assignment" name="selectedContact" placeholder="Select contacts to assign">
                             <div id="task-assignment" class="dropdown-content"></div>
                         </div>
                         <div id="selected-contacts"></div>
@@ -26,22 +25,22 @@
         <div class="right-menu">
             <h2>Due Date<p class="required-color">*</p>
             </h2>
-            <input id="task-date" type="date" name="task-date" class="date-selector" required>
+            <input id="task-date" type="date" name="date" class="date-selector" required>
             <h2>Prio</h2>
             <div class="dp-flex-jc-sb">
-                <input type="checkbox" id="task-high-priority" class="custom-checkbox-high"
+                <input type="checkbox" id="task-high-priority" name="priorityHigh" class="custom-checkbox-high"
                     onclick="handleCheckboxClick(this)">
                 <label for="task-high-priority" class="checkbox-container">
                     <div class="checkbox-label-high">Urgent<img class="checkbox-image-high"
                             src="/assets/img/icons/prio_high.png" alt="priority high"></div>
                 </label>
-                <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium"
+                <input type="checkbox" id="task-medium-priority" name="priorityMedium" class="custom-checkbox-medium"
                     onclick="handleCheckboxClick(this)" checked>
                 <label for="task-medium-priority" class="checkbox-container">
                     <div class="checkbox-label-medium">Medium<img class="checkbox-image-medium"
                             src="/assets/img/icons/prio_medium.png" alt="priority medium"></div>
                 </label>
-                <input type="checkbox" id="task-low-priority" class="custom-checkbox-low"
+                <input type="checkbox" id="task-low-priority" name="priorityLow" class="custom-checkbox-low"
                     onclick="handleCheckboxClick(this)">
                 <label for="task-low-priority" class="checkbox-container">
                     <div class="checkbox-label-low">Low<img class="checkbox-image-low"
@@ -51,7 +50,7 @@
             <h2>Category<p class="required-color">*</p>
             </h2>
             <div class="custom-select-container">
-                <select class="selectfield-task-category" name="task category" id="task-category" required>
+                <select class="selectfield-task-category" name="taskcategory" id="task-category" required>
                     <option value="" disabled selected hidden>Select a category</option>
                     <option value="Technical Task">Technical Task</option>
                     <option value="User Story">User Story</option>
@@ -61,7 +60,7 @@
             <div class="subtask-form">
                 <div class="input-container">
                     <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50"
-                        placeholder="Add new subtask" onfocus="showInput()">
+                        name="subtasks" placeholder="Add new subtask" onfocus="showInput()">
                     <button type="button" class="add-plus-button" id="add-plus-button" onclick="showInput()"><img
                             src="/assets/img/icons/add_subtask_icon.svg" alt=""></button>
                     <div class="subtask-btn-container" id="subtask-btn-container">

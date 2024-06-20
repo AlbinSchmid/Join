@@ -9,11 +9,10 @@ let taskIdCounter = 0;
 /**
  * init function which starts all relevant functions which are necessary to render the page content
  */
-async function init() {
-    await loadAllContacts();
-    /* renderAddTaskContent(); */
-    clearInput();
-}
+
+await loadAllContacts();
+clearInput();
+
 
 /**
  * This function renders the main add-task-content into the section with id = 'add-task-content'
