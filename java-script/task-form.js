@@ -1,5 +1,6 @@
 let contacts;
 let subtasks;
+let selectedContacts;
 
 document.addEventListener("init", () => {
   initTaskForm();
@@ -60,7 +61,7 @@ function contactsOnClick(id) {
 
 function contactsRender() {
   const selectedUsers = document.querySelectorAll(".contact-checkbox:checked");
-  const selectedContacts = [];
+  selectedContacts = [];
 
   const selectedContactsContainer =
     document.getElementById("selected-contacts");
@@ -170,10 +171,20 @@ function subtaskDoEdit(id, text) {
 }
 
 function setupSubmit() {
-  getForm().addEventListener("submit", function (e) {
+  getForm().addEventListener("submit", async function (e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-    console.log(Object.fromEntries(formData));
+    const task = Object.fromEntries(formData);
+    task.subtasks = subtasks;
+    task.priorityHigh = task.priority === "high";
+    task.priorityLow = task.priority === "low";
+    task.priorityMedium = task.priority === "medium";
+    task.selectedContact = selectedContacts;
+    task.id = new Date().getTime();
+    task.category = "to-do";
+
+    await postData("tasks", task);
+    setTimeout(() => (window.location = "/board.html"), 2000);
   });
 }
 
