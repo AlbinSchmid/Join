@@ -116,5 +116,5 @@ function resetCheckImg() {
 
 
 function loadBoardPage() {
-    window.location.href = "http://127.0.0.1:5500/board.html";
+    window.location.href = "/board.html";
 }
