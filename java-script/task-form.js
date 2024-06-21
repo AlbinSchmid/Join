@@ -70,6 +70,7 @@ function contactsRender() {
   for (const checkbox of selectedUsers) {
     const contact = contacts[checkbox.dataset.id];
     selectedContacts.push({
+      id: checkbox.dataset.id,
       color: contact.color,
       name: contact.name,
       initials: contact.initials,
@@ -182,12 +183,15 @@ function setupSubmit() {
     task.priorityMedium = task.priority === "medium";
     task.selectedContact = selectedContacts;
     task.id = new Date().getTime();
-    task.category = "to-do";
+    // task.category = "to-do";
 
     if (isEdit) {
       console.log("update");
+      await putData(`tasks/${task.firebaseId}`, task);
+      window.location = "/board.html";
     } else {
       await postData("tasks", task);
+      console.log(task);
       window.location = "/board.html";
     }
   });
@@ -210,8 +214,16 @@ async function setFormularToEdit(task) {
   isEdit = true;
   document.getElementById("task-form-title").innerText = "Edit Task";
   document.getElementById("create-task").innerText = "Edit Task";
-  selectedContacts = task.selectedContact;
+
+  // set contacts
+  for (const contact of task.selectedContact) {
+    document.getElementById(`contact-${contact.id}`).checked = true;
+  }
+  contactsRender();
+
+  // subtaks
   subtasks = task.subtasks;
+  subtasksRender();
 
   const form = getForm();
   for (const [key, val] of new URLSearchParams(task).entries()) {
@@ -225,7 +237,6 @@ async function setFormularToEdit(task) {
       input.value = val;
     }
   }
-  contactsRender();
 }
 
 function clearTaskForm() {
@@ -246,4 +257,3 @@ function clearTaskForm() {
 
   isEdit = false;
 }
-

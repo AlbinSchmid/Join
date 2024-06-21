@@ -6,7 +6,7 @@ let taskIdCounter = 0;
 let currentDraggedElement;
 
 document.addEventListener("init", async () => {
-    await initBoard();
+  await initBoard();
 });
 /**
  * function opens render relevated sub functions for generating the page content
@@ -15,60 +15,60 @@ document.addEventListener("init", async () => {
  */
 
 async function initBoard() {
-    await loadTasks();
-    await loadAllContacts();
-    updateHTML();
+  await loadTasks();
+  await loadAllContacts();
+  updateHTML();
 }
 
 function searchTask(searchBar) {
-    let searchTask = document
-        .getElementById("search-field-board")
-        .value.toLowerCase();
-    let searchTaskMobile = document
-        .getElementById("search-field-board-mobile")
-        .value.toLowerCase();
+  let searchTask = document
+    .getElementById("search-field-board")
+    .value.toLowerCase();
+  let searchTaskMobile = document
+    .getElementById("search-field-board-mobile")
+    .value.toLowerCase();
 
-    // Check if the searchbar is on desktop or on phone
-    if (searchBar === "desktop") {
-        FilterAndShowTaskOnDesktop(searchTask);
-    } else {
-        FilterAndShowTaskOnMobile(searchTaskMobile);
-    }
+  // Check if the searchbar is on desktop or on phone
+  if (searchBar === "desktop") {
+    FilterAndShowTaskOnDesktop(searchTask);
+  } else {
+    FilterAndShowTaskOnMobile(searchTaskMobile);
+  }
 }
 
 function FilterAndShowTaskOnDesktop(searchTask) {
-    if (searchTask.length === 1) {
-        updateHTML();
-    } else {
-        // Filter the tasks based on the search term
-        let filteredTasks = tasks.filter((task) => {
-            let title = task["title"].toLowerCase();
-            let description = task["description"].toLowerCase();
-            return title.includes(searchTask) || description.includes(searchTask);
-        });
+  if (searchTask.length === 1) {
+    updateHTML();
+  } else {
+    // Filter the tasks based on the search term
+    let filteredTasks = tasks.filter((task) => {
+      let title = task["title"].toLowerCase();
+      let description = task["description"].toLowerCase();
+      return title.includes(searchTask) || description.includes(searchTask);
+    });
 
-        // Update the HTML to display only the filtered tasks
-        updateHTML(filteredTasks);
-    }
+    // Update the HTML to display only the filtered tasks
+    updateHTML(filteredTasks);
+  }
 }
 
 function FilterAndShowTaskOnMobile(searchTaskMobile) {
-    if (searchTaskMobile.length === 1) {
-        updateHTML();
-    } else {
-        // Filter the tasks based on the search term
-        let filteredTasks = tasks.filter((task) => {
-            let title = task["title"].toLowerCase();
-            let description = task["description"].toLowerCase();
-            return (
-                title.includes(searchTaskMobile) ||
-                description.includes(searchTaskMobile)
-            );
-        });
+  if (searchTaskMobile.length === 1) {
+    updateHTML();
+  } else {
+    // Filter the tasks based on the search term
+    let filteredTasks = tasks.filter((task) => {
+      let title = task["title"].toLowerCase();
+      let description = task["description"].toLowerCase();
+      return (
+        title.includes(searchTaskMobile) ||
+        description.includes(searchTaskMobile)
+      );
+    });
 
-        // Update the HTML to display only the filtered tasks
-        updateHTML(filteredTasks);
-    }
+    // Update the HTML to display only the filtered tasks
+    updateHTML(filteredTasks);
+  }
 }
 
 /**
@@ -76,40 +76,40 @@ function FilterAndShowTaskOnMobile(searchTaskMobile) {
  * filters after categorys inside the tasks array
  */
 function updateHTML(filteredTasks = tasks) {
-    const dragAreas = ["to-do", "in-progress", "await-feedback", "done"];
+  const dragAreas = ["to-do", "in-progress", "await-feedback", "done"];
 
-    dragAreas.forEach((areaId) => {
-        let tasksInArea = filteredTasks.filter((t) => t["category"] == areaId);
-        const areaElement = document.getElementById(areaId);
-        areaElement.innerHTML = "";
+  dragAreas.forEach((areaId) => {
+    let tasksInArea = filteredTasks.filter((t) => t["category"] == areaId);
+    const areaElement = document.getElementById(areaId);
+    areaElement.innerHTML = "";
 
-        for (let index = 0; index < tasksInArea.length; index++) {
-            const element = tasksInArea[index];
-            let taskcategory = element.taskcategory;
-            let category = element.category;
-            let title = element.title;
-            let description = element.description;
-            let subtaskCount = element.subtaskCount;
-            let assignedTo = element.selectedContact
-                ? generateContactHTML(element.selectedContact)
-                : "";
-            let priority = generatePriorityHTML(element);
-            let backgroundColor = getBackgroundColor(taskcategory);
+    for (let index = 0; index < tasksInArea.length; index++) {
+      const element = tasksInArea[index];
+      let taskcategory = element.taskcategory;
+      let category = element.category;
+      let title = element.title;
+      let description = element.description;
+      let subtaskCount = element.subtaskCount;
+      let assignedTo = element.selectedContact
+        ? generateContactHTML(element.selectedContact)
+        : "";
+      let priority = generatePriorityHTML(element);
+      let backgroundColor = getBackgroundColor(taskcategory);
 
-            areaElement.innerHTML += getToDoHTML(
-                element,
-                taskcategory,
-                title,
-                description,
-                subtaskCount,
-                assignedTo,
-                priority,
-                index,
-                tasksInArea,
-                backgroundColor
-            );
-        }
-    });
+      areaElement.innerHTML += getToDoHTML(
+        element,
+        taskcategory,
+        title,
+        description,
+        subtaskCount,
+        assignedTo,
+        priority,
+        index,
+        tasksInArea,
+        backgroundColor
+      );
+    }
+  });
 }
 
 /**
@@ -118,17 +118,17 @@ function updateHTML(filteredTasks = tasks) {
  * @returns contactHTML with for-loop through array tasks, individuell css design for overlapping effect
  */
 function generateContactHTML(selectedContact) {
-    if (!selectedContact || selectedContact.length === 0) {
-        return "";
-    }
+  if (!selectedContact || selectedContact.length === 0) {
+    return "";
+  }
 
-    let contactHTML = "";
-    for (let i = 0; i < selectedContact.length; i++) {
-        let contact = selectedContact[i];
-        const assignedContainerStyle = `margin-left: ${i === 0 ? "0" : "-10px"};`;
-        contactHTML += `<div class="attributor-icon" style="background-color: ${contact.color}; ${assignedContainerStyle}">${contact.initials}</div>`;
-    }
-    return contactHTML;
+  let contactHTML = "";
+  for (let i = 0; i < selectedContact.length; i++) {
+    let contact = selectedContact[i];
+    const assignedContainerStyle = `margin-left: ${i === 0 ? "0" : "-10px"};`;
+    contactHTML += `<div class="attributor-icon" style="background-color: ${contact.color}; ${assignedContainerStyle}">${contact.initials}</div>`;
+  }
+  return contactHTML;
 }
 
 /**
@@ -137,18 +137,18 @@ function generateContactHTML(selectedContact) {
  * @returns priority image for updateHTML with if else query
  */
 function generatePriorityHTML(task) {
-    let priorityHTML = "";
-    if (task.priorityHigh) {
-        priorityHTML =
-            '<div class="priority-icon"><img src="assets/img/icons/prio_high.png" alt="High Priority"></div>';
-    } else if (task.priorityMedium) {
-        priorityHTML =
-            '<div class="priority-icon"><img src="assets/img/icons/prio_medium.png" alt="Medium Priority"></div>';
-    } else if (task.priorityLow) {
-        priorityHTML =
-            '<div class="priority-icon"><img src="assets/img/icons/prio_low.png" alt="Low Priority"></div>';
-    }
-    return priorityHTML;
+  let priorityHTML = "";
+  if (task.priorityHigh) {
+    priorityHTML =
+      '<div class="priority-icon"><img src="assets/img/icons/prio_high.png" alt="High Priority"></div>';
+  } else if (task.priorityMedium) {
+    priorityHTML =
+      '<div class="priority-icon"><img src="assets/img/icons/prio_medium.png" alt="Medium Priority"></div>';
+  } else if (task.priorityLow) {
+    priorityHTML =
+      '<div class="priority-icon"><img src="assets/img/icons/prio_low.png" alt="Low Priority"></div>';
+  }
+  return priorityHTML;
 }
 
 /**
@@ -157,14 +157,14 @@ function generatePriorityHTML(task) {
  * @returns defines the background color depending on the choosen taskcategory
  */
 function getBackgroundColor(taskcategory) {
-    let backgroundColor = "";
+  let backgroundColor = "";
 
-    if (taskcategory === "Technical Task") {
-        backgroundColor = "technical-task-color";
-    } else if (taskcategory === "User Story") {
-        backgroundColor = "user-story-color";
-    }
-    return backgroundColor;
+  if (taskcategory === "Technical Task") {
+    backgroundColor = "technical-task-color";
+  } else if (taskcategory === "User Story") {
+    backgroundColor = "user-story-color";
+  }
+  return backgroundColor;
 }
 
 /**
@@ -180,26 +180,26 @@ function getBackgroundColor(taskcategory) {
  * @returns HTML for the board content
  */
 function getToDoHTML(
-    task,
-    taskcategory,
-    title,
-    description,
-    subtaskCount,
-    assignedTo,
-    priority,
-    index,
-    category,
-    backgroundColor
+  task,
+  taskcategory,
+  title,
+  description,
+  subtaskCount,
+  assignedTo,
+  priority,
+  index,
+  category,
+  backgroundColor
 ) {
-    const total = task.subtasks.length;
-    const selected = task.subtasks.filter((it) => it.selected).length;
-    let percent = Math.round((selected / total) * 100);
-    if (isNaN(percent)) {
-        percent = 0;
-    }
+  const total = task.subtasks.length;
+  const selected = task.subtasks.filter((it) => it.selected).length;
+  let percent = Math.round((selected / total) * 100);
+  if (isNaN(percent)) {
+    percent = 0;
+  }
 
-    return /*html*/ `
- <div draggable="true" ondragstart="startDragging(${category[index]["id"]})" class="task-container" onclick="openTask(${category[index]["id"]})">
+  return /*html*/ `
+ <div draggable="true" ondragstart="startDragging('${task.firebaseId}')" class="task-container" onclick="openTask(${category[index]["id"]})">
  <div class="to-do-title-container">
  <p class="to-do-title ${backgroundColor}">${taskcategory}</p>
  </div>
@@ -222,27 +222,27 @@ function getToDoHTML(
  * updates progressBar but does not work correctly yet
  */
 function updateProgressBar(taskId, subTaskId) {
-    const task = getTaskById(taskId);
-    const subTask = task.subtasks[subTaskId];
-    const subTaskDocumentId = `subtask-${taskId}-${subTaskId}`;
-    subTask.selected = document.getElementById(subTaskDocumentId).checked;
+  const task = getTaskById(taskId);
+  const subTask = task.subtasks[subTaskId];
+  const subTaskDocumentId = `subtask-${taskId}-${subTaskId}`;
+  subTask.selected = document.getElementById(subTaskDocumentId).checked;
 
-    let totalSubtasks = document.querySelectorAll(
-        '.subtask-container-detail-view input[type="checkbox"]'
-    ).length;
-    let completedSubtasks = document.querySelectorAll(
-        '.subtask-container-detail-view input[type="checkbox"]:checked'
-    ).length;
+  let totalSubtasks = document.querySelectorAll(
+    '.subtask-container-detail-view input[type="checkbox"]'
+  ).length;
+  let completedSubtasks = document.querySelectorAll(
+    '.subtask-container-detail-view input[type="checkbox"]:checked'
+  ).length;
 
-    let percent = (completedSubtasks / totalSubtasks) * 100;
-    percent = Math.round(percent);
+  let percent = (completedSubtasks / totalSubtasks) * 100;
+  percent = Math.round(percent);
 
-    document.getElementById(`progress-bar${taskId}`).style.width = percent + "%";
-    document.getElementById(
-        `progress-count${taskId}`
-    ).innerHTML = `${completedSubtasks}/${totalSubtasks} Subtasks`;
+  document.getElementById(`progress-bar${taskId}`).style.width = percent + "%";
+  document.getElementById(
+    `progress-count${taskId}`
+  ).innerHTML = `${completedSubtasks}/${totalSubtasks} Subtasks`;
 
-    updateSubtaks(taskId);
+  updateSubtaks(taskId);
 }
 
 /**
@@ -252,51 +252,53 @@ function updateProgressBar(taskId, subTaskId) {
  * @returns
  */
 function openTask(taskId, callback) {
-    let container = document.getElementById("task-detail-view-container");
-    let task = getTaskById(taskId);
-    currentTask = tasks.findIndex((task) => task.id === taskId);
+  let container = document.getElementById("task-detail-view-container");
+  let task = getTaskById(taskId);
+  currentTask = tasks.findIndex((task) => task.id === taskId);
 
-    let technicalTask = task.taskcategory;
-    let category = task.category;
-    let title = task.title;
-    let description = task.description;
-    let dueDate = formatDateForSave(task.date);
-    let priority = generateDetailedPriorityHTML(task);
-    let assignedTo = generateDetailedContactHTML(task.selectedContact);
-    let subtasks = "";
-    if (task.subtasks && task.subtasks.length > 0) {
-        for (let i = 0; i < task.subtasks.length; i++) {
-            let subtask = task.subtasks[i];
-            subtasks += `<div class="subtask-container-detail-view"><input ${subtask?.selected ? "checked" : ""
-                } id="subtask-${taskId}-${i}" type="checkbox" onclick="updateProgressBar(${taskId}, ${i})"> ${subtask.text
-                }</div>`;
-        }
+  let technicalTask = task.taskcategory;
+  let category = task.category;
+  let title = task.title;
+  let description = task.description;
+  let dueDate = formatDateForSave(task.date);
+  let priority = generateDetailedPriorityHTML(task);
+  let assignedTo = generateDetailedContactHTML(task.selectedContact);
+  let subtasks = "";
+  if (task.subtasks && task.subtasks.length > 0) {
+    for (let i = 0; i < task.subtasks.length; i++) {
+      let subtask = task.subtasks[i];
+      subtasks += `<div class="subtask-container-detail-view"><input ${
+        subtask?.selected ? "checked" : ""
+      } id="subtask-${taskId}-${i}" type="checkbox" onclick="updateProgressBar(${taskId}, ${i})"> ${
+        subtask.text
+      }</div>`;
     }
+  }
 
-    container.innerHTML = "";
-    container.innerHTML = getTaskDetailViewHTML(
-        taskId,
-        technicalTask,
-        title,
-        subtasks,
-        description,
-        dueDate,
-        priority,
-        assignedTo,
-        category
-    );
-    container.classList.remove("d-hide");
-    container.classList.add("d-block");
-    container.dataset.callback = callback;
+  container.innerHTML = "";
+  container.innerHTML = getTaskDetailViewHTML(
+    taskId,
+    technicalTask,
+    title,
+    subtasks,
+    description,
+    dueDate,
+    priority,
+    assignedTo,
+    category
+  );
+  container.classList.remove("d-hide");
+  container.classList.add("d-block");
+  container.dataset.callback = callback;
 }
 
 /**
  * closes the fullscreen task view
  */
 function closeTask() {
-    let container = document.getElementById("task-detail-view-container");
-    container.classList.add("d-hide");
-    container.classList.remove("d-block");
+  let container = document.getElementById("task-detail-view-container");
+  container.classList.add("d-hide");
+  container.classList.remove("d-block");
 }
 
 /**
@@ -312,16 +314,16 @@ function closeTask() {
  * @returns fullscreen View with more informations then the normal board view, parameters deliever the right objects and their value out of the Array tasks
  */
 function getTaskDetailViewHTML(
-    taskId,
-    technicalTask,
-    title,
-    subtasks,
-    description,
-    dueDate,
-    priority,
-    assignedTo
+  taskId,
+  technicalTask,
+  title,
+  subtasks,
+  description,
+  dueDate,
+  priority,
+  assignedTo
 ) {
-    return /*html*/ `
+  return /*html*/ `
  <div id="detail-task${taskId}" class="detail-task-container">
  <div class="detail-task-overview">
  <div class="technical-task-container-detail"><p class="technical-task-detail">${technicalTask}</p><img class="close-detail-button" onclick="closeTask()" src="assets/img/icons/close__detailview_icon.svg" alt="close"></div>
@@ -355,46 +357,46 @@ function getTaskDetailViewHTML(
  * @param {*} edit function for editing the
  */
 function editTask(taskId) {
-    const task = tasks.find((task) => task.id === taskId);
-    console.log(task);
-    setFormularToEdit(task);
+  const task = tasks.find((task) => task.id === taskId);
+  console.log(task);
+  setFormularToEdit(task);
+  showTaskForm();
+//   let container = document.getElementById("add-task");
+//   container.classList.remove("d-none");
 
-    let container = document.getElementById("add-task");
-    container.classList.remove("d-none");
+//   let container2 = document.getElementById("addTask-board");
+//   container2.classList.remove("d-none");
 
-    let container2 = document.getElementById("addTask-board");
-    container2.classList.remove("d-none");
+//   console.log("hello edit");
+  // let task = tasks.find((task) => task.id === taskId);
+  // currentTask = tasks.findIndex((task) => task.id === taskId);
 
-    console.log("hello edit");
-    // let task = tasks.find((task) => task.id === taskId);
-    // currentTask = tasks.findIndex((task) => task.id === taskId);
+  // let title = task.title;
+  // let description = task.description;
+  // let dueDate = task.date;
+  // let priority = getEditPriorityHTML(task);
+  // let contacts = generateContactHTML(task.selectedContact);
+  // let subtasks = generateSubtasksHTML(task);
 
-    // let title = task.title;
-    // let description = task.description;
-    // let dueDate = task.date;
-    // let priority = getEditPriorityHTML(task);
-    // let contacts = generateContactHTML(task.selectedContact);
-    // let subtasks = generateSubtasksHTML(task);
+  // container.innerHTML = "";
+  // container.innerHTML = getEditTaskHTML(
+  // taskId,
+  // title,
+  // description,
+  // dueDate,
+  // priority,
+  // contacts,
+  // subtasks
+  // );
+  // document.getElementById("task-detail-view-container").classList.add("d-hide");
+  // document
+  // .getElementById("task-detail-view-container")
+  // .classList.remove("d-block");
+  // container.classList.remove("d-hide");
+  // container.classList.add("d-block");
 
-    // container.innerHTML = "";
-    // container.innerHTML = getEditTaskHTML(
-    // taskId,
-    // title,
-    // description,
-    // dueDate,
-    // priority,
-    // contacts,
-    // subtasks
-    // );
-    // document.getElementById("task-detail-view-container").classList.add("d-hide");
-    // document
-    // .getElementById("task-detail-view-container")
-    // .classList.remove("d-block");
-    // container.classList.remove("d-hide");
-    // container.classList.add("d-block");
-
-    // setupDropdown();
-    // renderContactOptions(taskId);
+  // setupDropdown();
+  // renderContactOptions(taskId);
 }
 
 /**
@@ -403,13 +405,13 @@ function editTask(taskId) {
  * @returns subtask html content
  */
 function generateSubtasksHTML(task) {
-    const subtasks = task.subtasks;
-    console.log(subtasks);
-    let subtasksHTML = "";
-    if (subtasks && subtasks.length > 0) {
-        for (let i = 0; i < subtasks.length; i++) {
-            let subtask = subtasks[i];
-            subtasksHTML += `<div class="subtask">
+  const subtasks = task.subtasks;
+  console.log(subtasks);
+  let subtasksHTML = "";
+  if (subtasks && subtasks.length > 0) {
+    for (let i = 0; i < subtasks.length; i++) {
+      let subtask = subtasks[i];
+      subtasksHTML += `<div class="subtask">
  <div class="subtask-text-container">
  <img src="assets/img/icons/punkt.png" alt="">
  <span>${subtask.text}</span>
@@ -420,15 +422,15 @@ function generateSubtasksHTML(task) {
  <img src="assets/img/icons/Subtasks_delete_icon.svg" alt="" class="delete-icon" onclick="deleteEditSubtask(${task.id}, ${i})"> 
  </div>
  </div>`;
-        }
     }
-    return subtasksHTML;
+  }
+  return subtasksHTML;
 }
 
 async function deleteEditSubtask(taskId, subTaskIndex) {
-    const task = getTaskById(taskId);
-    delete task.subtasks[subTaskIndex];
-    await updateSubtaks(taskId);
+  const task = getTaskById(taskId);
+  delete task.subtasks[subTaskIndex];
+  await updateSubtaks(taskId);
 }
 
 /**
@@ -437,11 +439,11 @@ async function deleteEditSubtask(taskId, subTaskIndex) {
  * @returns edit priority html content
  */
 function getEditPriorityHTML(task) {
-    let priorityHighChecked = task.priorityHigh ? "checked" : "";
-    let priorityMediumChecked = task.priorityMedium ? "checked" : "";
-    let priorityLowChecked = task.priorityLow ? "checked" : "";
+  let priorityHighChecked = task.priorityHigh ? "checked" : "";
+  let priorityMediumChecked = task.priorityMedium ? "checked" : "";
+  let priorityLowChecked = task.priorityLow ? "checked" : "";
 
-    let priorityHTML = /*html*/ `
+  let priorityHTML = /*html*/ `
  <h2 class="prio">Prio</h2>
  <div class="dp-flex-jc-sb prio-design-board">
  <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)" ${priorityHighChecked}>
@@ -466,7 +468,7 @@ function getEditPriorityHTML(task) {
  </div>
  </label>
  </div>`;
-    return priorityHTML;
+  return priorityHTML;
 }
 
 /**
@@ -481,15 +483,15 @@ function getEditPriorityHTML(task) {
  * @returns edit task html code with inputfields to edit exisiting content
  */
 function getEditTaskHTML(
-    taskId,
-    title,
-    description,
-    dueDate,
-    priority,
-    contacts,
-    subtasks
+  taskId,
+  title,
+  description,
+  dueDate,
+  priority,
+  contacts,
+  subtasks
 ) {
-    return /*html*/ `
+  return /*html*/ `
  <div id="edit-task${taskId}" class="edit-task-layout">
  <div class="edit-task-container">
  <div class="close-btn-edit-container"><img class="close-detail-button" onclick="closeEdit()" src="assets/img/icons/close__detailview_icon.svg" alt="close"></div>
@@ -539,10 +541,10 @@ function getEditTaskHTML(
 }
 
 async function updateSubtaks(taskId) {
-    const task = getTaskById(taskId);
+  const task = getTaskById(taskId);
 
-    await putData(`tasks/${task.firebaseId}`, task);
-    initBoard();
+  await putData(`tasks/${task.firebaseId}`, task);
+  initBoard();
 }
 
 /**
@@ -551,35 +553,35 @@ async function updateSubtaks(taskId) {
  * @returns taskId will be checked inside array and edited changes will be pushed into the firebase array tasks and initiates init() for refreshing the content
  */
 async function saveTask(taskId) {
-    const task = getTaskById(taskId);
-    console.log(task);
+  const task = getTaskById(taskId);
+  console.log(task);
 
-    let taskTitle = document.getElementById("task-title").value;
-    let taskDescription = document.getElementById("task-description").value;
-    let taskAssignment = document.getElementById("task-assignment").value;
-    let taskDate = document.getElementById("task-date").value;
-    let High = document.getElementById("task-high-priority").checked;
-    let Medium = document.getElementById("task-medium-priority").checked;
-    let Low = document.getElementById("task-low-priority").checked;
+  let taskTitle = document.getElementById("task-title").value;
+  let taskDescription = document.getElementById("task-description").value;
+  let taskAssignment = document.getElementById("task-assignment").value;
+  let taskDate = document.getElementById("task-date").value;
+  let High = document.getElementById("task-high-priority").checked;
+  let Medium = document.getElementById("task-medium-priority").checked;
+  let Low = document.getElementById("task-low-priority").checked;
 
-    let updatedTask = {
-        ...task,
-        title: taskTitle,
-        description: taskDescription,
-        assignment: taskAssignment,
-        date: taskDate,
-        priorityHigh: High,
-        priorityMedium: Medium,
-        priorityLow: Low,
-        subtaskCount: subtaskCount,
-        selectedContact: selectedContacts,
-    };
+  let updatedTask = {
+    ...task,
+    title: taskTitle,
+    description: taskDescription,
+    assignment: taskAssignment,
+    date: taskDate,
+    priorityHigh: High,
+    priorityMedium: Medium,
+    priorityLow: Low,
+    subtaskCount: subtaskCount,
+    selectedContact: selectedContacts,
+  };
 
-    await putData(`tasks/${task.firebaseId}`, updatedTask);
-    document.getElementById("edit-container").classList.remove("d-block");
-    document.getElementById("edit-container").classList.add("d-hide");
+  await putData(`tasks/${task.firebaseId}`, updatedTask);
+  document.getElementById("edit-container").classList.remove("d-block");
+  document.getElementById("edit-container").classList.add("d-hide");
 
-    initBoard();
+  initBoard();
 }
 
 /**
@@ -588,45 +590,45 @@ async function saveTask(taskId) {
  * @returns deletes choosen task
  */
 async function deleteTask(taskId) {
-    try {
-        let tasks = await getData("tasks");
-        let firebaseId = null;
+  try {
+    let tasks = await getData("tasks");
+    let firebaseId = null;
 
-        for (let [key, value] of Object.entries(tasks)) {
-            if (value.id === taskId) {
-                firebaseId = key;
-                break;
-            }
-        }
-
-        if (!firebaseId) {
-            console.error(`Task with ID ${taskId} not found.`);
-            return;
-        }
-
-        await deleteData(`tasks/${firebaseId}`);
-        delete tasks[firebaseId];
-    } catch (error) {
-        console.error(`Failed to delete task with ID ${taskId}:`, error);
+    for (let [key, value] of Object.entries(tasks)) {
+      if (value.id === taskId) {
+        firebaseId = key;
+        break;
+      }
     }
-    document.getElementById("task-detail-view-container").classList.add("d-hide");
-    document
-        .getElementById("task-detail-view-container")
-        .classList.remove("d-block");
-    // document.getElementById('body').classList.remove('overflow-hidden');
-    initBoard();
+
+    if (!firebaseId) {
+      console.error(`Task with ID ${taskId} not found.`);
+      return;
+    }
+
+    await deleteData(`tasks/${firebaseId}`);
+    delete tasks[firebaseId];
+  } catch (error) {
+    console.error(`Failed to delete task with ID ${taskId}:`, error);
+  }
+  document.getElementById("task-detail-view-container").classList.add("d-hide");
+  document
+    .getElementById("task-detail-view-container")
+    .classList.remove("d-block");
+  // document.getElementById('body').classList.remove('overflow-hidden');
+  initBoard();
 }
 
 /**
  * closes edit task window
  */
 function closeEdit() {
-    let container = document.getElementById("edit-container");
-    let containerTask = document.getElementById("task-detail-view-container");
-    container.classList.add("d-hide");
-    container.classList.remove("d-block");
-    containerTask.classList.add("d-hide");
-    containerTask.classList.remove("d-block");
+  let container = document.getElementById("edit-container");
+  let containerTask = document.getElementById("task-detail-view-container");
+  container.classList.add("d-hide");
+  container.classList.remove("d-block");
+  containerTask.classList.add("d-hide");
+  containerTask.classList.remove("d-block");
 }
 
 /**
@@ -635,20 +637,20 @@ function closeEdit() {
  * @returns contact name is added for the detail view
  */
 function generateDetailedContactHTML(selectedContact) {
-    if (!selectedContact || selectedContact.length === 0) {
-        return "";
-    }
+  if (!selectedContact || selectedContact.length === 0) {
+    return "";
+  }
 
-    let contactHTML = "";
-    for (let i = 0; i < selectedContact.length; i++) {
-        let contact = selectedContact[i];
-        contactHTML += `
+  let contactHTML = "";
+  for (let i = 0; i < selectedContact.length; i++) {
+    let contact = selectedContact[i];
+    contactHTML += `
  <div class="contact-detail">
  <div class="attributor-icon" style="background-color: ${contact.color}">${contact.initials}</div>
  <p>${contact.name}</p>
  </div>`;
-    }
-    return contactHTML;
+  }
+  return contactHTML;
 }
 
 /**
@@ -657,35 +659,40 @@ function generateDetailedContactHTML(selectedContact) {
  * @returns priority images with extra text besides the image
  */
 function generateDetailedPriorityHTML(task) {
-    let priorityHTML = "";
-    if (task.priorityHigh) {
-        priorityHTML = `
+  let priorityHTML = "";
+  if (task.priorityHigh) {
+    priorityHTML = `
  <div class="priority-detail-container">
  <p>High</p>
  <img src="assets/img/icons/prio_high.png" alt="High Priority">
  </div>`;
-    } else if (task.priorityMedium) {
-        priorityHTML = `
+  } else if (task.priorityMedium) {
+    priorityHTML = `
  <div class="priority-detail-container">
  <p>Medium</p>
  <img src="assets/img/icons/prio_medium.png" alt="Medium Priority">
  </div>`;
-    } else if (task.priorityLow) {
-        priorityHTML = `
+  } else if (task.priorityLow) {
+    priorityHTML = `
  <div class="priority-detail-container">
  <p>Low</p>
  <img src="assets/img/icons/prio_low.png" alt="Low Priority">
  </div>`;
-    } else {
-        priorityHTML = "";
-    }
-    return priorityHTML;
+  } else {
+    priorityHTML = "";
+  }
+  return priorityHTML;
 }
 
 /**
  * calls the addTask function on the board.html
  */
-function addTask() {
+function addTask(category = "to-do") {
+    showTaskForm();
+    document.getElementById("task-form-category").value = category;
+}
+
+function showTaskForm() {
     let container = document.getElementById("addTask-board");
     container.classList.remove("d-none");
 }
@@ -694,21 +701,21 @@ function addTask() {
  * calls the getAddTaskHTML which is divided into 4 parts, cause of the fullscreen view on the board.html
  */
 function getAddTaskHTML() {
-    let containerHeader = document.getElementById("addTask-board-header");
-    let container = document.getElementById("addTask-board-render-container");
-    let containerFooter = document.getElementById("addTask-board-footer");
-    containerHeader.innerHTML += getAddTaskHTMLHeader();
-    container.innerHTML += getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
-    containerFooter.innerHTML += getAddTaskHTMLFooter();
-    setupDropdown();
-    renderContactOptions();
+  let containerHeader = document.getElementById("addTask-board-header");
+  let container = document.getElementById("addTask-board-render-container");
+  let containerFooter = document.getElementById("addTask-board-footer");
+  containerHeader.innerHTML += getAddTaskHTMLHeader();
+  container.innerHTML += getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
+  containerFooter.innerHTML += getAddTaskHTMLFooter();
+  setupDropdown();
+  renderContactOptions();
 }
 
 /**
  * @returns the left side of the addTask content window
  */
 function getAddTaskHTMLLeftSide() {
-    return /*html*/ `
+  return /*html*/ `
  <div>
  <h2>Title<p class="required-color">*</p></h2>
  <form>
@@ -733,40 +740,40 @@ function getAddTaskHTMLLeftSide() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    renderContactOptions();
-    setupDropdown();
+  renderContactOptions();
+  setupDropdown();
 });
 
 function setupDropdown() {
-    const input = document.getElementById("dropdownInput");
-    const dropdown = document.getElementById("task-assignment");
-    const container = document.querySelector(".assignment-select-container");
+  const input = document.getElementById("dropdownInput");
+  const dropdown = document.getElementById("task-assignment");
+  const container = document.querySelector(".assignment-select-container");
 
-    if (input && dropdown && container) {
-        input.addEventListener("click", (event) => {
-            event.stopPropagation();
-            const isOpen = dropdown.style.display === "block";
-            dropdown.style.display = isOpen ? "none" : "block";
-            container.classList.toggle("open", !isOpen);
-        });
+  if (input && dropdown && container) {
+    input.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const isOpen = dropdown.style.display === "block";
+      dropdown.style.display = isOpen ? "none" : "block";
+      container.classList.toggle("open", !isOpen);
+    });
 
-        document.addEventListener("click", (event) => {
-            if (!input.contains(event.target) && !dropdown.contains(event.target)) {
-                dropdown.style.display = "none";
-                container.classList.remove("open");
-            }
-        });
-    }
+    document.addEventListener("click", (event) => {
+      if (!input.contains(event.target) && !dropdown.contains(event.target)) {
+        dropdown.style.display = "none";
+        container.classList.remove("open");
+      }
+    });
+  }
 }
 
 function renderContactOptions() {
-    const selectElement = document.getElementById("task-assignment");
-    let contactsHTML = "";
+  const selectElement = document.getElementById("task-assignment");
+  let contactsHTML = "";
 
-    if (selectElement) {
-        for (let i = 0; i < allContacts.length; i++) {
-            const contact = allContacts[i];
-            contactsHTML += `
+  if (selectElement) {
+    for (let i = 0; i < allContacts.length; i++) {
+      const contact = allContacts[i];
+      contactsHTML += `
  <div class="contact-container" data-index="${i}">
  <div class="contact-name-container">
  <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
@@ -774,54 +781,54 @@ function renderContactOptions() {
  </div>
  <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" style="cursor: pointer;">
  </div>`;
-        }
-        selectElement.innerHTML = contactsHTML;
-
-        const contactContainers = document.querySelectorAll(".contact-container");
-        contactContainers.forEach((container) => {
-            container.addEventListener("click", (event) => {
-                const index = container.getAttribute("data-index");
-                toggleContactSelection(index);
-                event.stopPropagation();
-            });
-        });
     }
+    selectElement.innerHTML = contactsHTML;
+
+    const contactContainers = document.querySelectorAll(".contact-container");
+    contactContainers.forEach((container) => {
+      container.addEventListener("click", (event) => {
+        const index = container.getAttribute("data-index");
+        toggleContactSelection(index);
+        event.stopPropagation();
+      });
+    });
+  }
 }
 
 function toggleContactSelection(index) {
-    const checkbox = document.getElementById(`contact-${index}`);
-    if (checkbox) {
-        checkbox.checked = !checkbox.checked;
-        renderSelectedContacts();
-    }
+  const checkbox = document.getElementById(`contact-${index}`);
+  if (checkbox) {
+    checkbox.checked = !checkbox.checked;
+    renderSelectedContacts();
+  }
 }
 
 function renderSelectedContacts() {
-    const selectedContactsContainer =
-        document.getElementById("selected-contacts");
-    const checkboxes = document.querySelectorAll(
-        '#task-assignment input[type="checkbox"]:checked'
-    );
-    if (selectedContactsContainer) {
-        selectedContactsContainer.innerHTML = "";
+  const selectedContactsContainer =
+    document.getElementById("selected-contacts");
+  const checkboxes = document.querySelectorAll(
+    '#task-assignment input[type="checkbox"]:checked'
+  );
+  if (selectedContactsContainer) {
+    selectedContactsContainer.innerHTML = "";
 
-        if (checkboxes.length === 0) {
-            selectedContactsContainer.innerHTML = ""; // Return empty content if no contacts are selected
-            return;
-        }
-
-        checkboxes.forEach((checkbox, i) => {
-            const color = checkbox.dataset.color;
-            const initials = checkbox.value;
-
-            const contactDiv = document.createElement("div");
-            contactDiv.style.backgroundColor = color;
-            contactDiv.classList.add("attributor-icon-board");
-            contactDiv.textContent = initials;
-
-            selectedContactsContainer.appendChild(contactDiv);
-        });
+    if (checkboxes.length === 0) {
+      selectedContactsContainer.innerHTML = ""; // Return empty content if no contacts are selected
+      return;
     }
+
+    checkboxes.forEach((checkbox, i) => {
+      const color = checkbox.dataset.color;
+      const initials = checkbox.value;
+
+      const contactDiv = document.createElement("div");
+      contactDiv.style.backgroundColor = color;
+      contactDiv.classList.add("attributor-icon-board");
+      contactDiv.textContent = initials;
+
+      selectedContactsContainer.appendChild(contactDiv);
+    });
+  }
 }
 
 /**
@@ -829,7 +836,7 @@ function renderSelectedContacts() {
  * @returns add task container right side html
  */
 function getAddTaskHTMLRightSide() {
-    return /*html*/ `
+  return /*html*/ `
  <div>
  <h2>Due Date<p class="required-color">*</p></h2>
  <form>
@@ -890,7 +897,7 @@ function getAddTaskHTMLRightSide() {
  * @returns addTask header HTML
  */
 function getAddTaskHTMLHeader() {
-    return /*html*/ `
+  return /*html*/ `
  <div class="addTask-board-header-content">
  <span>Add Task</span>
  <img class="close-detail-button" src="assets/img/icons/close__detailview_icon.svg" alt="close" onclick="closeAddTask()">
@@ -901,7 +908,7 @@ function getAddTaskHTMLHeader() {
  * closes the addTask window
  */
 function closeAddTask() {
-    document.getElementById("addTask-board").classList.add("d-none");
+  document.getElementById("addTask-board").classList.add("d-none");
 }
 
 /**
@@ -909,7 +916,7 @@ function closeAddTask() {
  * @returns addTask footer HTML
  */
 function getAddTaskHTMLFooter() {
-    return /*html*/ `
+  return /*html*/ `
  <div class="add-task-footer-board">
  <div class="dp-flex"><p class="required-color">*</p>This field is required</div>
  <div class="footer-btn-container">
@@ -924,18 +931,18 @@ function getAddTaskHTMLFooter() {
  * @param {*} clickedCheckbox parameter to check the input of the checkbox
  */
 function handleCheckboxClick(clickedCheckbox) {
-    const checkboxes = document.querySelectorAll(
-        '.dp-flex-jc-sb input[type="checkbox"]'
-    );
-    checkboxes.forEach((checkbox) => {
-        if (checkbox !== clickedCheckbox) {
-            checkbox.checked = false;
-        }
-    });
+  const checkboxes = document.querySelectorAll(
+    '.dp-flex-jc-sb input[type="checkbox"]'
+  );
+  checkboxes.forEach((checkbox) => {
+    if (checkbox !== clickedCheckbox) {
+      checkbox.checked = false;
+    }
+  });
 }
 
 function getTaskById(taskId) {
-    return tasks.find((it) => it.id === taskId);
+  return tasks.find((it) => it.id === taskId);
 }
 
 /**
@@ -943,51 +950,51 @@ function getTaskById(taskId) {
  * @returns creates a subtask within the addTask window
  */
 function createSubtask(taskId) {
-    let inputField = document.getElementById("task-subtasks");
-    let subtaskText = inputField.value.trim();
+  let inputField = document.getElementById("task-subtasks");
+  let subtaskText = inputField.value.trim();
 
-    if (subtaskText === "") {
-        alert("Please enter a subtask.");
-        clearInput();
-        return;
-    }
-
-    if (taskId) {
-        const task = getTaskById(taskId);
-
-        if (!task.subtasks) {
-            task.subtasks = [];
-        }
-
-        task.subtasks.push({
-            text: subtaskText,
-            selected: false,
-        });
-        renderSubtasks(task);
-        console.log(task);
-    } else {
-        subtasks.push({
-            text: subtaskText,
-            selected: false,
-        });
-        renderSubtasks({
-            subtasks: subtasks,
-        });
-    }
-
+  if (subtaskText === "") {
+    alert("Please enter a subtask.");
     clearInput();
+    return;
+  }
+
+  if (taskId) {
+    const task = getTaskById(taskId);
+
+    if (!task.subtasks) {
+      task.subtasks = [];
+    }
+
+    task.subtasks.push({
+      text: subtaskText,
+      selected: false,
+    });
+    renderSubtasks(task);
+    console.log(task);
+  } else {
+    subtasks.push({
+      text: subtaskText,
+      selected: false,
+    });
+    renderSubtasks({
+      subtasks: subtasks,
+    });
+  }
+
+  clearInput();
 }
 
 /**
  * renders the HTML content of the subtask created
  */
 function renderSubtasks(task) {
-    let container = document.querySelector(".subtasks-container");
-    container.innerHTML = ""; // Leere den Container
-    for (let i = 0; i < task.subtasks.length; i++) {
-        console.log("render", task.subtasks);
-        container.innerHTML += getSubtasksHTML(task, i);
-    }
+  let container = document.querySelector(".subtasks-container");
+  container.innerHTML = ""; // Leere den Container
+  for (let i = 0; i < task.subtasks.length; i++) {
+    console.log("render", task.subtasks);
+    container.innerHTML += getSubtasksHTML(task, i);
+  }
 }
 
 /**
@@ -996,9 +1003,9 @@ function renderSubtasks(task) {
  * @returns the html subtask text within div containers
  */
 function getSubtasksHTML(task, subtaskIndex) {
-    const subtask = task.subtasks[subtaskIndex];
-    const subtaskText = subtask.text;
-    return /*html*/ `
+  const subtask = task.subtasks[subtaskIndex];
+  const subtaskText = subtask.text;
+  return /*html*/ `
  <div class="subtask" data-subtask-text="${subtaskText}">
  <div class="subtask-text-container">
  <img src="assets/img/icons/punkt.png" alt="">
@@ -1017,22 +1024,22 @@ function getSubtasksHTML(task, subtaskIndex) {
  * @param {*} subtaskText edits the created and rendered subtask
  */
 function editSubtask(subtaskText) {
-    let index = subtasks.indexOf(subtaskText);
-    if (index !== -1) {
-        let subtaskElement = document.querySelector(
-            `[data-subtask-text="${subtaskText}"]`
-        );
-        if (subtaskElement) {
-            subtaskElement.innerHTML = `
+  let index = subtasks.indexOf(subtaskText);
+  if (index !== -1) {
+    let subtaskElement = document.querySelector(
+      `[data-subtask-text="${subtaskText}"]`
+    );
+    if (subtaskElement) {
+      subtaskElement.innerHTML = `
  <div class="subtask-edit-container">
  <input type="text" class="input-edit-subtask" value="${subtaskText}" onblur="saveEditedSubtask(this, ${index})" />
  <button class="add-button" onclick="saveEditedSubtask(this.previousElementSibling, ${index})"><img src="assets/img/icons/check_edit_icon.svg" alt=""></button>
  </div>`;
-            subtaskElement.querySelector(".input-edit-subtask").focus();
-        } else {
-            console.error("Subtask element not found for:", subtaskText);
-        }
+      subtaskElement.querySelector(".input-edit-subtask").focus();
+    } else {
+      console.error("Subtask element not found for:", subtaskText);
     }
+  }
 }
 
 /**
@@ -1041,11 +1048,11 @@ function editSubtask(subtaskText) {
  * @param {*} index saves the edited subtask text and calls the render subtask function to be up to date
  */
 function saveEditedSubtask(input, index) {
-    let newText = input.value.trim();
-    if (newText !== "" && index !== -1) {
-        subtasks[index] = newText;
-        renderSubtasks();
-    }
+  let newText = input.value.trim();
+  if (newText !== "" && index !== -1) {
+    subtasks[index] = newText;
+    renderSubtasks();
+  }
 }
 
 /**
@@ -1053,34 +1060,34 @@ function saveEditedSubtask(input, index) {
  * @param {*} subtaskText
  */
 function deleteSubtask(taskId, subtaskIndex) {
-    const task = getTaskById(taskId);
-    task.subtasks.splice(subtaskIndex, 1);
-    renderSubtasks(task);
+  const task = getTaskById(taskId);
+  task.subtasks.splice(subtaskIndex, 1);
+  renderSubtasks(task);
 }
 
 /**
  * clears the inputfield for adding a subtask
  */
 function clearInput() {
-    document.getElementById("task-subtasks").value = "";
-    document.getElementById("subtask-btn-container").style.display = "none";
-    document.getElementById("add-plus-button").style.display = "flex";
+  document.getElementById("task-subtasks").value = "";
+  document.getElementById("subtask-btn-container").style.display = "none";
+  document.getElementById("add-plus-button").style.display = "flex";
 }
 
 /**
  * shows the create subtask function icon and den clear input function icon
  */
 function showInput() {
-    document.getElementById("task-subtasks").style.display = "block";
-    document.getElementById("add-plus-button").style.display = "none";
-    document.getElementById("subtask-btn-container").style.display = "flex";
+  document.getElementById("task-subtasks").style.display = "block";
+  document.getElementById("add-plus-button").style.display = "none";
+  document.getElementById("subtask-btn-container").style.display = "flex";
 }
 
 /**
  * resets the addTask window
  */
 function clearTask() {
-    initBoard();
+  initBoard();
 }
 
 /**
@@ -1088,62 +1095,62 @@ function clearTask() {
  * @returns the selected options out of the addTask window and pushes them into the json array, also updates the firebase
  */
 async function createTask() {
-    let taskTitle = document.getElementById("task-title").value;
-    let taskDescription = document.getElementById("task-description").value;
-    let taskAssignment = document.getElementById("task-assignment").value;
-    let taskDate = document.getElementById("task-date").value;
-    let taskPriorityHigh = document.getElementById("task-high-priority").checked;
-    let taskPriorityMedium = document.getElementById(
-        "task-medium-priority"
-    ).checked;
-    let taskPriorityLow = document.getElementById("task-low-priority").checked;
-    let taskCategory = document.getElementById("task-category").value;
+  let taskTitle = document.getElementById("task-title").value;
+  let taskDescription = document.getElementById("task-description").value;
+  let taskAssignment = document.getElementById("task-assignment").value;
+  let taskDate = document.getElementById("task-date").value;
+  let taskPriorityHigh = document.getElementById("task-high-priority").checked;
+  let taskPriorityMedium = document.getElementById(
+    "task-medium-priority"
+  ).checked;
+  let taskPriorityLow = document.getElementById("task-low-priority").checked;
+  let taskCategory = document.getElementById("task-category").value;
 
-    let id = new Date().getTime();
+  let id = new Date().getTime();
 
-    if (taskTitle === "" || taskDate === "" || taskCategory === "") {
-        alert('Bitte füllen Sie die Felder "Titel", "Datum" und "Kategorie" aus.');
-        return;
-    }
+  if (taskTitle === "" || taskDate === "" || taskCategory === "") {
+    alert('Bitte füllen Sie die Felder "Titel", "Datum" und "Kategorie" aus.');
+    return;
+  }
 
-    let task = {
-        id: id,
-        category: "to-do",
-        title: taskTitle,
-        description: taskDescription,
-        assignment: taskAssignment,
-        date: new Date(taskDate),
-        priorityHigh: taskPriorityHigh,
-        priorityMedium: taskPriorityMedium,
-        priorityLow: taskPriorityLow,
-        taskcategory: taskCategory,
-        subtaskCount: subtaskCount,
-        subtasks: subtasks,
-        completedSubtasks: 0,
-        selectedContact: selectedContacts.slice(),
-    };
+  let task = {
+    id: id,
+    category: "to-do",
+    title: taskTitle,
+    description: taskDescription,
+    assignment: taskAssignment,
+    date: new Date(taskDate),
+    priorityHigh: taskPriorityHigh,
+    priorityMedium: taskPriorityMedium,
+    priorityLow: taskPriorityLow,
+    taskcategory: taskCategory,
+    subtaskCount: subtaskCount,
+    subtasks: subtasks,
+    completedSubtasks: 0,
+    selectedContact: selectedContacts.slice(),
+  };
 
-    await postData("tasks", task);
-    tasks.push(task);
-    document.getElementById("addTask-board").classList.add("d-none");
-    subtasks = [];
-    initBoard();
+  await postData("tasks", task);
+  tasks.push(task);
+  document.getElementById("addTask-board").classList.add("d-none");
+  subtasks = [];
+  initBoard();
 }
 
 /**
  *
  * @param {*} index start dragging tasks container and makes them moveable for drag&drop
  */
-function startDragging(index) {
-    currentDraggedElement = index - 1;
+function startDragging(firebaseId) {
+  currentDraggedElement = firebaseId;
 }
 
 /**
  *
  * @param {*} ev event allows to drop task container inside new category / dragarea
  */
-function allowDrop(ev) {
-    ev.preventDefault();
+function allowDrop(dragEvent) {
+  dragEvent.preventDefault();
 }
 
 /**
@@ -1151,47 +1158,42 @@ function allowDrop(ev) {
  * @param {*} category delivers the new category information to the firebase array tasks to update the page content
  */
 async function moveTo(category) {
-    tasks = [];
-    let taskFireBase = await getData("tasks");
-    let ids = Object.keys(taskFireBase || []);
-    let id = ids[currentDraggedElement];
-    await putData(`tasks/${id}/category`, category);
-    await getData("tasks");
-    initBoard();
+  await putData(`tasks/${currentDraggedElement}/category`, category);
+  initBoard();
 }
 
 /**
  * loads the tasks array from firebase
  */
 async function loadTasks() {
-    tasks = [];
-    let loadedTasks = await getData("tasks");
-    for (const [firebaseId, task] of Object.entries(loadedTasks)) {
-        tasks.push({
-            ...task,
-            firebaseId: firebaseId,
-            subtasks: task.subtasks?.filter((it) => !!it) ?? [],
-        });
-    }
+  tasks = [];
+  let loadedTasks = await getData("tasks");
+  for (const [firebaseId, task] of Object.entries(loadedTasks)) {
+    tasks.push({
+      ...task,
+      firebaseId: firebaseId,
+      subtasks: task.subtasks?.filter((it) => !!it) ?? [],
+    });
+  }
 }
 
 /**
  * loads all contacts out of the firebase array allContacts
  */
 async function loadAllContacts() {
-    allContacts = [];
-    let contacts = await getData("contacts");
-    let ids = Object.keys(contacts || []);
-    for (let i = 0; i < ids.length; i++) {
-        let id = ids[i];
-        let contact = contacts[id];
-        contact.id = id;
-        allContacts.push(contact);
-    }
+  allContacts = [];
+  let contacts = await getData("contacts");
+  let ids = Object.keys(contacts || []);
+  for (let i = 0; i < ids.length; i++) {
+    let id = ids[i];
+    let contact = contacts[id];
+    contact.id = id;
+    allContacts.push(contact);
+  }
 }
 
 function formatDateForSave(date) {
-    // Assuming date is in the format "yyyy-MM-dd"
-    const [year, month, day] = date.split("-");
-    return `${day}.${month}.${year}`;
+  // Assuming date is in the format "yyyy-MM-dd"
+  const [year, month, day] = date.split("-");
+  return `${day}.${month}.${year}`;
 }
