@@ -44,6 +44,9 @@ function linkActive() {
     };
     const pathname = window.location.pathname;
     const id = links[pathname];
+    if (!id) {
+        return;
+    }
     document.getElementById(id).classList.toggle("active-link");
 }
 
