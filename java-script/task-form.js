@@ -227,3 +227,24 @@ async function setFormularToEdit(task) {
   }
   contactsRender();
 }
+
+function clearTaskForm() {
+  const form = getForm();
+  form.reset();
+
+  selectedContacts = [];
+  contactsRender();
+
+  subtasks = [];
+  subtasksRender();
+
+  document.getElementById("task-subtasks").style.display = "none";
+  document.getElementById("add-plus-button").style.display = "flex";
+  document.getElementById("subtask-btn-container").style.display = "none";
+
+  document.getElementById("task-form-title").innerText = "Add Task";
+  document.getElementById("create-task").innerText = "Create Task";
+
+  isEdit = false;
+}
+

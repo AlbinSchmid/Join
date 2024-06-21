@@ -65,37 +65,36 @@
             ></div>
           </div> -->
 
-        <div class="status-container">
-          <div class="status-overiew-container">
-            <div>To do</div>
-            <p onclick="addTask()" class="status-bar-img">+</p>
-          </div>
-          <div id="to-do" class="dragarea" ondrop="moveTo('to-do')" ondragover="allowDrop(event)"></div>
+          <div class="status-container">
+            <div class="status-overiew-container">
+                <div>To do</div>
+                <p onclick="addTask()" class="status-bar-img">+</p>
+            </div>
+            <div id="to-do" class="dragarea" ondrop="moveTo('to-do')" ondragover="allowDrop(event)"></div>
         </div>
-
+        
         <div class="status-container">
-          <div class="status-overiew-container">
-            <div>In progress</div>
-            <p onclick="addTask()" class="status-bar-img">+</p>
-          </div>
-          <div id="in-progress" class="dragarea" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)"></div>
+            <div class="status-overiew-container">
+                <div>In progress</div>
+                <p onclick="addTask()" class="status-bar-img">+</p>
+            </div>
+            <div id="in-progress" class="dragarea" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)"></div>
         </div>
-
+        
         <div class="status-container">
-          <div class="status-overiew-container">
-            <div>Await feedback</div>
-            <p onclick="addTask()" class="status-bar-img">+</p>
-          </div>
-          <div id="await-feedback" class="dragarea" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)">
-          </div>
+            <div class="status-overiew-container">
+                <div>Await feedback</div>
+                <p onclick="addTask()" class="status-bar-img">+</p>
+            </div>
+            <div id="await-feedback" class="dragarea" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)"></div>
         </div>
-
+        
         <div class="status-container">
-          <div class="status-overiew-container">
-            <div>Done</div>
-            <p class="status-bar-img-done">+</p>
-          </div>
-          <div id="done" class="dragarea" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
+            <div class="status-overiew-container">
+                <div>Done</div>
+                <p class="status-bar-img-done">+</p>
+            </div>
+            <div id="done" class="dragarea" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
         </div>
       </section>
       <div id="addTask-board" class="addTask-board-container d-none">
