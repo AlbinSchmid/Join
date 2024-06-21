@@ -238,7 +238,6 @@ function clearTaskForm() {
   subtasks = [];
   subtasksRender();
 
-  document.getElementById("task-subtasks").style.display = "none";
   document.getElementById("add-plus-button").style.display = "flex";
   document.getElementById("subtask-btn-container").style.display = "none";
 
