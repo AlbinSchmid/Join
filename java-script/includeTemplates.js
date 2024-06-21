@@ -44,10 +44,6 @@ function linkActive() {
     };
     const pathname = window.location.pathname;
     const id = links[pathname];
-    if (!id) {
-        console.error("The link doesn't exist", pathname);
-        return;
-    }
     document.getElementById(id).classList.toggle("active-link");
 }
 
