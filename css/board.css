@@ -271,7 +271,7 @@
 
 .dragarea {
     min-width: 244px;
-    min-height: 256px;
+    min-height: 100vh;
 }
 
 .no-task-container {
