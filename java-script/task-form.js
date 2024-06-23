@@ -183,7 +183,6 @@ function setupSubmit() {
     task.priorityMedium = task.priority === "medium";
     task.selectedContact = selectedContacts;
     task.id = new Date().getTime();
-    // task.category = "to-do";
 
     if (isEdit) {
       console.log("update");
