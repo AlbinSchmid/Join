@@ -415,7 +415,6 @@ p {
     background: url('/assets/img/icons/arrow_drop_downaa.png') no-repeat center;
     background-size: 24px 24px; 
     pointer-events: none;
-    z-index: 1000; 
 }
 
 .custom-select-container.open::after {
