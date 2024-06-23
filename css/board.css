@@ -268,7 +268,6 @@
     display: flex;
 }
 
-
 .dragarea {
     min-width: 244px;
     min-height: 100vh;
@@ -326,7 +325,6 @@
 }
 
 .technical-task-detail {
-    background-color: #0038FF;
     color: #FFFFFF;
     font-size: 23px;
     font-weight: 400;
@@ -705,6 +703,12 @@ h3 {
     max-height: 25vh;
     scrollbar-width: thin;
     scrollbar-color: #0038FF white;
+}
+
+.contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .attributor-icon-board {

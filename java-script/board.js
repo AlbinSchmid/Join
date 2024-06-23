@@ -263,6 +263,7 @@ function openTask(taskId, callback) {
   let dueDate = formatDateForSave(task.date);
   let priority = generateDetailedPriorityHTML(task);
   let assignedTo = generateDetailedContactHTML(task.selectedContact);
+  let backgroundColor = getBackgroundColor(task.taskcategory); // Hintergrundfarbe basierend auf taskcategory setzen
   let subtasks = "";
   if (task.subtasks && task.subtasks.length > 0) {
     for (let i = 0; i < task.subtasks.length; i++) {
@@ -285,7 +286,8 @@ function openTask(taskId, callback) {
     dueDate,
     priority,
     assignedTo,
-    category
+    category,
+    backgroundColor // Hintergrundfarbe weitergeben
   );
   container.classList.remove("d-hide");
   container.classList.add("d-block");
@@ -321,12 +323,14 @@ function getTaskDetailViewHTML(
   description,
   dueDate,
   priority,
-  assignedTo
+  assignedTo,
+  category,
+  backgroundColor 
 ) {
   return /*html*/ `
- <div id="detail-task${taskId}" class="detail-task-container">
+ <div id="detail-task${taskId}" class="detail-task-container "> 
  <div class="detail-task-overview">
- <div class="technical-task-container-detail"><p class="technical-task-detail">${technicalTask}</p><img class="close-detail-button" onclick="closeTask()" src="assets/img/icons/close__detailview_icon.svg" alt="close"></div>
+ <div class="technical-task-container-detail"><p class="technical-task-detail ${backgroundColor}">${technicalTask}</p><img class="close-detail-button" onclick="closeTask()" src="assets/img/icons/close__detailview_icon.svg" alt="close"></div>
  <div><p class="title-detail">${title}</p></div>
  <div><p class="description-detail">${description}</p></div>
  <div class="date-detail"><p>Due Date:</p>${dueDate}</div>
@@ -354,49 +358,12 @@ function getTaskDetailViewHTML(
 
 /**
  *
- * @param {*} edit function for editing the
+ * @param {*} edit function for editing the opened task
  */
 function editTask(taskId) {
   const task = tasks.find((task) => task.id === taskId);
-  console.log(task);
   setFormularToEdit(task);
   showTaskForm();
-//   let container = document.getElementById("add-task");
-//   container.classList.remove("d-none");
-
-//   let container2 = document.getElementById("addTask-board");
-//   container2.classList.remove("d-none");
-
-//   console.log("hello edit");
-  // let task = tasks.find((task) => task.id === taskId);
-  // currentTask = tasks.findIndex((task) => task.id === taskId);
-
-  // let title = task.title;
-  // let description = task.description;
-  // let dueDate = task.date;
-  // let priority = getEditPriorityHTML(task);
-  // let contacts = generateContactHTML(task.selectedContact);
-  // let subtasks = generateSubtasksHTML(task);
-
-  // container.innerHTML = "";
-  // container.innerHTML = getEditTaskHTML(
-  // taskId,
-  // title,
-  // description,
-  // dueDate,
-  // priority,
-  // contacts,
-  // subtasks
-  // );
-  // document.getElementById("task-detail-view-container").classList.add("d-hide");
-  // document
-  // .getElementById("task-detail-view-container")
-  // .classList.remove("d-block");
-  // container.classList.remove("d-hide");
-  // container.classList.add("d-block");
-
-  // setupDropdown();
-  // renderContactOptions(taskId);
 }
 
 /**
@@ -427,6 +394,11 @@ function generateSubtasksHTML(task) {
   return subtasksHTML;
 }
 
+/**
+ * deletes Subtask 
+ * @param {*} taskId 
+ * @param {*} subTaskIndex 
+ */
 async function deleteEditSubtask(taskId, subTaskIndex) {
   const task = getTaskById(taskId);
   delete task.subtasks[subTaskIndex];
@@ -615,7 +587,6 @@ async function deleteTask(taskId) {
   document
     .getElementById("task-detail-view-container")
     .classList.remove("d-block");
-  // document.getElementById('body').classList.remove('overflow-hidden');
   initBoard();
 }
 
@@ -697,212 +668,6 @@ function showTaskForm() {
     container.classList.remove("d-none");
 }
 
-/**
- * calls the getAddTaskHTML which is divided into 4 parts, cause of the fullscreen view on the board.html
- */
-function getAddTaskHTML() {
-  let containerHeader = document.getElementById("addTask-board-header");
-  let container = document.getElementById("addTask-board-render-container");
-  let containerFooter = document.getElementById("addTask-board-footer");
-  containerHeader.innerHTML += getAddTaskHTMLHeader();
-  container.innerHTML += getAddTaskHTMLLeftSide() + getAddTaskHTMLRightSide();
-  containerFooter.innerHTML += getAddTaskHTMLFooter();
-  setupDropdown();
-  renderContactOptions();
-}
-
-/**
- * @returns the left side of the addTask content window
- */
-function getAddTaskHTMLLeftSide() {
-  return /*html*/ `
- <div>
- <h2>Title<p class="required-color">*</p></h2>
- <form>
- <input id="task-title" class="inputfield-title-board" placeholder="Enter a title" type="text" required>
- </form>
- <h2>Description</h2>
- <form>
- <textarea id="task-description" class="textareafied-description-board" placeholder="Enter a Description" rows="10"></textarea>
- </form>
- <h2>Assigned to</h2>
- <div>
- <form class="contacts-form">
- <div class="assignment-select-container">
- <input id="dropdownInput" class="assignment-task-assignment" placeholder="Select contacts to assign">
- <div id="task-assignment" class="dropdown-content-board"></div>
- </div>
- <div id="selected-contacts" class="board-contact-div-add-task"></div>
- </form>
- </div>
- </div> 
- <img class="mg-l-r-board" src="assets/img/icons/Vector 4.png" alt="">`;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderContactOptions();
-  setupDropdown();
-});
-
-function setupDropdown() {
-  const input = document.getElementById("dropdownInput");
-  const dropdown = document.getElementById("task-assignment");
-  const container = document.querySelector(".assignment-select-container");
-
-  if (input && dropdown && container) {
-    input.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const isOpen = dropdown.style.display === "block";
-      dropdown.style.display = isOpen ? "none" : "block";
-      container.classList.toggle("open", !isOpen);
-    });
-
-    document.addEventListener("click", (event) => {
-      if (!input.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.style.display = "none";
-        container.classList.remove("open");
-      }
-    });
-  }
-}
-
-function renderContactOptions() {
-  const selectElement = document.getElementById("task-assignment");
-  let contactsHTML = "";
-
-  if (selectElement) {
-    for (let i = 0; i < allContacts.length; i++) {
-      const contact = allContacts[i];
-      contactsHTML += `
- <div class="contact-container" data-index="${i}">
- <div class="contact-name-container">
- <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
- <span>${contact.name}</span>
- </div>
- <input type="checkbox" id="contact-${i}" value="${contact.initials}" data-color="${contact.color}" data-name="${contact.name}" style="cursor: pointer;">
- </div>`;
-    }
-    selectElement.innerHTML = contactsHTML;
-
-    const contactContainers = document.querySelectorAll(".contact-container");
-    contactContainers.forEach((container) => {
-      container.addEventListener("click", (event) => {
-        const index = container.getAttribute("data-index");
-        toggleContactSelection(index);
-        event.stopPropagation();
-      });
-    });
-  }
-}
-
-function toggleContactSelection(index) {
-  const checkbox = document.getElementById(`contact-${index}`);
-  if (checkbox) {
-    checkbox.checked = !checkbox.checked;
-    renderSelectedContacts();
-  }
-}
-
-function renderSelectedContacts() {
-  const selectedContactsContainer =
-    document.getElementById("selected-contacts");
-  const checkboxes = document.querySelectorAll(
-    '#task-assignment input[type="checkbox"]:checked'
-  );
-  if (selectedContactsContainer) {
-    selectedContactsContainer.innerHTML = "";
-
-    if (checkboxes.length === 0) {
-      selectedContactsContainer.innerHTML = ""; // Return empty content if no contacts are selected
-      return;
-    }
-
-    checkboxes.forEach((checkbox, i) => {
-      const color = checkbox.dataset.color;
-      const initials = checkbox.value;
-
-      const contactDiv = document.createElement("div");
-      contactDiv.style.backgroundColor = color;
-      contactDiv.classList.add("attributor-icon-board");
-      contactDiv.textContent = initials;
-
-      selectedContactsContainer.appendChild(contactDiv);
-    });
-  }
-}
-
-/**
- *
- * @returns add task container right side html
- */
-function getAddTaskHTMLRightSide() {
-  return /*html*/ `
- <div>
- <h2>Due Date<p class="required-color">*</p></h2>
- <form>
- <input id="task-date" type="date" name="task-date" class="date-selector" required>
- </form>
- <h2>Prio</h2>
- <div class="dp-flex-jc-sb">
- <input type="checkbox" id="task-high-priority" class="custom-checkbox-high" onclick="handleCheckboxClick(this)">
- <label for="task-high-priority" class="checkbox-container">
- <div class="checkbox-label-high">
- Urgent
- <img class="checkbox-image-high" src="assets/img/icons/prio_high.png" alt="priority high">
- </div>
- </label>
- <input type="checkbox" id="task-medium-priority" class="custom-checkbox-medium" onclick="handleCheckboxClick(this)" checked>
- <label for="task-medium-priority" class="checkbox-container">
- <div class="checkbox-label-medium">
- Medium
- <img class="checkbox-image-medium" src="assets/img/icons/prio_medium.png" alt="priority medium">
- </div>
- </label>
- <input type="checkbox" id="task-low-priority" class="custom-checkbox-low" onclick="handleCheckboxClick(this)">
- <label for="task-low-priority" class="checkbox-container">
- <div class="checkbox-label-low">
- Low
- <img class="checkbox-image-low" src="assets/img/icons/prio_low.png" alt="priority low">
- </div>
- </label>
- </div>
- <h2>Category<p class="required-color">*</p></h2>
- <form>
- <div class="custom-select-container">
- <select class="selectfield-task-category" name="task category" id="task-category" required>
- <option value="" disabled selected hidden>Select a category</option>
- <option value="Technical Task">Technical Task</option>
- <option value="User Story">User Story</option>
- </select>
- </div>
- </form>
- <h2>Subtasks</h2>
- <form class="subtask-form">
- <div class="input-container">
- <input type="text" class="inputfield-task-subtasks" id="task-subtasks" maxlength="50" placeholder="Add new subtask" onfocus="showInput()">
- <button type="button" class="add-plus-button" id="add-plus-button" onclick="showInput()"><img src="assets/img/icons/add_subtask_icon.svg" alt=""></button>
- <div class="subtask-btn-container board-design-buttons" id="subtask-btn-container">
- <button type="button" class="clear-button" onclick="clearInput()"><img src="assets/img/icons/delete_icon.svg" alt=""></button>
- <img src="assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
- <button type="button" class="add-button" onclick="createSubtask()"><img src="assets/img/icons/check_edit_icon.svg" alt=""></button>
- </div>
- </div>
- <div class="subtasks-container"></div>
- </form>
- </div>`;
-}
-
-/**
- *
- * @returns addTask header HTML
- */
-function getAddTaskHTMLHeader() {
-  return /*html*/ `
- <div class="addTask-board-header-content">
- <span>Add Task</span>
- <img class="close-detail-button" src="assets/img/icons/close__detailview_icon.svg" alt="close" onclick="closeAddTask()">
- </div>`;
-}
 
 /**
  * closes the addTask window
@@ -911,229 +676,15 @@ function closeAddTask() {
   document.getElementById("addTask-board").classList.add("d-none");
 }
 
-/**
- *
- * @returns addTask footer HTML
- */
-function getAddTaskHTMLFooter() {
-  return /*html*/ `
- <div class="add-task-footer-board">
- <div class="dp-flex"><p class="required-color">*</p>This field is required</div>
- <div class="footer-btn-container">
- <button onclick="clearTask()" class="clear-task-btn">Clear X</button>
- <button id="create-task" onclick="createTask()" class="create-task-btn">Create Task<img src="assets/img/icons/check.svg" alt=""></button><!-- Alert! Task added to Board -> Weiterleitung auf board.html -->
- </div>
- </div>`;
-}
-
-/**
- *
- * @param {*} clickedCheckbox parameter to check the input of the checkbox
- */
-function handleCheckboxClick(clickedCheckbox) {
-  const checkboxes = document.querySelectorAll(
-    '.dp-flex-jc-sb input[type="checkbox"]'
-  );
-  checkboxes.forEach((checkbox) => {
-    if (checkbox !== clickedCheckbox) {
-      checkbox.checked = false;
-    }
-  });
-}
-
 function getTaskById(taskId) {
   return tasks.find((it) => it.id === taskId);
 }
 
-/**
- *
- * @returns creates a subtask within the addTask window
- */
-function createSubtask(taskId) {
-  let inputField = document.getElementById("task-subtasks");
-  let subtaskText = inputField.value.trim();
-
-  if (subtaskText === "") {
-    alert("Please enter a subtask.");
-    clearInput();
-    return;
-  }
-
-  if (taskId) {
-    const task = getTaskById(taskId);
-
-    if (!task.subtasks) {
-      task.subtasks = [];
-    }
-
-    task.subtasks.push({
-      text: subtaskText,
-      selected: false,
-    });
-    renderSubtasks(task);
-    console.log(task);
-  } else {
-    subtasks.push({
-      text: subtaskText,
-      selected: false,
-    });
-    renderSubtasks({
-      subtasks: subtasks,
-    });
-  }
-
-  clearInput();
-}
-
-/**
- * renders the HTML content of the subtask created
- */
-function renderSubtasks(task) {
-  let container = document.querySelector(".subtasks-container");
-  container.innerHTML = ""; // Leere den Container
-  for (let i = 0; i < task.subtasks.length; i++) {
-    console.log("render", task.subtasks);
-    container.innerHTML += getSubtasksHTML(task, i);
-  }
-}
-
-/**
- *
- * @param {*} subtaskText
- * @returns the html subtask text within div containers
- */
-function getSubtasksHTML(task, subtaskIndex) {
-  const subtask = task.subtasks[subtaskIndex];
-  const subtaskText = subtask.text;
-  return /*html*/ `
- <div class="subtask" data-subtask-text="${subtaskText}">
- <div class="subtask-text-container">
- <img src="assets/img/icons/punkt.png" alt="">
- <span>${subtaskText}</span>
- </div>
- <div class="subtask-button">
- <img src="assets/img/icons/Subtasks_edit_icon.svg" alt="" class="edit-icon" onclick="editSubtask('${subtaskText}')">
- <img src="assets/img/icons/Vector 19.svg" alt="" class="vector-icon">
- <img src="assets/img/icons/Subtasks_delete_icon.svg" alt="" class="delete-icon" onclick="deleteSubtask(${task.id}, ${subtaskIndex})"> 
- </div>
- </div>`;
-}
-
-/**
- *
- * @param {*} subtaskText edits the created and rendered subtask
- */
-function editSubtask(subtaskText) {
-  let index = subtasks.indexOf(subtaskText);
-  if (index !== -1) {
-    let subtaskElement = document.querySelector(
-      `[data-subtask-text="${subtaskText}"]`
-    );
-    if (subtaskElement) {
-      subtaskElement.innerHTML = `
- <div class="subtask-edit-container">
- <input type="text" class="input-edit-subtask" value="${subtaskText}" onblur="saveEditedSubtask(this, ${index})" />
- <button class="add-button" onclick="saveEditedSubtask(this.previousElementSibling, ${index})"><img src="assets/img/icons/check_edit_icon.svg" alt=""></button>
- </div>`;
-      subtaskElement.querySelector(".input-edit-subtask").focus();
-    } else {
-      console.error("Subtask element not found for:", subtaskText);
-    }
-  }
-}
-
-/**
- *
- * @param {*} input
- * @param {*} index saves the edited subtask text and calls the render subtask function to be up to date
- */
-function saveEditedSubtask(input, index) {
-  let newText = input.value.trim();
-  if (newText !== "" && index !== -1) {
-    subtasks[index] = newText;
-    renderSubtasks();
-  }
-}
-
-/**
- * deletes created Subtask inside subtask-container
- * @param {*} subtaskText
- */
-function deleteSubtask(taskId, subtaskIndex) {
-  const task = getTaskById(taskId);
-  task.subtasks.splice(subtaskIndex, 1);
-  renderSubtasks(task);
-}
-
-/**
- * clears the inputfield for adding a subtask
- */
-function clearInput() {
-  document.getElementById("task-subtasks").value = "";
-  document.getElementById("subtask-btn-container").style.display = "none";
-  document.getElementById("add-plus-button").style.display = "flex";
-}
-
-/**
- * shows the create subtask function icon and den clear input function icon
- */
-function showInput() {
-  document.getElementById("task-subtasks").style.display = "block";
-  document.getElementById("add-plus-button").style.display = "none";
-  document.getElementById("subtask-btn-container").style.display = "flex";
-}
 
 /**
  * resets the addTask window
  */
 function clearTask() {
-  initBoard();
-}
-
-/**
- *
- * @returns the selected options out of the addTask window and pushes them into the json array, also updates the firebase
- */
-async function createTask() {
-  let taskTitle = document.getElementById("task-title").value;
-  let taskDescription = document.getElementById("task-description").value;
-  let taskAssignment = document.getElementById("task-assignment").value;
-  let taskDate = document.getElementById("task-date").value;
-  let taskPriorityHigh = document.getElementById("task-high-priority").checked;
-  let taskPriorityMedium = document.getElementById(
-    "task-medium-priority"
-  ).checked;
-  let taskPriorityLow = document.getElementById("task-low-priority").checked;
-  let taskCategory = document.getElementById("task-category").value;
-
-  let id = new Date().getTime();
-
-  if (taskTitle === "" || taskDate === "" || taskCategory === "") {
-    alert('Bitte füllen Sie die Felder "Titel", "Datum" und "Kategorie" aus.');
-    return;
-  }
-
-  let task = {
-    id: id,
-    category: "to-do",
-    title: taskTitle,
-    description: taskDescription,
-    assignment: taskAssignment,
-    date: new Date(taskDate),
-    priorityHigh: taskPriorityHigh,
-    priorityMedium: taskPriorityMedium,
-    priorityLow: taskPriorityLow,
-    taskcategory: taskCategory,
-    subtaskCount: subtaskCount,
-    subtasks: subtasks,
-    completedSubtasks: 0,
-    selectedContact: selectedContacts.slice(),
-  };
-
-  await postData("tasks", task);
-  tasks.push(task);
-  document.getElementById("addTask-board").classList.add("d-none");
-  subtasks = [];
   initBoard();
 }
 

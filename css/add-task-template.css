@@ -548,6 +548,9 @@ p {
 .subtask-edit-container {
     display: flex;
     align-items: center;
+    width: 440px;
+    height: 28px;
+    background-color: #FFFFFF;
 }
 
 .input-edit-subtask {
