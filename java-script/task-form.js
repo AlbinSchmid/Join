@@ -213,7 +213,7 @@ async function setFormularToAdd() {
 async function setFormularToEdit(task) {
   isEdit = true;
   document.getElementById("task-form-title").innerText = "Edit Task";
-  document.getElementById("create-task").innerText = "Edit Task";
+  document.getElementById("create-task").innerHTML = `Edit Task<img src="/assets/img/icons/check_edit_btn.png" alt="">`;
 
   // set contacts
   for (const contact of task.selectedContact) {
