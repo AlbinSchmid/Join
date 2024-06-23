@@ -470,7 +470,7 @@
     align-items: center;
     display: flex;
     justify-content: center;
-    min-width: 42px;
+    width: 42px;
     height: 42px;
 }
 
@@ -609,6 +609,12 @@ h2 {
     justify-content: flex-end;
     margin-top: 50px;
     margin-right: 80px;
+}
+
+.contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 @media(max-width: 1490px) {
