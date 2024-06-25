@@ -48,7 +48,7 @@ async function contactsInit() {
                   <div class="initials-container" style="background-color: ${contact.color}">${contact.initials}</div>
                   <span>${contact.name}</span>
               </div>
-              <input type="checkbox" class="contact-checkbox" id="contact-${id}" value="${contact.initials}" data-id="${id}">
+              <input type="checkbox" onclick="contactsOnClick('${id}')" class="contact-checkbox" id="contact-${id}" value="${contact.initials}" data-id="${id}">
           </div>`;
   }
   selectElement.innerHTML = contactsHTML;
