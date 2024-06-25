@@ -543,7 +543,7 @@ p {
 .subtask-edit-container {
     display: flex;
     align-items: center;
-    width: 440px;
+    width: 100%;
     height: 28px;
     background-color: #FFFFFF;
 }

@@ -578,9 +578,11 @@
 .assigned-container {
     display: flex;
     max-width: 180px;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    /* overflow-x: auto;
     scrollbar-width: thin;
-    scrollbar-color: #0038FF white;
+    scrollbar-color: #0038FF white; */
     padding-bottom: 8px;
 }
 .priority-detail-container {
