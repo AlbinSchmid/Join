@@ -200,27 +200,27 @@ function getForm() {
   return document.getElementById("task-form");
 }
 
-async function setFormularToAdd() {
-  isEdit = false;
-  document.getElementById("task-form-title").innerText = "Add Task";
-  document.getElementById("create-task").innerText = "Create Task";
-
-  selectedContacts = [];
-  subtasks = [];
-}
-
 async function setFormularToEdit(task) {
   isEdit = true;
   document.getElementById("task-form-title").innerText = "Edit Task";
   document.getElementById("create-task").innerHTML = `Edit Task<img src="/assets/img/icons/check_edit_btn.png" alt="">`;
 
   // set contacts
-  for (const contact of task.selectedContact) {
-    document.getElementById(`contact-${contact.id}`).checked = true;
+  if (Array.isArray(task.selectedContact)) {
+    for (const contact of task.selectedContact) {
+      const contactElement = document.getElementById(`contact-${contact.id}`);
+      if (contactElement) {
+        contactElement.checked = true;
+      } else {
+        console.warn(`Element with ID contact-${contact.id} not found.`);
+      }
+    }
+  } else {
+    console.warn("task.selectedContact is not an array:", task.selectedContact);
   }
   contactsRender();
 
-  // subtaks
+  // subtasks
   subtasks = task.subtasks;
   subtasksRender();
 
@@ -237,6 +237,8 @@ async function setFormularToEdit(task) {
     }
   }
 }
+
+
 
 function clearTaskForm() {
   const form = getForm();
