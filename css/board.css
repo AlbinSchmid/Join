@@ -681,7 +681,6 @@ h2 {
     scrollbar-width: thin !important;
 }
 .close-button-container {
-    position: relative;
     width: 1182px;
     height: 80%;
     display: flex;
