@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="/css/color.css">
     <link rel="stylesheet" href="/css/fonts.css">
     <link rel="shortcut icon" href="/assets/img/join-logo.png" type="image/x-icon">
-    <script src="/java-script/header.js"></script> 
+    <script src="/java-script/header.js"></script>
     <title>JOIN</title>
 </head>
 
 <body>
-    <header >
+    <header>
         <img src="/assets/img/logo_join_blue.png" alt="Join logo" class="logo-mobile">
         <p class="header-text d-none-mobile">Kanban Project Management Tool</p>
-        <div class="header-right">
-            <a href="/help.html" class="help-img-link cp"><img src="./assets/img/icons/help.png" alt="help" class="d-none-mobile"></a>
+        <div id="header-right" class="header-right">
+            <a href="/help.html" class="help-img-link cp"><img src="./assets/img/icons/help.png" alt="help"
+                    class="d-none-mobile"></a>
             <div onclick="showDropdownMenu()" class="header-right-user dflex-c-c cp" id="userInitials"></div>
         </div>
     </header>
@@ -25,9 +26,9 @@
         <div class="header-dropdown-menu">
             <a href="/legal-notice.html">Legal Notice</a>
             <a href="/privacy-policy.html">Privacy Policy</a>
-            <a href="/log-in.html">Log out</a>
+            <a href="/log-in.html" onclick="logout()">Log out</a>
         </div>
     </section>
-
 </body>
+
 </html>
