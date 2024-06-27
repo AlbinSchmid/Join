@@ -524,6 +524,7 @@ p {
     gap: 8px;
     margin-right: 16px;
     align-items: center;
+    height: 28px;
 }
 
 .subtask .subtask-button img {
@@ -552,12 +553,11 @@ p {
     flex: 1;
     padding: 4px;
     font-size: 16px;
-    height: 30px;
+    height: 20px;
 }
 
 .input-edit-subtask:focus {
     outline: none;
-    text-decoration: underline;
     border: 0px;
 }
 
