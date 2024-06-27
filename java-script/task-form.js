@@ -10,6 +10,7 @@ document.addEventListener("init", () => {
 async function initTaskForm() {
   contacts = {};
   subtasks = [];
+  minDate();
   setupSubmit();
   await contactsInit();
 }
@@ -239,7 +240,6 @@ async function setFormularToEdit(task) {
 }
 
 
-
 function clearTaskForm() {
   const form = getForm();
   form.reset();
@@ -258,3 +258,14 @@ function clearTaskForm() {
 
   isEdit = false;
 }
+
+function minDate() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
+
+  document.getElementById('task-date').setAttribute('min', formattedDate);
+}
+
