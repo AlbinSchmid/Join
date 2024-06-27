@@ -4,6 +4,9 @@
  * This function finds elements with the 'w3-include-html' attribute, fetches the content of the specified file,
  * and replaces the innerHTML of those elements with the fetched content. If the fetch fails, it displays a "Page not found" message.
  */
+
+
+
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");
     for (let i = 0; i < includeElements.length; i++) {
@@ -15,6 +18,14 @@ async function includeHTML() {
         } else {
             element.innerHTML = "Page not found";
         }
+    }
+
+    // Initialisierungsfunktionen nur aufrufen, wenn nicht von login.html kommt
+    const referrer = document.referrer;
+    if (!referrer.includes('login.html')) {
+        showUser();
+        linkActive();
+        document.dispatchEvent(new CustomEvent("init"));
     }
 }
 
@@ -63,3 +74,13 @@ function showUser() {
     let user = JSON.parse(userAsText);
     userInitials.innerHTML = `<div>${user.initials}</div>`;
 }
+
+async function initializePage() {
+    await includeHTML();
+}
+
+initializePage();
+
+
+
+
