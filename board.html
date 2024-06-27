@@ -59,7 +59,7 @@
             <div>To do</div>
             <p onclick="addTask('to-do')" class="status-bar-img">+</p>
           </div>
-          <div class="no-task-container d-hide">No tasks to do</div>
+          <div class="no-task-container d-hide" ondrop="moveTo('to-do')" ondragover="allowDrop(event)">No tasks to do</div>
           <div id="to-do" class="dragarea" ondrop="moveTo('to-do')" ondragover="allowDrop(event)">
           </div>
         </div>
@@ -69,7 +69,7 @@
             <div>In progress</div>
             <p onclick="addTask('in-progress')" class="status-bar-img">+</p>
           </div>
-          <div class="no-task-container d-hide">No tasks in progress</div>
+          <div class="no-task-container d-hide" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)">No tasks in progress</div>
           <div id="in-progress" class="dragarea" ondrop="moveTo('in-progress')" ondragover="allowDrop(event)"></div>
         </div>
 
@@ -80,7 +80,7 @@
               +
             </p>
           </div>
-          <div class="no-task-container d-hide">No tasks await-feedback</div>
+          <div class="no-task-container d-hide" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)">No tasks await-feedback</div>
           <div id="await-feedback" class="dragarea" ondrop="moveTo('await-feedback')" ondragover="allowDrop(event)">
           </div>
         </div>
@@ -90,17 +90,17 @@
             <div>Done</div>
             <p class="status-bar-img-done">+</p>
           </div>
-          <div class="no-task-container d-hide">No tasks done</div>
+          <div class="no-task-container d-hide" ondrop="moveTo('done')" ondragover="allowDrop(event)">No tasks done</div>
           <div id="done" class="dragarea" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
         </div>
       </section>
-      
+
       <div id="addTask-board" class="addTask-board-container d-none">
-         
-       
+
+
         <div id="add-task" w3-include-html="assets/templates/taskForm.html" class="overlay-background"></div>
-        <div class="close-button-container"> <img class="close-detail-button" src="assets/img/icons/close__detailview_icon.svg" alt="close"
-          onclick="closeAddTask()" /></div>
+        <div class="close-button-container"> <img class="close-detail-button"
+            src="assets/img/icons/close__detailview_icon.svg" alt="close" onclick="closeAddTask()" /></div>
       </div>
     </div>
     <script src="/java-script/task-form.js"></script>
