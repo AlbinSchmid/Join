@@ -531,42 +531,6 @@ async function updateSubtaks(taskId) {
   initBoard();
 }
 
-/**
- *
- * @param {*} taskId
- * @returns taskId will be checked inside array and edited changes will be pushed into the firebase array tasks and initiates init() for refreshing the content
- */
-async function saveTask(taskId) {
-  const task = getTaskById(taskId);
-  console.log(task);
-
-  let taskTitle = document.getElementById("task-title").value;
-  let taskDescription = document.getElementById("task-description").value;
-  let taskAssignment = document.getElementById("task-assignment").value;
-  let taskDate = document.getElementById("task-date").value;
-  let High = document.getElementById("task-high-priority").checked;
-  let Medium = document.getElementById("task-medium-priority").checked;
-  let Low = document.getElementById("task-low-priority").checked;
-
-  let updatedTask = {
-    ...task,
-    title: taskTitle,
-    description: taskDescription,
-    assignment: taskAssignment,
-    date: taskDate,
-    priorityHigh: High,
-    priorityMedium: Medium,
-    priorityLow: Low,
-    subtaskCount: subtaskCount,
-    selectedContact: selectedContacts,
-  };
-
-  await putData(`tasks/${task.firebaseId}`, updatedTask);
-  document.getElementById("edit-container").classList.remove("d-block");
-  document.getElementById("edit-container").classList.add("d-hide");
-
-  initBoard();
-}
 
 /**
  *

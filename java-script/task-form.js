@@ -183,10 +183,12 @@ function setupSubmit() {
     task.priorityLow = task.priority === "low";
     task.priorityMedium = task.priority === "medium";
     task.selectedContact = selectedContacts;
-    task.id = new Date().getTime();
 
     if (isEdit) {
-      console.log("update");
+      if (!task.firebaseId) {
+        console.error("cannot update task because firebase id is null");
+        return;
+      }
       await putData(`tasks/${task.firebaseId}`, task);
       window.location = "/board.html";
     } else {
@@ -203,6 +205,7 @@ function getForm() {
 
 async function setFormularToEdit(task) {
   isEdit = true;
+  document.getElementById("task-form-firebaseId").value = task.firebaseId;
   document.getElementById("task-form-title").innerText = "Edit Task";
   document.getElementById("create-task").innerHTML = `Edit Task<img src="/assets/img/icons/check_edit_btn.png" alt="">`;
 
