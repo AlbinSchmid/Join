@@ -240,7 +240,6 @@ async function setFormularToEdit(task) {
 }
 
 
-
 function clearTaskForm() {
   const form = getForm();
   form.reset();
