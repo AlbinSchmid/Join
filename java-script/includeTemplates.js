@@ -38,8 +38,8 @@ async function includeHTML() {
     showUser();
     linkActive();
     document.dispatchEvent(new CustomEvent("init"));
-  })();
-  
+})();
+
 
 /**
  * Sets the active state for the current link to the current page.
@@ -55,7 +55,7 @@ function linkActive() {
     };
     const pathname = window.location.pathname;
     const id = links[pathname];
-   
+
     document.getElementById(id)?.classList.toggle("active-link");
 }
 
@@ -71,16 +71,16 @@ function showUser() {
         return;
     }
     let userAsText = localStorage.getItem("user");
+    if (!userAsText) {
+        hideNavbarAndUserMenu();
+        return;
+    }
     let user = JSON.parse(userAsText);
     userInitials.innerHTML = `<div>${user.initials}</div>`;
 }
 
-async function initializePage() {
-    await includeHTML();
+function hideNavbarAndUserMenu() {
+    document.getElementById("side-bar-nav").style.visibility = "hidden";
+    document.getElementById("header-right").style.visibility = "hidden";
+
 }
-
-initializePage();
-
-
-
-
