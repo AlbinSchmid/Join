@@ -702,11 +702,12 @@ h2 {
     }
     .dragarea {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: row;
         gap: 24px;
         min-height: 256px;
     }
 }
+
 @media(max-width: 1300px) {
     .addTask-board-container {
         align-items: flex-start;
@@ -735,12 +736,6 @@ h2 {
     }
     .board-task-container {
         display: block;
-    }
-    .dragarea {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 24px;
-        min-height: 256px;
     }
     .status-overiew-container {
         padding-top: 12px;

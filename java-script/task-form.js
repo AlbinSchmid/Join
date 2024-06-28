@@ -12,6 +12,7 @@ async function initTaskForm() {
   subtasks = [];
   setupSubmit();
   await contactsInit();
+  calendarDate();
 }
 
 async function contactsInit() {
@@ -234,13 +235,12 @@ async function setFormularToEdit(task) {
       continue;
     }
     if (input.type === "checkbox") {
-      input.checked = !!val;z
+      input.checked = !!val;
     } else {
       input.value = val;
     }
   }
 }
-
 
 
 function clearTaskForm() {
@@ -260,4 +260,10 @@ function clearTaskForm() {
   document.getElementById("create-task").innerText = "Create Task";
 
   isEdit = false;
+}
+
+
+function calendarDate() {
+  document.getElementById("task-date").min = new Date().toISOString().split("T")[0];
+
 }

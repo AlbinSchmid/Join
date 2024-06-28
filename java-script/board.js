@@ -211,7 +211,7 @@ function getToDoHTML(
   const progressContainerClass = total > 0 ? "" : "d-hide";
 
   return /*html*/ `
-    <div draggable="true" ondragstart="startDragging('${task.firebaseId}')" class="task-container" onclick="openTask(${category[index]["id"]})">
+    <div draggable="true" ondragstart="startDragging('${task.firebaseId}')" class="task-container" onclick="openTask(${category[index].id})">
       <div class="to-do-title-container">
         <p class="to-do-title ${backgroundColor}">${taskcategory}</p>
       </div>
