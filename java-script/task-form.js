@@ -183,6 +183,7 @@ function setupSubmit() {
     task.priorityLow = task.priority === "low";
     task.priorityMedium = task.priority === "medium";
     task.selectedContact = selectedContacts;
+    task.id = new Date().getTime();
 
     if (isEdit) {
       if (!task.firebaseId) {
